@@ -292,6 +292,7 @@ const defaultLang = "es";
 let currentLang = defaultLang;
 const themeStorageKey = "paleomagina-theme";
 let currentTheme = "light";
+const pageTransitionDuration = 280;
 
 function renderScopes(lang) {
   const container = document.getElementById("ambitos-grid");
@@ -360,6 +361,57 @@ function applyTheme(theme) {
   updateThemeButtonLabel();
 }
 
+function isNavigableInternalLink(link) {
+  if (!link || !link.href) return false;
+  if (link.target && link.target.toLowerCase() === "_blank") return false;
+  if (link.hasAttribute("download")) return false;
+  if (link.dataset.noTransition === "true") return false;
+  if (link.href.startsWith("mailto:") || link.href.startsWith("tel:")) return false;
+
+  let destination;
+  try {
+    destination = new URL(link.href, window.location.href);
+  } catch (_err) {
+    return false;
+  }
+
+  if (destination.origin !== window.location.origin) return false;
+
+  const samePath = destination.pathname === window.location.pathname;
+  const hasOnlyHashChange = samePath && destination.search === window.location.search && destination.hash;
+  if (hasOnlyHashChange) return false;
+
+  return true;
+}
+
+function enablePageTransitions() {
+  document.body.classList.add("page-transition");
+  requestAnimationFrame(() => {
+    document.body.classList.add("page-ready");
+  });
+
+  window.addEventListener("pageshow", () => {
+    document.body.classList.remove("page-leaving");
+    document.body.classList.add("page-ready");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.defaultPrevented) return;
+    if (event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    const link = event.target.closest("a[href]");
+    if (!isNavigableInternalLink(link)) return;
+
+    event.preventDefault();
+    document.body.classList.add("page-leaving");
+
+    window.setTimeout(() => {
+      window.location.href = link.href;
+    }, pageTransitionDuration);
+  });
+}
+
 document.querySelectorAll(".lang-btn").forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.lang));
 });
@@ -395,3 +447,4 @@ try {
 
 applyTheme(initialTheme);
 applyLanguage(defaultLang);
+enablePageTransitions();

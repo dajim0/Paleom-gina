@@ -47,6 +47,23 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+/* Transicion global al entrar/salir entre paginas */
+body.page-transition {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+body.page-transition.page-ready {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+body.page-transition.page-leaving {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
 body::before {
   content: "";
   position: fixed;
