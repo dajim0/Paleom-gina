@@ -528,11 +528,31 @@ figcaption {
   color: var(--primary);
 }
 
-.floor-card img {
-  margin-top: 1rem;
-  border-radius: 0.65rem;
+.floor-plan {
+  margin: 1rem 0 0.8rem;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
   border: 1px solid var(--border);
-  background: #fff;
+  background: linear-gradient(180deg, #faf7f2, #f2ece2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.floor-plan img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0.55rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  padding: 0.35rem;
+}
+
+.floor-plan figcaption {
+  margin-top: 0.45rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 .floor-article {
