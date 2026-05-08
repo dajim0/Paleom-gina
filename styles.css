@@ -34,6 +34,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -45,6 +46,7 @@ body {
   position: relative;
   /* Transicion suave para el fondo y el color de texto general */
   transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
 }
 
 /* Transicion global al entrar/salir entre paginas */
@@ -102,7 +104,7 @@ a {
 }
 
 .container {
-  width: min(1100px, 92vw);
+  width: min(1100px, calc(100% - 2rem));
   margin: 0 auto;
 }
 
@@ -514,6 +516,48 @@ figcaption {
   gap: 0.5rem;
 }
 
+.floor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.floor-card h3 {
+  color: var(--primary);
+}
+
+.floor-card img {
+  margin-top: 1rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.floor-article {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+}
+
+.floor-article h3 {
+  margin: 0.5rem 0 0.55rem;
+  color: var(--primary);
+}
+
+.floor-figure {
+  margin-top: 1.2rem;
+}
+
+.floor-figure img {
+  width: 100%;
+  border-radius: 0.65rem;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
 .site-footer {
   padding: 2.5rem 0;
   background: #c49d66;
@@ -540,6 +584,10 @@ button:focus-visible {
   }
 
   .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .floor-grid {
     grid-template-columns: 1fr;
   }
 
