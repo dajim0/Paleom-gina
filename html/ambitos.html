@@ -170,6 +170,30 @@
           </div>
         </div>
       </section>
+
+      <section class="section" id="museo-3d" aria-labelledby="museum-3d-title">
+        <div class="container">
+          <h2 id="museum-3d-title" data-i18n="museum_3d_title">Recreacion 3D interactiva del museo</h2>
+          <p class="section-lead" data-i18n="museum_3d_intro">
+            Explora el museo por secciones. Pulsa en una seccion para resaltarla y ver su descripcion.
+          </p>
+          <div class="museum-3d-layout">
+            <div class="card museum-3d-viewer-card">
+              <div id="museum-3d-canvas" class="museum-3d-canvas" aria-label="Visor 3D del museo"></div>
+            </div>
+            <aside class="card museum-3d-panel">
+              <h3 data-i18n="museum_3d_sections_title">Secciones</h3>
+              <div id="museum-3d-sections" class="museum-3d-sections"></div>
+              <article class="museum-3d-detail">
+                <h4 id="museum-3d-detail-title">A0 - Bienvenida</h4>
+                <p id="museum-3d-detail-text">
+                  Punto inicial del recorrido: recepcion, orientacion y contexto del centro.
+                </p>
+              </article>
+            </aside>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -187,5 +211,6 @@
     </footer>
 
     <script src="../script.js"></script>
+    <script type="module" src="../museum3d.js"></script>
   </body>
 </html>
