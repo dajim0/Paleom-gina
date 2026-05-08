@@ -77,6 +77,8 @@ const timelineContent = {
 const translations = {
   es: {
     skip_to_content: "Saltar al contenido principal",
+    nav_main_aria: "Navegacion principal",
+    language_selector_aria: "Selector de idioma",
     nav_home: "Inicio",
     nav_about: "Sobre",
     nav_exhibits: "Ambitos",
@@ -162,6 +164,31 @@ const translations = {
     news_2_p: "Encuentro sobre avances en arqueologia y paleontologia regional.",
     news_3_t: "Campaña de excavacion",
     news_3_p: "Seguimiento en directo de trabajos de campo y hallazgos.",
+    page_home_title: "Paleomagina | Inicio",
+    page_about_title: "Paleomagina | Sobre",
+    page_exhibits_title: "Paleomagina | Ambitos",
+    page_resources_title: "Paleomagina | Recursos",
+    page_contact_title: "Paleomagina | Contacto",
+    index_title: "INDICE",
+    index_main: "ASPECTOS GENERALES",
+    index_intro: "INTRODUCCION GENERAL: UN RECORRIDO PARA COMPRENDER SIERRA MAGINA DESDE LA CIENCIA, EL PAISAJE Y LA MEMORIA HUMANA",
+    index_criteria: "CRITERIOS A TENER EN CUENTA EN EL PROYECTO",
+    timeline_aria: "Linea temporal del museo",
+    qr_example_alt: "Codigo QR de ejemplo que abre la ficha del fosil A2",
+    gal_1_alt: "Paisaje montanoso de Sierra Magina al amanecer",
+    gal_2_alt: "Detalle de fosil sobre soporte de laboratorio",
+    gal_3_alt: "Excavacion arqueologica en terreno de montana",
+    gal_4_alt: "Mesa de laboratorio con herramientas cientificas",
+    contact_intro: "Escribenos para organizar visitas escolares, actividades en grupo y colaboraciones cientificas.",
+    contact_email_label: "Email:",
+    contact_phone_label: "Telefono:",
+    contact_location_label: "Ubicacion:",
+    contact_location_value: "Sierra Magina, Jaen",
+    contact_quick_access: "Acceso rapido",
+    contact_qr_help: "Escanea para abrir la pagina principal del proyecto.",
+    contact_qr_alt: "Codigo QR para acceder al inicio de Paleomagina",
+    theme_mode_dark: "Modo oscuro",
+    theme_mode_light: "Modo claro",
     footer_title: "Paleomagina",
     footer_p: "Sierra Magina, ciencia y patrimonio al alcance de todos.",
     footer_contact: "Contacto",
@@ -169,6 +196,8 @@ const translations = {
   },
   en: {
     skip_to_content: "Skip to main content",
+    nav_main_aria: "Main navigation",
+    language_selector_aria: "Language selector",
     nav_home: "Home",
     nav_about: "About",
     nav_exhibits: "Exhibits",
@@ -254,6 +283,31 @@ const translations = {
     news_2_p: "Meeting focused on regional archaeology and paleontology advances.",
     news_3_t: "Excavation campaign",
     news_3_p: "Live follow-up of fieldwork and discoveries.",
+    page_home_title: "Paleomagina | Home",
+    page_about_title: "Paleomagina | About",
+    page_exhibits_title: "Paleomagina | Exhibits",
+    page_resources_title: "Paleomagina | Resources",
+    page_contact_title: "Paleomagina | Contact",
+    index_title: "INDEX",
+    index_main: "GENERAL ASPECTS",
+    index_intro: "GENERAL INTRODUCTION: A JOURNEY TO UNDERSTAND SIERRA MAGINA THROUGH SCIENCE, LANDSCAPE, AND HUMAN MEMORY",
+    index_criteria: "KEY CRITERIA TO CONSIDER IN THE PROJECT",
+    timeline_aria: "Museum timeline",
+    qr_example_alt: "Example QR code opening the A2 fossil record",
+    gal_1_alt: "Mountain landscape of Sierra Magina at sunrise",
+    gal_2_alt: "Fossil detail on a laboratory support",
+    gal_3_alt: "Archaeological excavation in mountain terrain",
+    gal_4_alt: "Laboratory table with scientific tools",
+    contact_intro: "Write to us to organize school visits, group activities, and scientific collaborations.",
+    contact_email_label: "Email:",
+    contact_phone_label: "Phone:",
+    contact_location_label: "Location:",
+    contact_location_value: "Sierra Magina, Jaen",
+    contact_quick_access: "Quick access",
+    contact_qr_help: "Scan to open the project's home page.",
+    contact_qr_alt: "QR code to access the Paleomagina home page",
+    theme_mode_dark: "Dark mode",
+    theme_mode_light: "Light mode",
     footer_title: "Paleomagina",
     footer_p: "Sierra Magina, science and heritage for everyone.",
     footer_contact: "Contact",
@@ -329,6 +383,18 @@ function applyLanguage(lang) {
     if (value) node.textContent = value;
   });
 
+  document.querySelectorAll("[data-i18n-alt]").forEach((node) => {
+    const key = node.dataset.i18nAlt;
+    const value = translations[lang][key];
+    if (value) node.setAttribute("alt", value);
+  });
+
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+    const key = node.dataset.i18nAriaLabel;
+    const value = translations[lang][key];
+    if (value) node.setAttribute("aria-label", value);
+  });
+
   document.querySelectorAll(".lang-btn").forEach((button) => {
     const active = button.dataset.lang === lang;
     button.classList.toggle("active", active);
@@ -343,7 +409,8 @@ function applyLanguage(lang) {
 }
 
 function updateThemeButtonLabel() {
-  const label = currentTheme === "dark" ? "Modo claro" : "Modo oscuro";
+  const labelKey = currentTheme === "dark" ? "theme_mode_light" : "theme_mode_dark";
+  const label = translations[currentLang]?.[labelKey] || "Theme";
   document.querySelectorAll(".theme-toggle").forEach((button) => {
     button.textContent = label;
     button.setAttribute("aria-label", label);

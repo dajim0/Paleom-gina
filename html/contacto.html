@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paleomagina | Contacto</title>
+    <title data-i18n="page_contact_title">Paleomagina | Contacto</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,7 +21,7 @@
           <span class="brand-mark" aria-hidden="true">PM</span>
           <span class="brand-text">Paleomagina</span>
         </a>
-        <nav aria-label="Navegacion principal">
+        <nav data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
           <ul class="nav-list">
             <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
             <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
@@ -33,7 +33,7 @@
             <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
           </ul>
         </nav>
-        <div class="language-switcher" role="group" aria-label="Selector de idioma">
+        <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria" aria-label="Selector de idioma">
           <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
           <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
@@ -46,16 +46,17 @@
         <div class="container two-col">
           <div>
             <h2 id="contact-page-title" data-i18n="footer_contact">Contacto</h2>
-            <p>Escribenos para organizar visitas escolares, actividades en grupo y colaboraciones cientificas.</p>
-            <p><strong>Email:</strong> <a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
-            <p><strong>Telefono:</strong> +34 000 000 000</p>
-            <p><strong>Ubicacion:</strong> Sierra Magina, Jaen</p>
+            <p data-i18n="contact_intro">Escribenos para organizar visitas escolares, actividades en grupo y colaboraciones cientificas.</p>
+            <p><strong data-i18n="contact_email_label">Email:</strong> <a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+            <p><strong data-i18n="contact_phone_label">Telefono:</strong> +34 000 000 000</p>
+            <p><strong data-i18n="contact_location_label">Ubicacion:</strong> <span data-i18n="contact_location_value">Sierra Magina, Jaen</span></p>
           </div>
           <div class="card qr-card">
-            <h3>Acceso rapido</h3>
-            <p>Escanea para abrir la pagina principal del proyecto.</p>
+            <h3 data-i18n="contact_quick_access">Acceso rapido</h3>
+            <p data-i18n="contact_qr_help">Escanea para abrir la pagina principal del proyecto.</p>
             <img
               src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://paleomagina.example/inicio"
+              data-i18n-alt="contact_qr_alt"
               alt="Codigo QR para acceder al inicio de Paleomagina"
               width="180"
               height="180"

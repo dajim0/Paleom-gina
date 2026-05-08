@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paleomagina | Ambitos</title>
+    <title data-i18n="page_exhibits_title">Paleomagina | Ambitos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,7 +21,7 @@
           <span class="brand-mark" aria-hidden="true">PM</span>
           <span class="brand-text">Paleomagina</span>
         </a>
-        <nav aria-label="Navegacion principal">
+        <nav data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
           <ul class="nav-list">
             <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
             <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
@@ -33,7 +33,7 @@
             <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
           </ul>
         </nav>
-        <div class="language-switcher" role="group" aria-label="Selector de idioma">
+        <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria" aria-label="Selector de idioma">
           <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
           <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
@@ -58,7 +58,7 @@
           <p data-i18n="timeline_intro">
             Explora las grandes etapas para entender la evolucion de Sierra Magina y su registro arqueologico.
           </p>
-          <div class="timeline" role="list" aria-label="Linea temporal del museo">
+          <div class="timeline" role="list" data-i18n-aria-label="timeline_aria" aria-label="Linea temporal del museo">
             <button class="timeline-item active" data-time="marine" role="listitem" data-i18n="timeline_marine">Era marina</button>
             <button class="timeline-item" data-time="geology" role="listitem" data-i18n="timeline_geology">Formacion geologica</button>
             <button class="timeline-item" data-time="quaternary" role="listitem" data-i18n="timeline_quaternary">Cuaternario</button>
@@ -89,6 +89,7 @@
             <p data-i18n="qr_p">Escanea para abrir una ficha ampliada del fosil en tiempo real.</p>
             <img
               src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://paleomagina.example/visita-interactiva-2026"
+              data-i18n-alt="qr_example_alt"
               alt="Codigo QR de ejemplo que abre la ficha del fosil A2"
               width="160"
               height="160"
@@ -101,10 +102,10 @@
         <div class="container">
           <h2 id="gallery-title" data-i18n="gallery_title">Galeria multimedia</h2>
           <div class="gallery-grid">
-            <figure><img src="https://picsum.photos/id/1039/800/500" alt="Paisaje montanoso de Sierra Magina al amanecer" loading="lazy" /><figcaption data-i18n="gal_1">Paisaje de Sierra Magina</figcaption></figure>
-            <figure><img src="https://picsum.photos/id/1025/800/500" alt="Detalle de fosil sobre soporte de laboratorio" loading="lazy" /><figcaption data-i18n="gal_2">Fosiles y registro geologico</figcaption></figure>
-            <figure><img src="https://picsum.photos/id/1040/800/500" alt="Excavacion arqueologica en terreno de montana" loading="lazy" /><figcaption data-i18n="gal_3">Excavaciones arqueologicas</figcaption></figure>
-            <figure><img src="https://picsum.photos/id/1076/800/500" alt="Mesa de laboratorio con herramientas cientificas" loading="lazy" /><figcaption data-i18n="gal_4">Trabajo cientifico en laboratorio</figcaption></figure>
+            <figure><img src="https://picsum.photos/id/1039/800/500" data-i18n-alt="gal_1_alt" alt="Paisaje montanoso de Sierra Magina al amanecer" loading="lazy" /><figcaption data-i18n="gal_1">Paisaje de Sierra Magina</figcaption></figure>
+            <figure><img src="https://picsum.photos/id/1025/800/500" data-i18n-alt="gal_2_alt" alt="Detalle de fosil sobre soporte de laboratorio" loading="lazy" /><figcaption data-i18n="gal_2">Fosiles y registro geologico</figcaption></figure>
+            <figure><img src="https://picsum.photos/id/1040/800/500" data-i18n-alt="gal_3_alt" alt="Excavacion arqueologica en terreno de montana" loading="lazy" /><figcaption data-i18n="gal_3">Excavaciones arqueologicas</figcaption></figure>
+            <figure><img src="https://picsum.photos/id/1076/800/500" data-i18n-alt="gal_4_alt" alt="Mesa de laboratorio con herramientas cientificas" loading="lazy" /><figcaption data-i18n="gal_4">Trabajo cientifico en laboratorio</figcaption></figure>
           </div>
         </div>
       </section>
