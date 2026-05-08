@@ -1,81 +1,118 @@
-import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
-import { OrbitControls } from "https://unpkg.com/three@0.165.0/examples/jsm/controls/OrbitControls.js";
-
 const host = document.getElementById("museum-3d-canvas");
 const listHost = document.getElementById("museum-3d-sections");
+const legendHost = document.getElementById("museum-3d-legend");
 const detailTitle = document.getElementById("museum-3d-detail-title");
 const detailText = document.getElementById("museum-3d-detail-text");
 
-if (!host || !listHost || !detailTitle || !detailText) {
-  // This page does not include the 3D viewer.
-} else {
-  const sections = [
-    { code: "A0", title: "Bienvenida", text: "Punto inicial del recorrido: recepcion, orientacion y contexto del centro.", x: -4, z: 0, w: 2.4, d: 2.2, color: 0xb88e56 },
-    { code: "A1", title: "Mar de Tetis", text: "Lectura del origen marino del territorio y registro fosil.", x: -1.2, z: 0.2, w: 2.1, d: 2.1, color: 0xc89b62 },
-    { code: "A2", title: "Geologia y orografia", text: "Procesos geologicos que modelan Sierra Magina.", x: 1.5, z: -0.1, w: 2.3, d: 2.2, color: 0xd2a56b },
-    { code: "A3", title: "Cuaternario", text: "Cambios climaticos y ambientales durante el Cuaternario.", x: 4, z: 0.3, w: 2.1, d: 2.1, color: 0xd9aa72 },
-    { code: "A4", title: "Mundo neandertal", text: "Evidencias de vida neandertal y tecnologia asociada.", x: -2.8, z: -2.6, w: 2.2, d: 1.9, color: 0xc07b44 },
-    { code: "A5", title: "Paleolitico superior", text: "Innovaciones culturales y tecnicas de sociedades cazadoras.", x: -0.1, z: -2.5, w: 2.2, d: 1.9, color: 0xb36f3d },
-    { code: "A6", title: "Neolitico", text: "Primeras comunidades productoras y transformacion del territorio.", x: 2.6, z: -2.4, w: 2.1, d: 1.9, color: 0x6b8b5f },
-    { code: "A7", title: "Calcolitico", text: "Metalurgia inicial y nuevos modelos sociales.", x: 4.8, z: -2.2, w: 1.8, d: 1.8, color: 0x7f9a57 },
-    { code: "A8", title: "Ciencia y ciudadania", text: "Investigacion arqueologica y divulgacion abierta al publico.", x: 0.9, z: 2.8, w: 2.4, d: 1.8, color: 0xa79b45 },
-    { code: "TZ", title: "Terraza y paisaje", text: "Cierre del recorrido con lectura directa del paisaje real.", x: 4.2, z: 2.7, w: 2.4, d: 1.7, color: 0x9d8462 }
-  ];
+if (host && listHost && legendHost && detailTitle && detailText) {
+  const floorButtons = Array.from(document.querySelectorAll(".museum-3d-floor-btn"));
+  const PLAN_BASE_W = 760;
+  const PLAN_BASE_H = 360;
+  const floorData = {
+    ground: {
+      label: "Planta BAJA",
+      planImagePath: "../images/planta-baja-plano.png",
+      legendTitle: "Leyenda planta baja",
+      sections: [
+        { code: "R1", title: "Recepcion y acogida", text: "Primer punto de contacto y bienvenida del visitante.", color: "#c79a5f", poly: [[88, 226], [172, 200], [214, 244], [134, 290], [82, 274]] },
+        { code: "R2", title: "Distribucion y transicion", text: "Area de paso interpretativo y preparacion del recorrido.", color: "#d6a66f", poly: [[198, 194], [330, 158], [380, 208], [244, 242]] },
+        { code: "R3", title: "Escaleras y eras geologicas", text: "Conexion vertical con introduccion a las eras geologicas.", color: "#9da881", poly: [[364, 152], [520, 114], [578, 174], [418, 214]] }
+      ]
+    },
+    first: {
+      label: "Planta PRIMERA",
+      planImagePath: "../images/planta-primera-plano.png",
+      legendTitle: "Leyenda planta primera",
+      sections: [
+        { code: "AN", title: "Antesala", text: "Antesala de acceso a la exposicion permanente.", color: "#d0b183", poly: [[70, 272], [142, 238], [182, 274], [116, 316], [68, 302]] },
+        { code: "A0", title: "Bienvenida", text: "Punto inicial del recorrido expositivo en sala.", color: "#c79a5f", poly: [[160, 236], [250, 206], [292, 254], [206, 286]] },
+        { code: "A1", title: "Mar de Tetis", text: "Lectura del origen marino del territorio y registro fosil.", color: "#cda36d", poly: [[260, 204], [352, 176], [396, 226], [302, 256]] },
+        { code: "A2", title: "Geologia y orografia", text: "Procesos geologicos que modelan Sierra Magina.", color: "#d8ad76", poly: [[366, 172], [466, 146], [508, 198], [404, 226]] },
+        { code: "A3", title: "Cuaternario", text: "Cambios climaticos y ambientales durante el Cuaternario.", color: "#dfb57d", poly: [[474, 140], [574, 116], [616, 166], [514, 192]] },
+        { code: "A4", title: "Mundo neandertal", text: "Evidencias de vida neandertal y tecnologia asociada.", color: "#cb7f49", poly: [[246, 272], [342, 242], [388, 292], [286, 326]] },
+        { code: "A5", title: "Paleolitico superior", text: "Innovaciones culturales y tecnicas de sociedades cazadoras.", color: "#bb703f", poly: [[352, 238], [454, 210], [500, 260], [392, 292]] },
+        { code: "A6", title: "Neolitico", text: "Primeras comunidades productoras y transformacion del territorio.", color: "#6f9663", poly: [[460, 204], [562, 176], [612, 226], [500, 258]] },
+        { code: "A7", title: "Calcolitico", text: "Metalurgia inicial y nuevos modelos sociales.", color: "#879e5d", poly: [[514, 266], [610, 240], [650, 282], [552, 308]] },
+        { code: "A8", title: "Ciencia y ciudadania", text: "Investigacion arqueologica y divulgacion abierta al publico.", color: "#a99e4a", poly: [[364, 82], [486, 56], [526, 100], [404, 126]] },
+        { code: "TZ", title: "Terraza y paisaje", text: "Cierre del recorrido con lectura directa del paisaje real.", color: "#9f8564", poly: [[538, 44], [668, 24], [704, 66], [576, 92]] }
+      ]
+    }
+  };
 
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf7f1e6);
+  let currentFloor = "ground";
+  let selectedCode = floorData[currentFloor].sections[0].code;
 
-  const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 120);
-  camera.position.set(0, 10.5, 12.5);
+  host.innerHTML = `
+    <div class="museum-3d-stage">
+      <img class="museum-3d-plan-image" alt="Plano del museo" />
+      <div class="museum-3d-floor-label"></div>
+    </div>
+  `;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  host.appendChild(renderer.domElement);
+  const planImage = host.querySelector(".museum-3d-plan-image");
+  const stage = host.querySelector(".museum-3d-stage");
+  const floorLabel = host.querySelector(".museum-3d-floor-label");
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.target.set(0, 0.5, 0);
-  controls.maxPolarAngle = Math.PI / 2.1;
-  controls.minDistance = 8;
-  controls.maxDistance = 24;
+  function pointInPolygon(point, polygon) {
+    let inside = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      const xi = polygon[i][0];
+      const yi = polygon[i][1];
+      const xj = polygon[j][0];
+      const yj = polygon[j][1];
+      const intersect = (yi > point[1]) !== (yj > point[1]) &&
+        point[0] < ((xj - xi) * (point[1] - yi)) / (yj - yi) + xi;
+      if (intersect) inside = !inside;
+    }
+    return inside;
+  }
 
-  const hemi = new THREE.HemisphereLight(0xffffff, 0xb7a286, 0.95);
-  scene.add(hemi);
-  const dir = new THREE.DirectionalLight(0xffffff, 0.65);
-  dir.position.set(7, 12, 8);
-  scene.add(dir);
+  function getImageDrawBox() {
+    const box = planImage.getBoundingClientRect();
+    const imageAspect = PLAN_BASE_W / PLAN_BASE_H;
+    const boxAspect = box.width / box.height;
+    if (boxAspect > imageAspect) {
+      const drawHeight = box.height;
+      const drawWidth = drawHeight * imageAspect;
+      return { left: box.left + (box.width - drawWidth) / 2, top: box.top, width: drawWidth, height: drawHeight };
+    }
+    const drawWidth = box.width;
+    const drawHeight = drawWidth / imageAspect;
+    return { left: box.left, top: box.top + (box.height - drawHeight) / 2, width: drawWidth, height: drawHeight };
+  }
 
-  const base = new THREE.Mesh(
-    new THREE.BoxGeometry(13.5, 0.4, 8.8),
-    new THREE.MeshStandardMaterial({ color: 0xe6ddce, roughness: 0.9 })
-  );
-  base.position.y = -0.22;
-  scene.add(base);
+  function renderLegend() {
+    const current = floorData[currentFloor];
+    legendHost.innerHTML = "";
+    const title = document.createElement("p");
+    title.className = "museum-3d-legend-title";
+    title.textContent = current.legendTitle;
+    legendHost.appendChild(title);
 
-  const grid = new THREE.GridHelper(13, 13, 0xceb89c, 0xd9c8b2);
-  grid.position.y = -0.02;
-  scene.add(grid);
+    const list = document.createElement("div");
+    list.className = "museum-3d-legend-list";
+    current.sections.forEach((section) => {
+      const item = document.createElement("div");
+      item.className = "museum-3d-legend-item";
 
-  const sectionMeshes = [];
-  let selectedCode = "A0";
+      const swatch = document.createElement("span");
+      swatch.className = "museum-3d-legend-swatch";
+      swatch.style.backgroundColor = section.color;
 
-  sections.forEach((section) => {
-    const mesh = new THREE.Mesh(
-      new THREE.BoxGeometry(section.w, 0.75, section.d),
-      new THREE.MeshStandardMaterial({ color: section.color, roughness: 0.72, metalness: 0.05 })
-    );
-    mesh.position.set(section.x, 0.38, section.z);
-    mesh.userData.code = section.code;
-    scene.add(mesh);
-    sectionMeshes.push(mesh);
-  });
+      const text = document.createElement("span");
+      text.textContent = `${section.code} - ${section.title}`;
 
-  const raycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
+      item.appendChild(swatch);
+      item.appendChild(text);
+      list.appendChild(item);
+    });
+    legendHost.appendChild(list);
+  }
 
   function setActive(code) {
     selectedCode = code;
-    const active = sections.find((item) => item.code === code);
+    const current = floorData[currentFloor];
+    const active = current.sections.find((s) => s.code === code);
     if (!active) return;
 
     detailTitle.textContent = `${active.code} - ${active.title}`;
@@ -84,57 +121,56 @@ if (!host || !listHost || !detailTitle || !detailText) {
     document.querySelectorAll(".museum-3d-section-btn").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.code === code);
     });
+  }
 
-    sectionMeshes.forEach((mesh) => {
-      const isActive = mesh.userData.code === code;
-      mesh.scale.y = isActive ? 1.18 : 1;
-      mesh.position.y = isActive ? 0.45 : 0.38;
-      mesh.material.emissive = new THREE.Color(isActive ? 0x3b1d0f : 0x000000);
-      mesh.material.emissiveIntensity = isActive ? 0.15 : 0;
+  function renderSectionButtons() {
+    const current = floorData[currentFloor];
+    listHost.innerHTML = "";
+    current.sections.forEach((section) => {
+      const btn = document.createElement("button");
+      btn.className = "museum-3d-section-btn";
+      btn.dataset.code = section.code;
+      btn.type = "button";
+      btn.textContent = `${section.code} - ${section.title}`;
+      btn.addEventListener("click", () => setActive(section.code));
+      listHost.appendChild(btn);
     });
   }
 
-  sections.forEach((section) => {
-    const btn = document.createElement("button");
-    btn.className = "museum-3d-section-btn";
-    btn.dataset.code = section.code;
-    btn.type = "button";
-    btn.textContent = `${section.code} - ${section.title}`;
-    btn.addEventListener("click", () => setActive(section.code));
-    listHost.appendChild(btn);
+  function setFloor(floor) {
+    currentFloor = floor;
+    floorButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.floor === floor);
+    });
+
+    const current = floorData[floor];
+    floorLabel.textContent = current.label;
+    planImage.src = current.planImagePath;
+
+    renderLegend();
+    renderSectionButtons();
+
+    selectedCode = current.sections[0].code;
+    setActive(selectedCode);
+  }
+
+  floorButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const floor = button.dataset.floor;
+      if (floorData[floor]) setFloor(floor);
+    });
   });
 
-  function onPointerDown(event) {
-    const rect = renderer.domElement.getBoundingClientRect();
-    pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(sectionMeshes);
-    if (intersects.length > 0) {
-      setActive(intersects[0].object.userData.code);
-    }
-  }
+  stage.addEventListener("click", (event) => {
+    const drawBox = getImageDrawBox();
+    const localX = event.clientX - drawBox.left;
+    const localY = event.clientY - drawBox.top;
+    if (localX < 0 || localY < 0 || localX > drawBox.width || localY > drawBox.height) return;
+    const mapX = (localX / drawBox.width) * PLAN_BASE_W;
+    const mapY = (localY / drawBox.height) * PLAN_BASE_H;
+    const hit = floorData[currentFloor].sections.find((section) => pointInPolygon([mapX, mapY], section.poly));
+    if (hit) setActive(hit.code);
+  });
 
-  renderer.domElement.addEventListener("pointerdown", onPointerDown);
-
-  function resize() {
-    const width = host.clientWidth;
-    const height = host.clientHeight;
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  }
-
-  const resizeObserver = new ResizeObserver(resize);
-  resizeObserver.observe(host);
-  resize();
-  setActive(selectedCode);
-
-  function animate() {
-    controls.update();
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-
-  animate();
+  setFloor(currentFloor);
 }
