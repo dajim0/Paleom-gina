@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paleomagina | Inicio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Saltar al contenido principal</a>
+
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Paleomagina">
+          <span class="brand-mark" aria-hidden="true">PM</span>
+          <span class="brand-text">Paleomagina</span>
+        </a>
+        <nav aria-label="Navegacion principal">
+          <ul class="nav-list">
+            <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+            <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
+            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
+            <li><a href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
+            <li><a href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
+            <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="language-switcher" role="group" aria-label="Selector de idioma">
+          <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Modo oscuro">Modo oscuro</button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="section index-panel" aria-labelledby="indice-title">
+        <div class="container index-content">
+          <p class="index-title" id="indice-title">INDICE</p>
+          <div class="index-block">
+            <p class="index-number">1</p>
+            <div>
+              <p class="index-main">ASPECTOS GENERALES </p>
+              <div class="index-subitem">
+                <p>INTRODUCCION GENERAL: UN RECORRIDO PARA COMPRENDER SIERRA MAGINA DESDE LA CIENCIA, EL PAISAJE Y LA MEMORIA HUMANA</p>
+              </div>
+              <div class="index-subitem">
+                <p>CRITERIOS A TENER EN CUENTA EN EL PROYECTO</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <p class="kicker" data-i18n="hero_kicker">Centro de Interpretacion Paleomagina</p>
+          <h1 id="hero-title" data-i18n="hero_title">Sierra Magina: un archivo del tiempo</h1>
+          <p class="hero-text" data-i18n="hero_text">
+            Recorre millones de años de historia geologica y humana con una experiencia conectada por QR, recursos interactivos y ciencia basada en evidencias.
+          </p>
+          <a class="btn btn-primary" href="ambitos.html" data-i18n="hero_cta">Comenzar recorrido</a>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="objetivo" aria-labelledby="goal-title">
+        <div class="container">
+          <h2 id="goal-title" data-i18n="goal_title">Objetivo del proyecto</h2>
+          <p class="section-lead" data-i18n="goal_intro">
+            Paleomagina divulga ciencia de forma moderna para explicar la evolucion del territorio y la relacion entre naturaleza y humanidad.
+          </p>
+          <div class="resource-grid">
+            <article class="card"><h3 data-i18n="goal_1_t">Experiencia inmersiva</h3><p data-i18n="goal_1_p">Recorrido interactivo que une museo fisico y microsite digital.</p></article>
+            <article class="card"><h3 data-i18n="goal_2_t">Aprendizaje por evidencias</h3><p data-i18n="goal_2_p">Contenidos construidos desde la arqueologia, paleontologia y geologia.</p></article>
+            <article class="card"><h3 data-i18n="goal_3_t">Ciencia y ciudadania</h3><p data-i18n="goal_3_p">Investigacion actual compartida de forma clara y participativa.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h2 data-i18n="footer_title">Paleomagina</h2>
+          <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
+        </div>
+        <div>
+          <h3 data-i18n="footer_contact">Contacto</h3>
+          <p><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+          <p>+34 000 000 000</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paleomagina | Ambitos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Saltar al contenido principal</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Paleomagina">
+          <span class="brand-mark" aria-hidden="true">PM</span>
+          <span class="brand-text">Paleomagina</span>
+        </a>
+        <nav aria-label="Navegacion principal">
+          <ul class="nav-list">
+            <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+            <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
+            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
+            <li><a href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
+            <li><a href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
+            <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="language-switcher" role="group" aria-label="Selector de idioma">
+          <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Modo oscuro">Modo oscuro</button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="section section-alt" id="ambitos" aria-labelledby="ambitos-title">
+        <div class="container">
+          <h2 id="ambitos-title" data-i18n="exhibits_title">Ambitos expositivos A0-A8 y terraza</h2>
+          <p class="section-lead" data-i18n="exhibits_lead">
+            Cada ambito incluye resumen, recursos audiovisuales, galeria, curiosidades, linea temporal y acceso por QR.
+          </p>
+          <div class="grid-cards" id="ambitos-grid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="timeline" aria-labelledby="timeline-title">
+        <div class="container">
+          <h2 id="timeline-title" data-i18n="timeline_title">Linea temporal interactiva</h2>
+          <p data-i18n="timeline_intro">
+            Explora las grandes etapas para entender la evolucion de Sierra Magina y su registro arqueologico.
+          </p>
+          <div class="timeline" role="list" aria-label="Linea temporal del museo">
+            <button class="timeline-item active" data-time="marine" role="listitem" data-i18n="timeline_marine">Era marina</button>
+            <button class="timeline-item" data-time="geology" role="listitem" data-i18n="timeline_geology">Formacion geologica</button>
+            <button class="timeline-item" data-time="quaternary" role="listitem" data-i18n="timeline_quaternary">Cuaternario</button>
+            <button class="timeline-item" data-time="neanderthal" role="listitem" data-i18n="timeline_neanderthal">Neandertales</button>
+            <button class="timeline-item" data-time="neolithic" role="listitem" data-i18n="timeline_neolithic">Neolitico</button>
+            <button class="timeline-item" data-time="chalcolithic" role="listitem" data-i18n="timeline_chalcolithic">Calcolitico</button>
+          </div>
+          <article class="card timeline-detail" id="timeline-detail" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="mapa" aria-labelledby="map-title">
+        <div class="container two-col">
+          <div>
+            <h2 id="map-title" data-i18n="map_title">Mapa interactivo y QR</h2>
+            <p data-i18n="map_p1">
+              Cada panel fisico del museo conecta con una pagina especifica del microsite mediante QR para ampliar contenidos.
+            </p>
+            <ul>
+              <li data-i18n="map_l1">Sierra Magina y su evolucion paisajistica.</li>
+              <li data-i18n="map_l2">Cuevas y areas de excavacion.</li>
+              <li data-i18n="map_l3">Puntos con hallazgos destacados.</li>
+              <li data-i18n="map_l4">Rutas educativas para visitas guiadas.</li>
+            </ul>
+          </div>
+          <div class="card qr-card">
+            <h3 data-i18n="qr_title">Ejemplo QR de sala</h3>
+            <p data-i18n="qr_p">Escanea para abrir una ficha ampliada del fosil en tiempo real.</p>
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://paleomagina.example/visita-interactiva-2026"
+              alt="Codigo QR de ejemplo que abre la ficha del fosil A2"
+              width="160"
+              height="160"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="galeria" aria-labelledby="gallery-title">
+        <div class="container">
+          <h2 id="gallery-title" data-i18n="gallery_title">Galeria multimedia</h2>
+          <div class="gallery-grid">
+            <figure><img src="https://picsum.photos/id/1039/800/500" alt="Paisaje montanoso de Sierra Magina al amanecer" loading="lazy" /><figcaption data-i18n="gal_1">Paisaje de Sierra Magina</figcaption></figure>
+            <figure><img src="https://picsum.photos/id/1025/800/500" alt="Detalle de fosil sobre soporte de laboratorio" loading="lazy" /><figcaption data-i18n="gal_2">Fosiles y registro geologico</figcaption></figure>
+            <figure><img src="https://picsum.photos/id/1040/800/500" alt="Excavacion arqueologica en terreno de montana" loading="lazy" /><figcaption data-i18n="gal_3">Excavaciones arqueologicas</figcaption></figure>
+            <figure><img src="https://picsum.photos/id/1076/800/500" alt="Mesa de laboratorio con herramientas cientificas" loading="lazy" /><figcaption data-i18n="gal_4">Trabajo cientifico en laboratorio</figcaption></figure>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h2 data-i18n="footer_title">Paleomagina</h2>
+          <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
+        </div>
+        <div>
+          <h3 data-i18n="footer_contact">Contacto</h3>
+          <p><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+          <p>+34 000 000 000</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

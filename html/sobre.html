@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paleomagina | Sobre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Saltar al contenido principal</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Paleomagina">
+          <span class="brand-mark" aria-hidden="true">PM</span>
+          <span class="brand-text">Paleomagina</span>
+        </a>
+        <nav aria-label="Navegacion principal">
+          <ul class="nav-list">
+            <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+            <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
+            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="#educacion" data-i18n="nav_education">Educacion</a></li>
+            <li><a href="#ciencia" data-i18n="nav_science">Ciencia</a></li>
+            <li><a href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
+            <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="language-switcher" role="group" aria-label="Selector de idioma">
+          <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Modo oscuro">Modo oscuro</button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="section" id="sobre" aria-labelledby="sobre-title">
+        <div class="container two-col">
+          <div>
+            <h2 id="sobre-title" data-i18n="about_title">Sobre Paleomagina</h2>
+            <p data-i18n="about_p1">
+              Paleomagina es un centro dedicado a interpretar la evolucion del territorio de Sierra Magina desde el antiguo mar de Tetis hasta las comunidades prehistoricas.
+            </p>
+            <p data-i18n="about_p2">
+              Sus objetivos cientificos combinan investigacion arqueologica y paleontologica, divulgacion y educacion para conectar paisaje, ciencia y humanidad.
+            </p>
+            <p data-i18n="about_p3">
+              La visita se amplia con contenidos digitales para antes, durante y despues del recorrido presencial.
+            </p>
+          </div>
+          <aside class="card">
+            <h3 data-i18n="about_highlights_title">Claves del centro</h3>
+            <ul>
+              <li data-i18n="about_h1">Investigacion en campo, laboratorio y territorio.</li>
+              <li data-i18n="about_h2">Difusion del patrimonio de Sierra Magina.</li>
+              <li data-i18n="about_h3">Experiencia museistica progresiva por ambitos.</li>
+              <li data-i18n="about_h4">Soporte educativo para aulas y familias.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="educacion" aria-labelledby="education-title">
+        <div class="container">
+          <h2 id="education-title" data-i18n="education_title">Educacion para colegios</h2>
+          <div class="resource-grid">
+            <article class="card"><h3 data-i18n="edu_1_t">Materiales didacticos</h3><p data-i18n="edu_1_p">Unidades por edades, actividades imprimibles y recursos para aula.</p></article>
+            <article class="card"><h3 data-i18n="edu_2_t">Actividades</h3><p data-i18n="edu_2_p">Talleres sobre fosiles, herramientas prehistoricas y lectura del paisaje.</p></article>
+            <article class="card"><h3 data-i18n="edu_3_t">Visitas escolares</h3><p data-i18n="edu_3_p">Itinerarios guiados por niveles con objetivos curriculares adaptados.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="ciencia" aria-labelledby="science-title">
+        <div class="container">
+          <h2 id="science-title" data-i18n="science_title">Ciencia y laboratorio</h2>
+          <p data-i18n="science_intro">
+            La investigacion se basa en evidencias obtenidas en campo, analizadas en laboratorio y compartidas con la ciudadania.
+          </p>
+          <ul class="science-list">
+            <li data-i18n="science_l1">Metodologia de excavacion y registro estratigrafico.</li>
+            <li data-i18n="science_l2">Conservacion preventiva y restauracion de piezas.</li>
+            <li data-i18n="science_l3">Arqueologia experimental para contrastar hipotesis.</li>
+            <li data-i18n="science_l4">Difusion de resultados en actividades y publicaciones.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h2 data-i18n="footer_title">Paleomagina</h2>
+          <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
+        </div>
+        <div>
+          <h3 data-i18n="footer_contact">Contacto</h3>
+          <p><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+          <p>+34 000 000 000</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
