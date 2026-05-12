@@ -86,6 +86,8 @@ const translations = {
     nav_education: "Educacion",
     nav_science: "Ciencia",
     nav_news: "Noticias",
+    nav_glossary: "Glosario",
+    nav_audiovisuals: "Audiovisuales",
     hero_kicker: "Centro de Interpretacion Paleomagina",
     hero_title: "Sierra Magina: un archivo del tiempo",
     hero_text: "Un museo moderno para leer millones de años de historia: mares antiguos, montañas, cambios climaticos, aparicion humana y evolucion cultural.",
@@ -273,6 +275,8 @@ const translations = {
     nav_education: "Education",
     nav_science: "Science",
     nav_news: "News",
+    nav_glossary: "Glossary",
+    nav_audiovisuals: "Audiovisuals",
     hero_kicker: "Paleomagina Interpretation Center",
     hero_title: "Sierra Magina: an archive of time",
     hero_text: "A modern museum to read millions of years of history: ancient seas, mountain building, climate shifts, human emergence, and cultural evolution.",
@@ -531,6 +535,12 @@ function applyLanguage(lang) {
     if (value) node.setAttribute("aria-label", value);
   });
 
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+    const key = node.dataset.i18nPlaceholder;
+    const value = translations[lang][key];
+    if (value) node.setAttribute("placeholder", value);
+  });
+
   document.querySelectorAll(".lang-btn").forEach((button) => {
     const active = button.dataset.lang === lang;
     button.classList.toggle("active", active);
@@ -538,9 +548,11 @@ function applyLanguage(lang) {
   });
 
   renderScopes(lang);
-  const activeTimeline = document.querySelector(".timeline-item.active");
-  const selectedTime = activeTimeline?.dataset.time || "marine";
-  updateTimeline(lang, selectedTime);
+  if (!document.querySelector(".timeline-era")) {
+    const activeTimeline = document.querySelector(".timeline-item.active");
+    const selectedTime = activeTimeline?.dataset.time || "marine";
+    updateTimeline(lang, selectedTime);
+  }
   updateThemeButtonLabel();
 }
 

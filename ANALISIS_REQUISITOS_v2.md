@@ -6,6 +6,29 @@
 
 ---
 
+## ACTUALIZACIÓN v2.1 (12 de mayo de 2026) — Interfaz y mantenimiento
+
+### Cambios técnicos y de producto
+
+- **Bootstrap 5.3** integrado en todas las páginas HTML (`cdn.jsdelivr.net`) para rejilla, componentes y menú responsive (navbar con `navbar-toggler`).
+- **Menú global fijo** (`navbar fixed-top`) visible al hacer scroll en todo el sitio, con enlaces unificados: Inicio, Sobre, Ámbitos, Recursos, **Glosario**, **Audiovisuales**, Educación, Ciencia y Noticias (anclas donde aplica).
+- **Separación de capas**: estilos en `styles.css` (incluye bloques antes inline en `audiovisuales.html` y estilos del visor en `ambitos.html`); lógica de listados en `audiovisuals.js` y `glossary.js`.
+- **Corrección de archivos**: eliminado contenido corrupto tras `</html>` en `ambitos.html` y código huérfano al final de `museum3d.js` para garantizar HTML/JS válidos.
+- **Accesibilidad**: `padding-top` en `body` para no solapar el menú fijo; placeholders i18n vía `data-i18n-placeholder` en `script.js`.
+
+### Archivos tocados (resumen)
+
+| Archivo | Cambio |
+|---------|--------|
+| `html/*.html` | Bootstrap CSS/JS, navbar común, sin CSS/JS inline |
+| `styles.css` | Estilos audiovisuales, visor museo, utilidades footer, `padding-top` cuerpo |
+| `audiovisuals.js`, `glossary.js` | Nuevo: lógica de página |
+| `script.js` | Claves `nav_glossary`, `nav_audiovisuals`, placeholders i18n |
+| `museum3d.js` | Eliminación de duplicado corrupto |
+| `ANALISIS_REQUISITOS_v2.md` | Este apartado |
+
+---
+
 ## RESUMEN EJECUTIVO
 
 **Estado anterior (v1.0):** 44% cumplimiento (11 CUMPLE, 13 PARCIAL, 14 FALTA)

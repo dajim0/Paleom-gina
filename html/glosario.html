@@ -16,36 +16,56 @@
       href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
     <link rel="icon" type="image/png" href="../images/favicon.png" />
   </head>
   <body>
-    <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Saltar al contenido principal</a>
+    <a class="skip-link visually-hidden-focusable" href="#main-content" data-i18n="skip_to_content">Saltar al contenido principal</a>
 
-    <header class="site-header" id="top">
-      <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Paleomagina">
-          <span class="brand-mark" aria-hidden="true">PM</span>
-          <span class="brand-text">Paleomagina</span>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm pm-topnav"
+      data-i18n-aria-label="nav_main_aria"
+      aria-label="Navegacion principal"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+          <span class="brand-mark d-inline-flex align-items-center justify-content-center rounded-circle me-1">PM</span>
+          Paleomagina
         </a>
-        <nav data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
-          <ul class="nav-list">
-            <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
-            <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
-            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
-            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
-            <li><a href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
-            <li><a href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
-            <li><a href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#pmMainNav"
+          aria-controls="pmMainNav"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="pmMainNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
+            <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav_home">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.html" data-i18n="nav_about">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link" href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
+            <li class="nav-item"><a class="nav-link" href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li class="nav-item"><a class="nav-link active" href="glosario.html" data-i18n="nav_glossary">Glosario</a></li>
+            <li class="nav-item"><a class="nav-link" href="audiovisuales.html" data-i18n="nav_audiovisuals">Audiovisuales</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
+            <li class="nav-item"><a class="nav-link" href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
           </ul>
-        </nav>
-        <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria" aria-label="Selector de idioma">
-          <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
-          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <div class="d-flex flex-wrap align-items-center gap-2 ms-lg-2">
+            <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria" aria-label="Selector de idioma">
+              <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
+              <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+            </div>
+            <button class="theme-toggle btn btn-sm" type="button" data-i18n="theme_mode_dark">Modo oscuro</button>
+          </div>
         </div>
-        <button class="theme-toggle" type="button" aria-label="Modo oscuro">Modo oscuro</button>
       </div>
-    </header>
+    </nav>
 
     <main id="main-content">
       <section class="hero-simple" id="glosario-hero" aria-labelledby="glosario-title">
@@ -55,24 +75,24 @@
         </div>
       </section>
 
-      <section class="section" id="glossary-content" aria-labelledby="glosario-title">
+      <section class="section" id="glossary-content" aria-labelledby="glossary-search-title">
         <div class="container">
+          <h2 class="visually-hidden" id="glossary-search-title">Busqueda</h2>
           <div class="glossary-search">
-            <input 
-              type="text" 
-              id="glossary-input" 
-              placeholder="Buscar término..." 
+            <input
+              type="search"
+              class="form-control"
+              id="glossary-input"
+              placeholder="Buscar término..."
               data-i18n-placeholder="glossary_search_placeholder"
               aria-label="Búsqueda en glosario"
             />
           </div>
-          
-          <dl class="glossary-list" id="glossary-list" role="region" aria-live="polite">
-            <!-- Generado por JavaScript -->
-          </dl>
-          
-          <div id="no-results" class="section-lead" style="display: none; text-align: center; margin-top: 2rem;">
-            <p data-i18n="glossary_no_results">No se encontraron resultados para tu búsqueda.</p>
+
+          <dl class="glossary-list" id="glossary-list" role="region" aria-live="polite"></dl>
+
+          <div id="no-results" class="section-lead d-none text-center mt-4">
+            <p class="mb-0" data-i18n="glossary_no_results">No se encontraron resultados para tu búsqueda.</p>
           </div>
         </div>
       </section>
@@ -112,62 +132,9 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../data.js"></script>
     <script src="../script.js"></script>
-    <script>
-      // Renderizar glosario al cargar
-      document.addEventListener('DOMContentLoaded', function() {
-        renderGlossary(currentLang);
-      });
-
-      function renderGlossary(lang) {
-        const list = document.getElementById('glossary-list');
-        const glossaryData = getGlossary(lang);
-        
-        list.innerHTML = glossaryData.map(item => `
-          <div class="glossary-entry">
-            <dt class="glossary-term">${item.term}</dt>
-            <dd class="glossary-definition">${item.def}</dd>
-          </div>
-        `).join('');
-      }
-
-      // Búsqueda interactiva
-      const searchInput = document.getElementById('glossary-input');
-      const noResults = document.getElementById('no-results');
-      const glossaryList = document.getElementById('glossary-list');
-
-      searchInput.addEventListener('input', function(e) {
-        const query = e.target.value.toLowerCase();
-        const glossaryData = getGlossary(currentLang);
-        const filtered = glossaryData.filter(item => 
-          item.term.toLowerCase().includes(query) || 
-          item.def.toLowerCase().includes(query)
-        );
-
-        if (filtered.length === 0 && query.length > 0) {
-          noResults.style.display = 'block';
-          glossaryList.style.display = 'none';
-        } else {
-          noResults.style.display = 'none';
-          glossaryList.style.display = 'block';
-          glossaryList.innerHTML = filtered.map(item => `
-            <div class="glossary-entry">
-              <dt class="glossary-term">${item.term}</dt>
-              <dd class="glossary-definition">${item.def}</dd>
-            </div>
-          `).join('');
-        }
-      });
-
-      // Actualizar glosario al cambiar idioma
-      const originalRenderScopes = window.renderScopes;
-      const originalApplyLanguage = window.applyLanguage;
-      
-      window.applyLanguage = function(lang) {
-        originalApplyLanguage(lang);
-        renderGlossary(lang);
-      };
-    </script>
+    <script src="../glossary.js"></script>
   </body>
 </html>

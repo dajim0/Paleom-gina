@@ -47,6 +47,52 @@ body {
   /* Transicion suave para el fondo y el color de texto general */
   transition: background-color 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
+  padding-top: 4.75rem;
+}
+
+.navbar.pm-topnav .nav-link,
+.navbar.pm-topnav .navbar-brand {
+  min-height: unset;
+  min-width: unset;
+}
+
+.navbar.pm-topnav .nav-link {
+  padding: 0.45rem 0.65rem;
+}
+
+.pm-topnav .language-switcher {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.pm-topnav .lang-btn {
+  color: #f8f9fa;
+}
+
+.pm-topnav .lang-btn.active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.pm-topnav .theme-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f8f9fa;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.footer-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 /* Transicion global al entrar/salir entre paginas */
@@ -590,12 +636,92 @@ figcaption {
 }
 
 .museum-3d-canvas {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
   border-radius: 0.65rem;
   background: radial-gradient(circle at 20% 15%, #ffffff 0%, #f0e6d7 70%);
   border: 1px solid var(--border);
   overflow: hidden;
+}
+
+.museum-3d-canvas img.floor-plan-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 0;
+}
+
+.museum-3d-canvas svg.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.zone-area {
+  cursor: pointer;
+}
+
+.zone-area:hover {
+  opacity: 0.85 !important;
+}
+
+.zone-area.active-zone {
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.museum-3d-section-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.35rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--card);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+}
+
+.museum-3d-section-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .museum-3d-section-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.museum-3d-section-item.active {
+  background: rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .museum-3d-section-item.active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.museum-3d-section-item span:first-of-type {
+  font-weight: 700;
+  min-width: 24px;
+}
+
+.museum-3d-section-item small {
+  opacity: 0.65;
+  font-size: 0.7rem;
+}
+
+.zone-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .museum-3d-stage {
@@ -970,12 +1096,147 @@ button:focus-visible {
 }
 
 /* Estilos para tarjetas audiovisuales */
-.audiovisual-card {
-  transition: all 0.2s ease;
-}
-
 .audiovisual-card:focus-within {
   outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.video-player {
+  position: relative;
+  background: var(--bg-alt);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  aspect-ratio: 16 / 9;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.audiovisuals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.audiovisual-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.audiovisual-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.audiovisual-thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-contrast);
+  font-size: 3rem;
+}
+
+.audiovisual-content {
+  padding: 1.25rem;
+}
+
+.audiovisual-scope {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.audiovisual-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: var(--text);
+}
+
+.audiovisual-duration {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.audiovisual-subtitle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--accent);
+  color: var(--primary-contrast);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.video-transcript {
+  background: var(--bg-alt);
+  border-left: 4px solid var(--primary);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin: 2rem 0;
+}
+
+.video-transcript h3 {
+  margin-top: 0;
+}
+
+.video-transcript p {
+  line-height: 1.8;
+}
+
+.audiovisual-filter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.filter-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+}
+
+.filter-btn:focus-visible {
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
@@ -1292,6 +1553,8 @@ img:hover {
 /* Print styles */
 @media print {
   .site-header,
+  .navbar,
+  .pm-topnav,
   .theme-toggle,
   .language-switcher,
   .btn {
@@ -1301,6 +1564,410 @@ img:hover {
   body {
     background: white;
     color: black;
+    padding-top: 0;
   }
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* MUSEUM 3D SCENES - ANIMATED 3D VISUALIZATIONS */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.obj3d {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Ocean/Marine Scene */
+.ocean-scene {
+  background: linear-gradient(180deg,#0a4a8a 0%,#1a6fba 40%,#2a9fca 100%);
+}
+
+.ocean-water {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.07) 19px);
+}
+
+.ammonite {
+  position: absolute;
+  top: 25px;
+  left: 70px;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
+  animation: float 3s ease-in-out infinite;
+}
+
+.bubble {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  animation: rise 3s ease-in infinite;
+}
+
+.b1 { left: 40px; bottom: 30px; animation-delay: 0s; }
+.b2 { left: 120px; bottom: 20px; animation-delay: 1s; width: 5px; height: 5px; }
+.b3 { left: 200px; bottom: 40px; animation-delay: 2s; width: 6px; height: 6px; }
+
+.fish {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+  font-size: 2rem;
+  animation: swim 4s ease-in-out infinite;
+}
+
+.ocean-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  background: linear-gradient(#8a6020, #6a4010);
+  border-radius: 0 0 12px 12px;
+}
+
+.sea-label {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #f0d080;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Geology Scene */
+.geology-scene {
+  background: linear-gradient(180deg,#c8e0f0 0%,#8ab0d0 100%);
+}
+
+.mountain-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.peak {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+}
+
+.strata {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.stratum {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+}
+
+.s1 { background: #8a9080; }
+.s2 { background: #9a6050; }
+.s3 { background: #b08060; }
+
+/* Quaternary/Mammoth Scene */
+.quaternary-scene {
+  background: linear-gradient(180deg, #c0d8f0 0%, #90b8e0 60%, #e8f0f8 100%);
+}
+
+.mammoth-container {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+}
+
+.snow-ground {
+  height: 12px;
+  background: white;
+  border-radius: 4px;
+  margin-top: -4px;
+}
+
+.snowflake {
+  position: absolute;
+  color: rgba(255,255,255,0.8);
+  font-size: 1.1rem;
+  animation: snowfall 4s linear infinite;
+}
+
+.sf1 { top: 10px; left: 20px; animation-delay: 0s; }
+.sf2 { top: 5px; left: 180px; animation-delay: 1.5s; }
+.sf3 { top: 20px; left: 100px; animation-delay: 3s; }
+
+/* Neandertal/Cave Scene */
+.cave-scene {
+  background: linear-gradient(135deg, #1a0a00 0%, #3a1a00 100%);
+}
+
+.cave-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 50%, rgba(255,120,30,0.25) 0%, transparent 70%);
+}
+
+.cave-arch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80%;
+  background: radial-gradient(ellipse at 50% -10%, transparent 55%, rgba(0,0,0,0.8) 56%);
+  pointer-events: none;
+}
+
+.fire-container {
+  position: absolute;
+  bottom: 25px;
+  left: 100px;
+}
+
+.fire {
+  position: relative;
+  width: 40px;
+  height: 55px;
+}
+
+.flame {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 50% 30% 30%;
+  animation: flicker 0.7s ease-in-out infinite alternate;
+}
+
+.f1 {
+  width: 40px;
+  height: 55px;
+  left: 0;
+  background: radial-gradient(#ffee00, #ff6600, #ff2200);
+  animation-delay: 0s;
+}
+
+.f2 {
+  width: 28px;
+  height: 40px;
+  left: 6px;
+  background: radial-gradient(#ffffff, #ffcc00, #ff8800);
+  animation-delay: 0.2s;
+}
+
+.f3 {
+  width: 16px;
+  height: 25px;
+  left: 12px;
+  background: radial-gradient(#ffffff, #ffff88);
+  animation-delay: 0.4s;
+}
+
+.ember {
+  position: absolute;
+  bottom: -2px;
+  width: 40px;
+  height: 8px;
+  background: #cc4400;
+  border-radius: 4px;
+}
+
+.fire-glow {
+  position: absolute;
+  bottom: 0;
+  left: -20px;
+  right: -20px;
+  height: 80px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,100,0,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.neandertal-silhouette {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  filter: drop-shadow(0 0 8px rgba(255,120,30,0.6));
+}
+
+.stone-tools {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
+  gap: 6px;
+}
+
+.tool {
+  width: 12px;
+  height: 20px;
+  background: #8a8a7a;
+  border-radius: 2px 4px 2px 0;
+  transform-origin: bottom;
+}
+
+.t1 { transform: rotate(-15deg); }
+.t2 { height: 16px; transform: rotate(5deg); }
+.t3 { height: 14px; transform: rotate(20deg); }
+
+.cave-painting {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 2rem;
+  opacity: 0.6;
+  transform: scaleX(-1);
+}
+
+/* Neolithic Scene */
+.neolithic-scene {
+  background: linear-gradient(180deg, #87ceeb 0%, #a8d8a8 60%, #7ab060 100%);
+}
+
+.sky-neo {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,#87ceeb 0%,#b8e0a0 100%);
+}
+
+.field {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+}
+
+.wheat-row {
+  display: flex;
+  gap: 4px;
+  padding: 0 10px;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.wheat {
+  width: 12px;
+  height: 55px;
+  background: linear-gradient(180deg, #e0c060 0%, #c0a040 60%, #8a7030 100%);
+  border-radius: 3px 3px 0 0;
+  animation: sway 2s ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+
+.pot-3d {
+  position: absolute;
+  bottom: 55px;
+  right: 20px;
+  filter: drop-shadow(4px 8px 10px rgba(0,0,0,0.3));
+}
+
+.hut {
+  position: absolute;
+  bottom: 55px;
+  left: 15px;
+  font-size: 3rem;
+}
+
+.animals {
+  position: absolute;
+  bottom: 55px;
+  left: 80px;
+  font-size: 1.5rem;
+}
+
+/* Chalcolithic Scene - EPIC ROTATING ARROW */
+.chalco-scene-epic {
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chalco-rotator-epic {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.chalco-arrow-3d {
+  width: 100%;
+  height: 100%;
+  animation: rotateArrow3D 10s linear infinite;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  cursor: grab;
+}
+
+.chalco-arrow-3d:active {
+  animation-play-state: paused;
+  cursor: grabbing;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ANIMATIONS FOR 3D SCENES */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes rise {
+  0% { transform: translateY(0); opacity: 0.5; }
+  100% { transform: translateY(-160px); opacity: 0; }
+}
+
+@keyframes swim {
+  0%, 100% { transform: translateX(0) scaleX(1); }
+  50% { transform: translateX(-15px) scaleX(-1); }
+}
+
+@keyframes snowfall {
+  0% { transform: translateY(-10px); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(60px); opacity: 0; }
+}
+
+@keyframes flicker {
+  0% { transform: scaleX(1) scaleY(1); }
+  100% { transform: scaleX(0.9) scaleY(1.05); }
+}
+
+@keyframes sway {
+  0% { transform: rotate(-3deg); }
+  100% { transform: rotate(3deg); }
+}
+
+@keyframes rotateArrow3D {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  25% {
+    transform: rotateX(15deg) rotateY(90deg) rotateZ(0deg);
+  }
+  50% {
+    transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  }
+  75% {
+    transform: rotateX(-15deg) rotateY(270deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(360deg) rotateZ(0deg);
+  }
 }
