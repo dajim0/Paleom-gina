@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Glosario científico de términos clave de geología, paleontología y arqueología de Sierra Magina. Definiciones para todos los públicos." />
+    <meta property="og:title" content="Glosario | Paleomagina" />
+    <meta property="og:description" content="Términos científicos clave explicados de forma clara y accesible." />
+    <meta property="og:type" content="website" />
+    <meta name="author" content="Centro de Interpretación Paleomagina" />
+    <meta name="keywords" content="glosario, geología, paleontología, arqueología, Sierra Magina" />
+    <title data-i18n="page_glossary_title">Paleomagina | Glosario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Saltar al contenido principal</a>
+
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Paleomagina">
+          <span class="brand-mark" aria-hidden="true">PM</span>
+          <span class="brand-text">Paleomagina</span>
+        </a>
+        <nav data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
+          <ul class="nav-list">
+            <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+            <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
+            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
+            <li><a href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
+            <li><a href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
+          </ul>
+        </nav>
+        <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria" aria-label="Selector de idioma">
+          <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Modo oscuro">Modo oscuro</button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero-simple" id="glosario-hero" aria-labelledby="glosario-title">
+        <div class="container">
+          <h1 id="glosario-title" data-i18n="glossary_title">Glosario científico</h1>
+          <p class="hero-text" data-i18n="glossary_intro">Términos clave de geología, paleontología y arqueología explicados de forma clara y accesible para todos los públicos.</p>
+        </div>
+      </section>
+
+      <section class="section" id="glossary-content" aria-labelledby="glosario-title">
+        <div class="container">
+          <div class="glossary-search">
+            <input 
+              type="text" 
+              id="glossary-input" 
+              placeholder="Buscar término..." 
+              data-i18n-placeholder="glossary_search_placeholder"
+              aria-label="Búsqueda en glosario"
+            />
+          </div>
+          
+          <dl class="glossary-list" id="glossary-list" role="region" aria-live="polite">
+            <!-- Generado por JavaScript -->
+          </dl>
+          
+          <div id="no-results" class="section-lead" style="display: none; text-align: center; margin-top: 2rem;">
+            <p data-i18n="glossary_no_results">No se encontraron resultados para tu búsqueda.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="glossary-info">
+        <div class="container">
+          <h2 data-i18n="glossary_context_title">Contexto científico</h2>
+          <div class="resource-grid">
+            <article class="card">
+              <h3 data-i18n="glossary_geology">Geología</h3>
+              <p data-i18n="glossary_geology_p">Ciencia que estudia la estructura, composición y evolución de la Tierra y sus rocas.</p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="glossary_paleontology">Paleontología</h3>
+              <p data-i18n="glossary_paleontology_p">Ciencia que estudia los fósiles y la vida pasada de nuestro planeta.</p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="glossary_archaeology">Arqueología</h3>
+              <p data-i18n="glossary_archaeology_p">Ciencia que estudia las culturas pasadas a través de sus restos materiales.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h2 data-i18n="footer_title">Paleomagina</h2>
+          <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
+        </div>
+        <div>
+          <h3 data-i18n="footer_contact">Contacto</h3>
+          <p><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+          <p>+34 000 000 000</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../data.js"></script>
+    <script src="../script.js"></script>
+    <script>
+      // Renderizar glosario al cargar
+      document.addEventListener('DOMContentLoaded', function() {
+        renderGlossary(currentLang);
+      });
+
+      function renderGlossary(lang) {
+        const list = document.getElementById('glossary-list');
+        const glossaryData = getGlossary(lang);
+        
+        list.innerHTML = glossaryData.map(item => `
+          <div class="glossary-entry">
+            <dt class="glossary-term">${item.term}</dt>
+            <dd class="glossary-definition">${item.def}</dd>
+          </div>
+        `).join('');
+      }
+
+      // Búsqueda interactiva
+      const searchInput = document.getElementById('glossary-input');
+      const noResults = document.getElementById('no-results');
+      const glossaryList = document.getElementById('glossary-list');
+
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase();
+        const glossaryData = getGlossary(currentLang);
+        const filtered = glossaryData.filter(item => 
+          item.term.toLowerCase().includes(query) || 
+          item.def.toLowerCase().includes(query)
+        );
+
+        if (filtered.length === 0 && query.length > 0) {
+          noResults.style.display = 'block';
+          glossaryList.style.display = 'none';
+        } else {
+          noResults.style.display = 'none';
+          glossaryList.style.display = 'block';
+          glossaryList.innerHTML = filtered.map(item => `
+            <div class="glossary-entry">
+              <dt class="glossary-term">${item.term}</dt>
+              <dd class="glossary-definition">${item.def}</dd>
+            </div>
+          `).join('');
+        }
+      });
+
+      // Actualizar glosario al cambiar idioma
+      const originalRenderScopes = window.renderScopes;
+      const originalApplyLanguage = window.applyLanguage;
+      
+      window.applyLanguage = function(lang) {
+        originalApplyLanguage(lang);
+        renderGlossary(lang);
+      };
+    </script>
+  </body>
+</html>

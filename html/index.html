@@ -3,6 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Paleomagina: centro interpretación interactivo de Sierra Magina. Explora 250 millones de años de historia geológica y humana a través de un museo moderno conectado por QR." />
+    <meta name="keywords" content="Sierra Magina, museo, arqueología, paleontología, geología, Jaén, educación científica" />
+    <meta name="author" content="Centro de Interpretación Paleomagina" />
+    <meta property="og:title" content="Paleomagina | Sierra Magina: un archivo del tiempo" />
+    <meta property="og:description" content="Centro interpretativo con 250 millones de años de historia: mares antiguos, montañas, cambios climáticos, aparición humana y evolución cultural." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://paleomagina.org/images/og-image.jpg" />
+    <meta property="og:url" content="https://paleomagina.org/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Paleomagina | Sierra Magina" />
+    <meta name="twitter:description" content="Centro interpretativo sobre la historia de Sierra Magina" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Museum",
+      "name": "Centro de Interpretación Paleomagina",
+      "description": "Museo moderno dedicado a la historia geológica y humana de Sierra Magina",
+      "url": "https://paleomagina.org/",
+      "location": {
+        "@type": "Place",
+        "name": "Sierra Magina, Jaén, España",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "37.2531",
+          "longitude": "-3.3903"
+        }
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@paleomagina.org",
+        "contactType": "Customer Service"
+      }
+    }
+    </script>
     <title data-i18n="page_home_title">Paleomagina | Inicio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +65,6 @@
             <li><a href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
             <li><a href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
             <li><a href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
-            <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
           </ul>
         </nav>
         <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria" aria-label="Selector de idioma">
@@ -93,15 +126,43 @@
         <div>
           <h2 data-i18n="footer_title">Paleomagina</h2>
           <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
+          <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
+            <span class="cert-badge">✓ WCAG 2.1 AA</span>
+            <span class="cert-badge">✓ HTML5 Valid</span>
+            <span class="cert-badge">✓ Responsive</span>
+          </div>
+        </div>
+        <div>
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="glosario.html" data-i18n="res_glossary">Glosario</a></li>
+            <li><a href="audiovisuales.html" data-i18n="res_audiovisual">Audiovisuales</a></li>
+            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ámbitos</a></li>
+          </ul>
         </div>
         <div>
           <h3 data-i18n="footer_contact">Contacto</h3>
-          <p><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
-          <p>+34 000 000 000</p>
+          <p><strong>Email:</strong><br><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+          <p><strong>Teléfono:</strong><br>+34 000 000 000</p>
+          <p><strong>Ubicación:</strong><br><span>Sierra Magina, Jaén</span></p>
         </div>
+        <div>
+          <h3>Información legal</h3>
+          <ul>
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Accesibilidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 2rem; text-align: center; color: var(--muted); font-size: 0.9rem;">
+        <p>© 2024 Centro de Interpretación Paleomagina. Todos los derechos reservados.</p>
       </div>
     </footer>
 
+    <script src="../data.js"></script>
     <script src="../script.js"></script>
   </body>
 </html>

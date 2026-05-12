@@ -809,3 +809,498 @@ button:focus-visible {
     font-size: 1rem;
   }
 }
+
+/* ============================================
+   Estilos de accesibilidad mejorada (WCAG 2.1 AA)
+   ============================================ */
+
+/* Focus visible mejorado para navegación por teclado */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Asegurar contraste en modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f2e9dc;
+    --bg: #1e1a15;
+  }
+}
+
+/* Reducir movimiento para usuarios sensibles */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Estilos para términos del glosario */
+.glossary-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.glossary-entry {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--card);
+  border-left: 4px solid var(--primary);
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease;
+}
+
+.glossary-entry:hover,
+.glossary-entry:focus-within {
+  box-shadow: var(--shadow);
+}
+
+.glossary-term {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.glossary-definition {
+  margin: 0.5rem 0 0 0;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+/* Estilos para búsqueda */
+.glossary-search {
+  margin: 2rem 0;
+}
+
+.glossary-search input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--card);
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glossary-search input:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(186, 145, 91, 0.2);
+}
+
+.glossary-search input::placeholder {
+  color: var(--muted);
+}
+
+/* Sección hero simplificada */
+.hero-simple {
+  padding: 4rem 0;
+  text-align: center;
+  background: linear-gradient(135deg, var(--bg-alt), var(--bg));
+}
+
+.hero-simple h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+}
+
+.hero-simple .hero-text {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* Footer mejorado con más estructura */
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-content h3,
+.footer-content h2 {
+  font-size: 1.15rem;
+  margin-top: 0;
+  color: var(--primary);
+}
+
+.footer-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-content li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-content a {
+  color: var(--text);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.footer-content a:hover,
+.footer-content a:focus-visible {
+  color: var(--primary);
+}
+
+/* Mejora de contraste en botones */
+.btn {
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 4px rgba(186, 145, 91, 0.3);
+}
+
+/* Estilos para tarjetas audiovisuales */
+.audiovisual-card {
+  transition: all 0.2s ease;
+}
+
+.audiovisual-card:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Mejorar legibilidad de textos */
+p {
+  line-height: 1.8;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.3;
+}
+
+/* Asegurar que los enlaces tengan suficiente padding para mobile */
+a {
+  display: inline-block;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+/* Mejorar iconos con etiquetas aria-label */
+[aria-label]::before {
+  content: "";
+}
+
+/* ============================================
+   MEJORAS PROFESIONALES V2.0
+   ============================================ */
+
+/* Header mejorado con efecto glassmorphism */
+.site-header {
+  box-shadow: 0 4px 30px rgba(90, 74, 55, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Mejora del brand/logo */
+.brand {
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brand:hover,
+.brand:focus-visible {
+  color: var(--accent);
+  text-shadow: 0 2px 8px rgba(190, 79, 46, 0.15);
+}
+
+/* Navegación mejorada con underline animation */
+.nav-list a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-list a:hover::after,
+.nav-list a:focus-visible::after {
+  width: 100%;
+}
+
+/* Botones profesionales con gradientes */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 15px rgba(186, 145, 91, 0.3);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(186, 145, 91, 0.4);
+}
+
+/* Tarjetas con efecto de elevación */
+.card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(216, 197, 168, 0.5);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 12px 40px rgba(90, 74, 55, 0.15);
+}
+
+/* Mejora de secciones */
+.section {
+  position: relative;
+}
+
+.section h2 {
+  position: relative;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--primary);
+  margin-bottom: 2rem;
+}
+
+.section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  width: 60px;
+}
+
+/* Timeline mejorada */
+.timeline-item {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.timeline-item:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(90, 74, 55, 0.2);
+}
+
+/* Inputs y formularios mejorados */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea {
+  border: 2px solid var(--border);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+input[type="text"]:focus-visible,
+input[type="email"]:focus-visible,
+input[type="search"]:focus-visible,
+textarea:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(186, 145, 91, 0.15);
+  outline: none;
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent);
+}
+
+.breadcrumb span {
+  color: var(--muted);
+}
+
+/* Certificación badges */
+.cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(186, 145, 91, 0.1), rgba(190, 79, 46, 0.1));
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.cert-badge::before {
+  content: '✓';
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth page transitions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Hover effect para imágenes */
+img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+/* Mejora de contraste en modo oscuro */
+[data-theme="dark"] {
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .card {
+  border-color: rgba(75, 63, 49, 0.8);
+}
+
+[data-theme="dark"] .nav-list a::after {
+  background: var(--accent);
+}
+
+/* Media queries para responsividad profesional */
+@media (max-width: 768px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-list {
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+  }
+}
+
+/* Print styles */
+@media print {
+  .site-header,
+  .theme-toggle,
+  .language-switcher,
+  .btn {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}
+}
