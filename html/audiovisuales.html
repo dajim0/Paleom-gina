@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Audiovisuales educativos sobre la historia geológica y humana de Sierra Magina. Videos con subtítulos en español e inglés." />
+  <meta property="og:title" content="Audiovisuales | Paleomagina" />
+  <meta property="og:description"
+    content="Documentales y videos educativos con subtítulos sobre la historia de Sierra Magina." />
+  <meta property="og:type" content="website" />
+  <meta name="author" content="Centro de Interpretación Paleomagina" />
+  <title data-i18n="page_audiovisuals_title">Paleomagina | Audiovisuales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <style>
+    .video-player {
+      position: relative;
+      background: var(--bg-alt);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    .audiovisuals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .audiovisual-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .audiovisual-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .audiovisual-card:focus-within {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .audiovisual-thumbnail {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-contrast);
+      font-size: 3rem;
+    }
+
+    .audiovisual-content {
+      padding: 1.25rem;
+    }
+
+    .audiovisual-scope {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--primary-contrast);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .audiovisual-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      color: var(--text);
+    }
+
+    .audiovisual-duration {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .audiovisual-subtitle-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--accent);
+      color: var(--primary-contrast);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .video-transcript {
+      background: var(--bg-alt);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin: 2rem 0;
+    }
+
+    .video-transcript h3 {
+      margin-top: 0;
+    }
+
+    .video-transcript p {
+      line-height: 1.8;
+    }
+
+    .audiovisual-filter {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .filter-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary);
+      color: var(--primary-contrast);
+      border-color: var(--primary);
+    }
+
+    .filter-btn:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Saltar al contenido principal</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Paleomagina">
+        <span class="brand-mark" aria-hidden="true">PM</span>
+        <span class="brand-text">Paleomagina</span>
+      </a>
+      <nav data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
+        <ul class="nav-list">
+          <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+          <li><a href="sobre.html" data-i18n="nav_about">Sobre</a></li>
+          <li><a href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
+          <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+          <li><a href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
+          <li><a href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
+          <li><a href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
+        </ul>
+      </nav>
+      <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria"
+        aria-label="Selector de idioma">
+        <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Modo oscuro">Modo oscuro</button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero-simple" id="audiovisuals-hero" aria-labelledby="audiovisuals-title">
+      <div class="container">
+        <h1 id="audiovisuals-title" data-i18n="audiovisuals_title">Audiovisuales educativos</h1>
+        <p class="hero-text" data-i18n="audiovisuals_intro">Documentales, piezas breves y explicaciones por ámbito con
+          subtítulos en español e inglés.</p>
+      </div>
+    </section>
+
+    <section class="section" id="audiovisuals-content">
+      <div class="container">
+        <h2 data-i18n="audiovisuals_available">Contenido disponible</h2>
+
+        <div class="audiovisual-filter">
+          <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Todos</button>
+          <button class="filter-btn" data-filter="geology" data-i18n="filter_geology">Geología</button>
+          <button class="filter-btn" data-filter="paleontology" data-i18n="filter_paleontology">Paleontología</button>
+          <button class="filter-btn" data-filter="archaeology" data-i18n="filter_archaeology">Arqueología</button>
+        </div>
+
+        <div class="audiovisuals-grid" id="audiovisuals-grid" role="region" aria-live="polite">
+          <!-- Generado por JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="accessibility-info">
+      <div class="container">
+        <h2 data-i18n="audiovisuals_accessibility">Accesibilidad</h2>
+        <div class="resource-grid">
+          <article class="card">
+            <h3 data-i18n="audiovisuals_subtitles">Subtítulos</h3>
+            <p data-i18n="audiovisuals_subtitles_p">Todos los audiovisuales cuentan con subtítulos en español e inglés
+              para garantizar accesibilidad auditiva.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="audiovisuals_descriptions">Audiodescripciones</h3>
+            <p data-i18n="audiovisuals_descriptions_p">Disponibles descripciones de audio para personas con discapacidad
+              visual en contenido seleccionado.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="audiovisuals_transcripts">Transcripciones</h3>
+            <p data-i18n="audiovisuals_transcripts_p">Acceso a texto completo de cada audiovisual para consulta
+              académica e inclusión digital.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <h2 data-i18n="footer_title">Paleomagina</h2>
+        <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
+      </div>
+      <div>
+        <h3 data-i18n="footer_contact">Contacto</h3>
+        <p><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+        <p>+34 000 000 000</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../data.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      renderAudiovisuals(currentLang);
+    });
+
+    function renderAudiovisuals(lang) {
+      const grid = document.getElementById('audiovisuals-grid');
+      const audiovisuals = getAudiovisuals(lang);
+
+      grid.innerHTML = audiovisuals.map(av => `
+          <article class="audiovisual-card" role="button" tabindex="0">
+            <div class="audiovisual-thumbnail">🎬</div>
+            <div class="audiovisual-content">
+              <span class="audiovisual-scope">${av.scope}</span>
+              <h3 class="audiovisual-title">${av.title}</h3>
+              <div class="audiovisual-duration">⏱️ ${av.duration}</div>
+              ${av.subtitle ? '<span class="audiovisual-subtitle-badge">✓ Subtítulos</span>' : ''}
+            </div>
+          </article>
+        `).join('');
+
+      // Evento para abrir modal (simulado)
+      document.querySelectorAll('.audiovisual-card').forEach(card => {
+        card.addEventListener('click', function () {
+          alert('Reproductor de video:\n' + this.querySelector('.audiovisual-title').textContent);
+        });
+        card.addEventListener('keypress', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            this.click();
+          }
+        });
+      });
+    }
+
+    // Filtrado por categoría
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        // Aquí iría la lógica de filtrado real
+      });
+    });
+
+    // Actualizar audiovisuales al cambiar idioma
+    const originalApplyLanguage = window.applyLanguage;
+    window.applyLanguage = function (lang) {
+      originalApplyLanguage(lang);
+      renderAudiovisuals(lang);
+    };
+  </script>
+</body>
+
+</html>
