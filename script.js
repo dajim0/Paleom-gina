@@ -1247,7 +1247,7 @@ function initSobreSectionNav() {
   }
 
   function updateActive() {
-    const offset = 140;
+    const offset = 168;
     const y = window.scrollY + offset;
     let currentId = sections[0].id;
     for (const sec of sections) {

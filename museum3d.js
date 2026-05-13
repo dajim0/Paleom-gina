@@ -313,40 +313,40 @@ function buildSectionList(floor) {
   });
 }
 
-/** Imagen TIMELINE + pie (una línea por escena) */
+/** Ilustraciones del timeline sin marca de agua (`images/IMG2/*_peeled.png`). */
 const TIMELINE_IMAGE_META = {
   stage1: {
-    src: '../images/timeline/timeline-01.png',
+    src: '../images/IMG2/1_peeled.png',
     caption:
       'Precámbrico y Paleozoico temprano: rocas volcánicas y mar antiguo con trilobites y vida marina recreada.'
   },
   stage2: {
-    src: '../images/timeline/timeline-02.png',
+    src: '../images/IMG2/2_peeled.png',
     caption:
       'Carbonífero y Mesozoico: pantanos, helechos gigantes y primeros mamíferos como Eomaia.'
   },
   stage3: {
-    src: '../images/timeline/timeline-03.png',
+    src: '../images/IMG2/3_peeled.png',
     caption:
       'Sabana africana: Australopithecus bípedo y Homo habilis con herramientas de piedra.'
   },
   stage4: {
-    src: '../images/timeline/timeline-04.png',
+    src: '../images/IMG2/4_peeled.png',
     caption:
       'Homo erectus alrededor del fuego; paisaje euroasiático y presagio del neandertal.'
   },
   stage5: {
-    src: '../images/timeline/timeline-05.png',
+    src: '../images/IMG2/5_peeled.png',
     caption:
       'Cueva iluminada por antorchas: arte rupestre compartido y valle holocénico al fondo.'
   },
   stage6: {
-    src: '../images/timeline/timeline-06.png',
+    src: '../images/IMG2/6_peeled.png',
     caption:
       'Holoceno temprano: cultivos, ganado y aldea neolítica hacia la escritura cuneiforme.'
   },
   stage7: {
-    src: '../images/timeline/timeline-07.png',
+    src: '../images/IMG2/7_peeled.png',
     caption:
       'Bronce, zigurat y ciudad histórica hasta la megalópolis moderna y el Antropoceno.'
   }
