@@ -13,7 +13,7 @@
   <meta property="og:description"
     content="Centro interpretativo con 250 millones de años de historia: mares antiguos, montañas, cambios climáticos, aparición humana y evolución cultural." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://paleomagina.org/images/og-image.jpg" />
+  <meta property="og:image" content="https://paleomagina.org/images/hero-portada.png" />
   <meta property="og:url" content="https://paleomagina.org/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Paleomagina | Sierra Magina" />
@@ -46,7 +46,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="pmMainNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-nowrap pm-nav-scroll">
           <li class="nav-item"><a class="nav-link active" href="index.html" data-i18n="nav_home">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="sobre.html" data-i18n="nav_about">Sobre</a></li>
           <li class="nav-item"><a class="nav-link" href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
@@ -54,43 +54,20 @@
           <li class="nav-item"><a class="nav-link" href="glosario.html" data-i18n="nav_glossary">Glosario</a></li>
           <li class="nav-item"><a class="nav-link" href="audiovisuales.html"
               data-i18n="nav_audiovisuals">Audiovisuales</a></li>
-          <li class="nav-item"><a class="nav-link" href="sobre.html#educacion" data-i18n="nav_education">Educacion</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
-          <li class="nav-item"><a class="nav-link" href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
         </ul>
-        <div class="d-flex flex-wrap align-items-center gap-2 ms-lg-2">
+        <div class="d-flex flex-nowrap align-items-center gap-2 ms-lg-2 pm-nav-controls">
           <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria"
             aria-label="Selector de idioma">
             <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
             <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
           </div>
-          <button class="theme-toggle btn btn-sm" type="button" data-i18n="theme_mode_dark">Modo oscuro</button>
+          <button class="theme-toggle" type="button"></button>
         </div>
       </div>
     </div>
   </nav>
 
   <main id="main-content">
-    <section class="section index-panel" aria-labelledby="indice-title">
-      <div class="container index-content">
-        <p class="index-title" id="indice-title" data-i18n="index_title">INDICE</p>
-        <div class="index-block">
-          <p class="index-number">1</p>
-          <div>
-            <p class="index-main" data-i18n="index_main">ASPECTOS GENERALES </p>
-            <div class="index-subitem">
-              <p data-i18n="index_intro">INTRODUCCION GENERAL: UN RECORRIDO PARA COMPRENDER SIERRA MAGINA DESDE LA
-                CIENCIA, EL PAISAJE Y LA MEMORIA HUMANA</p>
-            </div>
-            <div class="index-subitem">
-              <p data-i18n="index_criteria">CRITERIOS A TENER EN CUENTA EN EL PROYECTO</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="hero-overlay"></div>
       <div class="container hero-content">
@@ -104,26 +81,24 @@
       </div>
     </section>
 
-    <section class="section section-alt" id="objetivo" aria-labelledby="goal-title">
+    <section class="section section-alt" id="centro-breve" aria-labelledby="home-teaser-title">
       <div class="container">
-        <h2 id="goal-title" data-i18n="goal_title">Objetivo del proyecto</h2>
-        <p class="section-lead" data-i18n="goal_intro">
-          Paleomagina divulga ciencia de forma moderna para explicar la evolucion del territorio y la relacion entre
-          naturaleza y humanidad.
-        </p>
-        <div class="resource-grid">
-          <article class="card">
-            <h3 data-i18n="goal_1_t">Experiencia inmersiva</h3>
-            <p data-i18n="goal_1_p">Recorrido interactivo que une museo fisico y microsite digital.</p>
-          </article>
-          <article class="card">
-            <h3 data-i18n="goal_2_t">Aprendizaje por evidencias</h3>
-            <p data-i18n="goal_2_p">Contenidos construidos desde la arqueologia, paleontologia y geologia.</p>
-          </article>
-          <article class="card">
-            <h3 data-i18n="goal_3_t">Ciencia y ciudadania</h3>
-            <p data-i18n="goal_3_p">Investigacion actual compartida de forma clara y participativa.</p>
-          </article>
+        <div class="two-col content-split content-split--middle">
+          <div class="content-prose">
+            <h2 id="home-teaser-title" class="pm-heading-with-icon">
+              <img src="../images/icons/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
+              <span data-i18n="home_teaser_title">Introducción</span>
+            </h2>
+            <p class="section-intro mb-3" data-i18n="home_teaser_intro"></p>
+            <p class="mb-4 text-muted small" data-i18n="home_teaser_hint"></p>
+            <a href="sobre.html" class="btn btn-primary" data-i18n="home_teaser_cta">Ir a Sobre</a>
+          </div>
+          <div>
+            <figure class="content-media-figure mb-0">
+              <img src="../images/museo-moderno.png" alt="" width="1200" height="800" loading="lazy"
+                decoding="async" data-i18n-alt="img_museo_moderno_alt" />
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -134,11 +109,6 @@
       <div>
         <h2 data-i18n="footer_title">Paleomagina</h2>
         <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
-        <div class="footer-badges">
-          <span class="cert-badge">✓ WCAG 2.1 AA</span>
-          <span class="cert-badge">✓ HTML5 Valid</span>
-          <span class="cert-badge">✓ Responsive</span>
-        </div>
       </div>
       <div>
         <h3>Recursos</h3>
@@ -156,16 +126,16 @@
         <p><strong>Ubicación:</strong><br><span>Sierra Magina, Jaén</span></p>
       </div>
       <div>
-        <h3>Información legal</h3>
+        <h3 data-i18n="footer_legal_heading">Información legal</h3>
         <ul>
-          <li><a href="#">Aviso legal</a></li>
-          <li><a href="#">Privacidad</a></li>
-          <li><a href="#">Cookies</a></li>
-          <li><a href="#">Accesibilidad</a></li>
+          <li><a href="aviso-legal.html" data-i18n="footer_legal_notice">Aviso legal</a></li>
+          <li><a href="privacidad.html" data-i18n="footer_legal_privacy">Privacidad</a></li>
+          <li><a href="cookies.html" data-i18n="footer_legal_cookies">Cookies</a></li>
+          <li><a href="accesibilidad.html" data-i18n="footer_legal_a11y">Accesibilidad</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-copy">
+    <div class="container footer-copy">
       <p class="mb-0">© 2026 Centro de Interpretacion Paleomagina. Todos los derechos reservados.</p>
     </div>
   </footer>

@@ -1,5 +1,45 @@
 // Contenidos ampliados de ambitos con descripciones completas
 const scopeContents = {
+  AAN: {
+    es: {
+      title: "AAN — Antesala",
+      description:
+        "Espacio inicial con familia neandertal, frase introductoria y relación visual con el paisaje. Crea impacto emocional e introduce la dimensión humana antes del recorrido numerado.",
+      content:
+        "Funciona como umbral afectivo y conceptual: vocabulario mínimo, escenografía que conecta con Sierra Mágina y una primera lectura del territorio como archivo de tiempo.",
+      timeline: "Umbral de visita",
+      facts: ["Impacto emocional y dimensión humana", "Relación visual con el paisaje exterior", "Preparación narrativa antes de A0"]
+    },
+    en: {
+      title: "AAN — Ante-room",
+      description:
+        "Opening space with Neanderthal family, introductory line, and visual link to the landscape. Builds emotional impact and a human dimension before the numbered route.",
+      content:
+        "It works as an affective and conceptual threshold: minimal vocabulary, staging linked to Sierra Mágina, and a first reading of the territory as an archive of time.",
+      timeline: "Visit threshold",
+      facts: ["Emotional impact and human scale", "Visual link to the outdoor landscape", "Narrative preparation before A0"]
+    }
+  },
+  A9: {
+    es: {
+      title: "A9 — Testimonios y voces",
+      description:
+        "Espacio audiovisual con investigadores, habitantes locales, experiencias personales y memoria territorial. Humaniza el discurso y relaciona ciencia y ciudadanía.",
+      content:
+        "Cierra el circuito interior con voces reales: cómo se investiga, qué significa el patrimonio para quien vive en el entorno y cómo la memoria colectiva dialoga con la evidencia científica.",
+      timeline: "Memoria y ciudadanía",
+      facts: ["Testimonios de equipo científico y vecindario", "Experiencias personales y memoria territorial", "Puente entre rigor y emoción compartida"]
+    },
+    en: {
+      title: "A9 — Testimonies and voices",
+      description:
+        "Audiovisual space with researchers, local residents, personal stories, and territorial memory. It humanises the narrative and connects science and citizenship.",
+      content:
+        "It closes the indoor circuit with real voices: how research happens, what heritage means for people who live nearby, and how collective memory dialogues with scientific evidence.",
+      timeline: "Memory and citizenship",
+      facts: ["Statements from scientific staff and neighbours", "Personal stories and territorial memory", "A bridge between rigour and shared emotion"]
+    }
+  },
   A0: {
     es: {
       title: "Bienvenida a Sierra Magina",
@@ -146,16 +186,20 @@ const scopeContents = {
   },
   ATZ: {
     es: {
-      title: "Terraza y paisaje",
-      description: "Interpretación del paisaje desde la terraza exterior. La historia visible en el territorio.",
-      content: "Desde la terraza, todo lo aprendido en el museo cobra sentido. Los estratos rocosos en las montañas, las cuevas visibles en los acantilados, el curso del río Guadalquivir modelando el valle. Sierra Magina es un libro abierto donde cada pliegue, cada roca, cada río cuenta una historia. El paisaje que ves es el resultado de 250 millones de años de transformaciones geológicas y de 300.000 años de presencia humana.",
+      title: "ATZ — Terraza final",
+      description:
+        "El museo continúa en el paisaje: desde la terraza se observa Sierra Mágina aplicando geología, relieve, historia humana y transformación del territorio.",
+      content:
+        "La visita no termina en sala: el horizonte pasa a ser parte de la exposición. Allí se relaciona lo visto en vitrinas y paneles con laderas, crestas y valles, cerrando el relato entre evidencia y territorio real.",
       timeline: "Todas las eras",
       facts: ["Altitud: 2.144 metros", "Visibilidad: hasta 50 km en días claros", "Especies vegetales: 60+ especies endémicas"]
     },
     en: {
-      title: "Terrace and landscape",
-      description: "Landscape interpretation from the outdoor terrace. History visible in the territory.",
-      content: "From the terrace, everything you learned in the museum makes sense. Rock strata in the mountains, caves visible in the cliffs, the Guadalquivir River shaping the valley. Sierra Magina is an open book where each fold, each rock, each river tells a story. The landscape you see is the result of 250 million years of geological transformations and 300,000 years of human presence.",
+      title: "ATZ — Final terrace",
+      description:
+        "The museum continues in the landscape: from the terrace you read Sierra Mágina through geology, relief, human history, and how the territory has changed.",
+      content:
+        "The visit does not end indoors: the horizon becomes part of the exhibition. What you saw in cases and panels connects with slopes, ridges, and valleys, closing the narrative between evidence and the real territory.",
       timeline: "All eras",
       facts: ["Altitude: 2,144 meters", "Visibility: up to 50 km on clear days", "Plant species: 60+ endemic species"]
     }

@@ -128,242 +128,56 @@ const ZONES = {
   ]
 };
 
-/* TIMELINE DATA — 3D ANIMATED SCENES WITH SVG */
+/* TIMELINE DATA — seven-stage Deep Time narrative */
 const TIMELINE_DATA = {
-  marine: {
-    title: 'Era marina — Mar de Tetis',
-    period: 'Hace ~65–5 millones de años',
-    text: 'El territorio que hoy conocemos como Sierra Mágina estuvo cubierto por el antiguo mar de Tetis. Los fósiles de ammonites, erizos de mar y corales hallados en la zona son el testimonio de ese océano desaparecido.',
-    color: '#1a6fa8',
-    object3d: `
-      <div class="obj3d ocean-scene">
-        <div class="ocean-water"></div>
-        <div class="ammonite">
-          <svg viewBox="0 0 120 120" width="120" height="120">
-            <defs>
-              <radialGradient id="ammG" cx="40%" cy="40%">
-                <stop offset="0%" stop-color="#f0d080"/>
-                <stop offset="100%" stop-color="#8a6020"/>
-              </radialGradient>
-            </defs>
-            <path d="M60,60 m0,-45 a45,45 0 1,1 -0.1,0" fill="none" stroke="url(#ammG)" stroke-width="12" stroke-dasharray="270 10"/>
-            <path d="M60,60 m0,-33 a33,33 0 1,1 -0.1,0" fill="none" stroke="#c8902a" stroke-width="9"/>
-            <path d="M60,60 m0,-21 a21,21 0 1,1 -0.1,0" fill="none" stroke="#a07020" stroke-width="7"/>
-            <path d="M60,60 m0,-11 a11,11 0 1,1 -0.1,0" fill="none" stroke="#7a5015" stroke-width="5"/>
-            <circle cx="60" cy="60" r="6" fill="#5a3a0a"/>
-          </svg>
-        </div>
-        <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
-        <div class="fish">🐠</div>
-        <div class="ocean-floor"></div>
-        <div class="sea-label">Mar de Tetis · ~65 Ma</div>
-      </div>`
+  stage1: {
+    title: 'La Fundación: La Tierra Primitiva y el Amanecer de la Vida Compleja',
+    period: 'Precámbrico — Paleozoico temprano',
+    text:
+      'La línea temporal comienza en las profundidades del tiempo geológico, mostrando la Tierra primitiva en una espectacular sala de museo cinematográfica y ultra realista en 4K. La escena inicial presenta una formación rocosa del Precámbrico profundamente texturizada, iluminada tenuemente bajo un cielo volcánico y caótico. A través de una transición sutil y perfectamente integrada, el paisaje evoluciona hacia el Paleozoico temprano. A la derecha, el entorno se convierte en un cálido mar poco profundo repleto de vida antigua meticulosamente recreada: trilobites, escorpiones marinos y peces primitivos fosilizados aparecen con un nivel extremo de detalle. Todo mantiene una estética hiperrealista, científica y cinematográfica.',
+    color: '#1e5a8c'
   },
-  geology: {
-    title: 'Formación geológica',
-    period: 'Hace ~5 millones de años',
-    text: 'Los movimientos tectónicos de la orogenia alpina plegaron y elevaron los sedimentos marinos, formando la Sierra de Mágina. Este proceso dejó expuestas las calizas jurásicas que caracterizan el paisaje actual.',
-    color: '#8a6030',
-    object3d: `
-      <div class="obj3d geology-scene">
-        <div class="mountain-3d">
-          <div class="peak">
-            <svg viewBox="0 0 200 120" width="200" height="120">
-              <polygon points="0,120 100,0 200,120" fill="#7a7060"/>
-              <polygon points="40,120 100,20 160,120" fill="#9a9080"/>
-              <polygon points="70,120 100,45 130,120" fill="#aba99a"/>
-              <polygon points="85,80 100,50 115,80" fill="white" opacity="0.6"/>
-            </svg>
-          </div>
-          <div class="strata">
-            <div class="stratum s1">Jurásico · Calizas</div>
-            <div class="stratum s2">Triásico · Arcillas</div>
-            <div class="stratum s3">Permico · Areniscas</div>
-          </div>
-        </div>
-      </div>`
+  stage2: {
+    title: 'Los Mamíferos Mesozoicos y la Cuna Carbonífera',
+    period: 'Carbonífero — Mesozoico temprano',
+    text:
+      'Continuando desde el borde derecho de la imagen anterior, el mar paleozoico se transforma gradualmente en el Carbonífero mediante cambios ambientales dramáticos y capas geológicas que se mezclan entre sí. El fondo marino da paso a un enorme pantano cubierto de niebla, dominado por gigantescos licopodios y helechos colosales. Conforme el ambiente se seca, el pantano se convierte de forma fluida en una llanura árida del Mesozoico iluminada por un atardecer volcánico. Entre la vegetación aparecen pequeños mamíferos primitivos, como Eomaia, representados con gran precisión anatómica y detalle cinematográfico, insinuando los futuros pasos evolutivos de la humanidad. El borde derecho prepara la transición hacia el Cenozoico.',
+    color: '#2d6b4f'
   },
-  quaternary: {
-    title: 'El Cuaternario y el origen del hombre',
-    period: 'Hace ~2,6 Ma – 11.700 años',
-    text: 'El Cuaternario define el escenario del origen y evolución humana. En Sierra Mágina, los cambios climáticos del Pleistoceno moldearon el paisaje y condicionaron la presencia de grandes mamíferos y los primeros homínidos.',
-    color: '#4a7a40',
-    object3d: `
-      <div class="obj3d quaternary-scene">
-        <div class="mammoth-container">
-          <svg viewBox="0 0 200 160" width="200" height="160">
-            <ellipse cx="100" cy="100" rx="65" ry="45" fill="#7a6050"/>
-            <ellipse cx="155" cy="85" rx="30" ry="28" fill="#7a6050"/>
-            <path d="M175,100 Q200,120 190,145 Q185,155 178,145 Q185,120 165,108" fill="#6a5040"/>
-            <path d="M168,105 Q195,100 195,115" fill="none" stroke="#f0e0b0" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="162" cy="82" r="4" fill="#2a1a0a"/>
-            <circle cx="163" cy="81" r="1.5" fill="white"/>
-            <rect x="60" y="138" width="18" height="25" rx="5" fill="#6a5040"/>
-            <rect x="85" y="138" width="18" height="25" rx="5" fill="#6a5040"/>
-            <rect x="110" y="138" width="18" height="25" rx="5" fill="#6a5040"/>
-            <rect x="135" y="138" width="18" height="22" rx="5" fill="#6a5040"/>
-            <ellipse cx="100" cy="90" rx="63" ry="40" fill="none" stroke="#5a4535" stroke-width="2" opacity="0.4"/>
-          </svg>
-          <div class="snow-ground"></div>
-          <div class="snowflake sf1">❄</div>
-          <div class="snowflake sf2">❄</div>
-          <div class="snowflake sf3">❄</div>
-        </div>
-      </div>`
+  stage3: {
+    title: 'El Amanecer de los Homínidos: Australopithecus y el Bipedismo',
+    period: 'Cenozoico — Plioceno / Pleistoceno temprano',
+    text:
+      'Siguiendo la transición establecida en la escena anterior, la exhibición introduce dramáticamente a los primeros homínidos bípedos durante el Cenozoico. El paisaje cambia desde una llanura seca hacia la inmensa sabana del África oriental bajo un cielo cambiante y espectacular. El foco principal es una reconstrucción hiperrealista de un Australopithecus afarensis, similar a Lucy, caminando erguido sobre el lecho seco de un río. A la derecha, el entorno se mezcla a través de un desenfoque temporal mostrando a los primeros Homo habilis cerca de una cueva, manipulando herramientas de piedra primitivas, marcando el siguiente gran salto evolutivo.',
+    color: '#c65d1a'
   },
-  neanderthal: {
-    title: 'El Paleolítico medio. El mundo Neandertal',
-    period: 'Hace ~300.000 – 35.000 años',
-    text: 'Los neandertales habitaron las cuevas y abrigos de Sierra Mágina. Sus útiles de piedra tallada (industria musteriense) y el uso del fuego revelan una inteligencia adaptativa sofisticada.',
-    color: '#7a3010',
-    object3d: `
-      <div class="obj3d cave-scene">
-        <div class="cave-bg"></div>
-        <div class="cave-arch"></div>
-        <div class="fire-container">
-          <div class="fire">
-            <div class="flame f1"></div>
-            <div class="flame f2"></div>
-            <div class="flame f3"></div>
-            <div class="ember"></div>
-          </div>
-          <div class="fire-glow"></div>
-        </div>
-        <div class="neandertal-silhouette">
-          <svg viewBox="0 0 80 130" width="70" height="130">
-            <ellipse cx="40" cy="25" rx="18" ry="16" fill="#5a4035"/>
-            <path d="M22,22 Q40,14 58,22" fill="#4a3025"/>
-            <path d="M28,40 Q20,65 22,90 Q35,95 40,95 Q45,95 58,90 Q60,65 52,40 Z" fill="#6a4a30"/>
-            <line x1="58" y1="30" x2="75" y2="120" stroke="#8a6040" stroke-width="3"/>
-            <polygon points="72,118 78,120 75,108" fill="#aaa"/>
-            <path d="M30,90 Q28,110 30,125" stroke="#5a3020" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M50,90 Q52,110 50,125" stroke="#5a3020" stroke-width="10" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="stone-tools">
-          <div class="tool t1"></div>
-          <div class="tool t2"></div>
-          <div class="tool t3"></div>
-        </div>
-        <div class="cave-painting">🦌</div>
-      </div>`
+  stage4: {
+    title: 'Homo Erectus: Migración y el Dominio del Fuego',
+    period: 'Pleistoceno medio',
+    text:
+      'Partiendo de la transición de Homo habilis mostrada anteriormente, la escena avanza hacia el Pleistoceno. La sabana africana se transforma en un ambiente euroasiático más frío, seco y variable, inspirado en lugares como Dmanisi. En el centro de la composición aparece un grupo de Homo erectus representados con increíble realismo y detalle anatómico. Están reunidos alrededor de un fuego controlado y pulsante, simbolizando el dominio del fuego y el desarrollo cognitivo. A la derecha, otro individuo contempla el horizonte, insinuando las futuras migraciones humanas. El extremo derecho se difumina temporalmente mostrando la figura robusta de un neandertal, preparando la siguiente etapa de la evolución.',
+    color: '#8b3a1f'
   },
-  neolithic: {
-    title: 'Neolítico',
-    period: 'Hace ~7.000 – 4.500 años',
-    text: 'La revolución neolítica transforma las sociedades: agricultura, ganadería, cerámica y los primeros asentamientos estables. Sierra Mágina muestra evidencias de esta transformación en yacimientos como la Cueva del Nacimiento.',
-    color: '#6a8a20',
-    object3d: `
-      <div class="obj3d neolithic-scene">
-        <div class="sky-neo"></div>
-        <div class="field">
-          <div class="wheat-row">
-            ${Array.from({length:8}, (_,i) => `<div class="wheat" style="animation-delay:${i*0.15}s"></div>`).join('')}
-          </div>
-        </div>
-        <div class="pot-3d">
-          <svg viewBox="0 0 100 120" width="90" height="110">
-            <defs>
-              <linearGradient id="potG" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#8a4020"/>
-                <stop offset="40%" stop-color="#c05030"/>
-                <stop offset="100%" stop-color="#6a3015"/>
-              </linearGradient>
-            </defs>
-            <path d="M25,30 Q10,50 15,85 Q30,105 50,105 Q70,105 85,85 Q90,50 75,30 Z" fill="url(#potG)"/>
-            <ellipse cx="50" cy="30" rx="25" ry="8" fill="#a04028"/>
-            <ellipse cx="50" cy="30" rx="20" ry="6" fill="#3a1a08"/>
-            <path d="M20,55 L80,55" stroke="#f0c080" stroke-width="1.5" opacity="0.6"/>
-            <path d="M22,60 Q50,50 78,60" stroke="#f0c080" stroke-width="1.5" fill="none" opacity="0.6"/>
-            <path d="M25,65 L35,55 L45,65 L55,55 L65,65 L75,55" stroke="#f0d090" stroke-width="1.5" fill="none" opacity="0.5"/>
-          </svg>
-        </div>
-        <div class="hut">🛖</div>
-        <div class="animals">🐐🌾</div>
-      </div>`
+  stage5: {
+    title: 'La Explosión del Simbolismo: Neandertales y la Cueva del Arte',
+    period: 'Paleolítico superior — transición al Holoceno',
+    text:
+      'La línea temporal avanza hacia el Paleolítico Superior manteniendo la misma estética ultra detallada y cinematográfica. El frío entorno glacial de la escena anterior se transforma en una enorme cueva profunda iluminada por antorchas. En primer plano, Homo sapiens de tipo Cro-Magnon y un robusto neandertal colaboran creando complejas pinturas rupestres sobre paredes de piedra caliza texturizada. Utilizan pigmentos de ocre y carbón, simbolizando el nacimiento del pensamiento abstracto y artístico. Al fondo, la entrada de la cueva revela mediante una distorsión temporal un fértil valle holocénico con los primeros asentamientos humanos permanentes, preparando la llegada de la agricultura.',
+    color: '#5c3d7a'
   },
-  chalcolithic: {
-    title: 'Calcolítico',
-    period: 'Hace ~4.500 – 3.500 años',
-    text: 'La Edad del Cobre marca el inicio de la metalurgia. En Sierra Mágina aparecen objetos de cobre, puntas de flecha, puñales y elementos de adorno. Las sociedades se hacen más complejas y jerarquizadas.',
-    color: '#4a6a8a',
-    object3d: `
-      <div class="obj3d chalco-scene-epic">
-        <div class="chalco-rotator-epic">
-          <svg viewBox="0 0 400 400" width="400" height="400" class="chalco-arrow-3d">
-            <defs>
-              <linearGradient id="copperMain" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffd700"/>
-                <stop offset="20%" stop-color="#ffb347"/>
-                <stop offset="40%" stop-color="#ff9500"/>
-                <stop offset="60%" stop-color="#e67e22"/>
-                <stop offset="80%" stop-color="#d35400"/>
-                <stop offset="100%" stop-color="#a04000"/>
-              </linearGradient>
-              <linearGradient id="copperShade" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#ffd700" stop-opacity="0.9"/>
-                <stop offset="50%" stop-color="#ff9500" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#8b3a00" stop-opacity="0.8"/>
-              </linearGradient>
-              <linearGradient id="copperGloss" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
-                <stop offset="50%" stop-color="#ffeb3b" stop-opacity="0.4"/>
-                <stop offset="100%" stop-color="#ff6f00" stop-opacity="0"/>
-              </linearGradient>
-              <radialGradient id="copperGlow">
-                <stop offset="0%" stop-color="#ffff99" stop-opacity="0.9"/>
-                <stop offset="100%" stop-color="#ff8c00" stop-opacity="0"/>
-              </radialGradient>
-              <filter id="shadowDeep">
-                <feDropShadow dx="0" dy="15" stdDeviation="8" flood-opacity="0.8" flood-color="#000"/>
-              </filter>
-              <filter id="glow3d">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            <rect width="400" height="400" fill="#000000"/>
-            <circle cx="200" cy="200" r="150" fill="url(#copperGlow)" opacity="0.15"/>
-            <g class="arrow-tip" filter="url(#shadowDeep)">
-              <polygon points="200,80 240,160 160,160" fill="url(#copperMain)" stroke="#8b3a00" stroke-width="2" filter="url(#glow3d)"/>
-              <polygon points="200,80 240,160 220,145" fill="url(#copperShade)" opacity="0.7"/>
-              <polygon points="200,85 230,155 190,150" fill="url(#copperGloss)" opacity="0.6"/>
-            </g>
-            <g class="arrow-shaft" filter="url(#shadowDeep)">
-              <line x1="200" y1="160" x2="200" y2="320" stroke="url(#copperGloss)" stroke-width="12" opacity="0.8"/>
-              <rect x="192" y="160" width="16" height="160" fill="url(#copperMain)" stroke="#8b3a00" stroke-width="1"/>
-              <rect x="192" y="160" width="6" height="160" fill="#a04000" opacity="0.5"/>
-              <rect x="197" y="160" width="3" height="160" fill="#ffffff" opacity="0.7"/>
-            </g>
-            <g class="arrow-fletches" filter="url(#shadowDeep)">
-              <polygon points="200,320 160,300 165,340 200,320" fill="url(#copperShade)" stroke="#8b3a00" stroke-width="1.5"/>
-              <polygon points="160,300 165,330 162,305" fill="url(#copperGloss)" opacity="0.5"/>
-              <polygon points="200,320 240,300 235,340 200,320" fill="url(#copperMain)" stroke="#8b3a00" stroke-width="1.5"/>
-              <polygon points="240,300 235,330 238,305" fill="url(#copperGloss)" opacity="0.5"/>
-              <polygon points="200,320 200,360 190,350 210,350" fill="url(#copperShade)" stroke="#8b3a00" stroke-width="1.5" opacity="0.9"/>
-              <polygon points="200,350 205,355 195,355" fill="url(#copperGloss)" opacity="0.4"/>
-            </g>
-            <g class="arrow-nock" filter="url(#shadowDeep)">
-              <rect x="195" y="310" width="10" height="25" fill="#8b3a00" stroke="#5a1a00" stroke-width="1"/>
-              <rect x="197" y="312" width="2" height="21" fill="#ffeb3b" opacity="0.4"/>
-            </g>
-            <g class="snake-pattern" opacity="0.6">
-              <path d="M200,200 Q210,210 200,220 Q190,230 200,240" stroke="#8b3a00" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <path d="M200,260 Q210,270 200,280" stroke="#8b3a00" stroke-width="2" fill="none" stroke-linecap="round"/>
-            </g>
-            <g class="light-rays" opacity="0.3">
-              <line x1="200" y1="50" x2="200" y2="20" stroke="#ffff99" stroke-width="2"/>
-              <line x1="250" y1="100" x2="280" y2="70" stroke="#ffff99" stroke-width="2"/>
-              <line x1="150" y1="100" x2="120" y2="70" stroke="#ffff99" stroke-width="2"/>
-              <line x1="260" y1="200" x2="300" y2="200" stroke="#ffff99" stroke-width="1.5"/>
-              <line x1="140" y1="200" x2="100" y2="200" stroke="#ffff99" stroke-width="1.5"/>
-            </g>
-          </svg>
-        </div>
-      </div>`
+  stage6: {
+    title: 'Vida Sedentaria: Agricultura y la Aldea Neolítica',
+    period: 'Holoceno temprano — Neolítico',
+    text:
+      'Desde el borde derecho de la escena anterior, el paisaje evoluciona completamente hacia el Holoceno temprano y la Revolución Neolítica. El pequeño asentamiento natufiense se convierte en un exuberante valle fluvial del Creciente Fértil. En primer plano, grupos de Homo sapiens cultivan trigo y cebada domesticados utilizando hoces de piedra. Cerca de ellos pastan ovejas y cabras domesticadas. En la zona media se alza una auténtica aldea neolítica de casas permanentes de adobe, inspirada en lugares como Jericó o Çatalhöyük. Todo el conjunto se mezcla gradualmente hacia monumentales construcciones de piedra y tablillas con escritura cuneiforme, anunciando el surgimiento de las primeras civilizaciones complejas.',
+    color: '#6b8e23'
+  },
+  stage7: {
+    title: 'Civilización Compleja y la Reflexión del Antropoceno',
+    period: 'Edades del Bronce e Hierro — Antropoceno',
+    text:
+      'La última escena completa la línea temporal manteniendo la estética hiperrealista de museo cinematográfico. A partir de las pistas de civilización compleja vistas anteriormente, el entorno avanza hacia las Edades del Bronce y del Hierro. La aldea neolítica y el paisaje fluvial son reemplazados por una ciudad organizada e intensamente urbanizada. En primer plano, trabajadores funden bronce y construyen un gigantesco zigurat de adobe inspirado en Uruk. A la derecha, tablillas cuneiformes se integran visualmente en una antigua biblioteca repleta de escritura compleja. Finalmente, esta escena proto-urbana se acelera mediante una intensa distorsión temporal hasta transformarse en una moderna megalópolis de acero y cristal con enormes centros de datos. Bajo la ciudad moderna, las capas industriales y nucleares aparecen fusionadas con antiguos estratos geológicos, simbolizando el inicio del Antropoceno y concluyendo la secuencia con una poderosa reflexión sobre la complejidad humana y la escala del tiempo geológico.',
+    color: '#4a5568'
   }
 };
 
@@ -377,6 +191,27 @@ const TIMELINE_DATA = {
 
 let currentFloor = 'ground';
 let activeZone = null;
+
+function resetMuseumDetail() {
+  activeZone = null;
+  if (document.body) delete document.body.dataset.museumZone;
+  const detailPanel = document.querySelector('.museum-3d-detail');
+  if (detailPanel) detailPanel.style.removeProperty('--detail-accent');
+  const titleEl = document.getElementById('museum-3d-detail-title');
+  const textEl = document.getElementById('museum-3d-detail-text');
+  if (typeof window.paleomaginaT === 'function') {
+    if (titleEl) titleEl.textContent = window.paleomaginaT('museum_3d_detail_title');
+    if (textEl) textEl.textContent = window.paleomaginaT('museum_3d_detail_hint');
+  }
+  document.querySelectorAll('.museum-3d-section-item').forEach(el => el.classList.remove('active'));
+}
+
+function refreshMuseumSelection() {
+  if (activeZone && currentFloor) selectZone(activeZone, currentFloor);
+}
+
+window.resetMuseumDetail = resetMuseumDetail;
+window.refreshMuseumSelection = refreshMuseumSelection;
 
 /* Build floor plan visualization */
 function buildFloorPlan(floor) {
@@ -437,6 +272,11 @@ function selectZone(id, floor) {
   const zone = ZONES[floor].find(z => z.id === id);
   if (!zone) return;
 
+  if (document.body) document.body.dataset.museumZone = id;
+
+  const detailPanel = document.querySelector('.museum-3d-detail');
+  if (detailPanel) detailPanel.style.setProperty('--detail-accent', zone.color);
+
   const titleEl = document.getElementById('museum-3d-detail-title');
   const textEl = document.getElementById('museum-3d-detail-text');
   if (titleEl) titleEl.textContent = `${zone.id} — ${zone.label}`;
@@ -444,6 +284,16 @@ function selectZone(id, floor) {
 
   document.querySelectorAll('.museum-3d-section-item').forEach(el => {
     el.classList.toggle('active', el.dataset.zone === id);
+  });
+
+  document.querySelectorAll('.museum-3d-canvas svg.overlay .zone-area').forEach(poly => {
+    const zid = poly.dataset.zoneId;
+    const z = ZONES[floor].find(zz => zz.id === zid);
+    poly.classList.toggle('active-zone', zid === id);
+    if (z) {
+      const hi = Math.min(0.92, z.opacity + 0.22);
+      poly.setAttribute('fill-opacity', zid === id ? hi : z.opacity);
+    }
   });
 }
 
@@ -463,22 +313,77 @@ function buildSectionList(floor) {
   });
 }
 
-/* Render timeline with 3D objects */
+/** Imagen TIMELINE + pie (una línea por escena) */
+const TIMELINE_IMAGE_META = {
+  stage1: {
+    src: '../images/timeline/timeline-01.png',
+    caption:
+      'Precámbrico y Paleozoico temprano: rocas volcánicas y mar antiguo con trilobites y vida marina recreada.'
+  },
+  stage2: {
+    src: '../images/timeline/timeline-02.png',
+    caption:
+      'Carbonífero y Mesozoico: pantanos, helechos gigantes y primeros mamíferos como Eomaia.'
+  },
+  stage3: {
+    src: '../images/timeline/timeline-03.png',
+    caption:
+      'Sabana africana: Australopithecus bípedo y Homo habilis con herramientas de piedra.'
+  },
+  stage4: {
+    src: '../images/timeline/timeline-04.png',
+    caption:
+      'Homo erectus alrededor del fuego; paisaje euroasiático y presagio del neandertal.'
+  },
+  stage5: {
+    src: '../images/timeline/timeline-05.png',
+    caption:
+      'Cueva iluminada por antorchas: arte rupestre compartido y valle holocénico al fondo.'
+  },
+  stage6: {
+    src: '../images/timeline/timeline-06.png',
+    caption:
+      'Holoceno temprano: cultivos, ganado y aldea neolítica hacia la escritura cuneiforme.'
+  },
+  stage7: {
+    src: '../images/timeline/timeline-07.png',
+    caption:
+      'Bronce, zigurat y ciudad histórica hasta la megalópolis moderna y el Antropoceno.'
+  }
+};
+
+function escapeTimelineHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/"/g, '&quot;');
+}
+
+/* Render timeline: imagen oficial TIMELINE + texto */
 function renderTimeline(timeKey) {
   const data = TIMELINE_DATA[timeKey];
   if (!data) return;
   const detail = document.getElementById('timeline-detail');
   if (!detail) return;
 
+  const meta = TIMELINE_IMAGE_META[timeKey];
+  const safeTitle = escapeTimelineHtml(data.title);
+  const safePeriod = escapeTimelineHtml(data.period);
+  const safeText = escapeTimelineHtml(data.text);
+  const safeCaption = meta ? escapeTimelineHtml(meta.caption) : '';
+  const photoBlock = meta
+    ? `<div class="timeline-photo"><img src="${meta.src}" alt="${safeTitle}" loading="lazy" width="1200" height="675" decoding="async" /><p class="timeline-photo-caption">${safeCaption}</p></div>`
+    : '';
+
   detail.style.borderTop = `4px solid ${data.color}`;
   detail.innerHTML = `
-    <div class="timeline-inner">
+    ${photoBlock}
+    <div class="timeline-inner px-3 pb-3 pt-3">
       <div class="timeline-text-block">
-        <h3 style="color:${data.color}">${data.title}</h3>
-        <p class="timeline-period">⏱ ${data.period}</p>
-        <p>${data.text}</p>
+        <h3 style="color:${data.color}">${safeTitle}</h3>
+        <p class="timeline-period">⏱ ${safePeriod}</p>
+        <div class="timeline-prose"><p>${safeText}</p></div>
       </div>
-      <div class="obj3d-wrap">${data.object3d}</div>
     </div>`;
 }
 
@@ -495,9 +400,9 @@ function init() {
       currentFloor = floor;
       document.querySelectorAll('.museum-3d-floor-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      resetMuseumDetail();
       buildFloorPlan(floor);
       buildSectionList(floor);
-      activeZone = null;
     });
   });
 
@@ -511,7 +416,9 @@ function init() {
   });
 
   // Render default timeline item
-  renderTimeline('marine');
+  renderTimeline('stage1');
+
+  resetMuseumDetail();
 }
 
 /* Run on DOM ready */

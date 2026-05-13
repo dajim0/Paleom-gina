@@ -39,92 +39,198 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="pmMainNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-nowrap pm-nav-scroll">
             <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav_home">Inicio</a></li>
             <li class="nav-item"><a class="nav-link" href="sobre.html" data-i18n="nav_about">Sobre</a></li>
             <li class="nav-item"><a class="nav-link active" href="ambitos.html" data-i18n="nav_exhibits">Ambitos</a></li>
             <li class="nav-item"><a class="nav-link" href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
             <li class="nav-item"><a class="nav-link" href="glosario.html" data-i18n="nav_glossary">Glosario</a></li>
             <li class="nav-item"><a class="nav-link" href="audiovisuales.html" data-i18n="nav_audiovisuals">Audiovisuales</a></li>
-            <li class="nav-item"><a class="nav-link" href="sobre.html#educacion" data-i18n="nav_education">Educacion</a></li>
-            <li class="nav-item"><a class="nav-link" href="sobre.html#ciencia" data-i18n="nav_science">Ciencia</a></li>
-            <li class="nav-item"><a class="nav-link" href="recursos.html#noticias" data-i18n="nav_news">Noticias</a></li>
           </ul>
-          <div class="d-flex flex-wrap align-items-center gap-2 ms-lg-2">
+          <div class="d-flex flex-nowrap align-items-center gap-2 ms-lg-2 pm-nav-controls">
             <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria" aria-label="Selector de idioma">
               <button class="lang-btn active" data-lang="es" aria-pressed="true">ES</button>
               <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
             </div>
-            <button class="theme-toggle btn btn-sm" type="button" data-i18n="theme_mode_dark">Modo oscuro</button>
+            <button class="theme-toggle" type="button"></button>
           </div>
         </div>
       </div>
     </nav>
 
+    <div class="page-hero-banner">
+      <img src="../images/excavacion-arqueologica.png" alt="" width="1920" height="640" loading="lazy"
+        decoding="async" data-i18n-alt="img_excavacion_alt" />
+    </div>
+
     <main id="main-content" class="py-4">
       <div class="container">
-        <section class="mb-5" aria-labelledby="timeline-h">
-          <h2 id="timeline-h" class="h3 mb-3" data-i18n="timeline_title">Linea temporal interactiva</h2>
-          <p class="lead" data-i18n="timeline_intro">Explora las grandes etapas para entender la evolucion de Sierra Magina y su registro arqueologico.</p>
-          <div class="timeline btn-group d-flex flex-wrap gap-2 mb-3" role="group" aria-label="Eras">
-            <button type="button" class="timeline-era btn btn-outline-secondary active" data-time="marine" data-i18n="timeline_marine">Era marina</button>
-            <button type="button" class="timeline-era btn btn-outline-secondary" data-time="geology" data-i18n="timeline_geology">Formacion geologica</button>
-            <button type="button" class="timeline-era btn btn-outline-secondary" data-time="quaternary" data-i18n="timeline_quaternary">Cuaternario</button>
-            <button type="button" class="timeline-era btn btn-outline-secondary" data-time="neanderthal" data-i18n="timeline_neanderthal">Neandertales</button>
-            <button type="button" class="timeline-era btn btn-outline-secondary" data-time="neolithic" data-i18n="timeline_neolithic">Neolitico</button>
-            <button type="button" class="timeline-era btn btn-outline-secondary" data-time="chalcolithic" data-i18n="timeline_chalcolithic">Calcolitico</button>
-          </div>
-          <article class="timeline-detail card p-3" id="timeline-detail" aria-live="polite"></article>
+        <section class="section mb-4" aria-labelledby="expo-concept-h">
+          <h2 id="expo-concept-h" class="h3" data-i18n="expo_concept_title">Concepto de la exposición permanente</h2>
+          <p class="section-lead" data-i18n="expo_concept_lead"></p>
+          <ul class="small mb-0">
+            <li data-i18n="expo_concept_li1"></li>
+            <li data-i18n="expo_concept_li2"></li>
+            <li data-i18n="expo_concept_li3"></li>
+            <li data-i18n="expo_concept_li4"></li>
+            <li data-i18n="expo_concept_li5"></li>
+          </ul>
         </section>
 
-        <section class="mt-5" aria-labelledby="museum-h">
-          <h2 id="museum-h" class="h3 mb-3" data-i18n="museum_3d_title">Recreacion 3D interactiva del museo</h2>
-          <p class="lead" data-i18n="museum_3d_intro">Explora el museo por secciones. Pulsa en una seccion para resaltarla y ver su descripcion.</p>
-          <div class="museum-3d-layout row g-3">
-            <div class="col-lg-8">
-              <div class="card">
-                <div class="card-body p-2">
-                  <div id="museum-3d-canvas" class="museum-3d-canvas"></div>
-                </div>
-              </div>
+        <section class="section section-alt mb-5" aria-labelledby="expo-route-detail-h">
+          <h2 id="expo-route-detail-h" class="h3" data-i18n="expo_route_detail_title">Recorrido expositivo por ámbitos</h2>
+          <p class="section-lead" data-i18n="expo_route_detail_lead"></p>
+          <div id="exhibit-route-accordion" class="pm-exhibit-route-root"></div>
+        </section>
+
+        <section class="section section-alt mb-5" aria-labelledby="expo-title">
+          <h2 id="expo-title" class="h3 pm-heading-with-icon">
+            <img src="../images/icons/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
+            <span data-i18n="expo_permanent_title">Exposición permanente y recorrido</span>
+          </h2>
+          <p class="section-intro" data-i18n="expo_permanent_intro"></p>
+          <div class="resource-grid mt-4">
+            <article class="card">
+              <h3 class="h5" data-i18n="route_rec_title">Recepción y planta baja</h3>
+              <p class="mb-0" data-i18n="route_rec_p"></p>
+            </article>
+            <article class="card">
+              <h3 class="h5" data-i18n="route_stairs_title">Escaleras y transición</h3>
+              <p class="mb-0" data-i18n="route_stairs_p"></p>
+            </article>
+            <article class="card">
+              <h3 class="h5" data-i18n="route_aan_title">AAN — Antesala</h3>
+              <p class="mb-0" data-i18n="route_aan_p"></p>
+            </article>
+            <article class="card">
+              <h3 class="h5" data-i18n="route_a0_tz_title">Ámbitos A0–A9 y terraza ATZ</h3>
+              <p data-i18n="route_a0_tz_intro"></p>
+              <p class="mb-0" data-i18n="route_a0_tz_li"></p>
+            </article>
+            <article class="card">
+              <h3 class="h5" data-i18n="route_resources_title">Recursos museográficos</h3>
+              <p class="small text-muted mb-2" data-i18n="route_resources_lead"></p>
+              <ul class="small mb-0">
+                <li data-i18n="route_resources_li1"></li>
+                <li data-i18n="route_resources_li2"></li>
+                <li data-i18n="route_resources_li3"></li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3 class="h5" data-i18n="route_public_title">Público objetivo</h3>
+              <p class="small text-muted mb-2" data-i18n="route_public_lead"></p>
+              <ul class="small mb-0">
+                <li data-i18n="route_public_li1"></li>
+                <li data-i18n="route_public_li2"></li>
+                <li data-i18n="route_public_li3"></li>
+                <li data-i18n="route_public_li4"></li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3 class="h5" data-i18n="route_exp_title">Experiencia del visitante</h3>
+              <p class="small text-muted mb-2" data-i18n="route_exp_lead"></p>
+              <ul class="small mb-0">
+                <li data-i18n="route_exp_li1"></li>
+                <li data-i18n="route_exp_li2"></li>
+                <li data-i18n="route_exp_li3"></li>
+                <li data-i18n="route_exp_li4"></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="mb-5" aria-labelledby="timeline-h">
+          <div class="timeline-section-panel">
+            <h2 id="timeline-h" class="h3 mb-3 pm-heading-with-icon">
+              <img src="../images/icons/icono-fosiles.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
+              <span data-i18n="timeline_title">Linea temporal interactiva</span>
+            </h2>
+            <p class="lead" data-i18n="timeline_intro">Explora las grandes etapas para entender la evolucion de Sierra Magina y su registro arqueologico.</p>
+            <div class="timeline btn-group d-flex flex-wrap gap-2 mb-2" role="group" aria-label="Eras">
+              <button type="button" class="timeline-era btn btn-outline-secondary active" data-time="stage1" data-i18n="timeline_stage_1">Tierra primitiva</button>
+              <button type="button" class="timeline-era btn btn-outline-secondary" data-time="stage2" data-i18n="timeline_stage_2">Carbonífero / Mesozoico</button>
+              <button type="button" class="timeline-era btn btn-outline-secondary" data-time="stage3" data-i18n="timeline_stage_3">Hominidos</button>
+              <button type="button" class="timeline-era btn btn-outline-secondary" data-time="stage4" data-i18n="timeline_stage_4">Homo erectus</button>
+              <button type="button" class="timeline-era btn btn-outline-secondary" data-time="stage5" data-i18n="timeline_stage_5">Arte rupestre</button>
+              <button type="button" class="timeline-era btn btn-outline-secondary" data-time="stage6" data-i18n="timeline_stage_6">Neolítico</button>
+              <button type="button" class="timeline-era btn btn-outline-secondary" data-time="stage7" data-i18n="timeline_stage_7">Civilización</button>
             </div>
-            <aside class="col-lg-4">
-              <div class="card">
-                <div class="card-body">
-                  <div class="museum-3d-floors btn-group d-flex flex-wrap gap-2 mb-3" role="group" data-i18n-aria-label="museum_3d_floor_switch_aria">
-                    <button type="button" class="museum-3d-floor-btn btn btn-outline-secondary active" data-floor="ground" data-i18n="museum_3d_floor_ground">Planta baja</button>
-                    <button type="button" class="museum-3d-floor-btn btn btn-outline-secondary" data-floor="first" data-i18n="museum_3d_floor_first">Planta primera</button>
-                  </div>
-                  <h3 class="h6" data-i18n="museum_3d_sections_title">Secciones</h3>
-                  <div id="museum-3d-sections"></div>
-                  <div class="museum-3d-detail mt-3 pt-3 border-top">
-                    <h4 class="h6" id="museum-3d-detail-title">Selecciona una seccion</h4>
-                    <p id="museum-3d-detail-text" class="small mb-0">Pulsa en cualquier zona coloreada del plano o en la lista para ver su descripcion.</p>
-                  </div>
+            <article class="timeline-detail card border-0 shadow-sm overflow-hidden p-0 mt-3" id="timeline-detail" aria-live="polite"></article>
+          </div>
+        </section>
+
+        <section class="mt-5 museum-section-wrap" aria-labelledby="museum-h">
+          <div class="museum-section-panel">
+            <h2 id="museum-h" class="museum-section-heading h3 mb-2 pm-heading-with-icon">
+              <img src="../images/icons/icono-excavacion.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
+              <span data-i18n="museum_3d_title">Recreacion 3D interactiva del museo</span>
+            </h2>
+            <p class="museum-section-lead lead mb-4" data-i18n="museum_3d_intro">Explora el museo por secciones. Pulsa en una seccion para resaltarla y ver su descripcion.</p>
+            <div class="museum-3d-layout">
+              <div class="museum-3d-viewer-column">
+                <div class="museum-3d-viewer-frame">
+                  <div id="museum-3d-canvas" class="museum-3d-canvas" role="img" data-i18n-aria-label="museum_3d_canvas_aria"></div>
+                  <p class="museum-3d-viewer-hint mb-0">
+                    <span class="museum-3d-viewer-hint-icon" aria-hidden="true">◆</span>
+                    <span data-i18n="museum_3d_viewer_hint">Pulsa una zona coloreada del plano o elige una seccion en la lista.</span>
+                  </p>
                 </div>
               </div>
-            </aside>
+              <aside class="museum-3d-sidebar-column">
+                <div class="museum-3d-sidebar-card card border-0 shadow-sm">
+                  <div class="card-body">
+                    <div class="museum-3d-floors" role="group" data-i18n-aria-label="museum_3d_floor_switch_aria">
+                      <button type="button" class="museum-3d-floor-btn active" data-floor="ground" data-i18n="museum_3d_floor_ground">Planta baja</button>
+                      <button type="button" class="museum-3d-floor-btn" data-floor="first" data-i18n="museum_3d_floor_first">Planta primera</button>
+                    </div>
+                    <h3 class="museum-3d-sidebar-heading h6" data-i18n="museum_3d_sections_title">Secciones</h3>
+                    <div id="museum-3d-sections" class="museum-3d-sections"></div>
+                    <div class="museum-3d-detail">
+                      <h4 class="museum-3d-detail-title h6" id="museum-3d-detail-title">Selecciona una seccion</h4>
+                      <p id="museum-3d-detail-text" class="museum-3d-detail-text mb-0">Pulsa en cualquier zona coloreada del plano o en la lista para ver su descripcion.</p>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
           </div>
         </section>
       </div>
     </main>
 
     <footer class="site-footer mt-5">
-      <div class="container py-4">
-        <div class="row g-4">
-          <div class="col-md-6">
-            <h2 class="h5" data-i18n="footer_title">Paleomagina</h2>
-            <p class="mb-0" data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
-          </div>
-          <div class="col-md-6">
-            <h3 class="h6" data-i18n="footer_contact">Contacto</h3>
-            <p class="mb-0"><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
-            <p class="mb-0">+34 000 000 000</p>
-          </div>
+      <div class="container footer-content">
+        <div>
+          <h2 data-i18n="footer_title">Paleomagina</h2>
+          <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
         </div>
-        <div class="footer-copy">
-          <p class="mb-0">© 2026 Centro de Interpretacion Paleomagina.</p>
+        <div>
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="glosario.html" data-i18n="res_glossary">Glosario</a></li>
+            <li><a href="audiovisuales.html" data-i18n="res_audiovisual">Audiovisuales</a></li>
+            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ámbitos</a></li>
+          </ul>
         </div>
+        <div>
+          <h3 data-i18n="footer_contact">Contacto</h3>
+          <p><strong>Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+          <p><strong>Teléfono:</strong><br />+34 000 000 000</p>
+          <p><strong>Ubicación:</strong><br /><span>Sierra Magina, Jaén</span></p>
+        </div>
+        <div>
+          <h3 data-i18n="footer_legal_heading">Información legal</h3>
+          <ul>
+            <li><a href="aviso-legal.html" data-i18n="footer_legal_notice">Aviso legal</a></li>
+            <li><a href="privacidad.html" data-i18n="footer_legal_privacy">Privacidad</a></li>
+            <li><a href="cookies.html" data-i18n="footer_legal_cookies">Cookies</a></li>
+            <li><a href="accesibilidad.html" data-i18n="footer_legal_a11y">Accesibilidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-copy">
+        <p class="mb-0">© 2026 Centro de Interpretacion Paleomagina. Todos los derechos reservados.</p>
       </div>
     </footer>
 
