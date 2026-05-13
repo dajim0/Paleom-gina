@@ -2,128 +2,210 @@
 /* MUSEUM 3D — Complete Interactive Viewer & Timeline                           */
 /* ═════════════════════════════════════════════════════════════════════════════ */
 
-/* FLOOR PLANS IMAGE DATA (Base64 encoded or path) */
+/** Planos subidos (planta baja / primera); rutas relativas a `html/*.html`. */
 const FLOOR_IMAGES = {
-  ground: 'data:image/png;base64,...', // If needed, actual image data
-  first: 'data:image/png;base64,...'
+  ground: '../images/planta-baja-museo.png',
+  first: '../images/planta-primera-museo.png'
 };
+
+/** Convierte polígonos en coords 0–1 al tamaño real de la imagen. */
+function zonePolyPoints(zone, W, H) {
+  if (zone.polyNorm && Array.isArray(zone.polyNorm)) {
+    return zone.polyNorm.map(([nx, ny]) => [nx * W, ny * H]);
+  }
+  if (zone.poly && Array.isArray(zone.poly)) return zone.poly;
+  return [];
+}
 
 /* MUSEUM FLOOR PLAN DATA — ZONES AND SECTIONS */
 const ZONES = {
   ground: [
     {
-      id: 'R1',
-      label: 'Recepción y acogida',
-      text: 'Primer punto de contacto y bienvenida del visitante.',
+      id: '1',
+      label: 'Recepción y orientación',
+      text:
+        'Zona de acogida y orientación: bienvenida al visitante, información general del centro y arranque del relato museístico con apoyos gráficos y mapas del territorio.',
       color: '#c79a5f',
-      opacity: 0.6,
-      poly: [[88, 226], [172, 200], [214, 244], [134, 290], [82, 274]]
+      opacity: 0.52,
+      polyNorm: [
+        [0.54, 0.05],
+        [0.93, 0.05],
+        [0.93, 0.39],
+        [0.54, 0.36]
+      ]
     },
     {
-      id: 'R2',
-      label: 'Distribución y transición',
-      text: 'Área de paso interpretativo y preparación del recorrido.',
+      id: '2',
+      label: 'Distribución y sala auxiliar',
+      text:
+        'Espacio de paso y estancia complementaria junto a servicios; prepara el recorrido hacia la zona vertical de ascensor y escaleras.',
       color: '#d6a66f',
-      opacity: 0.6,
-      poly: [[198, 194], [330, 158], [380, 208], [244, 242]]
+      opacity: 0.52,
+      polyNorm: [
+        [0.64, 0.46],
+        [0.93, 0.45],
+        [0.93, 0.92],
+        [0.64, 0.88]
+      ]
     },
     {
-      id: 'R3',
-      label: 'Escaleras y eras geológicas',
-      text: 'Conexión vertical con introducción a las eras geológicas.',
+      id: '3',
+      label: 'Escaleras y ascensor',
+      text:
+        'Núcleo de circulación vertical que conecta planta baja y primera planta, con transición interpretativa hacia el cuerpo expositivo principal.',
       color: '#9da881',
-      opacity: 0.6,
-      poly: [[364, 152], [520, 114], [578, 174], [418, 214]]
+      opacity: 0.52,
+      polyNorm: [
+        [0.46, 0.21],
+        [0.57, 0.21],
+        [0.57, 0.69],
+        [0.46, 0.66]
+      ]
     }
   ],
   first: [
     {
-      id: 'AN',
-      label: 'Antesala',
-      text: 'Antesala de acceso a la exposición permanente.',
+      id: 'AS',
+      label: 'Antesala (AS)',
+      text: 'Antesala de acceso a la exposición permanente, junto al ascensor y la conexión con la planta baja.',
       color: '#d0b183',
-      opacity: 0.6,
-      poly: [[70, 272], [142, 238], [182, 274], [116, 316], [68, 302]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.43, 0.36],
+        [0.51, 0.36],
+        [0.51, 0.45],
+        [0.43, 0.45]
+      ]
     },
     {
-      id: 'A0',
-      label: 'Bienvenida',
-      text: 'Punto inicial del recorrido expositivo en sala.',
+      id: '0',
+      label: 'Bienvenida (0)',
+      text: 'Punto inicial del recorrido expositivo en sala, entre el núcleo de escaleras y los primeros ámbitos temáticos.',
       color: '#c79a5f',
-      opacity: 0.6,
-      poly: [[160, 236], [250, 206], [292, 254], [206, 286]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.51, 0.46],
+        [0.61, 0.46],
+        [0.61, 0.56],
+        [0.51, 0.56]
+      ]
     },
     {
-      id: 'A1',
-      label: 'Mar de Tetis',
-      text: 'Lectura del origen marino del territorio y registro fósil.',
+      id: '1',
+      label: 'Mar de Tetis (1)',
+      text: 'Lectura del origen marino del territorio y del registro fósil asociado a los fondos antiguos de la cuenca.',
       color: '#cda36d',
-      opacity: 0.6,
-      poly: [[260, 204], [352, 176], [396, 226], [302, 256]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.66, 0.56],
+        [0.97, 0.56],
+        [0.97, 0.96],
+        [0.66, 0.94]
+      ]
     },
     {
-      id: 'A2',
-      label: 'Geología y orografía',
-      text: 'Procesos geológicos que modelan Sierra Mágina.',
+      id: '2',
+      label: 'Geología y orografía (2)',
+      text: 'Procesos geológicos y relieve que configuran Sierra Mágina y su entorno natural actual.',
       color: '#d8ad76',
-      opacity: 0.6,
-      poly: [[366, 172], [466, 146], [508, 198], [404, 226]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.63, 0.38],
+        [0.95, 0.38],
+        [0.95, 0.56],
+        [0.63, 0.56]
+      ]
     },
     {
-      id: 'A3',
-      label: 'Cuaternario',
-      text: 'Cambios climáticos y ambientales durante el Cuaternario.',
+      id: '3',
+      label: 'Cuaternario (3)',
+      text: 'Cambios climáticos y ambientales durante el Cuaternario y su reflejo en paisajes y yacimientos.',
       color: '#dfb57d',
-      opacity: 0.6,
-      poly: [[474, 140], [574, 116], [616, 166], [514, 192]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.58, 0.17],
+        [0.8, 0.15],
+        [0.8, 0.39],
+        [0.58, 0.39]
+      ]
     },
     {
-      id: 'A4',
-      label: 'Mundo neandertal',
-      text: 'Evidencias de vida neandertal y tecnología asociada.',
+      id: '4',
+      label: 'Mundo neandertal (4)',
+      text: 'Evidencias de vida neandertal en el entorno y la tecnología asociada a estas poblaciones.',
       color: '#cb7f49',
-      opacity: 0.6,
-      poly: [[246, 272], [342, 242], [388, 292], [286, 326]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.805, 0.04],
+        [0.97, 0.04],
+        [0.97, 0.145],
+        [0.805, 0.145]
+      ]
     },
     {
-      id: 'A5',
-      label: 'Paleolítico superior',
-      text: 'Innovaciones culturales y técnicas de sociedades cazadoras.',
+      id: '5',
+      label: 'Paleolítico superior (5)',
+      text: 'Innovaciones culturales y técnicas de sociedades cazadoras-recolectoras del Paleolítico superior.',
       color: '#bb703f',
-      opacity: 0.6,
-      poly: [[352, 238], [454, 210], [500, 260], [392, 292]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.36, 0.08],
+        [0.78, 0.06],
+        [0.78, 0.34],
+        [0.36, 0.34]
+      ]
     },
     {
-      id: 'A6',
-      label: 'Neolítico',
-      text: 'Primeras comunidades productoras y transformación del territorio.',
+      id: '6',
+      label: 'Neolítico (6)',
+      text: 'Primeras comunidades productoras y la transformación del territorio con la aparición de la agricultura y la ganadería.',
       color: '#6f9663',
-      opacity: 0.6,
-      poly: [[460, 204], [562, 176], [612, 226], [500, 258]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.14, 0.08],
+        [0.36, 0.08],
+        [0.36, 0.26],
+        [0.14, 0.26]
+      ]
     },
     {
-      id: 'A7',
-      label: 'Calcolítico',
-      text: 'Metalurgia inicial y nuevos modelos sociales.',
+      id: '7',
+      label: 'Calcolítico (7)',
+      text: 'Metalurgia inicial y nuevos modelos sociales vinculados al cobre y a la intensificación del poblamiento.',
       color: '#879e5d',
-      opacity: 0.6,
-      poly: [[514, 266], [610, 240], [650, 282], [552, 308]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.12, 0.26],
+        [0.36, 0.26],
+        [0.36, 0.48],
+        [0.12, 0.48]
+      ]
     },
     {
-      id: 'A8',
-      label: 'Ciencia y ciudadanía',
-      text: 'Investigación arqueológica y divulgación abierta al público.',
+      id: '8',
+      label: 'Ciencia y ciudadanía (8)',
+      text: 'Investigación arqueológica contemporánea, divulgación y participación ciudadana en el patrimonio.',
       color: '#a99e4a',
-      opacity: 0.6,
-      poly: [[364, 82], [486, 56], [526, 100], [404, 126]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.18, 0.48],
+        [0.34, 0.48],
+        [0.34, 0.62],
+        [0.18, 0.62]
+      ]
     },
     {
       id: 'TZ',
-      label: 'Terraza y paisaje',
-      text: 'Cierre del recorrido con lectura directa del paisaje real.',
+      label: 'Terraza y paisaje (TZ)',
+      text: 'Cierre del recorrido con lectura directa del paisaje real de Sierra Mágina desde la terraza del edificio.',
       color: '#9f8564',
-      opacity: 0.6,
-      poly: [[538, 44], [668, 24], [704, 66], [576, 92]]
+      opacity: 0.5,
+      polyNorm: [
+        [0.03, 0.65],
+        [0.3, 0.62],
+        [0.27, 0.97],
+        [0.04, 0.98]
+      ]
     }
   ]
 };
@@ -197,6 +279,11 @@ function resetMuseumDetail() {
   if (document.body) delete document.body.dataset.museumZone;
   const detailPanel = document.querySelector('.museum-3d-detail');
   if (detailPanel) detailPanel.style.removeProperty('--detail-accent');
+  const swatchEl = document.getElementById('museum-3d-detail-swatch');
+  if (swatchEl) {
+    swatchEl.hidden = true;
+    swatchEl.style.background = '';
+  }
   const titleEl = document.getElementById('museum-3d-detail-title');
   const textEl = document.getElementById('museum-3d-detail-text');
   if (typeof window.paleomaginaT === 'function') {
@@ -204,6 +291,13 @@ function resetMuseumDetail() {
     if (textEl) textEl.textContent = window.paleomaginaT('museum_3d_detail_hint');
   }
   document.querySelectorAll('.museum-3d-section-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.museum-3d-canvas svg.overlay .zone-area').forEach(poly => {
+    if (poly.dataset.floor !== currentFloor) return;
+    const zid = poly.dataset.zoneId;
+    const z = ZONES[currentFloor]?.find(zz => zz.id === zid);
+    poly.classList.remove('active-zone');
+    if (z) poly.setAttribute('fill-opacity', z.opacity);
+  });
 }
 
 function refreshMuseumSelection() {
@@ -213,24 +307,80 @@ function refreshMuseumSelection() {
 window.resetMuseumDetail = resetMuseumDetail;
 window.refreshMuseumSelection = refreshMuseumSelection;
 
+/** Escala imagen + SVG al mismo rectángulo (contain) dentro del escenario fijo. */
+function alignPlanOverlay(stage, img, svg) {
+  const iw = img.naturalWidth;
+  const ih = img.naturalHeight;
+  if (!stage || !svg || !iw || !ih) return;
+  const sw = stage.clientWidth;
+  const sh = stage.clientHeight;
+  if (!sw || !sh) return;
+  const scale = Math.min(sw / iw, sh / ih);
+  const dw = Math.round(iw * scale * 1000) / 1000;
+  const dh = Math.round(ih * scale * 1000) / 1000;
+  const left = Math.round((sw - dw) / 2);
+  const top = Math.round((sh - dh) / 2);
+  Object.assign(img.style, {
+    left: `${left}px`,
+    top: `${top}px`,
+    width: `${dw}px`,
+    height: `${dh}px`
+  });
+  Object.assign(svg.style, {
+    left: `${left}px`,
+    top: `${top}px`,
+    width: `${dw}px`,
+    height: `${dh}px`
+  });
+  svg.setAttribute('viewBox', `0 0 ${iw} ${ih}`);
+  svg.setAttribute('preserveAspectRatio', 'none');
+}
+
+function wireMuseumPlanResize(stage, img) {
+  const svg = stage.querySelector('svg.overlay');
+  if (!svg) return;
+  if (stage._museumPlanRO) {
+    stage._museumPlanRO.disconnect();
+    stage._museumPlanRO = null;
+  }
+  const run = () => alignPlanOverlay(stage, img, svg);
+  const ro = new ResizeObserver(run);
+  ro.observe(stage);
+  stage._museumPlanRO = ro;
+  requestAnimationFrame(run);
+}
+
 /* Build floor plan visualization */
 function buildFloorPlan(floor) {
   const canvas = document.getElementById('museum-3d-canvas');
   if (!canvas) return;
   canvas.innerHTML = '';
 
+  const stage = document.createElement('div');
+  stage.className = 'museum-3d-plan-stage';
+
   const img = document.createElement('img');
   img.className = 'floor-plan-img';
-  img.src = FLOOR_IMAGES[floor] || `../images/planta-${floor === 'ground' ? 'baja' : 'primera'}-plano.png`;
+  img.decoding = 'async';
+  img.src = FLOOR_IMAGES[floor];
   img.alt = floor === 'ground' ? 'Planta baja' : 'Planta primera';
-  canvas.appendChild(img);
 
-  img.onload = () => buildOverlay(canvas, floor, img);
-  if (img.complete) buildOverlay(canvas, floor, img);
+  stage.appendChild(img);
+  canvas.appendChild(stage);
+
+  let mounted = false;
+  function mount() {
+    if (mounted || !img.naturalWidth) return;
+    mounted = true;
+    buildOverlay(stage, floor, img);
+    wireMuseumPlanResize(stage, img);
+  }
+  img.onload = mount;
+  if (img.complete) mount();
 }
 
-function buildOverlay(canvas, floor, img) {
-  const old = canvas.querySelector('svg.overlay');
+function buildOverlay(stage, floor, img) {
+  const old = stage.querySelector('svg.overlay');
   if (old) old.remove();
 
   const W = img.naturalWidth || img.clientWidth;
@@ -244,27 +394,31 @@ function buildOverlay(canvas, floor, img) {
   const zones = ZONES[floor];
   zones.forEach(zone => {
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    const pointsStr = zone.poly.map(p => p.join(',')).join(' ');
+    const pts = zonePolyPoints(zone, W, H);
+    const pointsStr = pts.map(p => p.join(',')).join(' ');
     poly.setAttribute('points', pointsStr);
     poly.setAttribute('fill', zone.color);
     poly.setAttribute('fill-opacity', zone.opacity);
-    poly.setAttribute('stroke', 'rgba(255,255,255,0.5)');
+    poly.setAttribute('stroke', 'rgba(255,255,255,0.45)');
     poly.setAttribute('stroke-width', '1');
     poly.classList.add('zone-area');
     poly.dataset.zoneId = zone.id;
+    poly.dataset.floor = floor;
 
     poly.addEventListener('click', () => selectZone(zone.id, floor));
     poly.addEventListener('mouseenter', () => {
       poly.setAttribute('fill-opacity', 0.75);
     });
     poly.addEventListener('mouseleave', () => {
-      poly.setAttribute('fill-opacity', activeZone === zone.id ? 0.85 : zone.opacity);
+      const hi = Math.min(0.9, zone.opacity + 0.28);
+      poly.setAttribute('fill-opacity', activeZone === zone.id ? hi : zone.opacity);
     });
 
     svg.appendChild(poly);
   });
 
-  canvas.appendChild(svg);
+  stage.appendChild(svg);
+  alignPlanOverlay(stage, img, svg);
 }
 
 function selectZone(id, floor) {
@@ -279,6 +433,11 @@ function selectZone(id, floor) {
 
   const titleEl = document.getElementById('museum-3d-detail-title');
   const textEl = document.getElementById('museum-3d-detail-text');
+  const swatchEl = document.getElementById('museum-3d-detail-swatch');
+  if (swatchEl) {
+    swatchEl.hidden = false;
+    swatchEl.style.background = zone.color;
+  }
   if (titleEl) titleEl.textContent = `${zone.id} — ${zone.label}`;
   if (textEl) textEl.textContent = zone.text;
 
@@ -291,8 +450,8 @@ function selectZone(id, floor) {
     const z = ZONES[floor].find(zz => zz.id === zid);
     poly.classList.toggle('active-zone', zid === id);
     if (z) {
-      const hi = Math.min(0.92, z.opacity + 0.22);
-      poly.setAttribute('fill-opacity', zid === id ? hi : z.opacity);
+      const hi = Math.min(0.9, z.opacity + 0.32);
+      poly.setAttribute('fill-opacity', zid === id ? hi : z.opacity * 0.88);
     }
   });
 }
