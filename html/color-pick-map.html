@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa por color (canvas + getImageData)</title>
+    <link rel="stylesheet" href="../color-pick-map.css" />
+  </head>
+  <body class="cp-page">
+    <div class="cp-layout">
+      <h1>Mapa por color del plano</h1>
+      <p class="lead">
+        El plano se dibuja en un <strong>canvas</strong>; encima hay una <strong>imagen invisible</strong> alineada
+        (<code>object-fit: contain</code>) para conservar la misma geometría. Los clics los recibe el canvas y se usa
+        <code>canvas.getImageData()</code>. Ajusta las claves <code>"r,g,b"</code> en <code>color-pick-map.js</code> a
+        los colores reales de tu PNG (sirve la página por HTTP(S) con CORS si aplica).
+      </p>
+
+      <div class="cp-grid">
+        <div class="cp-stage-wrap">
+          <div class="cp-stage">
+            <canvas id="map-canvas" class="cp-canvas" width="800" height="500" aria-label="Plano interactivo por color"></canvas>
+            <img
+              id="map-source"
+              class="cp-source-img"
+              src="../images/planta-baja-museo.png"
+              alt=""
+              width="1600"
+              height="900"
+              decoding="async"
+              crossorigin="anonymous"
+            />
+          </div>
+          <p id="cp-hover" class="cp-hover" aria-live="polite"></p>
+        </div>
+
+        <aside class="cp-panel" aria-live="polite">
+          <p id="cp-hint" class="cp-panel__hint">Haz clic en un color del plano para ver la sección asociada.</p>
+          <div id="cp-panel-head" class="cp-panel__head" hidden>
+            <span id="cp-panel-swatch" class="cp-panel__swatch" aria-hidden="true"></span>
+            <h2 id="cp-panel-title" class="cp-panel__title"></h2>
+          </div>
+          <p id="cp-panel-rgb" class="cp-panel__rgb" hidden></p>
+          <p id="cp-panel-desc" class="cp-panel__desc" hidden></p>
+        </aside>
+      </div>
+    </div>
+
+    <script src="../color-pick-map.js"></script>
+  </body>
+</html>

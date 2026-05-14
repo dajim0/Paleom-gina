@@ -1,5 +1,5 @@
 /* ═════════════════════════════════════════════════════════════════════════════ */
-/* MUSEUM 3D — Complete Interactive Viewer & Timeline                           */
+/* Museo — mapa interactivo por plantas (plano + zonas) y línea temporal        */
 /* ═════════════════════════════════════════════════════════════════════════════ */
 
 /** Planos subidos (planta baja / primera); rutas relativas a `html/*.html`. */
@@ -8,16 +8,8 @@ const FLOOR_IMAGES = {
   first: '../images/planta-primera-museo.png'
 };
 
-/** Convierte polígonos en coords 0–1 al tamaño real de la imagen. */
-function zonePolyPoints(zone, W, H) {
-  if (zone.polyNorm && Array.isArray(zone.polyNorm)) {
-    return zone.polyNorm.map(([nx, ny]) => [nx * W, ny * H]);
-  }
-  if (zone.poly && Array.isArray(zone.poly)) return zone.poly;
-  return [];
-}
+/** Clic sobre los rellenos del PNG: cada sección usa su `color` en ZONES y un tono medio calibrado en la propia imagen (sin polígonos encima). */
 
-/* MUSEUM FLOOR PLAN DATA — ZONES AND SECTIONS */
 const ZONES = {
   ground: [
     {
@@ -25,42 +17,21 @@ const ZONES = {
       label: 'Recepción y orientación',
       text:
         'Zona de acogida y orientación: bienvenida al visitante, información general del centro y arranque del relato museístico con apoyos gráficos y mapas del territorio.',
-      color: '#c79a5f',
-      opacity: 0.52,
-      polyNorm: [
-        [0.54, 0.05],
-        [0.93, 0.05],
-        [0.93, 0.39],
-        [0.54, 0.36]
-      ]
+      color: '#c79a5f'
     },
     {
       id: '2',
       label: 'Distribución y sala auxiliar',
       text:
         'Espacio de paso y estancia complementaria junto a servicios; prepara el recorrido hacia la zona vertical de ascensor y escaleras.',
-      color: '#d6a66f',
-      opacity: 0.52,
-      polyNorm: [
-        [0.64, 0.46],
-        [0.93, 0.45],
-        [0.93, 0.92],
-        [0.64, 0.88]
-      ]
+      color: '#d6a66f'
     },
     {
       id: '3',
       label: 'Escaleras y ascensor',
       text:
         'Núcleo de circulación vertical que conecta planta baja y primera planta, con transición interpretativa hacia el cuerpo expositivo principal.',
-      color: '#9da881',
-      opacity: 0.52,
-      polyNorm: [
-        [0.46, 0.21],
-        [0.57, 0.21],
-        [0.57, 0.69],
-        [0.46, 0.66]
-      ]
+      color: '#9da881'
     }
   ],
   first: [
@@ -68,147 +39,269 @@ const ZONES = {
       id: 'AS',
       label: 'Antesala (AS)',
       text: 'Antesala de acceso a la exposición permanente, junto al ascensor y la conexión con la planta baja.',
-      color: '#d0b183',
-      opacity: 0.5,
-      polyNorm: [
-        [0.43, 0.36],
-        [0.51, 0.36],
-        [0.51, 0.45],
-        [0.43, 0.45]
-      ]
+      color: '#d0b183'
     },
     {
       id: '0',
       label: 'Bienvenida (0)',
       text: 'Punto inicial del recorrido expositivo en sala, entre el núcleo de escaleras y los primeros ámbitos temáticos.',
-      color: '#c79a5f',
-      opacity: 0.5,
-      polyNorm: [
-        [0.51, 0.46],
-        [0.61, 0.46],
-        [0.61, 0.56],
-        [0.51, 0.56]
-      ]
+      color: '#c79a5f'
     },
     {
       id: '1',
       label: 'Mar de Tetis (1)',
       text: 'Lectura del origen marino del territorio y del registro fósil asociado a los fondos antiguos de la cuenca.',
-      color: '#cda36d',
-      opacity: 0.5,
-      polyNorm: [
-        [0.66, 0.56],
-        [0.97, 0.56],
-        [0.97, 0.96],
-        [0.66, 0.94]
-      ]
+      color: '#cda36d'
     },
     {
       id: '2',
       label: 'Geología y orografía (2)',
       text: 'Procesos geológicos y relieve que configuran Sierra Mágina y su entorno natural actual.',
-      color: '#d8ad76',
-      opacity: 0.5,
-      polyNorm: [
-        [0.63, 0.38],
-        [0.95, 0.38],
-        [0.95, 0.56],
-        [0.63, 0.56]
-      ]
+      color: '#d8ad76'
     },
     {
       id: '3',
       label: 'Cuaternario (3)',
       text: 'Cambios climáticos y ambientales durante el Cuaternario y su reflejo en paisajes y yacimientos.',
-      color: '#dfb57d',
-      opacity: 0.5,
-      polyNorm: [
-        [0.58, 0.17],
-        [0.8, 0.15],
-        [0.8, 0.39],
-        [0.58, 0.39]
-      ]
+      color: '#dfb57d'
     },
     {
       id: '4',
       label: 'Mundo neandertal (4)',
       text: 'Evidencias de vida neandertal en el entorno y la tecnología asociada a estas poblaciones.',
-      color: '#cb7f49',
-      opacity: 0.5,
-      polyNorm: [
-        [0.805, 0.04],
-        [0.97, 0.04],
-        [0.97, 0.145],
-        [0.805, 0.145]
-      ]
+      color: '#cb7f49'
     },
     {
       id: '5',
       label: 'Paleolítico superior (5)',
       text: 'Innovaciones culturales y técnicas de sociedades cazadoras-recolectoras del Paleolítico superior.',
-      color: '#bb703f',
-      opacity: 0.5,
-      polyNorm: [
-        [0.36, 0.08],
-        [0.78, 0.06],
-        [0.78, 0.34],
-        [0.36, 0.34]
-      ]
+      color: '#bb703f'
     },
     {
       id: '6',
       label: 'Neolítico (6)',
       text: 'Primeras comunidades productoras y la transformación del territorio con la aparición de la agricultura y la ganadería.',
-      color: '#6f9663',
-      opacity: 0.5,
-      polyNorm: [
-        [0.14, 0.08],
-        [0.36, 0.08],
-        [0.36, 0.26],
-        [0.14, 0.26]
-      ]
+      color: '#6f9663'
     },
     {
       id: '7',
       label: 'Calcolítico (7)',
       text: 'Metalurgia inicial y nuevos modelos sociales vinculados al cobre y a la intensificación del poblamiento.',
-      color: '#879e5d',
-      opacity: 0.5,
-      polyNorm: [
-        [0.12, 0.26],
-        [0.36, 0.26],
-        [0.36, 0.48],
-        [0.12, 0.48]
-      ]
+      color: '#879e5d'
     },
     {
       id: '8',
       label: 'Ciencia y ciudadanía (8)',
       text: 'Investigación arqueológica contemporánea, divulgación y participación ciudadana en el patrimonio.',
-      color: '#a99e4a',
-      opacity: 0.5,
-      polyNorm: [
-        [0.18, 0.48],
-        [0.34, 0.48],
-        [0.34, 0.62],
-        [0.18, 0.62]
-      ]
+      color: '#a99e4a'
     },
     {
       id: 'TZ',
       label: 'Terraza y paisaje (TZ)',
       text: 'Cierre del recorrido con lectura directa del paisaje real de Sierra Mágina desde la terraza del edificio.',
-      color: '#9f8564',
-      opacity: 0.5,
-      polyNorm: [
-        [0.03, 0.65],
-        [0.3, 0.62],
-        [0.27, 0.97],
-        [0.04, 0.98]
-      ]
+      color: '#9f8564'
     }
   ]
 };
+
+/* ── Detección por color del bitmap (rellenos del plano) ── */
+
+function hexToRgb(hex) {
+  const h = String(hex).replace('#', '').trim();
+  if (h.length === 3) {
+    return [parseInt(h[0] + h[0], 16), parseInt(h[1] + h[1], 16), parseInt(h[2] + h[2], 16)];
+  }
+  if (h.length !== 6) return [0, 0, 0];
+  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+}
+
+function rgbDist2(r1, g1, b1, r2, g2, b2) {
+  return (r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2;
+}
+
+function isPaperLike(r, g, b) {
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const avg = (r + g + b) / 3;
+  return max - min < 22 && avg > 218;
+}
+
+function medianInt(values) {
+  const sorted = values.slice().sort((a, b) => a - b);
+  return sorted[Math.floor(sorted.length / 2)];
+}
+
+const CALIB_ASSIGN_MAX_D2 = 175 * 175;
+const CALIB_MIN_SAMPLES = 14;
+const CALIB_MAX_PER_ZONE = 5000;
+
+function calibrateFloorPickColors(floor, imgData, nw, nh) {
+  const zones = ZONES[floor];
+  if (!zones || !imgData) return;
+  zones.forEach(z => {
+    delete z._pickCenter;
+  });
+  const stride = Math.max(2, Math.floor(Math.min(nw, nh) / 280));
+  const samples = {};
+  zones.forEach(z => {
+    samples[z.id] = [];
+  });
+  const d = imgData.data;
+
+  for (let y = 0; y < nh; y += stride) {
+    for (let x = 0; x < nw; x += stride) {
+      const i = (Math.floor(y) * nw + Math.floor(x)) * 4;
+      const r = d[i];
+      const g = d[i + 1];
+      const b = d[i + 2];
+      if (isPaperLike(r, g, b)) continue;
+      let best = null;
+      let bestD = Infinity;
+      for (const z of zones) {
+        const [zr, zg, zb] = hexToRgb(z.color);
+        const dist = rgbDist2(r, g, b, zr, zg, zb);
+        if (dist < bestD) {
+          bestD = dist;
+          best = z;
+        }
+      }
+      if (!best || bestD > CALIB_ASSIGN_MAX_D2) continue;
+      const arr = samples[best.id];
+      if (arr.length < CALIB_MAX_PER_ZONE) arr.push([r, g, b]);
+    }
+  }
+
+  zones.forEach(z => {
+    const arr = samples[z.id];
+    if (arr.length < CALIB_MIN_SAMPLES) return;
+    z._pickCenter = [
+      medianInt(arr.map(c => c[0])),
+      medianInt(arr.map(c => c[1])),
+      medianInt(arr.map(c => c[2]))
+    ];
+  });
+}
+
+function clickDistanceToZone(r, g, b, z) {
+  const [nr, ng, nb] = hexToRgb(z.color);
+  const dNom = rgbDist2(r, g, b, nr, ng, nb);
+  if (!z._pickCenter) return dNom;
+  const dPick = rgbDist2(r, g, b, z._pickCenter[0], z._pickCenter[1], z._pickCenter[2]);
+  return Math.min(dNom, dPick);
+}
+
+const CLICK_MATCH_MAX_D2 = 158 * 158;
+
+function closestZoneByRgb(floor, r, g, b) {
+  const zones = ZONES[floor];
+  if (!zones) return null;
+  let best = null;
+  let bestD = Infinity;
+  for (const z of zones) {
+    const d = clickDistanceToZone(r, g, b, z);
+    if (d < bestD) {
+      bestD = d;
+      best = z;
+    }
+  }
+  if (!best || bestD > CLICK_MATCH_MAX_D2) return null;
+  return best;
+}
+
+const SAMPLE_RADIUS = 3;
+
+function sampleRgbFromBuffer(imgData, nw, nh, ix, iy) {
+  const buf = imgData.data;
+  let tr = 0;
+  let tg = 0;
+  let tb = 0;
+  let n = 0;
+  for (let dy = -SAMPLE_RADIUS; dy <= SAMPLE_RADIUS; dy++) {
+    for (let dx = -SAMPLE_RADIUS; dx <= SAMPLE_RADIUS; dx++) {
+      const x = Math.max(0, Math.min(nw - 1, ix + dx));
+      const y = Math.max(0, Math.min(nh - 1, iy + dy));
+      const i = (y * nw + x) * 4;
+      tr += buf[i];
+      tg += buf[i + 1];
+      tb += buf[i + 2];
+      n++;
+    }
+  }
+  return [Math.round(tr / n), Math.round(tg / n), Math.round(tb / n)];
+}
+
+function sampleRgbFromCtx(ctx, nw, nh, ix, iy) {
+  let tr = 0;
+  let tg = 0;
+  let tb = 0;
+  let n = 0;
+  for (let dy = -SAMPLE_RADIUS; dy <= SAMPLE_RADIUS; dy++) {
+    for (let dx = -SAMPLE_RADIUS; dx <= SAMPLE_RADIUS; dx++) {
+      const x = Math.max(0, Math.min(nw - 1, ix + dx));
+      const y = Math.max(0, Math.min(nh - 1, iy + dy));
+      let data;
+      try {
+        data = ctx.getImageData(x, y, 1, 1).data;
+      } catch {
+        return null;
+      }
+      tr += data[0];
+      tg += data[1];
+      tb += data[2];
+      n++;
+    }
+  }
+  return [Math.round(tr / n), Math.round(tg / n), Math.round(tb / n)];
+}
+
+function handlePlanClick(ev, stage, img, floor) {
+  const ctx = stage._museumPickCtx;
+  if (!ctx) return;
+  const rect = img.getBoundingClientRect();
+  if (rect.width < 2 || rect.height < 2) return;
+  const nw = img.naturalWidth;
+  const nh = img.naturalHeight;
+  const x = ((ev.clientX - rect.left) / rect.width) * nw;
+  const y = ((ev.clientY - rect.top) / rect.height) * nh;
+  const ix = Math.floor(Math.max(0, Math.min(nw - 1, x)));
+  const iy = Math.floor(Math.max(0, Math.min(nh - 1, y)));
+  const pickBuf = stage._museumPickBuf;
+  const rgb = pickBuf ? sampleRgbFromBuffer(pickBuf, nw, nh, ix, iy) : sampleRgbFromCtx(ctx, nw, nh, ix, iy);
+  if (!rgb) return;
+  const [rp, gp, bp] = rgb;
+  if (isPaperLike(rp, gp, bp)) {
+    resetMuseumDetail();
+    return;
+  }
+  const z = closestZoneByRgb(floor, rp, gp, bp);
+  if (z) selectZone(z.id, floor);
+  else resetMuseumDetail();
+}
+
+function setupPlanPixelPicking(stage, floor, img) {
+  const nw = img.naturalWidth || img.clientWidth;
+  const nh = img.naturalHeight || img.clientHeight;
+  if (!nw || !nh) return;
+  const cnv = document.createElement('canvas');
+  cnv.width = nw;
+  cnv.height = nh;
+  const ctx = cnv.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, nw, nh);
+  let fullData = null;
+  try {
+    fullData = ctx.getImageData(0, 0, nw, nh);
+  } catch (e) {
+    console.warn('[museum3d] No se pueden leer pixels del plano (origen/CORS).', e);
+  }
+  calibrateFloorPickColors(floor, fullData, nw, nh);
+  stage._museumPickCtx = ctx;
+  stage._museumPickBuf = fullData;
+  stage._museumPickFloor = floor;
+  const onClick = ev => handlePlanClick(ev, stage, img, floor);
+  img.addEventListener('click', onClick);
+  stage._museumPlanClickHandler = onClick;
+}
+
 
 /* TIMELINE DATA — seven-stage Deep Time narrative */
 const TIMELINE_DATA = {
@@ -267,10 +360,6 @@ const TIMELINE_DATA = {
 /* INITIALIZATION AND RENDERING FUNCTIONS                                       */
 /* ═════════════════════════════════════════════════════════════════════════════ */
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* INITIALIZATION AND RENDERING FUNCTIONS                                       */
-/* ═════════════════════════════════════════════════════════════════════════════ */
-
 let currentFloor = 'ground';
 let activeZone = null;
 
@@ -291,13 +380,6 @@ function resetMuseumDetail() {
     if (textEl) textEl.textContent = window.paleomaginaT('museum_3d_detail_hint');
   }
   document.querySelectorAll('.museum-3d-section-item').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.museum-3d-canvas svg.overlay .zone-area').forEach(poly => {
-    if (poly.dataset.floor !== currentFloor) return;
-    const zid = poly.dataset.zoneId;
-    const z = ZONES[currentFloor]?.find(zz => zz.id === zid);
-    poly.classList.remove('active-zone');
-    if (z) poly.setAttribute('fill-opacity', z.opacity);
-  });
 }
 
 function refreshMuseumSelection() {
@@ -307,11 +389,11 @@ function refreshMuseumSelection() {
 window.resetMuseumDetail = resetMuseumDetail;
 window.refreshMuseumSelection = refreshMuseumSelection;
 
-/** Escala imagen + SVG al mismo rectángulo (contain) dentro del escenario fijo. */
-function alignPlanOverlay(stage, img, svg) {
+/** Escala la imagen del plano (contain) dentro del escenario fijo. */
+function alignPlanImage(stage, img) {
   const iw = img.naturalWidth;
   const ih = img.naturalHeight;
-  if (!stage || !svg || !iw || !ih) return;
+  if (!stage || !iw || !ih) return;
   const sw = stage.clientWidth;
   const sh = stage.clientHeight;
   if (!sw || !sh) return;
@@ -326,24 +408,14 @@ function alignPlanOverlay(stage, img, svg) {
     width: `${dw}px`,
     height: `${dh}px`
   });
-  Object.assign(svg.style, {
-    left: `${left}px`,
-    top: `${top}px`,
-    width: `${dw}px`,
-    height: `${dh}px`
-  });
-  svg.setAttribute('viewBox', `0 0 ${iw} ${ih}`);
-  svg.setAttribute('preserveAspectRatio', 'none');
 }
 
 function wireMuseumPlanResize(stage, img) {
-  const svg = stage.querySelector('svg.overlay');
-  if (!svg) return;
   if (stage._museumPlanRO) {
     stage._museumPlanRO.disconnect();
     stage._museumPlanRO = null;
   }
-  const run = () => alignPlanOverlay(stage, img, svg);
+  const run = () => alignPlanImage(stage, img);
   const ro = new ResizeObserver(run);
   ro.observe(stage);
   stage._museumPlanRO = ro;
@@ -362,6 +434,9 @@ function buildFloorPlan(floor) {
   const img = document.createElement('img');
   img.className = 'floor-plan-img';
   img.decoding = 'async';
+  if (location.protocol === 'http:' || location.protocol === 'https:') {
+    img.crossOrigin = 'anonymous';
+  }
   img.src = FLOOR_IMAGES[floor];
   img.alt = floor === 'ground' ? 'Planta baja' : 'Planta primera';
 
@@ -372,53 +447,14 @@ function buildFloorPlan(floor) {
   function mount() {
     if (mounted || !img.naturalWidth) return;
     mounted = true;
-    buildOverlay(stage, floor, img);
+    setupPlanPixelPicking(stage, floor, img);
     wireMuseumPlanResize(stage, img);
+    if (activeZone && currentFloor === floor) {
+      refreshMuseumSelection();
+    }
   }
   img.onload = mount;
   if (img.complete) mount();
-}
-
-function buildOverlay(stage, floor, img) {
-  const old = stage.querySelector('svg.overlay');
-  if (old) old.remove();
-
-  const W = img.naturalWidth || img.clientWidth;
-  const H = img.naturalHeight || img.clientHeight;
-
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.classList.add('overlay');
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  svg.setAttribute('preserveAspectRatio', 'none');
-
-  const zones = ZONES[floor];
-  zones.forEach(zone => {
-    const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    const pts = zonePolyPoints(zone, W, H);
-    const pointsStr = pts.map(p => p.join(',')).join(' ');
-    poly.setAttribute('points', pointsStr);
-    poly.setAttribute('fill', zone.color);
-    poly.setAttribute('fill-opacity', zone.opacity);
-    poly.setAttribute('stroke', 'rgba(255,255,255,0.45)');
-    poly.setAttribute('stroke-width', '1');
-    poly.classList.add('zone-area');
-    poly.dataset.zoneId = zone.id;
-    poly.dataset.floor = floor;
-
-    poly.addEventListener('click', () => selectZone(zone.id, floor));
-    poly.addEventListener('mouseenter', () => {
-      poly.setAttribute('fill-opacity', 0.75);
-    });
-    poly.addEventListener('mouseleave', () => {
-      const hi = Math.min(0.9, zone.opacity + 0.28);
-      poly.setAttribute('fill-opacity', activeZone === zone.id ? hi : zone.opacity);
-    });
-
-    svg.appendChild(poly);
-  });
-
-  stage.appendChild(svg);
-  alignPlanOverlay(stage, img, svg);
 }
 
 function selectZone(id, floor) {
@@ -443,16 +479,6 @@ function selectZone(id, floor) {
 
   document.querySelectorAll('.museum-3d-section-item').forEach(el => {
     el.classList.toggle('active', el.dataset.zone === id);
-  });
-
-  document.querySelectorAll('.museum-3d-canvas svg.overlay .zone-area').forEach(poly => {
-    const zid = poly.dataset.zoneId;
-    const z = ZONES[floor].find(zz => zz.id === zid);
-    poly.classList.toggle('active-zone', zid === id);
-    if (z) {
-      const hi = Math.min(0.9, z.opacity + 0.32);
-      poly.setAttribute('fill-opacity', zid === id ? hi : z.opacity * 0.88);
-    }
   });
 }
 

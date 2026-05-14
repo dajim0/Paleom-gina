@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa museo — solo canvas (color por píxel)</title>
+    <link rel="stylesheet" href="../museum-canvas-map.css" />
+  </head>
+  <body class="mcm-page">
+    <div class="mcm-layout">
+      <h1>Mapa interactivo por color (canvas)</h1>
+      <p class="lead">
+        La imagen del plano solo existe dentro del <strong>&lt;canvas&gt;</strong> (<code>drawImage</code>).
+        Cada clic usa <code>getImageData</code> y la escala responsive
+        <code>canvas.width / rect.width</code> y <code>canvas.height / rect.height</code>.
+        Edita <code>zones</code> y <code>IMG_SRC</code> en <code>museum-canvas-map.js</code>.
+      </p>
+
+      <div class="mcm-grid">
+        <div class="mcm-canvas-wrap">
+          <!-- Bitmap interno = tamaño natural de la imagen (lo fija el JS al cargar). -->
+          <canvas id="museum-canvas" width="800" height="600" aria-label="Plano del museo (mapa por color)"></canvas>
+        </div>
+
+        <aside class="mcm-panel" aria-live="polite">
+          <p id="mcm-hint" class="mcm-panel__hint">Pulsa un color del plano para identificar la sala.</p>
+          <div id="mcm-head" class="mcm-panel__head" hidden>
+            <span id="mcm-swatch" class="mcm-panel__swatch" aria-hidden="true"></span>
+            <h2 id="mcm-title" class="mcm-panel__title"></h2>
+          </div>
+          <p id="mcm-meta" class="mcm-panel__meta" hidden></p>
+          <p id="mcm-desc" class="mcm-panel__desc" hidden></p>
+        </aside>
+      </div>
+    </div>
+
+    <script src="../museum-canvas-map.js"></script>
+  </body>
+</html>

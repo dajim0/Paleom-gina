@@ -1,10 +1,11 @@
 :root,
 [data-theme="light"] {
+  /* Modo día: fondo claro, textura visible pero suavizada con velo claro (no parece modo oscuro) */
   --bg: #f4eee4;
   --bg-alt: #ece3d4;
-  --text: #3d3328;
-  --heading: #2a2218;
-  --muted: #5c5044;
+  --text: #1e1914;
+  --heading: #14110d;
+  --muted: #2c241c;
   --primary: #a67c3d;
   --primary-contrast: #ffffff;
   --accent: #a83820;
@@ -22,6 +23,24 @@
   --footer-link: #f5e6c8;
   --footer-link-hover: #ffffff;
   color-scheme: light;
+  --pm-page-texture: url("images/FONDO%20GENERAL.png");
+  /* Velo con color de tema (crema): mas % = textura mas discreta */
+  --pm-html-veil-top: 30%;
+  --pm-html-veil-bottom: 24%;
+  /* Capa media: tinte blanco/crema sobre la foto — lee bien y no oscurece el modo día */
+  --pm-texture-mid: #fffdf8;
+  --pm-texture-scrim-top: 36%;
+  --pm-texture-scrim-bottom: 46%;
+  --pm-surface-band-pct: 54%;
+  --pm-surface-card-pct: 90%;
+  --pm-hero-overlay-a: 0.74;
+  --pm-hero-overlay-b: 0.36;
+  /* Paneles de lectura (fondo blanco / tarjeta) */
+  --pm-read-panel-bg: color-mix(in srgb, #ffffff 92%, var(--card) 8%);
+  --pm-read-panel-shadow: 0 8px 26px rgba(50, 40, 30, 0.09);
+  --pm-read-panel-radius: 0.75rem;
+  --pm-read-panel-padding-block: 1.35rem;
+  --pm-read-panel-padding-inline: 1.5rem;
 }
 
 [data-theme="dark"] {
@@ -29,7 +48,7 @@
   --bg-alt: #171410;
   --text: #faf6f0;
   --heading: #fff8ee;
-  --muted: #e2d8cc;
+  --muted: #ece4d8;
   --primary: #e4c88c;
   --primary-contrast: #14110e;
   --accent: #f0b4a0;
@@ -47,6 +66,21 @@
   --footer-link: #f0d9a8;
   --footer-link-hover: #ffffff;
   color-scheme: dark;
+  /* Modo noche: mas contraste con el modo día (fondo y velo mas marcados) */
+  --pm-html-veil-top: 44%;
+  --pm-html-veil-bottom: 38%;
+  --pm-texture-mid: #070605;
+  --pm-texture-scrim-top: 40%;
+  --pm-texture-scrim-bottom: 52%;
+  --pm-surface-band-pct: 56%;
+  --pm-surface-card-pct: 90%;
+  --pm-hero-overlay-a: 0.82;
+  --pm-hero-overlay-b: 0.46;
+  --pm-read-panel-bg: color-mix(in srgb, var(--card) 86%, #000 14%);
+  --pm-read-panel-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+  --pm-read-panel-radius: 0.75rem;
+  --pm-read-panel-padding-block: 1.35rem;
+  --pm-read-panel-padding-inline: 1.5rem;
 }
 
 /* Modo oscuro: contraste uniforme en todo el contenido (Bootstrap + utilidades) */
@@ -62,28 +96,28 @@
 [data-theme="dark"] .card,
 [data-theme="dark"] .card-body,
 [data-theme="dark"] .list-group-item {
-  background-color: var(--card);
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
 }
 
 [data-theme="dark"] .accordion-item {
-  background-color: var(--card);
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border-color: var(--border);
 }
 
 [data-theme="dark"] .accordion-button {
-  background-color: var(--card);
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
 }
 
 [data-theme="dark"] .accordion-button:not(.collapsed) {
-  background-color: var(--bg-alt);
+  background-color: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
   color: var(--text);
   box-shadow: none;
 }
 
 [data-theme="dark"] .accordion-body {
-  background-color: var(--card);
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
 }
 
@@ -93,9 +127,71 @@
 
 [data-theme="dark"] .form-control,
 [data-theme="dark"] .form-select {
-  background-color: var(--bg-alt);
+  background-color: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
   border-color: var(--border);
   color: var(--text);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html:not([data-theme="dark"]) .form-control,
+html:not([data-theme="dark"]) .form-select {
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+html:not([data-theme="dark"]) .form-control::placeholder {
+  color: var(--muted);
+}
+
+html:not([data-theme="dark"]) main .card,
+html:not([data-theme="dark"]) main .card-body {
+  color: var(--text);
+}
+
+html:not([data-theme="dark"]) .text-muted {
+  color: var(--muted) !important;
+}
+
+html:not([data-theme="dark"]) .accordion-item {
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+html:not([data-theme="dark"]) .accordion-button {
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  color: var(--text);
+}
+
+html:not([data-theme="dark"]) .accordion-button:not(.collapsed) {
+  background-color: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
+  color: var(--text);
+  box-shadow: none;
+}
+
+html:not([data-theme="dark"]) .accordion-body {
+  background-color: color-mix(in srgb, var(--bg) var(--pm-surface-band-pct), transparent);
+  color: var(--text);
+}
+
+html:not([data-theme="dark"]) .accordion-button::after {
+  filter: none;
+}
+
+html:not([data-theme="dark"]) .list-group-item {
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+html:not([data-theme="dark"]) .table {
+  --bs-table-bg: color-mix(in srgb, var(--card) 45%, transparent);
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--border);
 }
 
 [data-theme="dark"] .form-control::placeholder {
@@ -114,6 +210,24 @@
   color: var(--heading);
 }
 
+html:not([data-theme="dark"]) main {
+  color: var(--text);
+}
+
+html:not([data-theme="dark"]) .content-prose {
+  color: var(--text);
+}
+
+html:not([data-theme="dark"]) .content-prose :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--heading);
+}
+
+html:not([data-theme="dark"]) main .small,
+html:not([data-theme="dark"]) main .small.text-muted {
+  font-size: 0.9375rem;
+  color: var(--muted) !important;
+}
+
 *,
 *::before,
 *::after {
@@ -123,6 +237,26 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  min-height: 100%;
+  /* Textura + velo de tema + velo intermedio (--pm-texture-mid: claro de día, casi negro de noche) */
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) var(--pm-html-veil-top), transparent),
+      color-mix(in srgb, var(--bg) var(--pm-html-veil-bottom), transparent)
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--pm-texture-mid) var(--pm-texture-scrim-top), transparent),
+      color-mix(in srgb, var(--pm-texture-mid) var(--pm-texture-scrim-bottom), transparent)
+    ),
+    var(--pm-page-texture);
+  background-size: auto, auto, cover;
+  background-position: 0 0, 0 0, center top;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-attachment: scroll, scroll, fixed;
+  transition: background-color 0.4s ease;
 }
 
 body {
@@ -130,8 +264,11 @@ body {
   font-family: "Montserrat", sans-serif;
   line-height: 1.6;
   color: var(--text);
-  background: var(--bg);
+  background: transparent;
   position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
   /* Transicion suave para el fondo y el color de texto general */
   transition: background-color 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
@@ -155,7 +292,7 @@ body {
 }
 
 .navbar.pm-topnav .navbar-nav .nav-link:not(.active) {
-  opacity: 0.78;
+  opacity: 0.9;
 }
 
 .navbar.pm-topnav .navbar-nav .nav-link:hover:not(.active) {
@@ -304,10 +441,10 @@ body::before {
   border-left: none;
   border-bottom: none;
   transform: rotate(12deg);
-  opacity: 0.6;
+  opacity: 0.32;
   pointer-events: none;
   z-index: 0;
-  /* Transicion para el borde decorativo */
+  /* Transicion suave para el borde decorativo */
   transition: border-color 0.4s ease, opacity 0.4s ease;
 }
 
@@ -316,6 +453,32 @@ main,
 footer {
   position: relative;
   z-index: 1;
+}
+
+/* Titulos y cuerpo: modo dia nitido (sin sombra que difumina el trazo sobre textura clara) */
+main section:not(.hero, .hero-simple) :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6),
+main#main-content > .container > :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+  color: var(--heading);
+}
+
+html:not([data-theme="dark"]) main section:not(.hero, .hero-simple) :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6),
+html:not([data-theme="dark"]) main#main-content > .container > :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+  text-shadow: none;
+}
+
+html:not([data-theme="dark"]) main section:not(.hero, .hero-simple) :where(p, li, dd, .lead, .section-lead, .section-intro, .hero-text),
+html:not([data-theme="dark"]) main#main-content > .container :where(p, li, dd, .lead, .section-lead, .section-intro) {
+  text-shadow: none;
+}
+
+[data-theme="dark"] main section:not(.hero, .hero-simple) :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6),
+[data-theme="dark"] main#main-content > .container > :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+  text-shadow: 0 0.06em 0.2em rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] main section:not(.hero, .hero-simple) :where(p, li, dd, .lead, .section-lead, .section-intro, .hero-text),
+[data-theme="dark"] main#main-content > .container :where(p, li, dd, .lead, .section-lead, .section-intro) {
+  text-shadow: 0 0.05em 0.16em rgba(0, 0, 0, 0.42);
 }
 
 img {
@@ -575,8 +738,11 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
   font-size: clamp(3.2rem, 9vw, 6.3rem);
   line-height: 1;
   color: #d5c4a8;
-  /* Si este color cambia en dark mode, agregar transicion */
   transition: color 0.4s ease;
+}
+
+[data-theme="dark"] .index-number {
+  color: color-mix(in srgb, var(--primary) 48%, #fff 52%);
 }
 
 .index-main {
@@ -651,7 +817,10 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(57, 43, 30, 0.82), rgba(57, 43, 30, 0.42));
+  background: linear-gradient(
+    rgba(57, 43, 30, var(--pm-hero-overlay-a)),
+    rgba(57, 43, 30, var(--pm-hero-overlay-b))
+  );
   z-index: 1;
 }
 
@@ -730,12 +899,12 @@ h2 {
 }
 
 .section-alt {
-  background: var(--bg-alt);
-  transition: background-color 0.4s ease;
+  background: transparent;
+  transition: background-color 0.4s ease, box-shadow 0.35s ease;
 }
 
 .section-lead {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 50%, var(--muted) 50%);
   margin-bottom: 1.4rem;
   transition: color 0.4s ease;
 }
@@ -810,7 +979,7 @@ h2 {
   z-index: 1022;
   pointer-events: none;
   padding: 0.4rem 0.6rem calc(0.45rem + env(safe-area-inset-bottom, 0px));
-  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--bg) 58%, transparent) 22%);
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--bg) var(--pm-html-veil-top), transparent) 22%);
 }
 
 .sobre-nav-float .sobre-section-nav {
@@ -822,7 +991,7 @@ h2 {
   padding: 0.4rem 0.5rem;
   border-radius: 0.75rem;
   border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
-  background: color-mix(in srgb, var(--card) 92%, transparent);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 -10px 36px rgba(0, 0, 0, 0.14);
@@ -896,10 +1065,12 @@ h2 {
   color: var(--text);
   text-decoration: none;
   border: 1px solid var(--border);
-  background: var(--card);
-  opacity: 0.66;
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  opacity: 0.9;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
     transform 0.15s ease, opacity 0.2s ease, filter 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .sobre-section-nav-link:hover {
@@ -989,35 +1160,37 @@ h2 {
 }
 
 .pm-exhibit-route-accordion .accordion-item {
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border-color: var(--border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .pm-exhibit-route-accordion .accordion-button {
   font-weight: 700;
   font-size: 0.95rem;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
 }
 
 .pm-exhibit-route-accordion .accordion-button:not(.collapsed) {
-  background: var(--bg-alt);
+  background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
   color: var(--text);
   box-shadow: none;
 }
 
 .pm-exhibit-route-accordion .accordion-body {
-  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) var(--pm-surface-band-pct), transparent);
   color: var(--text);
 }
 
 [data-theme="dark"] .pm-exhibit-route-accordion .accordion-button {
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
 }
 
 [data-theme="dark"] .pm-exhibit-route-accordion .accordion-button:not(.collapsed) {
-  background: var(--bg-alt);
+  background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
 }
 
 /* Sobre: resalta la sección cuyo contenido está “en foco” al hacer scroll */
@@ -1031,7 +1204,7 @@ h2 {
 }
 
 .section.section-alt.sobre-section-active {
-  background: linear-gradient(90deg, rgba(166, 124, 61, 0.14) 0%, var(--bg-alt) 48%);
+  background: linear-gradient(90deg, rgba(166, 124, 61, 0.14) 0%, transparent 48%);
 }
 
 [data-theme="dark"] .section.sobre-section-active:not(.section-alt) {
@@ -1039,7 +1212,7 @@ h2 {
 }
 
 [data-theme="dark"] .section.section-alt.sobre-section-active {
-  background: linear-gradient(90deg, rgba(228, 200, 140, 0.11) 0%, var(--bg-alt) 48%);
+  background: linear-gradient(90deg, rgba(228, 200, 140, 0.11) 0%, transparent 48%);
 }
 
 .section.sobre-section-active h2 {
@@ -1059,11 +1232,14 @@ h2 {
 }
 
 .card {
-  background: var(--card);
+  color: var(--text);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border: 1px solid var(--border);
   border-radius: 0.65rem;
   padding: 1rem;
   box-shadow: var(--shadow);
+  backdrop-filter: saturate(1.1) blur(10px);
+  -webkit-backdrop-filter: saturate(1.1) blur(10px);
   transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
 }
 
@@ -1099,7 +1275,7 @@ h2 {
 }
 
 .scope-meta {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 45%, var(--muted) 55%);
   font-size: 0.92rem;
   transition: color 0.4s ease;
 }
@@ -1113,13 +1289,15 @@ h2 {
 
 .timeline-item {
   border: 1px solid var(--border);
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
   border-radius: 999px;
   padding: 0.45rem 0.85rem;
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .timeline-item.active {
@@ -1154,9 +1332,11 @@ figure {
   margin: 0;
   border-radius: 0.9rem;
   overflow: hidden;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border: 1px solid var(--border);
   transition: border-color 0.4s ease, background-color 0.4s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 figcaption {
@@ -1186,13 +1366,13 @@ figcaption {
   padding: 0.8rem;
   border-radius: 0.8rem;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, #faf7f2, #f2ece2);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  background: transparent;
+  box-shadow: var(--shadow);
 }
 
 [data-theme="dark"] .floor-plan {
-  background: linear-gradient(180deg, var(--card), var(--bg-alt));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: transparent;
+  box-shadow: var(--shadow);
 }
 
 .floor-plan img {
@@ -1201,7 +1381,7 @@ figcaption {
   object-fit: contain;
   object-position: center;
   border-radius: 0.55rem;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border: 1px solid var(--border);
   padding: 0.35rem;
 }
@@ -1233,7 +1413,7 @@ figcaption {
   width: 100%;
   border-radius: 0.65rem;
   border: 1px solid var(--border);
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
 }
 
 /* --- Recreación interactiva del museo (planta + panel) --- */
@@ -1246,9 +1426,11 @@ figcaption {
   border-radius: 0.75rem;
   padding: 1.35rem 1.35rem 1.5rem;
   border: 1px solid var(--border);
-  background: var(--bg-alt);
+  background: var(--pm-read-panel-bg);
   overflow: hidden;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .museum-section-panel::before {
@@ -1256,19 +1438,24 @@ figcaption {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(145deg, rgba(166, 124, 61, 0.09) 0%, transparent 42%, rgba(168, 56, 32, 0.05) 100%),
-    radial-gradient(ellipse 80% 50% at 100% 0%, rgba(166, 124, 61, 0.12), transparent 55%);
+    linear-gradient(145deg, rgba(166, 124, 61, 0.06) 0%, transparent 42%, rgba(168, 56, 32, 0.04) 100%),
+    radial-gradient(ellipse 80% 50% at 100% 0%, rgba(166, 124, 61, 0.08), transparent 55%);
+  opacity: 0.38;
   pointer-events: none;
 }
 
 [data-theme="dark"] .museum-section-panel::before {
-  opacity: 0.85;
+  opacity: 0.48;
 }
 
 .museum-section-heading,
 .museum-section-lead {
   position: relative;
   z-index: 1;
+}
+
+.museum-section-lead {
+  color: color-mix(in srgb, var(--text) 78%, var(--muted) 22%);
 }
 
 .museum-section-heading {
@@ -1303,7 +1490,7 @@ figcaption {
 .museum-3d-viewer-frame {
   padding: 0.65rem;
   border-radius: 0.85rem;
-  background: linear-gradient(160deg, var(--card) 0%, var(--bg-alt) 100%);
+  background: transparent;
   border: 1px solid var(--border);
   box-shadow: 0 4px 28px rgba(60, 48, 36, 0.1);
 }
@@ -1318,7 +1505,11 @@ figcaption {
   border-radius: 0.65rem;
   background:
     radial-gradient(ellipse 120% 100% at 30% 20%, rgba(255, 255, 255, 0.35) 0%, transparent 55%),
-    radial-gradient(circle at 20% 15%, #ffffff 0%, #efe4d4 75%);
+    radial-gradient(
+      circle at 20% 15%,
+      color-mix(in srgb, #ffffff var(--pm-surface-card-pct), transparent) 0%,
+      color-mix(in srgb, #efe4d4 var(--pm-surface-band-pct), transparent) 75%
+    );
   border: 1px solid rgba(203, 184, 159, 0.85);
   overflow: hidden;
   box-shadow:
@@ -1329,7 +1520,11 @@ figcaption {
 [data-theme="dark"] .museum-3d-canvas {
   background:
     radial-gradient(ellipse 120% 100% at 30% 18%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 20% 15%, var(--card) 0%, var(--bg-alt) 78%);
+    radial-gradient(
+      circle at 20% 15%,
+      color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 0%,
+      color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent) 78%
+    );
   border-color: var(--border);
   box-shadow: inset 0 2px 24px rgba(0, 0, 0, 0.35);
 }
@@ -1338,7 +1533,7 @@ figcaption {
   margin-top: 0.75rem;
   padding: 0.55rem 0.65rem 0 0.15rem;
   font-size: 0.88rem;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
   line-height: 1.45;
   display: flex;
   align-items: flex-start;
@@ -1362,8 +1557,10 @@ figcaption {
   top: 5.35rem;
   border-radius: 0.75rem !important;
   border: 1px solid var(--border) !important;
-  background: var(--card) !important;
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) !important;
   overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .museum-3d-sidebar-card .card-body {
@@ -1398,28 +1595,8 @@ figcaption {
   z-index: 0;
   margin: 0;
   user-select: none;
-  pointer-events: none;
-}
-
-.museum-3d-plan-stage svg.overlay {
-  position: absolute;
-  z-index: 1;
   pointer-events: auto;
-  overflow: visible;
-}
-
-.zone-area {
   cursor: pointer;
-}
-
-.zone-area:hover {
-  opacity: 0.85 !important;
-}
-
-.zone-area.active-zone {
-  stroke: #fff;
-  stroke-width: 3.5;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.65));
 }
 
 .museum-3d-section-item {
@@ -1432,7 +1609,7 @@ figcaption {
   border: 1px solid var(--border);
   border-left: 4px solid var(--zone-color, var(--primary));
   border-radius: 0.55rem;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   cursor: pointer;
   text-align: left;
   font: inherit;
@@ -1442,6 +1619,8 @@ figcaption {
     border-color 0.2s ease,
     box-shadow 0.2s ease,
     transform 0.15s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .museum-3d-section-item:hover {
@@ -1474,7 +1653,7 @@ figcaption {
 }
 
 .museum-3d-section-item small {
-  opacity: 0.65;
+  opacity: 0.88;
   font-size: 0.7rem;
 }
 
@@ -1531,13 +1710,15 @@ figcaption {
   border: 1px solid var(--border);
   border-radius: 0.55rem;
   padding: 0.52rem 0.65rem;
-  background: var(--bg-alt);
+  background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
   color: var(--text);
   font: inherit;
   font-weight: 700;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .museum-3d-floor-btn:hover {
@@ -1561,7 +1742,9 @@ figcaption {
   border: 1px solid var(--border);
   border-radius: 0.55rem;
   padding: 0.55rem 0.6rem;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .museum-3d-legend-title {
@@ -1594,12 +1777,14 @@ figcaption {
   border: 1px solid var(--border);
   border-radius: 0.55rem;
   padding: 0.5rem 0.65rem;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
   text-align: left;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .museum-3d-section-btn:hover {
@@ -1616,10 +1801,12 @@ figcaption {
   margin-top: 1.05rem;
   padding: 1rem 1rem 1.05rem 1.05rem;
   border-radius: 0.65rem;
-  background: var(--bg-alt);
+  background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
   border: 1px solid var(--border);
   border-left: 4px solid var(--detail-accent, var(--primary));
   box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .museum-3d-detail-head {
@@ -1859,10 +2046,12 @@ button:focus-visible {
 .glossary-entry {
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border-left: 4px solid var(--primary);
   border-radius: 4px;
   transition: box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .glossary-entry:hover,
@@ -1873,7 +2062,7 @@ button:focus-visible {
 .glossary-term {
   font-weight: 700;
   font-size: 1.15rem;
-  color: var(--primary);
+  color: var(--heading);
   margin: 0 0 0.5rem 0;
 }
 
@@ -1895,9 +2084,11 @@ button:focus-visible {
   border: 2px solid var(--border);
   border-radius: 8px;
   font-size: 1rem;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   color: var(--text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .glossary-search input:focus-visible {
@@ -1909,11 +2100,11 @@ button:focus-visible {
   color: var(--muted);
 }
 
-/* Sección hero simplificada */
+/* Sección hero simplificada (sin banda crema: mismo fondo general que el resto) */
 .hero-simple {
   padding: 4rem 0;
   text-align: center;
-  background: linear-gradient(135deg, var(--bg-alt), var(--bg));
+  background: transparent;
 }
 
 .hero-simple h1 {
@@ -1930,12 +2121,33 @@ button:focus-visible {
   line-height: 1.8;
 }
 
-/* Audiovisuales: mismo ritmo que Recursos (banda + bloque de título legible) */
+.hero-simple > .container {
+  padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
+  border-radius: var(--pm-read-panel-radius);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: var(--pm-read-panel-bg);
+  box-shadow: var(--pm-read-panel-shadow);
+  backdrop-filter: saturate(1.06) blur(10px);
+  -webkit-backdrop-filter: saturate(1.06) blur(10px);
+}
+
+/* Audiovisuales: cabecera con panel de lectura */
 .page-audiovisuals-intro {
-  padding: 3rem 0 3.25rem;
+  padding: 2rem 1.5rem 2.25rem;
   text-align: center;
-  background: linear-gradient(180deg, var(--bg-alt), var(--bg));
-  border-bottom: 1px solid var(--border);
+  max-width: min(960px, calc(100% - 2rem));
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
+  background: var(--pm-read-panel-bg);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  border-radius: var(--pm-read-panel-radius);
+  box-shadow: var(--pm-read-panel-shadow);
+  backdrop-filter: saturate(1.06) blur(10px);
+  -webkit-backdrop-filter: saturate(1.06) blur(10px);
+}
+
+.page-audiovisuals-intro .container {
+  padding-inline: 0;
 }
 
 .page-audiovisuals-intro h1 {
@@ -1954,7 +2166,7 @@ button:focus-visible {
 
 #glosario-hero.hero-simple {
   background-image:
-    linear-gradient(135deg, rgba(242, 236, 226, 0.94), rgba(235, 225, 210, 0.9)),
+    linear-gradient(135deg, rgba(242, 236, 226, 0.68), rgba(235, 225, 210, 0.62)),
     url("images/fosil.png");
   background-size: cover;
   background-position: center;
@@ -1962,7 +2174,7 @@ button:focus-visible {
 
 [data-theme="dark"] #glosario-hero.hero-simple {
   background-image:
-    linear-gradient(135deg, rgba(15, 13, 10, 0.9), rgba(24, 21, 18, 0.92)),
+    linear-gradient(135deg, rgba(15, 13, 10, 0.72), rgba(24, 21, 18, 0.75)),
     url("images/fosil.png");
 }
 
@@ -2000,7 +2212,7 @@ button:focus-visible {
 
 .video-player {
   position: relative;
-  background: var(--bg-alt);
+  background: transparent;
   border-radius: 8px;
   overflow: hidden;
   margin: 1.5rem 0;
@@ -2025,12 +2237,14 @@ button:focus-visible {
 }
 
 .audiovisual-card {
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .audiovisual-card:hover {
@@ -2092,11 +2306,13 @@ button:focus-visible {
 }
 
 .video-transcript {
-  background: var(--bg-alt);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border-left: 4px solid var(--primary);
   padding: 1.5rem;
   border-radius: 4px;
   margin: 2rem 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .video-transcript h3 {
@@ -2115,7 +2331,7 @@ button:focus-visible {
 }
 
 .filter-btn {
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border: 1px solid var(--border);
   padding: 0.6rem 1.2rem;
   border-radius: 20px;
@@ -2124,6 +2340,8 @@ button:focus-visible {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .filter-btn:hover,
@@ -2257,7 +2475,7 @@ h3 {
 .card {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(216, 197, 168, 0.5);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
 }
 
 .card::before {
@@ -2422,8 +2640,11 @@ img:hover {
 }
 
 [data-theme="dark"] .card {
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border-color: var(--border);
   box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 [data-theme="dark"] .card::before {
@@ -2440,7 +2661,7 @@ img:hover {
 }
 
 [data-theme="dark"] .filter-btn {
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border-color: var(--border);
   color: var(--text);
 }
@@ -2457,7 +2678,7 @@ img:hover {
 [data-theme="dark"] .btn-outline-secondary:hover,
 [data-theme="dark"] .btn-outline-secondary:focus-visible {
   color: var(--text) !important;
-  background-color: var(--card) !important;
+  background-color: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) !important;
   border-color: var(--primary) !important;
 }
 
@@ -2486,7 +2707,7 @@ img:hover {
 .media-placeholder {
   border-radius: 0.75rem;
   border: 1px dashed var(--border);
-  background: var(--bg-alt);
+  background: transparent;
   aspect-ratio: 4 / 3;
   display: grid;
   place-items: center;
@@ -2503,7 +2724,9 @@ img:hover {
   overflow: hidden;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .content-media-figure img {
@@ -2542,9 +2765,11 @@ img:hover {
   border-radius: 0.75rem;
   padding: 1.25rem;
   border: 1px solid var(--border);
-  background: var(--bg-alt);
+  background: var(--pm-read-panel-bg);
   overflow: hidden;
   isolation: isolate;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* Fondo del timeline (carpeta images/timeline): más visible en todo el bloque */
@@ -2576,6 +2801,14 @@ img:hover {
   );
 }
 
+html:not([data-theme="dark"]) .timeline-section-panel::after {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #fffdf8 84%, transparent),
+    color-mix(in srgb, #f4eee4 72%, transparent)
+  );
+}
+
 .timeline-section-panel > * {
   position: relative;
   z-index: 1;
@@ -2586,11 +2819,11 @@ img:hover {
 }
 
 .timeline-section-panel > .lead {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 52%, var(--muted) 48%);
 }
 
 .timeline-section-panel .timeline-detail.card {
-  background: color-mix(in srgb, var(--card) 82%, transparent);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   backdrop-filter: saturate(125%) blur(10px);
   -webkit-backdrop-filter: saturate(125%) blur(10px);
 }
@@ -2622,10 +2855,10 @@ img:hover {
   padding: 0.65rem 1rem 0.85rem;
   font-size: 0.92rem;
   font-weight: 600;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 48%, var(--muted) 52%);
   text-align: center;
   line-height: 1.45;
-  background: color-mix(in srgb, var(--bg-alt) 72%, transparent);
+  background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
   border-top: 1px solid var(--border);
 }
 
@@ -2684,6 +2917,59 @@ img:hover {
 
 .content-prose {
   max-width: 65ch;
+  padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
+  border-radius: var(--pm-read-panel-radius);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  background: var(--pm-read-panel-bg);
+  box-shadow: var(--pm-read-panel-shadow);
+  backdrop-filter: saturate(1.08) blur(12px);
+  -webkit-backdrop-filter: saturate(1.08) blur(12px);
+}
+
+/* Páginas legales / texto único en container */
+main#main-content > .container.content-prose {
+  max-width: min(48rem, 100%);
+  margin-inline: auto;
+  padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
+  border-radius: var(--pm-read-panel-radius);
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  background: var(--pm-read-panel-bg);
+  box-shadow: var(--pm-read-panel-shadow);
+  backdrop-filter: saturate(1.08) blur(12px);
+  -webkit-backdrop-filter: saturate(1.08) blur(12px);
+}
+
+/* Secciones con .container (Recursos, Sobre, parte de Inicio, etc.): tarjeta si no hay .content-prose (evita doble caja) */
+main section:not(.hero, .hero-simple) > .container:not(:has(.content-prose)) {
+  padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
+  border-radius: var(--pm-read-panel-radius);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  background: var(--pm-read-panel-bg);
+  box-shadow: var(--pm-read-panel-shadow);
+  backdrop-filter: saturate(1.06) blur(10px);
+  -webkit-backdrop-filter: saturate(1.06) blur(10px);
+}
+
+/* Ámbitos: main > .container > section (sin .container interno) */
+main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap):not(:has(> .timeline-section-panel)) {
+  padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
+  border-radius: var(--pm-read-panel-radius);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  background: var(--pm-read-panel-bg);
+  box-shadow: var(--pm-read-panel-shadow);
+  backdrop-filter: saturate(1.06) blur(10px);
+  -webkit-backdrop-filter: saturate(1.06) blur(10px);
+}
+
+/* Utilidad: mismo aspecto de tarjeta en cualquier bloque */
+.pm-read-panel {
+  padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
+  border-radius: var(--pm-read-panel-radius);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  background: var(--pm-read-panel-bg);
+  box-shadow: var(--pm-read-panel-shadow);
+  backdrop-filter: saturate(1.06) blur(10px);
+  -webkit-backdrop-filter: saturate(1.06) blur(10px);
 }
 
 .content-prose ul {
@@ -2692,7 +2978,7 @@ img:hover {
 
 .section-intro {
   font-size: 1.08rem;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 72%, var(--muted) 28%);
   max-width: 70ch;
   margin-bottom: 2rem;
   line-height: 1.75;
@@ -3142,4 +3428,53 @@ img:hover {
   100% {
     transform: rotateX(0deg) rotateY(360deg) rotateZ(0deg);
   }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* MapZoneTracer — herramienta de trazado manual de polígonos sobre planos    */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.map-zone-tracer__stage-wrap {
+  max-width: 100%;
+  overflow: auto;
+  border-radius: 0.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+}
+
+.map-zone-tracer__stage {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.map-zone-tracer__img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+  user-select: none;
+  pointer-events: none;
+}
+
+.map-zone-tracer__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  cursor: crosshair;
+}
+
+.map-zone-tracer__swatch {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  vertical-align: middle;
+}
+
+.map-zone-tracer__item .font-monospace {
+  font-size: 0.78rem;
 }

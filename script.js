@@ -263,7 +263,7 @@ const translations = {
     floor_end_title: "Finalizacion: la terraza como cierre con significado",
     floor_end_p1: "La salida a la terraza funciona como ambito final del recorrido y como transicion simbolica entre el relato interior y el paisaje real.",
     floor_end_p2: "Este cierre vincula de forma directa conocimiento y territorio, convirtiendo el entorno en una continuidad tangible de lo aprendido.",
-    museum_3d_title: "Recreacion 3D interactiva del museo",
+    museum_3d_title: "Mapa interactivo",
     museum_3d_intro: "Explora el museo por secciones. Pulsa en una seccion para resaltarla y ver su descripcion.",
     museum_3d_floor_switch_aria: "Selector de planta del museo",
     museum_3d_floor_ground: "Planta baja",
@@ -654,7 +654,7 @@ const translations = {
     floor_end_title: "Conclusion: the terrace as a meaningful ending",
     floor_end_p1: "The exit to the terrace acts as the final scope of the route and as a symbolic transition between the interior narrative and the real landscape.",
     floor_end_p2: "This closure directly links knowledge and territory, turning the surroundings into a tangible continuation of what was learned.",
-    museum_3d_title: "Interactive 3D recreation of the museum",
+    museum_3d_title: "Interactive map",
     museum_3d_intro: "Explore the museum by sections. Click a section to highlight it and read its description.",
     museum_3d_floor_switch_aria: "Museum floor selector",
     museum_3d_floor_ground: "Ground floor",
@@ -1295,3 +1295,4 @@ if (document.readyState === "loading") {
 } else {
   initSobreSectionNav();
 }
+
