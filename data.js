@@ -1,43 +1,39 @@
-// Contenidos ampliados de ambitos con descripciones completas
+// ═══════════════════════════════════════════════════════════════════
+// data.js — Paleomagina · Datos, traducciones y lógica compartida
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Ámbitos (lista ordenada para la grid) ───────────────────────────
+const scopes = [
+  { code: "AAN", key: "scope_aan", title_es: "Antesala (AAN)",        title_en: "Ante-room (AAN)" },
+  { code: "A0",  key: "scope_a0",  title_es: "Bienvenida",            title_en: "Welcome" },
+  { code: "A1",  key: "scope_a1",  title_es: "El mar de Tetis",       title_en: "The Tethys Sea" },
+  { code: "A2",  key: "scope_a2",  title_es: "Geologia y orografia",  title_en: "Geology and orography" },
+  { code: "A3",  key: "scope_a3",  title_es: "Cuaternario",           title_en: "Quaternary" },
+  { code: "A4",  key: "scope_a4",  title_es: "Mundo neandertal",      title_en: "Neanderthal world" },
+  { code: "A5",  key: "scope_a5",  title_es: "Paleolitico superior",  title_en: "Upper Paleolithic" },
+  { code: "A6",  key: "scope_a6",  title_es: "Neolitico",             title_en: "Neolithic" },
+  { code: "A7",  key: "scope_a7",  title_es: "Calcolitico",           title_en: "Chalcolithic" },
+  { code: "A8",  key: "scope_a8",  title_es: "Ciencia y ciudadania",  title_en: "Science and citizenship" },
+  { code: "A9",  key: "scope_a9",  title_es: "Testimonios y voces",   title_en: "Testimonies and voices" },
+  { code: "ATZ", key: "scope_atz", title_es: "Terraza final (ATZ)",   title_en: "Final terrace (ATZ)" }
+];
+
+// ── Contenidos ampliados por ámbito ─────────────────────────────────
 const scopeContents = {
   AAN: {
     es: {
       title: "AAN — Antesala",
-      description:
-        "Espacio inicial con familia neandertal, frase introductoria y relación visual con el paisaje. Crea impacto emocional e introduce la dimensión humana antes del recorrido numerado.",
-      content:
-        "Funciona como umbral afectivo y conceptual: vocabulario mínimo, escenografía que conecta con Sierra Mágina y una primera lectura del territorio como archivo de tiempo.",
+      description: "Espacio inicial con familia neandertal, frase introductoria y relación visual con el paisaje. Crea impacto emocional e introduce la dimensión humana antes del recorrido numerado.",
+      content: "Funciona como umbral afectivo y conceptual: vocabulario mínimo, escenografía que conecta con Sierra Mágina y una primera lectura del territorio como archivo de tiempo.",
       timeline: "Umbral de visita",
-      facts: ["Impacto emocional y dimensión humana", "Relación visual con el paisaje exterior", "Preparación narrativa antes de A0"]
+      facts: ["Impacto emocional y dimensión humana","Relación visual con el paisaje exterior","Preparación narrativa antes de A0"]
     },
     en: {
       title: "AAN — Ante-room",
-      description:
-        "Opening space with Neanderthal family, introductory line, and visual link to the landscape. Builds emotional impact and a human dimension before the numbered route.",
-      content:
-        "It works as an affective and conceptual threshold: minimal vocabulary, staging linked to Sierra Mágina, and a first reading of the territory as an archive of time.",
+      description: "Opening space with Neanderthal family, introductory line, and visual link to the landscape. Builds emotional impact and a human dimension before the numbered route.",
+      content: "It works as an affective and conceptual threshold: minimal vocabulary, staging linked to Sierra Mágina, and a first reading of the territory as an archive of time.",
       timeline: "Visit threshold",
-      facts: ["Emotional impact and human scale", "Visual link to the outdoor landscape", "Narrative preparation before A0"]
-    }
-  },
-  A9: {
-    es: {
-      title: "A9 — Testimonios y voces",
-      description:
-        "Espacio audiovisual con investigadores, habitantes locales, experiencias personales y memoria territorial. Humaniza el discurso y relaciona ciencia y ciudadanía.",
-      content:
-        "Cierra el circuito interior con voces reales: cómo se investiga, qué significa el patrimonio para quien vive en el entorno y cómo la memoria colectiva dialoga con la evidencia científica.",
-      timeline: "Memoria y ciudadanía",
-      facts: ["Testimonios de equipo científico y vecindario", "Experiencias personales y memoria territorial", "Puente entre rigor y emoción compartida"]
-    },
-    en: {
-      title: "A9 — Testimonies and voices",
-      description:
-        "Audiovisual space with researchers, local residents, personal stories, and territorial memory. It humanises the narrative and connects science and citizenship.",
-      content:
-        "It closes the indoor circuit with real voices: how research happens, what heritage means for people who live nearby, and how collective memory dialogues with scientific evidence.",
-      timeline: "Memory and citizenship",
-      facts: ["Statements from scientific staff and neighbours", "Personal stories and territorial memory", "A bridge between rigour and shared emotion"]
+      facts: ["Emotional impact and human scale","Visual link to the outdoor landscape","Narrative preparation before A0"]
     }
   },
   A0: {
@@ -46,14 +42,14 @@ const scopeContents = {
       description: "Introducción al museo y guía de visita. Sierra Magina es un territorio extraordinario donde confluyen 250 millones de años de historia geológica y humana.",
       content: "Este ámbito marca el inicio de tu recorrido. Sierra Magina es una montaña que cuenta historias: de antiguos mares, de movimientos terrestres, de cambios climáticos, de los primeros humanos que la habitaron y de las sociedades que evolucionaron en su territorio. A través de ciencia basada en evidencias, reconstruimos esa historia.",
       timeline: "Hoy",
-      facts: ["Sierra Magina tiene 2.144 metros de altura", "Contiene registros de 250 millones de años", "Es un Geoparque UNESCO propuesto"]
+      facts: ["Sierra Magina tiene 2.144 metros de altura","Contiene registros de 250 millones de años","Es un Geoparque UNESCO propuesto"]
     },
     en: {
       title: "Welcome to Sierra Magina",
       description: "Museum introduction and visit guide. Sierra Magina is an extraordinary territory where 250 million years of geological and human history converge.",
       content: "This area marks the start of your journey. Sierra Magina is a mountain that tells stories: of ancient seas, of earth movements, of climate change, of the first humans who inhabited it, and of the societies that evolved in its territory. Through evidence-based science, we reconstruct that history.",
       timeline: "Today",
-      facts: ["Sierra Magina is 2,144 meters high", "Contains records spanning 250 million years", "A proposed UNESCO Geopark"]
+      facts: ["Sierra Magina is 2,144 meters high","Contains records spanning 250 million years","A proposed UNESCO Geopark"]
     }
   },
   A1: {
@@ -62,14 +58,14 @@ const scopeContents = {
       description: "Origen marino del territorio y fósiles del Tetis. Entre 200 y 100 millones de años, Sierra Magina fue el fondo de un océano tropical.",
       content: "Durante el Mesozoico, Sierra Magina estuvo completamente sumergida bajo el Mar de Tetis, un vasto océano tropical. Los sedimentos depositados durante millones de años formaron capas que hoy contienen abundantes fósiles: ammonites, belemnites, bivalvos y otros organismos marinos. La lenta evaporación del mar dejó depósitos de sal y yeso que son visibles en las canteras actuales.",
       timeline: "Mesozoico (200-65 M.a.)",
-      facts: ["Profundidad estimada: 500-2000 metros", "Temperatura del agua: 25-30°C", "Fósiles frecuentes: Ammonites de 30 cm"]
+      facts: ["Profundidad estimada: 500-2000 metros","Temperatura del agua: 25-30°C","Fósiles frecuentes: Ammonites de 30 cm"]
     },
     en: {
       title: "The Tethys Sea",
       description: "Marine origin of the territory and Tethys fossils. Between 200 and 100 million years ago, Sierra Magina was the floor of a tropical ocean.",
       content: "During the Mesozoic Era, Sierra Magina was completely submerged under the Tethys Sea, a vast tropical ocean. Sediments deposited over millions of years formed layers that today contain abundant fossils: ammonites, belemnites, bivalves, and other marine organisms. The slow evaporation of the sea left deposits of salt and gypsum visible in current quarries.",
       timeline: "Mesozoic (200-65 Ma)",
-      facts: ["Estimated depth: 500-2,000 meters", "Water temperature: 25-30°C", "Common fossils: Ammonites up to 30 cm"]
+      facts: ["Estimated depth: 500-2,000 meters","Water temperature: 25-30°C","Common fossils: Ammonites up to 30 cm"]
     }
   },
   A2: {
@@ -78,14 +74,14 @@ const scopeContents = {
       description: "Lectura del relieve, rocas y procesos geológicos. Cómo el levantamiento tectónico transformó un fondo marino en montaña.",
       content: "Hace 65 millones de años comenzó el levantamiento de la cadena bética. Las capas marinas se plegaron, fracturaron y elevaron, transformando el fondo del océano en tierra. Las rocas calizas, dolomías y margas de origen marino son ahora los componentes principales de Sierra Magina. La erosión ha modelado profundas gargantas y cuevas, creando un paisaje kárstico de gran belleza.",
       timeline: "Cenozoico (65 M.a. - hoy)",
-      facts: ["Tasa de elevación: 0.5-1 mm/año", "Número de cuevas catalogadas: 47", "Principales: Cueva del Agua, Cueva de la Sorda"]
+      facts: ["Tasa de elevación: 0.5-1 mm/año","Número de cuevas catalogadas: 47","Principales: Cueva del Agua, Cueva de la Sorda"]
     },
     en: {
       title: "Geology and orography",
       description: "Reading relief, rocks, and geological processes. How tectonic uplift transformed an ocean floor into a mountain.",
       content: "Sixty-five million years ago, the uplift of the Betic chain began. Marine layers folded, fractured, and rose, transforming the ocean floor into land. Limestone, dolomite, and marl rocks of marine origin are now the main components of Sierra Magina. Erosion has sculpted deep gorges and caves, creating a karst landscape of great beauty.",
       timeline: "Cenozoic (65 Ma - present)",
-      facts: ["Uplift rate: 0.5-1 mm/year", "Number of catalogued caves: 47", "Major: Water Cave, Deaf Woman's Cave"]
+      facts: ["Uplift rate: 0.5-1 mm/year","Number of catalogued caves: 47","Major: Water Cave, Deaf Woman's Cave"]
     }
   },
   A3: {
@@ -94,14 +90,14 @@ const scopeContents = {
       description: "Clima, fauna y cambios ambientales. La era de las glaciaciones y los primeros humanos.",
       content: "Los últimos 2.5 millones de años fueron marcados por ciclos de frío intenso y calentamiento. Sierra Magina experimentó múltiples glaciaciones que dejaron depósitos de sedimentos glaciares. La fauna cambió drásticamente: rinocerontes lanudos, mamuts, hienas de las cavernas y luego, los primeros humanos adaptados al frío. Los glaciares retrocedieron y el clima se estabilizó hace apenas 10.000 años.",
       timeline: "Cuaternario (2.5 M.a. - hoy)",
-      facts: ["Ciclos glaciares: 4-5 principales", "Temperatura media en glaciaciones: -10°C", "Primer registro humano: hace 300.000 años"]
+      facts: ["Ciclos glaciares: 4-5 principales","Temperatura media en glaciaciones: -10°C","Primer registro humano: hace 300.000 años"]
     },
     en: {
       title: "Quaternary",
       description: "Climate, fauna, and environmental changes. The era of glaciations and the first humans.",
       content: "The last 2.5 million years were marked by cycles of intense cold and warming. Sierra Magina experienced multiple glaciations that left glacial sediment deposits. Fauna changed dramatically: woolly rhinoceroses, mammoths, cave hyenas, and then the first humans adapted to cold. Glaciers retreated and the climate stabilized only 10,000 years ago.",
       timeline: "Quaternary (2.5 Ma - present)",
-      facts: ["Glacial cycles: 4-5 major ones", "Average temperature during glaciations: -10°C", "First human record: 300,000 years ago"]
+      facts: ["Glacial cycles: 4-5 major ones","Average temperature during glaciations: -10°C","First human record: 300,000 years ago"]
     }
   },
   A4: {
@@ -110,14 +106,14 @@ const scopeContents = {
       description: "Vida cotidiana, tecnología y evidencias neandertales. Una especie humana adaptada al frío extremo.",
       content: "Los neandertales (Homo neanderthalensis) dominaron Europa entre hace 400.000 y 40.000 años. En Sierra Magina encontramos evidencias de su presencia: herramientas de piedra tallada, restos óseos y, en ocasiones, evidencias de enterramientos. Eran cazadores especializados, con cerebro comparable al nuestro, capaces de hacer fuego, cuidar a sus enfermos y posiblemente tener lenguaje. Se extinguieron hace 40.000 años, posiblemente tras la llegada de los Homo sapiens.",
       timeline: "Paleolítico Medio (400.000-40.000 a.C.)",
-      facts: ["Altura promedio: 165 cm", "Capacidad craneal: 1.450-1.750 cc", "Arqueosítios: Cueva de las Grajas, Cueva de la Cabrería"]
+      facts: ["Altura promedio: 165 cm","Capacidad craneal: 1.450-1.750 cc","Arqueosítios: Cueva de las Grajas, Cueva de la Cabrería"]
     },
     en: {
       title: "Neanderthal world",
       description: "Daily life, technology, and Neanderthal evidence. A human species adapted to extreme cold.",
       content: "Neanderthals (Homo neanderthalensis) dominated Europe between 400,000 and 40,000 years ago. In Sierra Magina we find evidence of their presence: flaked stone tools, bone remains, and occasionally burial evidence. They were specialized hunters with brains comparable to ours, capable of making fire, caring for the sick, and possibly having language. They went extinct 40,000 years ago, possibly after the arrival of Homo sapiens.",
       timeline: "Middle Paleolithic (400,000-40,000 BC)",
-      facts: ["Average height: 165 cm", "Cranial capacity: 1,450-1,750 cc", "Archaeological sites: Grajas Cave, Cabrería Cave"]
+      facts: ["Average height: 165 cm","Cranial capacity: 1,450-1,750 cc","Archaeological sites: Grajas Cave, Cabrería Cave"]
     }
   },
   A5: {
@@ -126,14 +122,14 @@ const scopeContents = {
       description: "Innovaciones humanas del Paleolítico superior. Arte, símbolos y consolidación de Homo sapiens.",
       content: "Hace 40.000 años, los Homo sapiens llegaron a Europa y con ellos nuevas tecnologías y capacidades. El Paleolítico superior vio la explosión del arte: grabados en piedra, esculturas en marfil y hueso, posiblemente música. Las herramientas se hicieron más sofisticadas, con puntas de flecha especializadas para diferentes presas. Las redes sociales se ampliaron, el comercio a larga distancia se intensificó y aparecen los primeros santuarios compartidos.",
       timeline: "Paleolítico Superior (40.000-10.000 a.C.)",
-      facts: ["Tecnología: láminas, buriles, arpones", "Primeras flautas: hace 35.000 años", "Arte rupestre identificado en la región"]
+      facts: ["Tecnología: láminas, buriles, arpones","Primeras flautas: hace 35.000 años","Arte rupestre identificado en la región"]
     },
     en: {
       title: "Upper Paleolithic",
       description: "Human innovations in the Upper Paleolithic. Art, symbols, and consolidation of Homo sapiens.",
       content: "Forty thousand years ago, Homo sapiens arrived in Europe bringing new technologies and abilities. The Upper Paleolithic saw an explosion of art: stone engravings, ivory and bone sculptures, possibly music. Tools became more sophisticated, with specialized arrowheads for different prey. Social networks expanded, long-distance trade intensified, and the first shared sanctuaries appeared.",
       timeline: "Upper Paleolithic (40,000-10,000 BC)",
-      facts: ["Technology: blades, burins, harpoons", "First flutes: 35,000 years ago", "Rock art identified in the region"]
+      facts: ["Technology: blades, burins, harpoons","First flutes: 35,000 years ago","Rock art identified in the region"]
     }
   },
   A6: {
@@ -142,14 +138,14 @@ const scopeContents = {
       description: "Primeras comunidades agricultoras y ganaderas. La transformación más importante de la humanidad.",
       content: "Hace 10.000 años comenzó la revolución neolítica. Las sociedades de cazadores-recolectores se transformaron en agricultoras y ganaderas. En Sierra Magina, encontramos evidencia de cereales cultivados, domesticación de cabras y ovejas, y asentamientos más permanentes. Esta transición permitió el crecimiento de la población, la especialización del trabajo y la acumulación de bienes. Aparecen las primeras cerámicas decoradas y los primeros templos colectivos.",
       timeline: "Neolítico (10.000-4.500 a.C.)",
-      facts: ["Primeros cereales: trigo y cebada", "Plantas domesticadas: legumbres, lino", "Asentamientos tipo: poblados de 50-200 personas"]
+      facts: ["Primeros cereales: trigo y cebada","Plantas domesticadas: legumbres, lino","Asentamientos tipo: poblados de 50-200 personas"]
     },
     en: {
       title: "Neolithic",
       description: "First farming and herding communities. The most important transformation in humanity.",
       content: "Ten thousand years ago, the Neolithic Revolution began. Hunter-gatherer societies transformed into farming and pastoral communities. In Sierra Magina, we find evidence of cultivated cereals, domestication of goats and sheep, and more permanent settlements. This transition enabled population growth, labor specialization, and accumulation of goods. Decorated pottery and the first collective temples appear.",
       timeline: "Neolithic (10,000-4,500 BC)",
-      facts: ["First cereals: wheat and barley", "Domesticated plants: legumes, flax", "Settlement type: villages of 50-200 people"]
+      facts: ["First cereals: wheat and barley","Domesticated plants: legumes, flax","Settlement type: villages of 50-200 people"]
     }
   },
   A7: {
@@ -158,14 +154,14 @@ const scopeContents = {
       description: "Metalurgia temprana y transformaciones sociales. El cobre, la riqueza y la diferenciación social.",
       content: "Hace 5.000 años, llegó la metalurgia del cobre. Este metal podía ser trabajado en frío y, mediante calor, forjado en herramientas más eficientes. La minería del cobre generó riqueza concentrada. Aparecen las primeras élites, fortificaciones y conflictos organizados. Los enterramientos calcolíticos muestran diferenciación social clara: algunos individuos reciben elaborados ajuares mientras otros tienen entierros sencillos. Se desarrollan sistemas complejos de intercambio comercial.",
       timeline: "Calcolítico (5.000-3.500 a.C.)",
-      facts: ["Minas de cobre: Linares y Peñarroya", "Primeras armas: puntas de cobre", "Asentamientos amurallados: Fuente Álamo"]
+      facts: ["Minas de cobre: Linares y Peñarroya","Primeras armas: puntas de cobre","Asentamientos amurallados: Fuente Álamo"]
     },
     en: {
       title: "Chalcolithic",
       description: "Early metallurgy and social transformations. Copper, wealth, and social differentiation.",
       content: "Five thousand years ago, copper metallurgy arrived. This metal could be worked cold and, through heat, forged into more efficient tools. Copper mining generated concentrated wealth. The first elites, fortifications, and organized conflicts appear. Chalcolithic burials show clear social differentiation: some individuals receive elaborate grave goods while others have simple burials. Complex systems of commercial exchange develop.",
       timeline: "Chalcolithic (5,000-3,500 BC)",
-      facts: ["Copper mines: Linares and Peñarroya", "First weapons: copper points", "Fortified settlements: Fuente Álamo"]
+      facts: ["Copper mines: Linares and Peñarroya","First weapons: copper points","Fortified settlements: Fuente Álamo"]
     }
   },
   A8: {
@@ -174,141 +170,547 @@ const scopeContents = {
       description: "Método científico, participación ciudadana y patrimonio. Cómo la arqueología se abre a la sociedad.",
       content: "La investigación arqueológica en Sierra Magina sigue el método científico riguroso: observación, hipótesis, experimentación y conclusiones basadas en evidencias. Excavamos, registramos en 3D, analizamos en laboratorio, datamos con carbono-14 y comparamos con otras regiones. Pero además, abrimos las investigaciones a la ciudadanía: participan en excavaciones, aprenden a identificar artefactos, comprenden cómo reconstruimos la historia. El patrimonio de Sierra Magina es de todos y para todos.",
       timeline: "Presente y futuro",
-      facts: ["Campañas de excavación: anuales", "Participantes ciudadanos: 50-100/año", "Publicaciones científicas: 5-8/año"]
+      facts: ["Campañas de excavación: anuales","Participantes ciudadanos: 50-100/año","Publicaciones científicas: 5-8/año"]
     },
     en: {
       title: "Science and citizenship",
       description: "Scientific method, citizen engagement, and heritage. How archaeology opens to society.",
       content: "Archaeological research in Sierra Magina follows rigorous scientific method: observation, hypothesis, experimentation, and evidence-based conclusions. We excavate, record in 3D, analyze in the lab, date with carbon-14, and compare with other regions. But we also open research to citizens: they participate in digs, learn to identify artifacts, understand how we reconstruct history. Sierra Magina's heritage belongs to everyone and is for everyone.",
       timeline: "Present and future",
-      facts: ["Excavation campaigns: annual", "Citizen participants: 50-100/year", "Scientific publications: 5-8/year"]
+      facts: ["Excavation campaigns: annual","Citizen participants: 50-100/year","Scientific publications: 5-8/year"]
+    }
+  },
+  A9: {
+    es: {
+      title: "A9 — Testimonios y voces",
+      description: "Espacio audiovisual con investigadores, habitantes locales, experiencias personales y memoria territorial. Humaniza el discurso y relaciona ciencia y ciudadanía.",
+      content: "Cierra el circuito interior con voces reales: cómo se investiga, qué significa el patrimonio para quien vive en el entorno y cómo la memoria colectiva dialoga con la evidencia científica.",
+      timeline: "Memoria y ciudadanía",
+      facts: ["Testimonios de equipo científico y vecindario","Experiencias personales y memoria territorial","Puente entre rigor y emoción compartida"]
+    },
+    en: {
+      title: "A9 — Testimonies and voices",
+      description: "Audiovisual space with researchers, local residents, personal stories, and territorial memory. It humanises the narrative and connects science and citizenship.",
+      content: "It closes the indoor circuit with real voices: how research happens, what heritage means for people who live nearby, and how collective memory dialogues with scientific evidence.",
+      timeline: "Memory and citizenship",
+      facts: ["Statements from scientific staff and neighbours","Personal stories and territorial memory","A bridge between rigour and shared emotion"]
     }
   },
   ATZ: {
     es: {
       title: "ATZ — Terraza final",
-      description:
-        "El museo continúa en el paisaje: desde la terraza se observa Sierra Mágina aplicando geología, relieve, historia humana y transformación del territorio.",
-      content:
-        "La visita no termina en sala: el horizonte pasa a ser parte de la exposición. Allí se relaciona lo visto en vitrinas y paneles con laderas, crestas y valles, cerrando el relato entre evidencia y territorio real.",
+      description: "El museo continúa en el paisaje: desde la terraza se observa Sierra Mágina aplicando geología, relieve, historia humana y transformación del territorio.",
+      content: "La visita no termina en sala: el horizonte pasa a ser parte de la exposición. Allí se relaciona lo visto en vitrinas y paneles con laderas, crestas y valles, cerrando el relato entre evidencia y territorio real.",
       timeline: "Todas las eras",
-      facts: ["Altitud: 2.144 metros", "Visibilidad: hasta 50 km en días claros", "Especies vegetales: 60+ especies endémicas"]
+      facts: ["Altitud: 2.144 metros","Visibilidad: hasta 50 km en días claros","Especies vegetales: 60+ especies endémicas"]
     },
     en: {
       title: "ATZ — Final terrace",
-      description:
-        "The museum continues in the landscape: from the terrace you read Sierra Mágina through geology, relief, human history, and how the territory has changed.",
-      content:
-        "The visit does not end indoors: the horizon becomes part of the exhibition. What you saw in cases and panels connects with slopes, ridges, and valleys, closing the narrative between evidence and the real territory.",
+      description: "The museum continues in the landscape: from the terrace you read Sierra Mágina through geology, relief, human history, and how the territory has changed.",
+      content: "The visit does not end indoors: the horizon becomes part of the exhibition. What you saw in cases and panels connects with slopes, ridges, and valleys, closing the narrative between evidence and the real territory.",
       timeline: "All eras",
-      facts: ["Altitude: 2,144 meters", "Visibility: up to 50 km on clear days", "Plant species: 60+ endemic species"]
+      facts: ["Altitude: 2,144 meters","Visibility: up to 50 km on clear days","Plant species: 60+ endemic species"]
     }
   }
 };
 
-// Glosario científico
+// ── Glosario ─────────────────────────────────────────────────────────
 const glossary = {
   es: [
-    { term: "Ammonite", def: "Molusco marino extinto con concha en espiral. Fósil guía del Mesozoico." },
-    { term: "Estratigrafía", def: "Ciencia que estudia el orden y la composición de las capas rocosas." },
-    { term: "Fósil", def: "Resto o huella de un organismo antiguo conservado en una roca." },
-    { term: "Geología", def: "Ciencia que estudia la estructura, composición y evolución de la Tierra." },
-    { term: "Glaciación", def: "Período de clima frío en el que los glaciares avanzan sobre grandes áreas." },
-    { term: "Homo neanderthalensis", def: "Especie humana extinta que vivió en Europa hace 400.000-40.000 años." },
-    { term: "Homo sapiens", def: "Especie humana actual. Surgió en África hace ~300.000 años." },
-    { term: "Kárstico", def: "Paisaje formado por la disolución de rocas solubles como la caliza y la dolomía." },
-    { term: "Mesozoico", def: "Era geológica hace 252-66 millones de años. Era de los dinosaurios." },
-    { term: "Metalurgia", def: "Tecnología de extracción y trabajo de metales." },
-    { term: "Neolítico", def: "Período de la prehistoria en el que surge la agricultura (10.000-3.500 a.C.)." },
-    { term: "Paleolítico", def: "Período más antiguo de la prehistoria caracterizado por el uso de herramientas de piedra." },
-    { term: "Paleontología", def: "Ciencia que estudia los fósiles y la vida pasada." },
-    { term: "Sedimento", def: "Material sólido o fragmentos de roca transportados y depositados por agua o viento." },
-    { term: "Tetis", def: "Antiguo océano tropical que existió entre Europa y África durante el Mesozoico." }
+    { term: "Ammonite",             def: "Molusco marino extinto con concha en espiral. Fósil guía del Mesozoico." },
+    { term: "Estratigrafía",        def: "Ciencia que estudia el orden y la composición de las capas rocosas." },
+    { term: "Fósil",                def: "Resto o huella de un organismo antiguo conservado en una roca." },
+    { term: "Geología",             def: "Ciencia que estudia la estructura, composición y evolución de la Tierra." },
+    { term: "Glaciación",           def: "Período de clima frío en el que los glaciares avanzan sobre grandes áreas." },
+    { term: "Homo neanderthalensis",def: "Especie humana extinta que vivió en Europa hace 400.000-40.000 años." },
+    { term: "Homo sapiens",         def: "Especie humana actual. Surgió en África hace ~300.000 años." },
+    { term: "Kárstico",             def: "Paisaje formado por la disolución de rocas solubles como la caliza y la dolomía." },
+    { term: "Mesozoico",            def: "Era geológica hace 252-66 millones de años. Era de los dinosaurios." },
+    { term: "Metalurgia",           def: "Tecnología de extracción y trabajo de metales." },
+    { term: "Neolítico",            def: "Período de la prehistoria en el que surge la agricultura (10.000-3.500 a.C.)." },
+    { term: "Paleolítico",          def: "Período más antiguo de la prehistoria caracterizado por el uso de herramientas de piedra." },
+    { term: "Paleontología",        def: "Ciencia que estudia los fósiles y la vida pasada." },
+    { term: "Sedimento",            def: "Material sólido o fragmentos de roca transportados y depositados por agua o viento." },
+    { term: "Tetis",                def: "Antiguo océano tropical que existió entre Europa y África durante el Mesozoico." }
   ],
   en: [
-    { term: "Ammonite", def: "Extinct marine mollusk with spiral shell. Guide fossil of the Mesozoic." },
-    { term: "Stratigraphy", def: "Science that studies the order and composition of rock layers." },
-    { term: "Fossil", def: "Remains or traces of an ancient organism preserved in rock." },
-    { term: "Geology", def: "Science that studies the structure, composition, and evolution of the Earth." },
-    { term: "Glaciation", def: "Period of cold climate when glaciers advance over large areas." },
-    { term: "Homo neanderthalensis", def: "Extinct human species that lived in Europe 400,000-40,000 years ago." },
-    { term: "Homo sapiens", def: "Current human species. Emerged in Africa ~300,000 years ago." },
-    { term: "Karst", def: "Landscape formed by dissolution of soluble rocks like limestone and dolomite." },
-    { term: "Mesozoic", def: "Geological era 252-66 million years ago. Age of dinosaurs." },
-    { term: "Metallurgy", def: "Technology of metal extraction and working." },
-    { term: "Neolithic", def: "Prehistoric period when agriculture emerged (10,000-3,500 BC)." },
-    { term: "Paleolithic", def: "Oldest period of prehistory characterized by stone tool use." },
-    { term: "Paleontology", def: "Science that studies fossils and past life." },
-    { term: "Sediment", def: "Solid material or rock fragments transported and deposited by water or wind." },
-    { term: "Tethys", def: "Ancient tropical ocean that existed between Europe and Africa during the Mesozoic." }
+    { term: "Ammonite",             def: "Extinct marine mollusk with spiral shell. Guide fossil of the Mesozoic." },
+    { term: "Stratigraphy",         def: "Science that studies the order and composition of rock layers." },
+    { term: "Fossil",               def: "Remains or traces of an ancient organism preserved in rock." },
+    { term: "Geology",              def: "Science that studies the structure, composition, and evolution of the Earth." },
+    { term: "Glaciation",           def: "Period of cold climate when glaciers advance over large areas." },
+    { term: "Homo neanderthalensis",def: "Extinct human species that lived in Europe 400,000-40,000 years ago." },
+    { term: "Homo sapiens",         def: "Current human species. Emerged in Africa ~300,000 years ago." },
+    { term: "Karst",                def: "Landscape formed by dissolution of soluble rocks like limestone and dolomite." },
+    { term: "Mesozoic",             def: "Geological era 252-66 million years ago. Age of dinosaurs." },
+    { term: "Metallurgy",           def: "Technology of metal extraction and working." },
+    { term: "Neolithic",            def: "Prehistoric period when agriculture emerged (10,000-3,500 BC)." },
+    { term: "Paleolithic",          def: "Oldest period of prehistory characterized by stone tool use." },
+    { term: "Paleontology",         def: "Science that studies fossils and past life." },
+    { term: "Sediment",             def: "Solid material or rock fragments transported and deposited by water or wind." },
+    { term: "Tethys",               def: "Ancient tropical ocean that existed between Europe and Africa during the Mesozoic." }
   ]
 };
 
-// Audiovisuales con metadatos
+// ── Audiovisuales ────────────────────────────────────────────────────
 const audiovisuals = {
   es: [
-    { id: 1, scope: "A1", title: "El Tetis: un océano perdido", duration: "8:45", subtitle: true },
-    { id: 2, scope: "A2", title: "Cómo nace una montaña", duration: "6:30", subtitle: true },
-    { id: 3, scope: "A3", title: "Glaciaciones: el ciclo del hielo", duration: "10:15", subtitle: true },
-    { id: 4, scope: "A4", title: "Neandertales: habitantes del frío", duration: "7:45", subtitle: true },
-    { id: 5, scope: "A5", title: "El arte rupestre del Paleolítico", duration: "9:00", subtitle: true },
-    { id: 6, scope: "A6", title: "La revolución neolítica", duration: "11:30", subtitle: true },
-    { id: 7, scope: "A7", title: "Primeros metales, primeras élites", duration: "8:15", subtitle: true },
-    { id: 8, scope: "A8", title: "Arqueología: desenterrando el pasado", duration: "12:00", subtitle: true }
+    { id: 1, scope: "A1", title: "El Tetis: un océano perdido",         duration: "8:45",  subtitle: true },
+    { id: 2, scope: "A2", title: "Cómo nace una montaña",              duration: "6:30",  subtitle: true },
+    { id: 3, scope: "A3", title: "Glaciaciones: el ciclo del hielo",   duration: "10:15", subtitle: true },
+    { id: 4, scope: "A4", title: "Neandertales: habitantes del frío",  duration: "7:45",  subtitle: true },
+    { id: 5, scope: "A5", title: "El arte rupestre del Paleolítico",   duration: "9:00",  subtitle: true },
+    { id: 6, scope: "A6", title: "La revolución neolítica",            duration: "11:30", subtitle: true },
+    { id: 7, scope: "A7", title: "Primeros metales, primeras élites",  duration: "8:15",  subtitle: true },
+    { id: 8, scope: "A8", title: "Arqueología: desenterrando el pasado",duration: "12:00", subtitle: true }
   ],
   en: [
-    { id: 1, scope: "A1", title: "The Tethys: a lost ocean", duration: "8:45", subtitle: true },
-    { id: 2, scope: "A2", title: "How mountains are born", duration: "6:30", subtitle: true },
-    { id: 3, scope: "A3", title: "Glaciations: the ice cycle", duration: "10:15", subtitle: true },
-    { id: 4, scope: "A4", title: "Neanderthals: inhabitants of the cold", duration: "7:45", subtitle: true },
-    { id: 5, scope: "A5", title: "Paleolithic rock art", duration: "9:00", subtitle: true },
-    { id: 6, scope: "A6", title: "The Neolithic Revolution", duration: "11:30", subtitle: true },
-    { id: 7, scope: "A7", title: "First metals, first elites", duration: "8:15", subtitle: true },
-    { id: 8, scope: "A8", title: "Archaeology: excavating the past", duration: "12:00", subtitle: true }
+    { id: 1, scope: "A1", title: "The Tethys: a lost ocean",           duration: "8:45",  subtitle: true },
+    { id: 2, scope: "A2", title: "How mountains are born",             duration: "6:30",  subtitle: true },
+    { id: 3, scope: "A3", title: "Glaciations: the ice cycle",         duration: "10:15", subtitle: true },
+    { id: 4, scope: "A4", title: "Neanderthals: inhabitants of the cold",duration: "7:45", subtitle: true },
+    { id: 5, scope: "A5", title: "Paleolithic rock art",               duration: "9:00",  subtitle: true },
+    { id: 6, scope: "A6", title: "The Neolithic Revolution",           duration: "11:30", subtitle: true },
+    { id: 7, scope: "A7", title: "First metals, first elites",         duration: "8:15",  subtitle: true },
+    { id: 8, scope: "A8", title: "Archaeology: excavating the past",   duration: "12:00", subtitle: true }
   ]
 };
 
-// Índice de códigos QR por ámbito
+// ── Índice QR ────────────────────────────────────────────────────────
 const qrIndex = {
   es: {
-    A0: { url: "/ambitos/bienvenida", label: "Bienvenida", floor: "PB" },
-    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1" },
-    A2: { url: "/ambitos/geologia", label: "Geología y orografía", floor: "P1" },
-    A3: { url: "/ambitos/cuaternario", label: "Cuaternario", floor: "P1" },
-    A4: { url: "/ambitos/neandertales", label: "Mundo neandertal", floor: "P1" },
-    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1" },
-    A6: { url: "/ambitos/neolitico", label: "Neolítico", floor: "P1" },
-    A7: { url: "/ambitos/calcolitico", label: "Calcolítico", floor: "P1" },
-    A8: { url: "/ambitos/ciencia", label: "Ciencia y ciudadanía", floor: "P1" },
-    ATZ: { url: "/ambitos/terraza", label: "Terraza y paisaje", floor: "P1" }
+    A0:  { url: "/ambitos/bienvenida",          label: "Bienvenida",           floor: "PB" },
+    A1:  { url: "/ambitos/tetis",               label: "El mar de Tetis",      floor: "P1" },
+    A2:  { url: "/ambitos/geologia",            label: "Geología y orografía", floor: "P1" },
+    A3:  { url: "/ambitos/cuaternario",         label: "Cuaternario",          floor: "P1" },
+    A4:  { url: "/ambitos/neandertales",        label: "Mundo neandertal",     floor: "P1" },
+    A5:  { url: "/ambitos/paleolitico-superior",label: "Paleolítico superior", floor: "P1" },
+    A6:  { url: "/ambitos/neolitico",           label: "Neolítico",            floor: "P1" },
+    A7:  { url: "/ambitos/calcolitico",         label: "Calcolítico",          floor: "P1" },
+    A8:  { url: "/ambitos/ciencia",             label: "Ciencia y ciudadanía", floor: "P1" },
+    ATZ: { url: "/ambitos/terraza",             label: "Terraza y paisaje",    floor: "P1" }
   },
   en: {
-    A0: { url: "/exhibits/welcome", label: "Welcome", floor: "GF" },
-    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1" },
-    A2: { url: "/exhibits/geology", label: "Geology and orography", floor: "F1" },
-    A3: { url: "/exhibits/quaternary", label: "Quaternary", floor: "F1" },
-    A4: { url: "/exhibits/neanderthals", label: "Neanderthal world", floor: "F1" },
-    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1" },
-    A6: { url: "/exhibits/neolithic", label: "Neolithic", floor: "F1" },
-    A7: { url: "/exhibits/chalcolithic", label: "Chalcolithic", floor: "F1" },
-    A8: { url: "/exhibits/science", label: "Science and citizenship", floor: "F1" },
-    ATZ: { url: "/exhibits/terrace", label: "Terrace and landscape", floor: "F1" }
+    A0:  { url: "/exhibits/welcome",     label: "Welcome",                floor: "GF" },
+    A1:  { url: "/exhibits/tethys",      label: "The Tethys Sea",         floor: "F1" },
+    A2:  { url: "/exhibits/geology",     label: "Geology and orography",  floor: "F1" },
+    A3:  { url: "/exhibits/quaternary",  label: "Quaternary",             floor: "F1" },
+    A4:  { url: "/exhibits/neanderthals",label: "Neanderthal world",      floor: "F1" },
+    A5:  { url: "/exhibits/paleolithic", label: "Upper Paleolithic",      floor: "F1" },
+    A6:  { url: "/exhibits/neolithic",   label: "Neolithic",              floor: "F1" },
+    A7:  { url: "/exhibits/chalcolithic",label: "Chalcolithic",           floor: "F1" },
+    A8:  { url: "/exhibits/science",     label: "Science and citizenship",floor: "F1" },
+    ATZ: { url: "/exhibits/terrace",     label: "Terrace and landscape",  floor: "F1" }
   }
 };
 
-// Funciones auxiliares para acceder a contenidos
-function getScopeContent(scopeCode, lang = "es") {
-  return scopeContents[scopeCode]?.[lang] || null;
-}
+// ── Funciones de acceso ──────────────────────────────────────────────
+function getScopeContent(code, lang) { return scopeContents[code]?.[lang || "es"] || null; }
+function getGlossary(lang)           { return glossary[lang || "es"] || []; }
+function getAudiovisuals(lang)       { return audiovisuals[lang || "es"] || []; }
+function getQRInfo(code, lang)       { return qrIndex[lang || "es"]?.[code] || null; }
 
-function getGlossary(lang = "es") {
-  return glossary[lang] || [];
-}
+// ── Descripciones cortas para tooltips del mapa ──────────────────────
+const scopeDescriptions = {
+  es: {
+    scope_aan: "Umbral emocional y primera lectura del territorio antes de la secuencia numerada.",
+    scope_a0:  "Introduccion al museo y guia de visita.",
+    scope_a1:  "Origen marino del territorio y fosiles del Tetis.",
+    scope_a2:  "Lectura del relieve, rocas y procesos geologicos.",
+    scope_a3:  "Clima, fauna y cambios ambientales del Cuaternario.",
+    scope_a4:  "Vida cotidiana, tecnologia y evidencias neandertales.",
+    scope_a5:  "Innovaciones humanas del Paleolitico superior.",
+    scope_a6:  "Primeras comunidades agricultoras y ganaderas.",
+    scope_a7:  "Metalurgia temprana y transformaciones sociales.",
+    scope_a8:  "Metodo cientifico, participacion ciudadana y patrimonio.",
+    scope_a9:  "Voces de investigadores y vecindario; memoria territorial y ciudadania.",
+    scope_atz: "Cierre en paisaje: el museo continua en Sierra Magina."
+  },
+  en: {
+    scope_aan: "Emotional threshold and first reading of the territory before numbered scopes.",
+    scope_a0:  "Museum introduction and visit guide.",
+    scope_a1:  "Marine origin of the territory and Tethys fossils.",
+    scope_a2:  "Reading relief, rocks, and geological processes.",
+    scope_a3:  "Climate, fauna, and environmental changes in the Quaternary.",
+    scope_a4:  "Daily life, technology, and Neanderthal evidence.",
+    scope_a5:  "Human innovations in the Upper Paleolithic.",
+    scope_a6:  "First farming and herding communities.",
+    scope_a7:  "Early metallurgy and social transformations.",
+    scope_a8:  "Scientific method, citizen engagement, and heritage.",
+    scope_a9:  "Researchers and neighbours' voices; territorial memory and citizenship.",
+    scope_atz: "Landscape closure: the museum continues outdoors."
+  }
+};
 
-function getAudiovisuals(lang = "es") {
-  return audiovisuals[lang] || [];
-}
-
-function getQRInfo(scopeCode, lang = "es") {
-  return qrIndex[lang]?.[scopeCode] || null;
-}
+// ── Traducciones UI ──────────────────────────────────────────────────
+const translations = {
+  es: {
+    skip_to_content: "Saltar al contenido principal",
+    nav_main_aria: "Navegacion principal",
+    language_selector_aria: "Selector de idioma",
+    nav_home: "Inicio", nav_about: "Sobre", nav_exhibits: "Ambitos",
+    nav_resources: "Recursos", nav_education: "Educacion", nav_science: "Ciencia",
+    nav_news: "Noticias", nav_glossary: "Glosario", nav_audiovisuals: "Audiovisuales",
+    img_museo_moderno_alt: "Centro de interpretación Paleomagina, vista exterior del edificio",
+    img_sobre_museo_alt: "El museo y el paisaje de Sierra Mágina",
+    img_fosil_alt: "Fósil de la colección en el relato de Paleomagina",
+    about_sections_nav_aria: "Secciones de la página Sobre",
+    about_nav_que: "Qué es", about_nav_obj: "Objetivos", about_nav_phil: "Filosofía",
+    about_nav_build: "Edificio", about_nav_contact: "Contacto",
+    about_aerial_photo_title: "Vista aérea de Sierra Magina",
+    about_aerial_photo_caption: "El territorio visto desde el aire: contexto del paisaje que enmarca el centro.",
+    about_building_photo_title: "El centro de interpretación",
+    about_map_photo_title: "Mapa arqueológico del territorio",
+    img_vista_aerea_alt: "Vista aérea de Sierra Mágina",
+    img_mapa_edificio_alt: "Mapa arqueológico de Sierra Magina",
+    img_lab_alt: "Laboratorio de análisis de materiales",
+    img_excavacion_alt: "Excavación arqueológica desde una vista cenital",
+    img_glossary_alt: "Fósil ilustrativo para el glosario científico",
+    img_glossary_restos_alt: "Restos arqueológicos del territorio de Sierra Magina",
+    img_terraza_alt: "Terraza mirador con Sierra Mágina al fondo",
+    hero_kicker: "Centro de Interpretacion Paleomagina",
+    hero_title: "Sierra Magina: un archivo del tiempo",
+    hero_text: "Un museo moderno para leer millones de años de historia: mares antiguos, montañas, cambios climaticos, aparicion humana y evolucion cultural.",
+    hero_cta: "Comenzar recorrido",
+    home_teaser_title: "Introducción",
+    home_teaser_intro: "Paleomagina es el espacio donde Sierra Magina se interpreta con evidencias: una visita ordenada por ámbitos, contenidos digitales y una terraza que mira al propio paisaje.",
+    home_teaser_hint: "Esta es solo la entrada: misión, objetivos, filosofía y cómo se organiza el edificio amplían el relato cuando decidas seguir explorando.",
+    home_teaser_cta: "Ir a Sobre",
+    timeline_title: "Linea temporal interactiva",
+    timeline_intro: "Un relato en siete escenas desde los origenes geologicos de la vida hasta el Antropoceno, enlazando tiempo profundo y evolucion humana.",
+    timeline_stage_1: "Tierra primitiva", timeline_stage_2: "Carbonífero / Mesozoico",
+    timeline_stage_3: "Hominidos", timeline_stage_4: "Homo erectus",
+    timeline_stage_5: "Arte rupestre", timeline_stage_6: "Neolítico", timeline_stage_7: "Civilización",
+    resources_title: "Recursos digitales",
+    res_audiovisual: "Audiovisuales", res_audiovisual_p: "Documentales, piezas breves y explicaciones por ambito con subtitulos.",
+    res_datasheets: "Fichas", res_datasheets_p: "Fichas tecnicas de fosiles, hallazgos y materiales de excavacion.",
+    res_maps: "Mapas", res_maps_p: "Mapa interactivo de cuevas, yacimientos y puntos de interes de Sierra Magina.",
+    res_gallery: "Galerias", res_gallery_p: "Imagenes de paisaje, laboratorio, recreaciones y procesos cientificos.",
+    res_glossary: "Glosario", res_glossary_p: "Terminos clave de geologia, paleontologia y arqueologia para todos los publicos.",
+    res_transcripts: "Transcripciones", res_transcripts_p: "Transcripciones de videos y audios para accesibilidad y consulta academica.",
+    page_home_title: "Paleomagina | Inicio", page_about_title: "Paleomagina | Sobre",
+    page_exhibits_title: "Paleomagina | Ambitos", page_resources_title: "Paleomagina | Recursos",
+    page_contact_title: "Paleomagina | Contacto",
+    page_glossary_title: "Paleomagina | Glosario", page_audiovisuals_title: "Paleomagina | Audiovisuales",
+    scope_meta: "Incluye texto, imagenes, videos, galeria, curiosidades, linea temporal y QR.",
+    theme_mode_dark: "Modo oscuro", theme_mode_light: "Modo claro",
+    footer_title: "Paleomagina", footer_p: "Sierra Magina, ciencia y patrimonio al alcance de todos.",
+    footer_contact: "Contacto",
+    footer_legal_heading: "Información legal", footer_legal_notice: "Aviso legal",
+    footer_legal_privacy: "Privacidad", footer_legal_cookies: "Cookies", footer_legal_a11y: "Accesibilidad",
+    glossary_title: "Glosario científico",
+    glossary_intro: "Términos clave de geología, paleontología y arqueología explicados de forma clara y accesible para todos los públicos.",
+    glossary_search_placeholder: "Buscar término...",
+    glossary_no_results: "No se encontraron resultados para tu búsqueda.",
+    audiovisuals_title: "Audiovisuales educativos",
+    audiovisuals_intro: "Documentales, piezas breves y explicaciones por ámbito con subtítulos en español e inglés.",
+    audiovisuals_available: "Contenido disponible",
+    audiovisuals_section_lead: "Selecciona un ambito para filtrar piezas breves y documentales con subtítulos.",
+    img_audiovisuals_banner_alt: "Ciencia, tecnología y divulgación audiovisual en Paleomagina",
+    audiovisuals_accessibility: "Accesibilidad",
+    audiovisuals_subtitles: "Subtítulos", audiovisuals_subtitles_p: "Todos los audiovisuales cuentan con subtítulos en español e inglés para garantizar accesibilidad auditiva.",
+    audiovisuals_descriptions: "Audiodescripciones", audiovisuals_descriptions_p: "Disponibles descripciones de audio para personas con discapacidad visual en contenido seleccionado.",
+    audiovisuals_transcripts: "Transcripciones", audiovisuals_transcripts_p: "Acceso a texto completo de cada audiovisual para consulta académica e inclusión digital.",
+    filter_all: "Todos", filter_geology: "Geología", filter_paleontology: "Paleontología", filter_archaeology: "Arqueología",
+    que_es_title: "Qué es Paleomágina",
+    que_es_intro: "Paleomágina es un centro científico, arqueológico y museográfico centrado en la interpretación de Sierra Mágina desde la geología, la paleontología, la arqueología y la evolución humana. El proyecto plantea el territorio como un gran archivo natural donde el paisaje conserva millones de años de historia.",
+    que_es_li_rocks: "Las rocas contienen información legible en estratos y fósiles.",
+    que_es_li_landscape: "El paisaje conserva huellas del pasado visible y oculta.",
+    que_es_li_science: "La ciencia permite interpretar esas huellas con método y evidencias.",
+    que_es_li_history: "La historia se reconstruye a partir de restos, contextos y comparación.",
+    que_es_combine: "La idea del museo se apoya en cuatro ideas y se despliega en siete líneas de trabajo:",
+    que_es_pillar_1: "Ciencia.", que_es_pillar_2: "Divulgación.", que_es_pillar_3: "Educación.",
+    que_es_pillar_4: "Turismo cultural.", que_es_pillar_5: "Participación ciudadana.",
+    que_es_pillar_6: "Experiencia emocional.", que_es_pillar_7: "Rigor y accesibilidad en la lectura del territorio.",
+    about_highlights_title: "Ejes del proyecto",
+    about_h1: "Ciencia de campo, laboratorio y territorio.", about_h2: "Divulgación del patrimonio de Sierra Mágina.",
+    about_h3: "Educación y públicos diversos.", about_h4: "Turismo cultural y referencia regional.",
+    about_h5: "Participación ciudadana y memoria compartida.", about_h6: "Experiencia museística progresiva por ámbitos.",
+    about_h7: "Conexión entre evidencia y emoción.",
+    obj_museum_title: "Objetivos del museo",
+    obj_museum_intro: "Paleomágina articula investigación, divulgación y experiencia de visita en torno a cuatro ejes complementarios, cada uno con metas concretas.",
+    obj_sci_t: "Objetivos científicos", obj_sci_intro: "Enfoque en método y transparencia del conocimiento:",
+    obj_sci_li1: "Explicar cómo se investiga el pasado.", obj_sci_li2: "Mostrar el trabajo arqueológico y paleontológico.",
+    obj_sci_li3: "Divulgar conocimiento científico.", obj_sci_li4: "Enseñar el método científico.",
+    obj_edu_t: "Objetivos educativos", obj_edu_intro: "Contenidos para distintas edades y ritmos:",
+    obj_edu_li1: "Facilitar la comprensión de procesos complejos.", obj_edu_li2: "Adaptar contenidos a todas las edades.",
+    obj_edu_li3: "Despertar la curiosidad científica.", obj_edu_li4: "Favorecer el aprendizaje activo.",
+    obj_tour_t: "Objetivos turísticos", obj_tour_intro: "Inserción en la oferta cultural del territorio:",
+    obj_tour_li1: "Reforzar Sierra Mágina como destino cultural.", obj_tour_li2: "Aumentar y diversificar visitantes.",
+    obj_tour_li3: "Consolidar turismo científico y natural.", obj_tour_li4: "Convertirse en referencia regional.",
+    obj_soc_t: "Objetivos sociales", obj_soc_intro: "Patrimonio vivo y ciudadanía:",
+    obj_soc_li1: "Integrar ciudadanía y patrimonio.", obj_soc_li2: "Reforzar la identidad territorial.",
+    obj_soc_li3: "Crear conciencia de conservación.", obj_soc_li4: "Generar memoria compartida.",
+    philosophy_title: "Filosofía del proyecto",
+    phil_archives_t: "El paisaje como archivo del tiempo",
+    phil_archives_lead: "Sierra Mágina se presenta como archivo geológico, memoria natural y territorio modelado por millones de años.",
+    phil_archives_li1: "Archivo geológico: estratos, cuevas y yacimientos.",
+    phil_archives_li2: "Memoria natural en el relieve y los procesos.",
+    phil_archives_li3: "Espacio donde leer procesos naturales y humanos.",
+    phil_archives_li4: "Lectura científica del territorio como narrativa compartida.",
+    phil_process_t: "La ciencia como proceso vivo",
+    phil_process_lead: "El museo no solo muestra resultados: explica cómo se produce el conocimiento.",
+    phil_process_li1: "Excavaciones y trabajo de campo.", phil_process_li2: "Trabajo de laboratorio y análisis.",
+    phil_process_li3: "Interpretación de evidencias y debate.", phil_process_li4: "Actualización del relato con nuevas datos.",
+    phil_emotion_t: "Ciencia y emoción",
+    phil_emotion_lead: "La exposición busca un equilibrio entre rigor y experiencia.",
+    phil_emotion_li1: "Impacto visual y comprensión sencilla.", phil_emotion_li2: "Experiencia inmersiva y ritmos de visita variados.",
+    phil_emotion_li3: "Rigor científico en textos y piezas.", phil_emotion_li4: "Conexión emocional con el esfuerzo humano y el entorno.",
+    building_title: "El edificio",
+    building_visit_teaser: "Para el recorrido paso a paso por plantas, ámbitos AAN–A9, terraza ATZ y recursos de sala —incluidos línea temporal y plano interactivo— visita la página ",
+    building_visit_teaser_end: ". Aquí resume la organización general, los espacios principales y la accesibilidad.",
+    building_org_t: "Organización general", building_org_lead: "El edificio articula la visita en altura y en profundidad:",
+    building_org_li1: "Sótano: almacenes científicos y servicios vinculados a la investigación.",
+    building_org_li2: "Planta baja: acogida, orientación y arranque del relato.",
+    building_org_li3: "Primera planta: exposición permanente, transiciones y terraza panorámica.",
+    building_spaces_t: "Espacios principales", building_spaces_lead: "Salas y usos previstos para la experiencia completa:",
+    building_spaces_li1: "Exposición permanente y recorrido cronológico.", building_spaces_li2: "Salas para exposiciones temporales.",
+    building_spaces_li3: "Sala de conferencias y actividades.", building_spaces_li4: "Laboratorio y espacios de análisis.",
+    building_spaces_li5: "Patio didáctico exterior.", building_spaces_li6: "Terraza panorámica ATZ como cierre en paisaje.",
+    building_access_t: "Accesibilidad", building_access_lead: "Diseño inclusivo y circulación clara:",
+    building_access_li1: "Ascensor y recorridos accesibles.", building_access_li2: "Circulación adaptada y señalización coherente.",
+    building_access_li3: "Consulta accesible en pantalla y apoyo a visitas guiadas.",
+    building_access_li4: "Compatibilidad con distintas necesidades de movilidad y tiempo.",
+    building_photo_caption: "Centro de interpretación Paleomágina: vista del edificio.",
+    building_map_caption: "Mapa arqueológico de Sierra Mágina.",
+    expo_concept_title: "Concepto de la exposición permanente",
+    expo_concept_lead: "La exposición funciona como viaje temporal, recorrido cronológico y descubrimiento progresivo: interpretación científica del territorio con revelación gradual de espacios.",
+    expo_concept_li1: "Muros separadores y sectores diferenciados.", expo_concept_li2: "Recorrido en zigzag que ordena la narrativa.",
+    expo_concept_li3: "Cambios de iluminación y atmósfera entre ámbitos.",
+    expo_concept_li4: "Paneles, vitrinas, audiovisuales y piezas que sostienen el método.",
+    expo_concept_li5: "Cierre en terraza: el museo continúa en el paisaje.",
+    expo_route_detail_title: "Recorrido expositivo por ámbitos",
+    expo_route_detail_lead: "Despliega cada bloque para ver objetivos, contenidos y recursos según el guion museográfico (AAN, A0–A9, ATZ).",
+    expo_route_accordion_aria: "Detalle del recorrido por ámbitos",
+    expo_permanent_title: "Exposición permanente y recorrido",
+    expo_permanent_intro: "Resumen del circuito interior: acogida, transición temporal, antesala emocional, secuencia A0–A9, voces y terraza ATZ frente a Sierra Mágina.",
+    route_rec_title: "Recepción y planta baja", route_rec_p: "Bienvenida, orientación, introducción conceptual y preparación narrativa con mapas, cronologías, paneles, objetos y audiovisuales.",
+    route_stairs_title: "Escaleras y transición", route_stairs_p: "Las escaleras introducen el tiempo geológico mediante eras, gráficos temporales, vinilos y mensajes interpretativos entre acogida y sala.",
+    route_aan_title: "AAN — Antesala", route_aan_p: "Espacio inicial con impacto emocional, familia neandertal y relación visual con el paisaje antes de la secuencia numerada.",
+    route_a0_tz_title: "Ámbitos A0–A9 y terraza ATZ",
+    route_a0_tz_intro: "La secuencia recorre desde la bienvenida a Sierra Mágina hasta testimonios y voces; la terraza ATZ proyecta el relato hacia el horizonte real.",
+    route_a0_tz_li: "Incluye Tetis, geología y relieve, Cuaternario, mundo neandertal, Paleolítico superior, Neolítico, Calcolítico, investigación arqueológica (A8), testimonios (A9) y cierre en terraza.",
+    route_resources_title: "Recursos museográficos", route_resources_lead: "Físicos, digitales y educativos:",
+    route_resources_li1: "Físicos: vitrinas, paneles, réplicas, piezas originales, ilustraciones y cronologías.",
+    route_resources_li2: "Digitales: micrositio responsive, QR, audiovisuales, interactividad y subtítulos bilingües.",
+    route_resources_li3: "Educativos: talleres, actividades escolares, arqueología experimental y patio didáctico.",
+    route_public_title: "Público objetivo", route_public_lead: "Públicos actuales y estratégicos:",
+    route_public_li1: "Actuales: escolares, familias, turismo local y público cultural.",
+    route_public_li2: "Estratégicos: universitarios, investigadores, turismo científico y de naturaleza.",
+    route_public_li3: "Centros educativos externos y grupos organizados.",
+    route_public_li4: "Vecindario e interesados en el patrimonio territorial.",
+    route_exp_title: "Experiencia del visitante", route_exp_lead: "La visita busca ser:",
+    route_exp_li1: "Clara, fluida y comprensible.", route_exp_li2: "Emocional y participativa.",
+    route_exp_li3: "Memorable y adaptada a distintos ritmos.", route_exp_li4: "Coherente con evidencia científica y lectura del paisaje.",
+    resources_visit_title: "Información práctica de visita",
+    resources_visit_lead: "Datos orientativos para planificar la experiencia; confirma horarios y reservas con el centro antes de desplazarte.",
+    resources_visit_li1: "Horario orientativo: martes a domingo, mañana y tarde (consultar calendario oficial).",
+    resources_visit_li2: "Duración recomendada del recorrido completo: entre 90 y 120 minutos.",
+    resources_visit_li3: "Grupos escolares y visitas organizadas: reserva previa por correo o teléfono.",
+    resources_visit_li4: "Accesibilidad: ascensor, itinerarios accesibles y apoyo en sala (detalle en recepción).",
+    resources_visit_li5: "Cómo llegar: Sierra Mágina (Jaén); enlaces de transporte y aparcamiento en la web municipal o de turismo provincial.",
+    resources_visit_li6: "Tarifas y bonos: publicar cuando el centro las tenga aprobadas; hasta entonces, consulta en contacto.",
+    museum_3d_title: "Mapa interactivo",
+    museum_3d_intro: "Explora el museo por secciones. Pulsa en una seccion para resaltarla y ver su descripcion.",
+    museum_3d_floor_switch_aria: "Selector de planta del museo",
+    museum_3d_floor_ground: "Planta baja", museum_3d_floor_first: "Planta primera",
+    museum_3d_legend_ground: "Leyenda planta baja", museum_3d_legend_first: "Leyenda planta primera",
+    museum_3d_sections_title: "Secciones",
+    museum_3d_canvas_aria: "Plano interactivo del museo con zonas seleccionables",
+    museum_3d_viewer_hint: "Pulsa una zona coloreada del plano o elige una seccion en la lista.",
+    museum_3d_detail_title: "Selecciona una seccion",
+    museum_3d_detail_hint: "Pulsa en cualquier zona coloreada del plano o en la lista para ver su descripcion.",
+    contact_intro: "Escribenos para organizar visitas escolares, actividades en grupo y colaboraciones cientificas.",
+    contact_footer_note: "El email, el teléfono y la ubicación figuran también en el pie de página de todas las pantallas para consultarlos al instante.",
+    contact_quick_access: "Acceso rapido", contact_qr_help: "Escanea para abrir la pagina principal del proyecto.",
+    contact_qr_alt: "Codigo QR para acceder al inicio de Paleomagina",
+    media_placeholder_label: "Imagen próximamente",
+    qr_example_alt: "Codigo QR de ejemplo que abre la ficha del fosil A2",
+    page_legal_notice_title: "Paleomágina | Aviso legal", page_legal_privacy_title: "Paleomágina | Privacidad",
+    page_legal_cookies_title: "Paleomágina | Cookies", page_legal_a11y_title: "Paleomágina | Accesibilidad",
+    legal_h1_notice: "Aviso legal", legal_h1_privacy: "Privacidad", legal_h1_cookies: "Cookies", legal_h1_a11y: "Accesibilidad"
+  },
+  en: {
+    skip_to_content: "Skip to main content",
+    nav_main_aria: "Main navigation", language_selector_aria: "Language selector",
+    nav_home: "Home", nav_about: "About", nav_exhibits: "Exhibits",
+    nav_resources: "Resources", nav_education: "Education", nav_science: "Science",
+    nav_news: "News", nav_glossary: "Glossary", nav_audiovisuals: "Audiovisuals",
+    img_museo_moderno_alt: "Paleomagina interpretation center, exterior view of the building",
+    img_sobre_museo_alt: "The museum and the Sierra Mágina landscape",
+    img_fosil_alt: "Fossil specimen featured in Paleomagina's narrative",
+    about_sections_nav_aria: "About page sections",
+    about_nav_que: "What it is", about_nav_obj: "Objectives", about_nav_phil: "Philosophy",
+    about_nav_build: "Building", about_nav_contact: "Contact",
+    about_aerial_photo_title: "Aerial view of Sierra Magina",
+    about_aerial_photo_caption: "The territory from above: landscape context around the centre.",
+    about_building_photo_title: "The interpretation centre",
+    about_map_photo_title: "Archaeological map of the territory",
+    img_vista_aerea_alt: "Aerial view of Sierra Mágina",
+    img_mapa_edificio_alt: "Archaeological map of Sierra Mágina",
+    img_lab_alt: "Laboratory for analysing archaeological materials",
+    img_excavacion_alt: "Archaeological excavation seen from above",
+    img_glossary_alt: "Illustrative fossil for the scientific glossary",
+    img_glossary_restos_alt: "Archaeological remains from the Sierra Mágina territory",
+    img_terraza_alt: "Terrace viewpoint with Sierra Mágina in the background",
+    hero_kicker: "Paleomagina Interpretation Center",
+    hero_title: "Sierra Magina: an archive of time",
+    hero_text: "A modern museum to read millions of years of history: ancient seas, mountain building, climate shifts, human emergence, and cultural evolution.",
+    hero_cta: "Start the journey",
+    home_teaser_title: "Introduction",
+    home_teaser_intro: "Paleomagina is where Sierra Magina is interpreted through evidence: a gallery route organised by scopes, digital layers, and a terrace overlooking the landscape itself.",
+    home_teaser_hint: "This is only the opening: mission, objectives, philosophy, and how the building is organised broaden the story when you choose to explore further.",
+    home_teaser_cta: "Go to About",
+    timeline_title: "Interactive timeline",
+    timeline_intro: "A seven-scene narrative from the geological dawn of life to the Anthropocene, linking deep time and human evolution.",
+    timeline_stage_1: "Primordial Earth", timeline_stage_2: "Carboniferous / early Mesozoic",
+    timeline_stage_3: "Early hominins", timeline_stage_4: "Homo erectus",
+    timeline_stage_5: "Cave art", timeline_stage_6: "Neolithic", timeline_stage_7: "Civilization",
+    resources_title: "Digital resources",
+    res_audiovisual: "Audiovisuals", res_audiovisual_p: "Documentaries, short pieces, and area-specific explainers with subtitles.",
+    res_datasheets: "Data sheets", res_datasheets_p: "Technical sheets for fossils, findings, and excavation materials.",
+    res_maps: "Maps", res_maps_p: "Interactive map of caves, archaeological sites, and key points in Sierra Magina.",
+    res_gallery: "Galleries", res_gallery_p: "Images of landscapes, labs, reconstructions, and scientific workflows.",
+    res_glossary: "Glossary", res_glossary_p: "Key geology, paleontology, and archaeology terms for all audiences.",
+    res_transcripts: "Transcripts", res_transcripts_p: "Video and audio transcripts for accessibility and academic consultation.",
+    page_home_title: "Paleomagina | Home", page_about_title: "Paleomagina | About",
+    page_exhibits_title: "Paleomagina | Exhibits", page_resources_title: "Paleomagina | Resources",
+    page_contact_title: "Paleomagina | Contact",
+    page_glossary_title: "Paleomagina | Glossary", page_audiovisuals_title: "Paleomagina | Audiovisuals",
+    scope_meta: "Includes text, images, videos, gallery, curiosities, timeline, and QR.",
+    theme_mode_dark: "Dark mode", theme_mode_light: "Light mode",
+    footer_title: "Paleomagina", footer_p: "Sierra Magina, science and heritage for everyone.",
+    footer_contact: "Contact",
+    footer_legal_heading: "Legal information", footer_legal_notice: "Legal notice",
+    footer_legal_privacy: "Privacy", footer_legal_cookies: "Cookies", footer_legal_a11y: "Accessibility",
+    glossary_title: "Scientific glossary",
+    glossary_intro: "Key terms in geology, paleontology, and archaeology explained clearly and accessibly for all audiences.",
+    glossary_search_placeholder: "Search term...", glossary_no_results: "No results found for your search.",
+    audiovisuals_title: "Educational audiovisuals",
+    audiovisuals_intro: "Documentaries, short pieces, and area-specific explanations with subtitles in Spanish and English.",
+    audiovisuals_available: "Available content",
+    audiovisuals_section_lead: "Pick an area to filter short pieces and documentaries with subtitles.",
+    img_audiovisuals_banner_alt: "Science, technology and audiovisual outreach at Paleomagina",
+    audiovisuals_accessibility: "Accessibility",
+    audiovisuals_subtitles: "Subtitles", audiovisuals_subtitles_p: "All audiovisuals include subtitles in Spanish and English to ensure hearing accessibility.",
+    audiovisuals_descriptions: "Audio descriptions", audiovisuals_descriptions_p: "Audio descriptions available for visually impaired users in selected content.",
+    audiovisuals_transcripts: "Transcripts", audiovisuals_transcripts_p: "Access to full text of each audiovisual for academic consultation and digital inclusion.",
+    filter_all: "All", filter_geology: "Geology", filter_paleontology: "Paleontology", filter_archaeology: "Archaeology",
+    que_es_title: "What is Paleomágina",
+    que_es_intro: "Paleomágina is a scientific, archaeological, and museographic centre focused on interpreting Sierra Mágina through geology, palaeontology, archaeology, and human evolution. The project treats the territory as a vast natural archive where the landscape preserves millions of years of history.",
+    que_es_li_rocks: "Rocks carry readable information in strata and fossils.",
+    que_es_li_landscape: "The landscape keeps traces of the past—visible and hidden.",
+    que_es_li_science: "Science interprets those traces with method and evidence.",
+    que_es_li_history: "History is reconstructed from remains, contexts, and comparison.",
+    que_es_combine: "The museum rests on four core ideas and unfolds along seven lines of work:",
+    que_es_pillar_1: "Science.", que_es_pillar_2: "Outreach.", que_es_pillar_3: "Education.",
+    que_es_pillar_4: "Cultural tourism.", que_es_pillar_5: "Citizen participation.",
+    que_es_pillar_6: "Emotional experience.", que_es_pillar_7: "Rigour and accessibility in reading the territory.",
+    about_highlights_title: "Project strands",
+    about_h1: "Field, lab, and territory science.", about_h2: "Heritage communication for Sierra Mágina.",
+    about_h3: "Education and diverse audiences.", about_h4: "Cultural tourism and regional reference.",
+    about_h5: "Citizen participation and shared memory.", about_h6: "Progressive museum experience by scopes.",
+    about_h7: "Connection between evidence and emotion.",
+    obj_museum_title: "Museum objectives",
+    obj_museum_intro: "Paleomágina connects research, outreach, and the visit around four complementary strands, each with clear goals.",
+    obj_sci_t: "Scientific objectives", obj_sci_intro: "Focus on method and transparent knowledge:",
+    obj_sci_li1: "Explain how the past is investigated.", obj_sci_li2: "Show archaeological and palaeontological work.",
+    obj_sci_li3: "Share scientific knowledge.", obj_sci_li4: "Teach the scientific method.",
+    obj_edu_t: "Educational objectives", obj_edu_intro: "Content for different ages and paces:",
+    obj_edu_li1: "Support understanding of complex processes.", obj_edu_li2: "Adapt content to all ages.",
+    obj_edu_li3: "Stimulate scientific curiosity.", obj_edu_li4: "Favour active learning.",
+    obj_tour_t: "Tourism objectives", obj_tour_intro: "Place in the region's cultural offer:",
+    obj_tour_li1: "Strengthen Sierra Mágina as a cultural destination.", obj_tour_li2: "Grow and diversify visitors.",
+    obj_tour_li3: "Consolidate scientific and nature tourism.", obj_tour_li4: "Become a regional reference.",
+    obj_soc_t: "Social objectives", obj_soc_intro: "Living heritage and citizenship:",
+    obj_soc_li1: "Connect citizens and heritage.", obj_soc_li2: "Reinforce territorial identity.",
+    obj_soc_li3: "Build conservation awareness.", obj_soc_li4: "Create shared memory.",
+    philosophy_title: "Project philosophy",
+    phil_archives_t: "The landscape as an archive of time",
+    phil_archives_lead: "Sierra Mágina is presented as a geological archive, natural memory, and territory shaped over millions of years.",
+    phil_archives_li1: "Geological archive: strata, caves, and sites.",
+    phil_archives_li2: "Natural memory in relief and processes.",
+    phil_archives_li3: "A place to read natural and human processes.",
+    phil_archives_li4: "Scientific reading of the territory as shared narrative.",
+    phil_process_t: "Science as a living process",
+    phil_process_lead: "The museum shows not only results but how knowledge is made.",
+    phil_process_li1: "Excavations and fieldwork.", phil_process_li2: "Laboratory work and analysis.",
+    phil_process_li3: "Interpretation of evidence and debate.", phil_process_li4: "Updating the narrative with new data.",
+    phil_emotion_t: "Science and emotion", phil_emotion_lead: "The exhibition balances rigour and experience.",
+    phil_emotion_li1: "Visual impact and clear explanation.", phil_emotion_li2: "Immersive experience and varied visit rhythms.",
+    phil_emotion_li3: "Scientific rigour in texts and objects.", phil_emotion_li4: "Emotional connection with human effort and the environment.",
+    building_title: "The building",
+    building_visit_teaser: "For a step-by-step route through floors, scopes AAN–A9, terrace ATZ, and on-gallery resources —including the timeline and interactive plan— see the ",
+    building_visit_teaser_end: " page. Below is a summary of overall layout, main spaces, and accessibility.",
+    building_org_t: "Overall layout", building_org_lead: "The building structures the visit in height and depth:",
+    building_org_li1: "Basement: scientific stores and services linked to research.",
+    building_org_li2: "Ground floor: welcome, orientation, and start of the narrative.",
+    building_org_li3: "First floor: permanent exhibition, transitions, and panoramic terrace.",
+    building_spaces_t: "Main spaces", building_spaces_lead: "Rooms and uses for the full experience:",
+    building_spaces_li1: "Permanent exhibition and chronological route.", building_spaces_li2: "Rooms for temporary exhibitions.",
+    building_spaces_li3: "Lecture hall and activities.", building_spaces_li4: "Laboratory and analysis spaces.",
+    building_spaces_li5: "Outdoor educational courtyard.", building_spaces_li6: "Panoramic terrace ATZ as a landscape closure.",
+    building_access_t: "Accessibility", building_access_lead: "Inclusive design and clear circulation:",
+    building_access_li1: "Lift and accessible routes.", building_access_li2: "Adapted circulation and consistent signage.",
+    building_access_li3: "Accessible on-screen information and guided visit support.",
+    building_access_li4: "Compatibility with different mobility and timing needs.",
+    building_photo_caption: "Paleomágina interpretation centre: exterior view.",
+    building_map_caption: "Archaeological map of Sierra Mágina.",
+    expo_concept_title: "Permanent exhibition concept",
+    expo_concept_lead: "The exhibition works as a time journey, chronological path, and progressive discovery: scientific interpretation of the territory with gradual revelation of spaces.",
+    expo_concept_li1: "Partition walls and differentiated sectors.", expo_concept_li2: "Zigzag circulation ordering the narrative.",
+    expo_concept_li3: "Lighting and atmosphere shifts between scopes.",
+    expo_concept_li4: "Panels, showcases, audiovisuals, and objects supporting the method.",
+    expo_concept_li5: "Terrace closure: the museum continues in the landscape.",
+    expo_route_detail_title: "Exhibition route by scope",
+    expo_route_detail_lead: "Expand each block for aims, contents, and resources following the museographic script (AAN, A0–A9, ATZ).",
+    expo_route_accordion_aria: "Detailed route by exhibition scope",
+    expo_permanent_title: "Permanent exhibition and route",
+    expo_permanent_intro: "Summary of the indoor circuit: welcome, temporal transition, emotional ante-room, sequence A0–A9, voices, and terrace ATZ facing Sierra Mágina.",
+    route_rec_title: "Reception and ground floor", route_rec_p: "Welcome, orientation, conceptual introduction, and narrative preparation with maps, chronologies, panels, objects, and audiovisuals.",
+    route_stairs_title: "Stairs and transition", route_stairs_p: "Stairs introduce geological time through eras, timelines, graphics, vinyls, and interpretive messages between welcome and gallery.",
+    route_aan_title: "AAN — Ante-room", route_aan_p: "Opening space with emotional impact, Neanderthal family, and visual link to the landscape before the numbered sequence.",
+    route_a0_tz_title: "Scopes A0–A9 and terrace ATZ",
+    route_a0_tz_intro: "The sequence runs from the welcome to Sierra Mágina through testimonies and voices; terrace ATZ projects the narrative onto the real horizon.",
+    route_a0_tz_li: "Includes Tethys, geology and relief, Quaternary, Neanderthal world, Upper Palaeolithic, Neolithic, Chalcolithic, archaeological research (A8), testimonies (A9), and terrace closure.",
+    route_resources_title: "Museographic resources", route_resources_lead: "Physical, digital, and educational:",
+    route_resources_li1: "Physical: showcases, panels, replicas, originals, illustrations, chronologies.",
+    route_resources_li2: "Digital: responsive microsite, QR, audiovisuals, interaction, bilingual subtitles.",
+    route_resources_li3: "Educational: workshops, school activities, experimental archaeology, educational courtyard.",
+    route_public_title: "Target audiences", route_public_lead: "Current and strategic audiences:",
+    route_public_li1: "Current: schools, families, local tourism, cultural public.",
+    route_public_li2: "Strategic: undergraduates, researchers, scientific and nature tourism.",
+    route_public_li3: "External education centres and organised groups.",
+    route_public_li4: "Local residents and heritage-interested visitors.",
+    route_exp_title: "Visitor experience", route_exp_lead: "The visit aims to be:",
+    route_exp_li1: "Clear, smooth, and understandable.", route_exp_li2: "Emotional and participatory.",
+    route_exp_li3: "Memorable and adapted to different paces.", route_exp_li4: "Consistent with scientific evidence and landscape reading.",
+    resources_visit_title: "Practical visit information",
+    resources_visit_lead: "Guidance for planning your visit; confirm opening hours and bookings with the centre before travelling.",
+    resources_visit_li1: "Indicative opening: Tuesday to Sunday, morning and afternoon (check official calendar).",
+    resources_visit_li2: "Recommended duration for the full route: 90–120 minutes.",
+    resources_visit_li3: "School groups and organised visits: advance booking by email or phone.",
+    resources_visit_li4: "Accessibility: lift, accessible routes, and on-gallery support (details at reception).",
+    resources_visit_li5: "Getting there: Sierra Mágina (Jaén); transport and parking via municipal or provincial tourism sites.",
+    resources_visit_li6: "Admission: publish when officially approved; until then, contact the centre.",
+    museum_3d_title: "Interactive map",
+    museum_3d_intro: "Explore the museum by sections. Click a section to highlight it and read its description.",
+    museum_3d_floor_switch_aria: "Museum floor selector",
+    museum_3d_floor_ground: "Ground floor", museum_3d_floor_first: "First floor",
+    museum_3d_legend_ground: "Ground floor legend", museum_3d_legend_first: "First floor legend",
+    museum_3d_sections_title: "Sections",
+    museum_3d_canvas_aria: "Interactive museum floor plan with selectable zones",
+    museum_3d_viewer_hint: "Tap a coloured zone on the plan or pick a section from the list.",
+    museum_3d_detail_title: "Choose a section",
+    museum_3d_detail_hint: "Click any coloured zone on the plan or use the list to read its description.",
+    contact_intro: "Write to us to organize school visits, group activities, and scientific collaborations.",
+    contact_footer_note: "Email, phone, and location are also listed in the footer on every page for quick reference.",
+    contact_quick_access: "Quick access", contact_qr_help: "Scan to open the project's home page.",
+    contact_qr_alt: "QR code to access the Paleomagina home page",
+    media_placeholder_label: "Image coming soon",
+    qr_example_alt: "Example QR code opening the A2 fossil record",
+    page_legal_notice_title: "Paleomágina | Legal notice", page_legal_privacy_title: "Paleomágina | Privacy",
+    page_legal_cookies_title: "Paleomágina | Cookies", page_legal_a11y_title: "Paleomágina | Accessibility",
+    legal_h1_notice: "Legal notice", legal_h1_privacy: "Privacy", legal_h1_cookies: "Cookies", legal_h1_a11y: "Accessibility"
+  }
+};
