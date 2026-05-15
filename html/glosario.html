@@ -61,7 +61,6 @@
             </div>
             <button class="theme-toggle" type="button"></button>
           </div>
-          <button class="theme-toggle" type="button"></button>
         </div>
       </div>
     </nav>
@@ -92,98 +91,90 @@
     <main id="main-content">
       <section class="section pt-4" id="glossary-content" aria-labelledby="glossary-search-title">
         <div class="container">
-          <h2 class="visually-hidden" id="glossary-search-title">Busqueda</h2>
-          <div class="glossary-search">
-            <input
-              type="search"
-              class="form-control"
-              id="glossary-input"
-              placeholder="Buscar término..."
-              data-i18n-placeholder="glossary_search_placeholder"
-              aria-label="Búsqueda en glosario"
-            />
+          <div class="pm-read-panel pm-read-panel--glossary">
+            <h2 class="visually-hidden" id="glossary-search-title">Busqueda</h2>
+            <div class="glossary-search">
+              <input
+                type="search"
+                class="form-control"
+                id="glossary-input"
+                placeholder="Buscar término..."
+                data-i18n-placeholder="glossary_search_placeholder"
+                aria-label="Búsqueda en glosario"
+              />
+            </div>
+
+            <dl class="glossary-list" id="glossary-list" role="region" aria-live="polite"></dl>
+
+            <div id="no-results" class="section-lead d-none text-center mt-4">
+              <p class="mb-0" data-i18n="glossary_no_results">No se encontraron resultados para tu búsqueda.</p>
+            </div>
           </div>
-
-    <section class="section" id="glossary-content" aria-labelledby="glossary-search-title">
-      <div class="container">
-        <h2 class="visually-hidden" id="glossary-search-title">Busqueda</h2>
-        <div class="glossary-search">
-          <input type="search" class="form-control" id="glossary-input" placeholder="Buscar término..."
-            data-i18n-placeholder="glossary_search_placeholder" aria-label="Búsqueda en glosario" />
         </div>
+      </section>
 
-        <dl class="glossary-list" id="glossary-list" role="region" aria-live="polite"></dl>
+      <section class="section section-alt pt-0" id="glossary-info" aria-labelledby="glossary-context-heading">
+        <div class="container">
+          <div class="pm-read-panel pm-read-panel--glossary">
+            <h2 id="glossary-context-heading" data-i18n="glossary_context_title">Contexto científico</h2>
+            <div class="resource-grid">
+              <article class="card">
+                <h3 data-i18n="glossary_geology">Geología</h3>
+                <p data-i18n="glossary_geology_p">Ciencia que estudia la estructura, composición y evolución de la Tierra y sus rocas.</p>
+              </article>
+              <article class="card">
+                <h3 data-i18n="glossary_paleontology">Paleontología</h3>
+                <p data-i18n="glossary_paleontology_p">Ciencia que estudia los fósiles y la vida pasada de nuestro planeta.</p>
+              </article>
+              <article class="card">
+                <h3 data-i18n="glossary_archaeology">Arqueología</h3>
+                <p data-i18n="glossary_archaeology_p">Ciencia que estudia las culturas pasadas a través de sus restos materiales.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-        <div id="no-results" class="section-lead d-none text-center mt-4">
-          <p class="mb-0" data-i18n="glossary_no_results">No se encontraron resultados para tu búsqueda.</p>
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <h2 data-i18n="footer_title">Paleomagina</h2>
+          <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
+        </div>
+        <div>
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="glosario.html" data-i18n="res_glossary">Glosario</a></li>
+            <li><a href="audiovisuales.html" data-i18n="res_audiovisual">Audiovisuales</a></li>
+            <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="ambitos.html" data-i18n="nav_exhibits">Ámbitos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="footer_contact">Contacto</h3>
+          <p><strong>Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+          <p><strong>Teléfono:</strong><br />+34 000 000 000</p>
+          <p><strong>Ubicación:</strong><br /><span>Sierra Magina, Jaén</span></p>
+        </div>
+        <div>
+          <h3 data-i18n="footer_legal_heading">Información legal</h3>
+          <ul>
+            <li><a href="aviso-legal.html" data-i18n="footer_legal_notice">Aviso legal</a></li>
+            <li><a href="privacidad.html" data-i18n="footer_legal_privacy">Privacidad</a></li>
+            <li><a href="cookies.html" data-i18n="footer_legal_cookies">Cookies</a></li>
+            <li><a href="accesibilidad.html" data-i18n="footer_legal_a11y">Accesibilidad</a></li>
+          </ul>
         </div>
       </div>
-    </section>
+      <div class="container footer-copy">
+        <p class="mb-0">© 2026 Centro de Interpretacion Paleomagina. Todos los derechos reservados.</p>
+      </div>
+    </footer>
 
-    <section class="section section-alt" id="glossary-info">
-      <div class="container">
-        <h2 data-i18n="glossary_context_title">Contexto científico</h2>
-        <div class="resource-grid">
-          <article class="card">
-            <h3 data-i18n="glossary_geology">Geología</h3>
-            <p data-i18n="glossary_geology_p">Ciencia que estudia la estructura, composición y evolución de la Tierra y
-              sus rocas.</p>
-          </article>
-          <article class="card">
-            <h3 data-i18n="glossary_paleontology">Paleontología</h3>
-            <p data-i18n="glossary_paleontology_p">Ciencia que estudia los fósiles y la vida pasada de nuestro planeta.
-            </p>
-          </article>
-          <article class="card">
-            <h3 data-i18n="glossary_archaeology">Arqueología</h3>
-            <p data-i18n="glossary_archaeology_p">Ciencia que estudia las culturas pasadas a través de sus restos
-              materiales.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <div>
-        <h2 data-i18n="footer_title">Paleomagina</h2>
-        <p data-i18n="footer_p">Sierra Magina, ciencia y patrimonio al alcance de todos.</p>
-      </div>
-      <div>
-        <h3>Recursos</h3>
-        <ul>
-          <li><a href="glosario.html" data-i18n="res_glossary">Glosario</a></li>
-          <li><a href="audiovisuales.html" data-i18n="res_audiovisual">Audiovisuales</a></li>
-          <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
-          <li><a href="ambitos.html" data-i18n="nav_exhibits">Ámbitos</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 data-i18n="footer_contact">Contacto</h3>
-        <p><strong>Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
-        <p><strong>Teléfono:</strong><br />+34 000 000 000</p>
-        <p><strong>Ubicación:</strong><br /><span>Sierra Magina, Jaén</span></p>
-      </div>
-      <div>
-        <h3 data-i18n="footer_legal_heading">Información legal</h3>
-        <ul>
-          <li><a href="aviso-legal.html" data-i18n="footer_legal_notice">Aviso legal</a></li>
-          <li><a href="privacidad.html" data-i18n="footer_legal_privacy">Privacidad</a></li>
-          <li><a href="cookies.html" data-i18n="footer_legal_cookies">Cookies</a></li>
-          <li><a href="accesibilidad.html" data-i18n="footer_legal_a11y">Accesibilidad</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-copy">
-      <p class="mb-0">© 2026 Centro de Interpretacion Paleomagina. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../data.js"></script>
-  <script src="../script.js"></script>
-  <script src="../glossary.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../data.js"></script>
+    <script src="../script.js"></script>
+    <script src="../glossary.js"></script>
+  </body>
 </html>

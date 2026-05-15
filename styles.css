@@ -1,6 +1,6 @@
-:root,
+﻿:root,
 [data-theme="light"] {
-  /* Modo día: fondo claro, textura visible pero suavizada con velo claro (no parece modo oscuro) */
+  /* Modo dÃ­a: fondo claro, textura visible pero suavizada con velo claro (no parece modo oscuro) */
   --bg: #f4eee4;
   --bg-alt: #ece3d4;
   --text: #1e1914;
@@ -27,7 +27,7 @@
   /* Velo con color de tema (crema): mas % = textura mas discreta */
   --pm-html-veil-top: 30%;
   --pm-html-veil-bottom: 24%;
-  /* Capa media: tinte blanco/crema sobre la foto — lee bien y no oscurece el modo día */
+  /* Capa media: tinte blanco/crema sobre la foto â€” lee bien y no oscurece el modo dÃ­a */
   --pm-texture-mid: #fffdf8;
   --pm-texture-scrim-top: 36%;
   --pm-texture-scrim-bottom: 46%;
@@ -41,6 +41,9 @@
   --pm-read-panel-radius: 0.75rem;
   --pm-read-panel-padding-block: 1.35rem;
   --pm-read-panel-padding-inline: 1.5rem;
+  --pm-panel-fondo-image: url("images/site/timeline-fondo.png");
+  --pm-panel-fondo-opacity: 0.26;
+  --pm-panel-fondo-opacity-dark: 0.18;
 }
 
 [data-theme="dark"] {
@@ -66,7 +69,7 @@
   --footer-link: #f0d9a8;
   --footer-link-hover: #ffffff;
   color-scheme: dark;
-  /* Modo noche: mas contraste con el modo día (fondo y velo mas marcados) */
+  /* Modo noche: mas contraste con el modo dÃ­a (fondo y velo mas marcados) */
   --pm-html-veil-top: 44%;
   --pm-html-veil-bottom: 38%;
   --pm-texture-mid: #070605;
@@ -238,7 +241,7 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   min-height: 100%;
-  /* Textura + velo de tema + velo intermedio (--pm-texture-mid: claro de día, casi negro de noche) */
+  /* Textura + velo de tema + velo intermedio (--pm-texture-mid: claro de dÃ­a, casi negro de noche) */
   background-color: var(--bg);
   background-image:
     linear-gradient(
@@ -284,7 +287,7 @@ body {
   padding: 0.45rem 0.65rem;
 }
 
-/* Página actual en la barra superior (junto a idioma / modo oscuro) */
+/* PÃ¡gina actual en la barra superior (junto a idioma / modo oscuro) */
 .navbar.pm-topnav .navbar-nav .nav-link {
   border-radius: 999px;
   transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease,
@@ -344,7 +347,7 @@ body {
   border-color: rgba(255, 255, 255, 0.35);
 }
 
-/* Desktop: una sola línea; la lista hace scroll horizontal si no cabe */
+/* Desktop: una sola lÃ­nea; la lista hace scroll horizontal si no cabe */
 @media (min-width: 992px) {
   .pm-topnav > .container {
     display: flex;
@@ -792,7 +795,7 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
   transition: color 0.4s ease;
 }
 
-/* Hero inicio + cabeceras de sección (misma altura y animación) */
+/* Hero inicio + cabeceras de secciÃ³n (misma altura y animaciÃ³n) */
 .hero,
 .page-hero {
   position: relative;
@@ -975,7 +978,7 @@ h2 {
   align-items: center;
 }
 
-/* Iconos decorativos PNG (fondo transparente) junto a títulos */
+/* Iconos decorativos PNG (fondo transparente) junto a tÃ­tulos */
 .pm-heading-with-icon {
   display: flex;
   align-items: center;
@@ -990,7 +993,7 @@ h2 {
   flex-shrink: 0;
 }
 
-/* Página Sobre: contenido a ancho pleno + espacio para barra índice inferior */
+/* PÃ¡gina Sobre: contenido a ancho pleno + espacio para barra Ã­ndice inferior */
 .sobre-page-main {
   position: relative;
   padding-bottom: calc(4.15rem + env(safe-area-inset-bottom, 0px));
@@ -1020,7 +1023,7 @@ h2 {
   scroll-margin-bottom: 5rem;
 }
 
-/* Índice Sobre: barra fija abajo (siempre visible; no tapa el hero superior) */
+/* Ãndice Sobre: barra fija abajo (siempre visible; no tapa el hero superior) */
 .sobre-nav-float {
   position: fixed;
   left: 0;
@@ -1205,7 +1208,7 @@ h2 {
   }
 }
 
-/* Ámbitos: acordeón del recorrido AAN–ATZ */
+/* Ãmbitos: acordeÃ³n del recorrido AANâ€“ATZ */
 .pm-exhibit-route-root {
   margin-top: 0.35rem;
 }
@@ -1244,7 +1247,7 @@ h2 {
   background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
 }
 
-/* Resalte naranja al pasar el cursor (solo hover, todas las páginas) */
+/* Resalte naranja al pasar el cursor (solo hover, todas las pÃ¡ginas) */
 @media (hover: hover) {
   .sobre-page-main .section,
   main#main-content > .container > section,
@@ -1255,7 +1258,6 @@ h2 {
   .timeline-section-panel,
   .pm-read-panel,
   .hero-simple > .container,
-  .page-audiovisuals-intro,
   .glossary-entry {
     transition: background-color 0.35s ease, box-shadow 0.35s ease, color 0.25s ease;
   }
@@ -1271,7 +1273,6 @@ h2 {
   .timeline-section-panel:hover,
   .pm-read-panel:hover,
   .hero-simple > .container:hover,
-  .page-audiovisuals-intro:hover,
   .glossary-entry:hover {
     box-shadow: inset 6px 0 0 var(--primary), var(--pm-read-panel-shadow);
   }
@@ -1283,8 +1284,7 @@ h2 {
   .content-prose:hover,
   .museum-section-panel:hover,
   .pm-read-panel:hover,
-  .hero-simple > .container:hover,
-  .page-audiovisuals-intro:hover {
+  .hero-simple > .container:hover {
     background: linear-gradient(90deg, rgba(166, 124, 61, 0.11) 0%, transparent 52%);
   }
 
@@ -1301,8 +1301,7 @@ h2 {
   [data-theme="dark"] .content-prose:hover,
   [data-theme="dark"] .museum-section-panel:hover,
   [data-theme="dark"] .pm-read-panel:hover,
-  [data-theme="dark"] .hero-simple > .container:hover,
-  [data-theme="dark"] .page-audiovisuals-intro:hover {
+  [data-theme="dark"] .hero-simple > .container:hover {
     background: linear-gradient(90deg, rgba(228, 200, 140, 0.09) 0%, transparent 52%);
   }
 
@@ -1321,7 +1320,6 @@ h2 {
   .timeline-section-panel:hover :is(h2, h3),
   .pm-read-panel:hover :is(h2, h3),
   .hero-simple > .container:hover :is(h2, h3),
-  .page-audiovisuals-intro:hover :is(h1, h2, h3),
   .glossary-entry:hover .glossary-term {
     color: var(--primary);
   }
@@ -1536,7 +1534,7 @@ figcaption {
   background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
 }
 
-/* --- Recreación interactiva del museo (planta + panel) --- */
+/* --- RecreaciÃ³n interactiva del museo (planta + panel) --- */
 .museum-section-wrap {
   position: relative;
 }
@@ -1551,21 +1549,6 @@ figcaption {
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
-
-.museum-section-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(145deg, rgba(166, 124, 61, 0.06) 0%, transparent 42%, rgba(168, 56, 32, 0.04) 100%),
-    radial-gradient(ellipse 80% 50% at 100% 0%, rgba(166, 124, 61, 0.08), transparent 55%);
-  opacity: 0.38;
-  pointer-events: none;
-}
-
-[data-theme="dark"] .museum-section-panel::before {
-  opacity: 0.48;
 }
 
 .museum-section-heading,
@@ -1594,382 +1577,6 @@ figcaption {
   opacity: 0.9;
 }
 
-.museum-3d-layout {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(17rem, 1fr);
-  gap: 1.35rem;
-  align-items: start;
-}
-
-.museum-3d-viewer-column {
-  min-width: 0;
-}
-
-.museum-3d-viewer-frame {
-  padding: 0.65rem;
-  border-radius: 0.85rem;
-  background: transparent;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 28px rgba(60, 48, 36, 0.1);
-}
-
-[data-theme="dark"] .museum-3d-viewer-frame {
-  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.45);
-}
-
-.museum-3d-canvas {
-  position: relative;
-  width: 100%;
-  border-radius: 0.65rem;
-  background:
-    radial-gradient(ellipse 120% 100% at 30% 20%, rgba(255, 255, 255, 0.35) 0%, transparent 55%),
-    radial-gradient(
-      circle at 20% 15%,
-      color-mix(in srgb, #ffffff var(--pm-surface-card-pct), transparent) 0%,
-      color-mix(in srgb, #efe4d4 var(--pm-surface-band-pct), transparent) 75%
-    );
-  border: 1px solid rgba(203, 184, 159, 0.85);
-  overflow: hidden;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -12px 28px rgba(60, 48, 36, 0.08);
-}
-
-[data-theme="dark"] .museum-3d-canvas {
-  background:
-    radial-gradient(ellipse 120% 100% at 30% 18%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(
-      circle at 20% 15%,
-      color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 0%,
-      color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent) 78%
-    );
-  border-color: var(--border);
-  box-shadow: inset 0 2px 24px rgba(0, 0, 0, 0.35);
-}
-
-.museum-3d-viewer-hint {
-  margin-top: 0.75rem;
-  padding: 0.55rem 0.65rem 0 0.15rem;
-  font-size: 0.88rem;
-  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
-  line-height: 1.45;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.45rem;
-}
-
-.museum-3d-viewer-hint-icon {
-  flex-shrink: 0;
-  margin-top: 0.12rem;
-  color: var(--primary);
-  font-size: 0.75rem;
-  line-height: 1;
-}
-
-.museum-3d-sidebar-column {
-  min-width: 0;
-}
-
-.museum-3d-sidebar-card {
-  position: sticky;
-  top: 5.35rem;
-  border-radius: 0.75rem !important;
-  border: 1px solid var(--border) !important;
-  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) !important;
-  overflow: hidden;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.museum-3d-sidebar-card .card-body {
-  padding: 1.15rem 1.2rem 1.25rem;
-  max-height: min(calc(100vh - 5.5rem), 920px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-
-.museum-3d-sidebar-heading {
-  margin: 0 0 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  color: var(--muted);
-}
-
-/* Mismo tamaño de lienzo para ambas plantas; imagen y SVG se escalan y alinean por JS */
-.museum-3d-plan-stage {
-  position: relative;
-  width: 100%;
-  height: clamp(300px, min(52vw, 52vh), 620px);
-  max-height: min(64vh, 640px);
-  min-height: 280px;
-  margin-inline: auto;
-}
-
-.museum-3d-plan-stage .floor-plan-img {
-  display: block;
-  position: absolute;
-  z-index: 0;
-  margin: 0;
-  user-select: none;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.museum-3d-section-item {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 0.52rem 0.65rem 0.52rem 0.55rem;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--zone-color, var(--primary));
-  border-radius: 0.55rem;
-  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
-  cursor: pointer;
-  text-align: left;
-  font: inherit;
-  color: var(--text);
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.15s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.museum-3d-section-item:hover {
-  background: rgba(166, 124, 61, 0.07);
-  border-color: rgba(166, 124, 61, 0.45);
-}
-
-[data-theme="dark"] .museum-3d-section-item:hover {
-  background: rgba(228, 200, 140, 0.09);
-  border-color: rgba(228, 200, 140, 0.35);
-}
-
-.museum-3d-section-item.active {
-  background: rgba(166, 124, 61, 0.2);
-  font-weight: 800;
-  box-shadow: 0 0 0 2px var(--primary), 0 4px 16px rgba(60, 48, 36, 0.15);
-  border-color: var(--primary);
-}
-
-[data-theme="dark"] .museum-3d-section-item.active {
-  background: rgba(228, 200, 140, 0.18);
-  box-shadow: 0 0 0 2px var(--primary), 0 4px 20px rgba(0, 0, 0, 0.45);
-  border-color: var(--primary);
-}
-
-.museum-3d-section-item strong {
-  font-weight: 800;
-  min-width: 2.35rem;
-  letter-spacing: 0.03em;
-}
-
-.museum-3d-section-item small {
-  opacity: 0.88;
-  font-size: 0.7rem;
-}
-
-.zone-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.museum-3d-stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.museum-3d-plan-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  filter: contrast(1.02) saturate(0.92);
-  cursor: crosshair;
-}
-
-.museum-3d-floor-label {
-  position: absolute;
-  left: 0.7rem;
-  top: 0.6rem;
-  padding: 0.22rem 0.5rem;
-  border-radius: 0.4rem;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--border);
-  color: var(--primary);
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-.museum-3d-panel h3 {
-  margin-bottom: 0.8rem;
-  color: var(--primary);
-}
-
-.museum-3d-floors {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.45rem;
-  margin-bottom: 0.8rem;
-}
-
-.museum-3d-floor-btn {
-  border: 1px solid var(--border);
-  border-radius: 0.55rem;
-  padding: 0.52rem 0.65rem;
-  background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
-  color: var(--text);
-  font: inherit;
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.museum-3d-floor-btn:hover {
-  border-color: var(--primary);
-}
-
-.museum-3d-floor-btn.active {
-  background: var(--primary);
-  color: var(--primary-contrast);
-  border-color: var(--primary);
-  box-shadow: 0 2px 12px rgba(166, 124, 61, 0.35);
-}
-
-.museum-3d-sections {
-  display: grid;
-  gap: 0.45rem;
-}
-
-.museum-3d-legend {
-  margin-bottom: 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: 0.55rem;
-  padding: 0.55rem 0.6rem;
-  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.museum-3d-legend-title {
-  margin: 0 0 0.4rem;
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: var(--primary);
-}
-
-.museum-3d-legend-list {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.museum-3d-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.86rem;
-}
-
-.museum-3d-legend-swatch {
-  width: 0.8rem;
-  height: 0.8rem;
-  border-radius: 0.15rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.museum-3d-section-btn {
-  border: 1px solid var(--border);
-  border-radius: 0.55rem;
-  padding: 0.5rem 0.65rem;
-  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
-  color: var(--text);
-  text-align: left;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.museum-3d-section-btn:hover {
-  border-color: var(--accent);
-}
-
-.museum-3d-section-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-
-.museum-3d-detail {
-  margin-top: 1.05rem;
-  padding: 1rem 1rem 1.05rem 1.05rem;
-  border-radius: 0.65rem;
-  background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--detail-accent, var(--primary));
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.museum-3d-detail-head {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
-  margin-bottom: 0.55rem;
-}
-
-.museum-3d-detail-swatch {
-  flex-shrink: 0;
-  width: 1.35rem;
-  height: 1.35rem;
-  margin-top: 0.1rem;
-  border-radius: 0.35rem;
-  border: 2px solid rgba(255, 255, 255, 0.75);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-[data-theme="dark"] .museum-3d-detail-swatch {
-  border-color: rgba(0, 0, 0, 0.35);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
-}
-
-.museum-3d-detail-title {
-  margin: 0;
-  flex: 1;
-  min-width: 0;
-  color: var(--primary);
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-}
-
-.museum-3d-detail-text {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text);
-  max-height: min(42vh, 22rem);
-  overflow-y: auto;
-  padding-right: 0.2rem;
-  overscroll-behavior: contain;
-}
 
 .site-footer {
   position: relative;
@@ -2020,7 +1627,7 @@ figcaption {
   color: var(--footer-link-hover);
 }
 
-/* Footer dentro de <main> (p. ej. index sin </main>): mismos colores que el resto de páginas */
+/* Footer dentro de <main> (p. ej. index sin </main>): mismos colores que el resto de pÃ¡ginas */
 main .site-footer a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-brand):not(.filter-btn) {
   color: var(--footer-link);
 }
@@ -2096,19 +1703,6 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .museum-3d-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .museum-3d-plan-stage {
-    height: clamp(260px, 62vw, 480px);
-    min-height: 240px;
-    max-height: min(52vh, 520px);
-  }
-
-  .museum-3d-sidebar-card {
-    position: static;
-  }
 
   .museum-section-panel {
     padding: 1.05rem 1rem 1.15rem;
@@ -2163,14 +1757,14 @@ button:focus-visible {
    Estilos de accesibilidad mejorada (WCAG 2.1 AA)
    ============================================ */
 
-/* Focus visible mejorado para navegación por teclado */
+/* Focus visible mejorado para navegaciÃ³n por teclado */
 :focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Tema explícito vía [data-theme]; no forzar :root con prefers-color-scheme (chocaba con modo claro) */
+/* Tema explÃ­cito vÃ­a [data-theme]; no forzar :root con prefers-color-scheme (chocaba con modo claro) */
 
 /* Reducir movimiento para usuarios sensibles */
 @media (prefers-reduced-motion: reduce) {
@@ -2184,7 +1778,7 @@ button:focus-visible {
   }
 }
 
-/* Estilos para términos del glosario */
+/* Estilos para tÃ©rminos del glosario */
 .glossary-list {
   list-style: none;
   padding: 0;
@@ -2220,7 +1814,7 @@ button:focus-visible {
   color: var(--text);
 }
 
-/* Estilos para búsqueda */
+/* Estilos para bÃºsqueda */
 .glossary-search {
   margin: 2rem 0;
 }
@@ -2248,7 +1842,46 @@ button:focus-visible {
   color: var(--muted);
 }
 
-/* Sección hero simplificada (sin banda crema: mismo fondo general que el resto) */
+/* Glosario: dos paneles separados; entradas sin fondo duplicado dentro del panel */
+.pm-read-panel--glossary {
+  margin-bottom: 2rem;
+}
+
+.pm-read-panel--glossary:last-child {
+  margin-bottom: 0;
+}
+
+.pm-read-panel .glossary-search {
+  margin: 0 0 1.5rem;
+}
+
+.pm-read-panel .glossary-list {
+  margin: 0;
+}
+
+.pm-read-panel .glossary-entry {
+  overflow: visible;
+  isolation: auto;
+}
+
+.pm-read-panel .glossary-entry::before,
+.pm-read-panel .glossary-entry::after {
+  content: none;
+  display: none;
+}
+
+.pm-read-panel .resource-grid .card {
+  overflow: visible;
+  isolation: auto;
+}
+
+.pm-read-panel .resource-grid .card::before,
+.pm-read-panel .resource-grid .card::after {
+  content: none;
+  display: none;
+}
+
+/* SecciÃ³n hero simplificada (sin banda crema: mismo fondo general que el resto) */
 .hero-simple {
   padding: 4rem 0;
   text-align: center;
@@ -2277,39 +1910,6 @@ button:focus-visible {
   box-shadow: var(--pm-read-panel-shadow);
   backdrop-filter: saturate(1.06) blur(10px);
   -webkit-backdrop-filter: saturate(1.06) blur(10px);
-}
-
-/* Audiovisuales: cabecera con panel de lectura */
-.page-audiovisuals-intro {
-  padding: 2rem 1.5rem 2.25rem;
-  text-align: center;
-  max-width: min(960px, calc(100% - 2rem));
-  margin-inline: auto;
-  margin-bottom: 1.5rem;
-  background: var(--pm-read-panel-bg);
-  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
-  border-radius: var(--pm-read-panel-radius);
-  box-shadow: var(--pm-read-panel-shadow);
-  backdrop-filter: saturate(1.06) blur(10px);
-  -webkit-backdrop-filter: saturate(1.06) blur(10px);
-}
-
-.page-audiovisuals-intro .container {
-  padding-inline: 0;
-}
-
-.page-audiovisuals-intro h1 {
-  font-size: clamp(1.85rem, 5vw, 2.75rem);
-  margin: 0 0 1rem;
-  color: var(--primary);
-}
-
-.page-audiovisuals-intro .hero-text {
-  max-width: 62ch;
-  margin: 0 auto;
-  font-size: 1.1rem;
-  color: var(--text);
-  line-height: 1.75;
 }
 
 .footer-content h3,
@@ -2501,7 +2101,7 @@ h3 {
   line-height: 1.3;
 }
 
-/* Objetivos táctiles sin convertir todos los enlaces en bloques de 44px */
+/* Objetivos tÃ¡ctiles sin convertir todos los enlaces en bloques de 44px */
 .navbar .nav-link,
 .pm-topnav .navbar-brand {
   display: inline-flex;
@@ -2545,7 +2145,7 @@ h3 {
   text-shadow: 0 2px 8px rgba(190, 79, 46, 0.15);
 }
 
-/* Navegación mejorada con underline animation */
+/* NavegaciÃ³n mejorada con underline animation */
 .nav-list a {
   position: relative;
   padding-bottom: 4px;
@@ -2605,26 +2205,11 @@ h3 {
   box-shadow: 0 8px 25px rgba(186, 145, 91, 0.4);
 }
 
-/* Tarjetas con efecto de elevación */
+/* Tarjetas con efecto de elevaciÃ³n */
 .card {
   position: relative;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.card:hover::before {
-  left: 100%;
 }
 
 .card:hover {
@@ -2730,7 +2315,7 @@ textarea:focus-visible {
   color: var(--muted);
 }
 
-/* Certificación badges */
+/* CertificaciÃ³n badges */
 .cert-badge {
   display: inline-flex;
   align-items: center;
@@ -2745,7 +2330,7 @@ textarea:focus-visible {
 }
 
 .cert-badge::before {
-  content: '✓';
+  content: 'âœ“';
   font-weight: 700;
   color: var(--accent);
 }
@@ -2780,7 +2365,7 @@ textarea:focus-visible {
   animation: fadeInUp 0.5s ease-out;
 }
 
-/* Hover effect para imágenes */
+/* Hover effect para imÃ¡genes */
 img {
   transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -2801,10 +2386,6 @@ img:hover {
   box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
-
-[data-theme="dark"] .card::before {
-  display: none;
 }
 
 [data-theme="dark"] .audiovisual-card {
@@ -2844,11 +2425,6 @@ img:hover {
   border-color: var(--primary) !important;
 }
 
-[data-theme="dark"] .museum-3d-floor-label {
-  background: rgba(74, 67, 58, 0.95);
-  color: var(--primary);
-  border-color: var(--border);
-}
 
 [data-theme="light"] .btn-outline-secondary:not(.active):not(:hover) {
   color: var(--muted);
@@ -2891,9 +2467,177 @@ img:hover {
   height: auto;
 }
 
+/* Sobre · Qué es: columna de imágenes apiladas */
+#que-es .two-col.content-split {
+  align-items: stretch;
+}
+
+.sobre-que-es-media-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.sobre-que-es-media-stack .content-media-figure:first-child {
+  flex: 0 0 auto;
+}
+
+.sobre-que-es-media-stack__item {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+}
+
+.sobre-que-es-media-stack__item img {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(9rem, 18vh, 14rem);
+  object-fit: cover;
+  object-position: center;
+}
+
 .about-media-title {
   color: var(--heading);
   letter-spacing: 0.02em;
+}
+
+/* Paneles de texto: mismo fondo que línea temporal (timeline-fondo.png) */
+:is(
+  .content-prose,
+  .pm-read-panel,
+  main#main-content > .container.content-prose,
+  main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+  main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+  main .resource-grid .card,
+  main .grid-cards .card,
+  main#main-content .card.h-100,
+  main#main-content > .container > section .card:not(.timeline-detail),
+  .glossary-entry,
+  .museum-section-panel,
+  .timeline-section-panel,
+  .pm-exhibit-route-accordion .accordion-item,
+  .qr-card
+) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+:is(
+  .content-prose,
+  .pm-read-panel,
+  main#main-content > .container.content-prose,
+  main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+  main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+  main .resource-grid .card,
+  main .grid-cards .card,
+  main#main-content .card.h-100,
+  main#main-content > .container > section .card:not(.timeline-detail),
+  .glossary-entry,
+  .museum-section-panel,
+  .timeline-section-panel,
+  .pm-exhibit-route-accordion .accordion-item,
+  .qr-card
+)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--pm-panel-fondo-image) center / cover no-repeat;
+  opacity: var(--pm-panel-fondo-opacity);
+  pointer-events: none;
+}
+
+[data-theme="dark"] :is(
+  .content-prose,
+  .pm-read-panel,
+  main#main-content > .container.content-prose,
+  main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+  main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+  main .resource-grid .card,
+  main .grid-cards .card,
+  main#main-content .card.h-100,
+  main#main-content > .container > section .card:not(.timeline-detail),
+  .glossary-entry,
+  .museum-section-panel,
+  .timeline-section-panel,
+  .pm-exhibit-route-accordion .accordion-item,
+  .qr-card
+)::before {
+  opacity: var(--pm-panel-fondo-opacity-dark);
+}
+
+:is(
+  .content-prose,
+  .pm-read-panel,
+  main#main-content > .container.content-prose,
+  main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+  main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+  main .resource-grid .card,
+  main .grid-cards .card,
+  main#main-content .card.h-100,
+  main#main-content > .container > section .card:not(.timeline-detail),
+  .glossary-entry,
+  .museum-section-panel,
+  .timeline-section-panel,
+  .pm-exhibit-route-accordion .accordion-item,
+  .qr-card
+)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #fffdf8 84%, transparent),
+    color-mix(in srgb, #f4eee4 72%, transparent)
+  );
+}
+
+[data-theme="dark"] :is(
+  .content-prose,
+  .pm-read-panel,
+  main#main-content > .container.content-prose,
+  main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+  main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+  main .resource-grid .card,
+  main .grid-cards .card,
+  main#main-content .card.h-100,
+  main#main-content > .container > section .card:not(.timeline-detail),
+  .glossary-entry,
+  .museum-section-panel,
+  .timeline-section-panel,
+  .pm-exhibit-route-accordion .accordion-item,
+  .qr-card
+)::after {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg-alt) 55%, transparent),
+    color-mix(in srgb, var(--bg-alt) 35%, transparent)
+  );
+}
+
+:is(
+  .content-prose,
+  .pm-read-panel,
+  main#main-content > .container.content-prose,
+  main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+  main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+  main .resource-grid .card,
+  main .grid-cards .card,
+  main#main-content .card.h-100,
+  main#main-content > .container > section .card:not(.timeline-detail),
+  .glossary-entry,
+  .museum-section-panel,
+  .timeline-section-panel,
+  .pm-exhibit-route-accordion .accordion-item,
+  .qr-card
+) > * {
+  position: relative;
+  z-index: 1;
 }
 
 .timeline-section-panel {
@@ -2902,52 +2646,8 @@ img:hover {
   padding: 1.25rem;
   border: 1px solid var(--border);
   background: var(--pm-read-panel-bg);
-  overflow: hidden;
-  isolation: isolate;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
-
-/* Fondo del timeline (images/site/timeline-fondo.png) */
-.timeline-section-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: url("images/site/timeline-fondo.png") center / cover no-repeat;
-  opacity: 0.58;
-  pointer-events: none;
-}
-
-[data-theme="dark"] .timeline-section-panel::before {
-  opacity: 0.42;
-}
-
-/* Velo ligero para legibilidad sin tapar el fondo */
-.timeline-section-panel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bg-alt) 55%, transparent),
-    color-mix(in srgb, var(--bg-alt) 35%, transparent)
-  );
-}
-
-html:not([data-theme="dark"]) .timeline-section-panel::after {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, #fffdf8 84%, transparent),
-    color-mix(in srgb, #f4eee4 72%, transparent)
-  );
-}
-
-.timeline-section-panel > * {
-  position: relative;
-  z-index: 1;
 }
 
 .timeline-section-panel > h2 {
@@ -3039,7 +2739,22 @@ html:not([data-theme="dark"]) .timeline-section-panel::after {
     box-shadow: inset 6px 0 0 var(--primary), var(--shadow);
   }
 
-  html:not([data-theme="dark"]) .timeline-section-panel:hover::after {
+  html:not([data-theme="dark"]) :is(
+    .content-prose,
+    .pm-read-panel,
+    main#main-content > .container.content-prose,
+    main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+    main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+    main .resource-grid .card,
+    main .grid-cards .card,
+    main#main-content .card.h-100,
+    main#main-content > .container > section .card:not(.timeline-detail),
+    .glossary-entry,
+    .museum-section-panel,
+    .timeline-section-panel,
+    .pm-exhibit-route-accordion .accordion-item,
+    .qr-card
+  ):hover::after {
     background: linear-gradient(
       105deg,
       rgba(166, 124, 61, 0.32) 0%,
@@ -3049,7 +2764,22 @@ html:not([data-theme="dark"]) .timeline-section-panel::after {
     );
   }
 
-  [data-theme="dark"] .timeline-section-panel:hover::after {
+  [data-theme="dark"] :is(
+    .content-prose,
+    .pm-read-panel,
+    main#main-content > .container.content-prose,
+    main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
+    main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap),
+    main .resource-grid .card,
+    main .grid-cards .card,
+    main#main-content .card.h-100,
+    main#main-content > .container > section .card:not(.timeline-detail),
+    .glossary-entry,
+    .museum-section-panel,
+    .timeline-section-panel,
+    .pm-exhibit-route-accordion .accordion-item,
+    .qr-card
+  ):hover::after {
     background: linear-gradient(
       105deg,
       rgba(228, 200, 140, 0.26) 0%,
@@ -3127,7 +2857,7 @@ html:not([data-theme="dark"]) .timeline-section-panel::after {
   -webkit-backdrop-filter: saturate(1.08) blur(12px);
 }
 
-/* Páginas legales / texto único en container */
+/* PÃ¡ginas legales / texto Ãºnico en container */
 main#main-content > .container.content-prose {
   max-width: min(48rem, 100%);
   margin-inline: auto;
@@ -3141,7 +2871,7 @@ main#main-content > .container.content-prose {
 }
 
 /* Secciones con .container (Recursos, Sobre, parte de Inicio, etc.): tarjeta si no hay .content-prose (evita doble caja) */
-main section:not(.hero, .hero-simple) > .container:not(:has(.content-prose)) {
+main section:not(.hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)) {
   padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
   border-radius: var(--pm-read-panel-radius);
   border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
@@ -3151,7 +2881,7 @@ main section:not(.hero, .hero-simple) > .container:not(:has(.content-prose)) {
   -webkit-backdrop-filter: saturate(1.06) blur(10px);
 }
 
-/* Ámbitos: main > .container > section (sin .container interno) */
+/* Ãmbitos: main > .container > section (sin .container interno) */
 main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap):not(:has(> .timeline-section-panel)) {
   padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
   border-radius: var(--pm-read-panel-radius);
@@ -3163,7 +2893,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   transition: background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-/* Ámbitos: resalte hover (después del panel base para ganar en cascada) */
+/* Ãmbitos: resalte hover (despuÃ©s del panel base para ganar en cascada) */
 @media (hover: hover) {
   main#main-content > .container > section:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
     box-shadow: inset 6px 0 0 var(--primary), var(--pm-read-panel-shadow);
@@ -3261,9 +2991,9 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   }
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
 /* MUSEUM 3D SCENES - ANIMATED 3D VISUALIZATIONS */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
 
 .obj3d {
   position: relative;
@@ -3612,9 +3342,9 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   cursor: grabbing;
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
 /* ANIMATIONS FOR 3D SCENES */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -3665,54 +3395,6 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   }
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* MapZoneTracer — herramienta de trazado manual de polígonos sobre planos    */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-.map-zone-tracer__stage-wrap {
-  max-width: 100%;
-  overflow: auto;
-  border-radius: 0.5rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 0.75rem;
-}
-
-.map-zone-tracer__stage {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-  vertical-align: top;
-}
-
-.map-zone-tracer__img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  vertical-align: top;
-  user-select: none;
-  pointer-events: none;
-}
-
-.map-zone-tracer__svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: auto;
-  cursor: crosshair;
-}
-
-.map-zone-tracer__swatch {
-  display: inline-block;
-  width: 1.25rem;
-  height: 1.25rem;
-  vertical-align: middle;
-}
-
-.map-zone-tracer__item .font-monospace {
-  font-size: 0.78rem;
-}
 /* ============================================
    MAPA INTERACTIVO DEL MUSEO
    ============================================ */

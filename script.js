@@ -8,7 +8,7 @@ let   currentLang      = defaultLang;
 const themeStorageKey  = "paleomagina-theme";
 let   currentTheme     = "light";
 
-// ── Exponer helper de traducción para museum3d.js ────────────────────
+// ── Exponer helper de traducción (timeline.js y otros módulos) ───────
 function paleomaginaT(key) {
   return translations[currentLang]?.[key] ?? translations.es[key] ?? "";
 }
@@ -157,15 +157,6 @@ function applyLanguage(lang) {
   renderScopes(lang);
   updateThemeButtonLabel();
   initAmbitosExhibitRoute();
-
-  // Notificar a museum3d.js si está cargado (ambitos.html)
-  if (typeof window.resetMuseumDetail === "function") {
-    if (document.body?.dataset.museumZone && typeof window.refreshMuseumSelection === "function") {
-      window.refreshMuseumSelection();
-    } else {
-      window.resetMuseumDetail();
-    }
-  }
 }
 
 // ── Botón de tema ────────────────────────────────────────────────────
