@@ -4,8 +4,8 @@
 
 /** Planos subidos (planta baja / primera); rutas relativas a `html/*.html`. */
 const FLOOR_IMAGES = {
-  ground: '../images/planta-baja-museo.png',
-  first: '../images/planta-primera-museo.png'
+  ground: '../images/site/planta-baja-museo.png',
+  first: '../images/site/planta-primera-museo.png'
 };
 
 /** Clic sobre los rellenos del PNG: cada sección usa su `color` en ZONES y un tono medio calibrado en la propia imagen (sin polígonos encima). */
@@ -498,40 +498,40 @@ function buildSectionList(floor) {
   });
 }
 
-/** Ilustraciones del timeline sin marca de agua (`images/IMG2/*_peeled.png`). */
+/** Ilustraciones del timeline (`images/site/*_peeled.png`). */
 const TIMELINE_IMAGE_META = {
   stage1: {
-    src: '../images/IMG2/1_peeled.png',
+    src: '../images/site/1_peeled.png',
     caption:
       'Precámbrico y Paleozoico temprano: rocas volcánicas y mar antiguo con trilobites y vida marina recreada.'
   },
   stage2: {
-    src: '../images/IMG2/2_peeled.png',
+    src: '../images/site/2_peeled.png',
     caption:
       'Carbonífero y Mesozoico: pantanos, helechos gigantes y primeros mamíferos como Eomaia.'
   },
   stage3: {
-    src: '../images/IMG2/3_peeled.png',
+    src: '../images/site/3_peeled.png',
     caption:
       'Sabana africana: Australopithecus bípedo y Homo habilis con herramientas de piedra.'
   },
   stage4: {
-    src: '../images/IMG2/4_peeled.png',
+    src: '../images/site/4_peeled.png',
     caption:
       'Homo erectus alrededor del fuego; paisaje euroasiático y presagio del neandertal.'
   },
   stage5: {
-    src: '../images/IMG2/5_peeled.png',
+    src: '../images/site/5_peeled.png',
     caption:
       'Cueva iluminada por antorchas: arte rupestre compartido y valle holocénico al fondo.'
   },
   stage6: {
-    src: '../images/IMG2/6_peeled.png',
+    src: '../images/site/6_peeled.png',
     caption:
       'Holoceno temprano: cultivos, ganado y aldea neolítica hacia la escritura cuneiforme.'
   },
   stage7: {
-    src: '../images/IMG2/7_peeled.png',
+    src: '../images/site/7_peeled.png',
     caption:
       'Bronce, zigurat y ciudad histórica hasta la megalópolis moderna y el Antropoceno.'
   }

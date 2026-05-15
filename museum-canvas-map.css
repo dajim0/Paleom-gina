@@ -36,7 +36,7 @@ html {
       color-mix(in srgb, var(--mcm-mid) var(--mcm-scrim-top), transparent),
       color-mix(in srgb, var(--mcm-mid) var(--mcm-scrim-bottom), transparent)
     ),
-    url("images/FONDO%20GENERAL.png");
+    url("images/site/fondo-general.png");
   background-size: auto, auto, cover;
   background-position: 0 0, 0 0, center top;
   background-repeat: no-repeat, no-repeat, no-repeat;

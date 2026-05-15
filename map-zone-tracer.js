@@ -3,8 +3,8 @@
 /* ═════════════════════════════════════════════════════════════════════════════ */
 
 const DEFAULT_IMAGES = {
-  ground: '../images/planta-baja-museo.png',
-  first: '../images/planta-primera-museo.png'
+  ground: '../images/site/planta-baja-museo.png',
+  first: '../images/site/planta-primera-museo.png'
 };
 
 /** Paleta sugerida (zonas 1–10), alineada con tonos del mapa; editable en UI. */

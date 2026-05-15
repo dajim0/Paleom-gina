@@ -12,8 +12,8 @@
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
-  <link rel="icon" type="image/png" href="../images/favicon.png" sizes="32x32" />
-  <link rel="apple-touch-icon" href="../images/favicon.png" />
+  <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
 
 <body>
@@ -24,7 +24,7 @@
     data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
     <div class="container">
       <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2 pm-brand-lockup" href="index.html">
-        <img src="../images/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44" decoding="async" />
+        <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44" decoding="async" />
         <span class="pm-brand-text">Paleomagina</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pmMainNav"
@@ -53,19 +53,36 @@
     </div>
   </nav>
 
-  <div class="page-hero-banner page-hero-banner--sobre">
-    <img src="../images/fosil.png" alt="" width="1920" height="640" loading="eager" decoding="async"
-      data-i18n-alt="img_fosil_alt" />
-  </div>
+  <section
+    class="page-hero"
+    style="--hero-bg-image: url('../images/site/FOSILES.png'); --hero-bg-position: center 40%"
+    aria-labelledby="page-hero-about-title"
+  >
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <img
+      class="page-hero__media"
+      src="../images/site/FOSILES.png"
+      alt=""
+      width="1920"
+      height="640"
+      loading="eager"
+      decoding="async"
+      data-i18n-alt="img_fosil_alt"
+    />
+    <div class="container hero-content">
+      <p class="kicker" data-i18n="page_hero_about_kicker">Sobre el centro</p>
+      <h1 id="page-hero-about-title" data-i18n="page_hero_about_title">Conoce Paleomagina</h1>
+      <p class="hero-text" data-i18n="page_hero_about_text">Ciencia, territorio y memoria de Sierra Mágina.</p>
+    </div>
+  </section>
 
   <main id="main-content" class="sobre-page-main">
     <div class="container sobre-page-layout">
       <div class="sobre-page-sections">
-    <section class="section" id="que-es" aria-labelledby="que-es-title">
+    <section class="section" id="que-es">
       <div class="container">
         <div class="two-col content-split">
           <div class="content-prose">
-            <h2 id="que-es-title" data-i18n="que_es_title">Qué es Paleomágina</h2>
             <p class="section-intro" data-i18n="que_es_intro"></p>
             <ul>
               <li data-i18n="que_es_li_rocks"></li>
@@ -86,8 +103,8 @@
           </div>
           <div>
             <figure class="content-media-figure mb-3">
-              <img src="../images/sobre-el-museo.png" alt="" width="1200" height="800" loading="lazy"
-                decoding="async" data-i18n-alt="img_sobre_museo_alt" />
+              <img src="../images/site/FOSILES.png" alt="" width="1200" height="800" loading="lazy"
+                decoding="async" data-i18n-alt="img_fosil_alt" />
             </figure>
             <aside class="card">
               <h3 data-i18n="about_highlights_title">Claves del centro</h3>
@@ -235,21 +252,21 @@
         </div>
         <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_aerial_photo_title">Vista aérea de Sierra Magina</h3>
         <figure class="floor-figure mb-3">
-          <img src="../images/vista-aerea-sierra-magina.png" alt="" width="1920" height="640" loading="lazy"
+          <img src="../images/site/vista-aerea-sierra-magina.png" alt="" width="1920" height="640" loading="lazy"
             decoding="async" data-i18n-alt="img_vista_aerea_alt"
             class="rounded w-100 shadow-sm" style="border: 1px solid var(--border);" />
           <figcaption class="text-muted mt-2 small" data-i18n="about_aerial_photo_caption"></figcaption>
         </figure>
         <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_building_photo_title">El centro de interpretación</h3>
         <figure class="floor-figure mb-3">
-          <img src="../images/museo-moderno.png" alt="" width="1200" height="800" loading="lazy"
+          <img src="../images/site/museo-moderno.png" alt="" width="1200" height="800" loading="lazy"
             decoding="async" data-i18n-alt="img_museo_moderno_alt"
             class="rounded w-100 shadow-sm" style="border: 1px solid var(--border);" />
           <figcaption class="text-muted mt-2 small" data-i18n="building_photo_caption"></figcaption>
         </figure>
         <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_map_photo_title">Mapa arqueológico</h3>
         <figure class="floor-figure mb-0">
-          <img src="../images/mapa-arqueologico.png" alt="" width="1400" height="900" loading="lazy"
+          <img src="../images/site/mapa-arqueologico.png" alt="" width="1400" height="900" loading="lazy"
             decoding="async" data-i18n-alt="img_mapa_edificio_alt"
             class="rounded w-100 shadow-sm" style="border: 1px solid var(--border);" />
           <figcaption class="text-muted mt-2 small" data-i18n="building_map_caption"></figcaption>
@@ -257,23 +274,6 @@
       </div>
     </section>
 
-    <section class="section section-alt" id="contacto" aria-labelledby="contact-page-title">
-      <div class="container two-col">
-        <div>
-          <h2 id="contact-page-title" data-i18n="footer_contact">Contacto</h2>
-          <p data-i18n="contact_intro">Escribenos para organizar visitas escolares, actividades en grupo y
-            colaboraciones cientificas.</p>
-          <p class="small text-muted mb-0" data-i18n="contact_footer_note"></p>
-        </div>
-        <div class="card qr-card">
-          <h3 data-i18n="contact_quick_access">Acceso rapido</h3>
-          <p data-i18n="contact_qr_help">Escanea para abrir la pagina principal del proyecto.</p>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://paleomagina.example/inicio"
-            data-i18n-alt="contact_qr_alt" alt="Codigo QR para acceder al inicio de Paleomagina" width="180"
-            height="180" />
-        </div>
-      </div>
-    </section>
       </div>
     </div>
     <aside class="sobre-nav-float" aria-label="Secciones" data-i18n-aria-label="about_sections_nav_aria">
@@ -283,7 +283,6 @@
           <a href="#objetivos-museo" class="sobre-section-nav-link" data-i18n="about_nav_obj">Objetivos</a>
           <a href="#filosofia" class="sobre-section-nav-link" data-i18n="about_nav_phil">Filosofía</a>
           <a href="#edificio" class="sobre-section-nav-link" data-i18n="about_nav_build">Edificio</a>
-          <a href="#contacto" class="sobre-section-nav-link" data-i18n="about_nav_contact">Contacto</a>
         </div>
       </nav>
     </aside>

@@ -55,7 +55,7 @@ const zones = {
   }
 };
 
-const IMG_SRC = '../images/planta-baja-museo.png';
+const IMG_SRC = '../images/site/planta-baja-museo.png';
 
 let baseCanvas = null;
 let visibleCanvas = null;
