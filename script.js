@@ -253,21 +253,20 @@ function initSobreSectionNav() {
     .filter(Boolean);
   if (!sections.length) return;
 
-  function setActiveById(id) {
+  function setActiveNavById(id) {
     links.forEach((l) => {
       const on = l.getAttribute("href") === `#${id}`;
       l.classList.toggle("active", on);
       if (on) l.setAttribute("aria-current", "true");
       else    l.removeAttribute("aria-current");
     });
-    sections.forEach((sec) => sec.classList.toggle("sobre-section-active", sec.id === id));
   }
 
   function updateActive() {
     const y = window.scrollY + 168;
     let cur = sections[0].id;
     for (const sec of sections) { if (sec.offsetTop <= y) cur = sec.id; }
-    setActiveById(cur);
+    setActiveNavById(cur);
   }
 
   let ticking = false;
@@ -281,7 +280,7 @@ function initSobreSectionNav() {
       l.classList.add("is-tapped");
       l._pmTapTimer = window.setTimeout(() => l.classList.remove("is-tapped"), 600);
       const id = l.getAttribute("href")?.replace("#", "");
-      if (id) setActiveById(id);
+      if (id) setActiveNavById(id);
       window.requestAnimationFrame(() => window.requestAnimationFrame(updateActive));
     });
   });
@@ -327,7 +326,7 @@ if (document.getElementById('museumMapSVG')) {
 
 const floorsData = {
   'P1': {
-    image: '../images/Captura_de_pantalla_2026-05-13_132447.png',
+    image: '../images/site/Captura_de_pantalla_2026-05-13_132447.png',
     zones: [
       { zoneId: 'A0', name: { es: 'Bienvenida', en: 'Welcome' }, color: '#d4a373', points: '228,152 245,138 276,183 259,193 230,152', scopeKey: 'scope_a0' },
       { zoneId: 'A1', name: { es: 'El mar de Tetis', en: 'The Tethys Sea' }, color: '#e07a5f', points: '214,226 276,184 289,198 355,155 372,227 231,253', scopeKey: 'scope_a1' },
@@ -343,7 +342,7 @@ const floorsData = {
     ]
   },
   'PB': {
-    image: '../images/Captura_de_pantalla_2026-05-13_132657.png',
+    image: '../images/site/Captura_de_pantalla_2026-05-13_132657.png',
     zones: [
       { zoneId: 'PB_1', name: { es: 'Zona 1', en: 'Zone 1' }, color: '#d4a373', points: '560,175 738,52 795,287 722,341 736,359 702,383', scopeKey: 'scope_a0' },
       { zoneId: 'PB_2', name: { es: 'Zona 2', en: 'Zone 2' }, color: '#e07a5f', points: '702,388 735,362 781,426 788,424 841,503 694,532 673,501 745,453', scopeKey: 'scope_aan' },
