@@ -69,53 +69,141 @@
     <section class="page-audiovisuals-intro" aria-labelledby="audiovisuals-title">
       <div class="container">
         <h1 id="audiovisuals-title" data-i18n="audiovisuals_title">Audiovisuales educativos</h1>
-        <p class="hero-text mb-0" data-i18n="audiovisuals_intro">Documentales, piezas breves y explicaciones por ámbito con
-          subtítulos en español e inglés.</p>
+        <p class="hero-text mb-0" data-i18n="audiovisuals_intro">Documentales y piezas breves con subtítulos en español e inglés. Haz clic en play para verlos aquí mismo.</p>
       </div>
     </section>
 
+    <!-- 🎬 VIDEOS EMBEBIDOS (hardcoded, sin filtros) -->
     <section class="section" id="audiovisuals-content">
       <div class="container">
-        <h2 data-i18n="audiovisuals_available">Contenido disponible</h2>
-        <p class="section-lead" data-i18n="audiovisuals_section_lead">Selecciona un ámbito para filtrar piezas breves y documentales.</p>
+        <h2 class="mb-4" data-i18n="audiovisuals_available">Nuestros documentales</h2>
+        
+        <div class="row g-4">
+          
+          <!-- VIDEO 1 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <article class="card h-100">
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="https://www.youtube.com/embed/VIDEO_ID_1" 
+                  title="El origen de Sierra Mágina"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">🌋 El origen de Sierra Mágina</h5>
+                <p class="card-text flex-grow-1">Descubre cómo el choque de placas tectónicas formó este paisaje único hace 20 millones de años.</p>
+                <small class="text-muted">⏱️ 14:22 • <span class="badge bg-success">Subtítulos</span></small>
+              </div>
+            </article>
+          </div>
 
-        <div class="audiovisual-filter">
-          <button type="button" class="filter-btn active" data-filter="all" data-i18n="filter_all">Todos</button>
-          <button type="button" class="filter-btn" data-filter="geology" data-i18n="filter_geology">Geología</button>
-          <button type="button" class="filter-btn" data-filter="paleontology"
-            data-i18n="filter_paleontology">Paleontología</button>
-          <button type="button" class="filter-btn" data-filter="archaeology"
-            data-i18n="filter_archaeology">Arqueología</button>
-        </div>
+          <!-- VIDEO 2 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <article class="card h-100">
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="https://www.youtube.com/embed/VIDEO_ID_2" 
+                  title="El karst de Mágina: agua y piedra"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">💧 El karst de Mágina: agua y piedra</h5>
+                <p class="card-text flex-grow-1">Explora cuevas, simas y formaciones kársticas creadas por la erosión del agua sobre la caliza.</p>
+                <small class="text-muted">⏱️ 10:15 • <span class="badge bg-success">Subtítulos</span></small>
+              </div>
+            </article>
+          </div>
 
-        <div class="audiovisuals-grid" id="audiovisuals-grid" role="region" aria-live="polite">
-          <!-- Generado por JavaScript -->
+          <!-- VIDEO 3 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <article class="card h-100">
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="https://www.youtube.com/embed/VIDEO_ID_3" 
+                  title="Fósiles del mar de Thetys"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">🐚 Fósiles del mar de Thetys</h5>
+                <p class="card-text flex-grow-1">Viaja al Jurásico y conoce ammonites, belemnites y otros fósiles marinos de la antigua Thetys.</p>
+                <small class="text-muted">⏱️ 12:40 • <span class="badge bg-success">Subtítulos</span></small>
+              </div>
+            </article>
+          </div>
+
+          <!-- VIDEO 4 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <article class="card h-100">
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="https://www.youtube.com/embed/VIDEO_ID_4" 
+                  title="Mamíferos prehistóricos de Jaén"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">🦣 Mamíferos prehistóricos de Jaén</h5>
+                <p class="card-text flex-grow-1">Descubre los grandes mamíferos que habitaron estas tierras durante el Pleistoceno.</p>
+                <small class="text-muted">⏱️ 11:05 • <span class="badge bg-success">Subtítulos</span></small>
+              </div>
+            </article>
+          </div>
+
+          <!-- VIDEO 5 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <article class="card h-100">
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="https://www.youtube.com/embed/VIDEO_ID_5" 
+                  title="El poblamiento neolítico en Mágina"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">🏺 El poblamiento neolítico en Mágina</h5>
+                <p class="card-text flex-grow-1">Cómo las primeras comunidades agrícolas se adaptaron a este entorno montañoso.</p>
+                <small class="text-muted">⏱️ 13:18 • <span class="badge bg-success">Subtítulos</span></small>
+              </div>
+            </article>
+          </div>
+
+          <!-- VIDEO 6 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <article class="card h-100">
+              <div class="ratio ratio-16x9">
+                <iframe 
+                  src="https://www.youtube.com/embed/VIDEO_ID_6" 
+                  title="La vía romana de Sierra Mágina"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">🛣️ La vía romana de Sierra Mágina</h5>
+                <p class="card-text flex-grow-1">Recorrido por los restos de calzadas, puentes y asentamientos del Imperio Romano.</p>
+                <small class="text-muted">⏱️ 09:50 • <span class="badge bg-success">Subtítulos</span></small>
+              </div>
+            </article>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" id="accessibility-info">
-      <div class="container">
-        <h2 data-i18n="audiovisuals_accessibility">Accesibilidad</h2>
-        <div class="resource-grid">
-          <article class="card">
-            <h3 data-i18n="audiovisuals_subtitles">Subtítulos</h3>
-            <p data-i18n="audiovisuals_subtitles_p">Todos los audiovisuales cuentan con subtítulos en español e inglés
-              para garantizar accesibilidad auditiva.</p>
-          </article>
-          <article class="card">
-            <h3 data-i18n="audiovisuals_descriptions">Audiodescripciones</h3>
-            <p data-i18n="audiovisuals_descriptions_p">Disponibles descripciones de audio para personas con discapacidad
-              visual en contenido seleccionado.</p>
-          </article>
-          <article class="card">
-            <h3 data-i18n="audiovisuals_transcripts">Transcripciones</h3>
-            <p data-i18n="audiovisuals_transcripts_p">Acceso a texto completo de cada audiovisual para consulta
-              académica e inclusión digital.</p>
-          </article>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -154,55 +242,8 @@
     </div>
   </footer>
 
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../data.js"></script>
   <script src="../script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      renderAudiovisuals(currentLang);
-    });
-
-    function renderAudiovisuals(lang) {
-      const grid = document.getElementById('audiovisuals-grid');
-      const audiovisuals = getAudiovisuals(lang);
-
-      grid.innerHTML = audiovisuals.map(av => `
-          <article class="audiovisual-card" role="button" tabindex="0">
-            <div class="audiovisual-thumbnail">🎬</div>
-            <div class="audiovisual-content">
-              <span class="audiovisual-scope">${av.scope}</span>
-              <h3 class="audiovisual-title">${av.title}</h3>
-              <div class="audiovisual-duration">⏱️ ${av.duration}</div>
-              ${av.subtitle ? '<span class="audiovisual-subtitle-badge">✓ Subtítulos</span>' : ''}
-            </div>
-          </article>
-        `).join('');
-
-      document.querySelectorAll('.audiovisual-card').forEach(card => {
-        card.addEventListener('click', function () {
-          alert('Reproductor de video:\n' + this.querySelector('.audiovisual-title').textContent);
-        });
-        card.addEventListener('keypress', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            this.click();
-          }
-        });
-      });
-    }
-
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
-    const originalApplyLanguage = window.applyLanguage;
-    window.applyLanguage = function (lang) {
-      originalApplyLanguage(lang);
-      renderAudiovisuals(lang);
-    };
-  </script>
 </body>
-
 </html>

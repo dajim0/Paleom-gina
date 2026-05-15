@@ -32,14 +32,14 @@
 </head>
 
 <body>
-  <a class="skip-link visually-hidden-focusable" href="#main-content" data-i18n="skip_to_content">Saltar al contenido
-    principal</a>
+
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm pm-topnav"
     data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
     <div class="container">
       <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2 pm-brand-lockup" href="index.html">
-        <img src="../images/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44" decoding="async" />
+        <img src="../images/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44"
+          decoding="async" />
         <span class="pm-brand-text">Paleomagina</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pmMainNav"
@@ -87,7 +87,8 @@
         <div class="two-col content-split content-split--middle">
           <div class="content-prose">
             <h2 id="home-teaser-title" class="pm-heading-with-icon">
-              <img src="../images/icons/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
+              <img src="../images/icons/icono-montanas.png" alt="" width="56" height="56" loading="lazy"
+                decoding="async" class="pm-inline-icon" />
               <span data-i18n="home_teaser_title">Introducción</span>
             </h2>
             <p class="section-intro mb-3" data-i18n="home_teaser_intro"></p>
@@ -96,8 +97,8 @@
           </div>
           <div>
             <figure class="content-media-figure mb-0">
-              <img src="../images/museo-moderno.png" alt="" width="1200" height="800" loading="lazy"
-                decoding="async" data-i18n-alt="img_museo_moderno_alt" />
+              <img src="../images/museo-moderno.png" alt="" width="1200" height="800" loading="lazy" decoding="async"
+                data-i18n-alt="img_museo_moderno_alt" />
             </figure>
           </div>
         </div>
@@ -108,44 +109,39 @@
     <section id="museum-interactive-map" class="section section-alt py-5">
       <div class="container">
         <h2 class="text-center mb-3 fw-bold" data-i18n="museum_3d_title">Recreación interactiva del museo</h2>
-        
+
         <!-- SELECTOR DE PLANTA -->
         <div class="floor-switcher d-flex justify-content-center gap-2 mb-4">
           <button class="btn btn-sm btn-outline-primary active" data-floor="P1" id="btnFloorP1">Planta Primera</button>
           <button class="btn btn-sm btn-outline-primary" data-floor="PB" id="btnFloorPB">Planta Baja</button>
         </div>
 
-        <p class="text-center text-muted mb-4" data-i18n="museum_3d_intro">Pulsa en una zona coloreada para ver su descripción.</p>
-        
-        <div class="museum-map-wrapper position-relative mx-auto shadow rounded overflow-hidden" style="max-width: 800px; background: var(--card); border: 1px solid var(--border);">
+        <p class="text-center text-muted mb-4" data-i18n="museum_3d_intro">Pulsa en una zona coloreada para ver su
+          descripción.</p>
+
+        <div class="museum-map-wrapper position-relative mx-auto shadow rounded overflow-hidden"
+          style="max-width: 800px; background: var(--card); border: 1px solid var(--border);">
           <!-- Imagen de fondo -->
-          <img 
-            src="../images/Captura_de_pantalla_2026-05-13_132657.png" 
-            alt="Plano interactivo del Museo Paleomagina" 
-            class="img-fluid w-100 d-block museum-map-base"
-            id="museumMapBase"
-            loading="lazy"
-          >
-          
+          <img src="../images/Captura_de_pantalla_2026-05-13_132657.png" alt="Plano interactivo del Museo Paleomagina"
+            class="img-fluid w-100 d-block museum-map-base" id="museumMapBase" loading="lazy">
+
           <!-- Capa SVG interactiva -->
-          <svg 
-            id="museumMapSVG" 
-            class="position-absolute top-0 start-0 w-100 h-100 museum-map-overlay"
-            viewBox="0 0 400 350" 
-            preserveAspectRatio="none"
-            aria-label="Mapa interactivo con zonas seleccionables"
-          >
+          <svg id="museumMapSVG" class="position-absolute top-0 start-0 w-100 h-100 museum-map-overlay"
+            viewBox="0 0 400 350" preserveAspectRatio="none" aria-label="Mapa interactivo con zonas seleccionables">
             <!-- Los polígonos se generan con JS -->
           </svg>
 
           <!-- Tooltip flotante -->
-          <div id="museumMapTooltip" class="museum-map-tooltip position-absolute d-none p-3 rounded shadow-lg" style="z-index: 100; pointer-events: none; max-width: 280px;">
+          <div id="museumMapTooltip" class="museum-map-tooltip position-absolute d-none p-3 rounded shadow-lg"
+            style="z-index: 100; pointer-events: none; max-width: 280px;">
             <strong id="tooltipTitle" class="d-block mb-1"></strong>
             <small id="tooltipDesc" class="text-muted"></small>
           </div>
 
           <!-- Panel de información (se muestra al hacer clic) -->
-          <div id="museumMapInfoPanel" class="museum-map-panel position-absolute bottom-0 start-0 end-0 p-3 bg-light border-top d-none" style="z-index: 90;">
+          <div id="museumMapInfoPanel"
+            class="museum-map-panel position-absolute bottom-0 start-0 end-0 p-3 bg-light border-top d-none"
+            style="z-index: 90;">
             <div class="d-flex justify-content-between align-items-start gap-3">
               <div class="flex-grow-1">
                 <h5 id="panelTitle" class="mb-1 fw-bold"></h5>
@@ -157,7 +153,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Leyenda de zonas -->
         <div class="mt-3 d-flex flex-wrap justify-content-center gap-2" id="museumMapLegend"></div>
       </div>
