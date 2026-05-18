@@ -6,10 +6,10 @@
     list.innerHTML = glossaryData
       .map(
         (item) => `
-          <div class="glossary-entry">
-            <dt class="glossary-term">${item.term}</dt>
-            <dd class="glossary-definition">${item.def}</dd>
-          </div>
+          <details class="glossary-entry">
+            <summary class="glossary-term">📌 ${item.term}</summary>
+            <div class="glossary-definition">${item.def}</div>
+          </details>
         `
       )
       .join("");
@@ -38,10 +38,10 @@
         glossaryList.innerHTML = filtered
           .map(
             (item) => `
-          <div class="glossary-entry">
-            <dt class="glossary-term">${item.term}</dt>
-            <dd class="glossary-definition">${item.def}</dd>
-          </div>
+          <details class="glossary-entry">
+            <summary class="glossary-term">📌 ${item.term}</summary>
+            <div class="glossary-definition">${item.def}</div>
+          </details>
         `
           )
           .join("");

@@ -279,6 +279,89 @@ function initSobreSectionNav() {
   updateActive();
 }
 
+function getTimeOfDayTheme(hour) {
+  if (hour >= 5 && hour < 11) return { className: "time-morning", label: "Amanecer" };
+  if (hour >= 11 && hour < 17) return { className: "time-afternoon", label: "Mediodía" };
+  if (hour >= 17 && hour < 21) return { className: "time-evening", label: "Tarde" };
+  return { className: "time-night", label: "Noche" };
+}
+
+function initTimeOfDayEffects() {
+  const chip = document.getElementById("timeOfDayChip");
+  if (!chip) return;
+  const now = new Date();
+  const theme = getTimeOfDayTheme(now.getHours());
+  document.body.classList.remove("time-morning", "time-afternoon", "time-evening", "time-night");
+  document.body.classList.add(theme.className);
+  chip.textContent = `${theme.label} · ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+}
+
+function initScrollReveal() {
+  const items = [...document.querySelectorAll(".animate-on-scroll")];
+  if (!items.length || !window.IntersectionObserver) {
+    items.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18 });
+
+  items.forEach((item) => observer.observe(item));
+}
+
+function openVideoOverlay(videoId, videoTitle) {
+  const overlay = document.getElementById("videoOverlay");
+  const frame = document.getElementById("videoOverlayFrame");
+  if (!overlay || !frame || !videoId) return;
+  overlay.classList.remove("d-none");
+  overlay.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  frame.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&cc_load_policy=1&cc_lang_pref=en&hl=en`;
+  frame.title = videoTitle || "Video en pantalla grande";
+}
+
+function closeVideoOverlay() {
+  const overlay = document.getElementById("videoOverlay");
+  const frame = document.getElementById("videoOverlayFrame");
+  if (!overlay || !frame) return;
+  frame.src = "";
+  overlay.classList.add("d-none");
+  overlay.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function initVideoOverlay() {
+  const buttons = document.querySelectorAll(".video-launch-button");
+  const closeBtn = document.getElementById("videoOverlayClose");
+  const backdrop = document.getElementById("videoOverlayBackdrop");
+  if (!buttons.length || !closeBtn || !backdrop) return;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const videoId = btn.dataset.videoId;
+      const title = btn.dataset.videoTitle || btn.getAttribute("aria-label") || "Video";
+      openVideoOverlay(videoId, title);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeVideoOverlay);
+  backdrop.addEventListener("click", closeVideoOverlay);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      const overlay = document.getElementById("videoOverlay");
+      if (overlay && !overlay.classList.contains("d-none")) {
+        closeVideoOverlay();
+      }
+    }
+  });
+}
+
 // ── Listeners globales ───────────────────────────────────────────────
 document.querySelectorAll(".lang-btn").forEach((btn) => {
   btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
@@ -302,6 +385,9 @@ applyTheme(initialTheme);
 applyLanguage(defaultLang);
 enablePageTransitions();
 initMainNavActiveState();
+initTimeOfDayEffects();
+initScrollReveal();
+initVideoOverlay();
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initSobreSectionNav);
