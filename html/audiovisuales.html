@@ -18,7 +18,7 @@
     href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=2" />
+  <link rel="stylesheet" href="../styles.css" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
@@ -27,12 +27,11 @@
   <a class="skip-link visually-hidden-focusable" href="#main-content" data-i18n="skip_to_content">Saltar al contenido
     principal</a>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm pm-topnav"
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm pm-topnav"
     data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
     <div class="container">
       <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2 pm-brand-lockup" href="index.html">
-        <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44"
-          decoding="async" />
+        <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44" decoding="async" />
         <span class="pm-brand-text">Paleomagina</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pmMainNav"
@@ -61,42 +60,46 @@
     </div>
   </nav>
 
-  <section class="page-hero" style="--hero-bg-image: url('../images/site/ciencia-tecnologia.png')"
-    aria-labelledby="page-hero-audiovisuals-title">
+  <section
+    class="page-hero"
+    style="--hero-bg-image: url('../images/site/ciencia-tecnologia.png')"
+    aria-labelledby="page-hero-audiovisuals-title"
+  >
     <div class="hero-overlay" aria-hidden="true"></div>
-    <img class="page-hero__media" src="../images/site/ciencia-tecnologia.png" alt="" width="1920" height="640"
-      loading="eager" decoding="async" data-i18n-alt="img_audiovisuals_banner_alt" />
+    <img
+      class="page-hero__media"
+      src="../images/site/ciencia-tecnologia.png"
+      alt=""
+      width="1920"
+      height="640"
+      loading="eager"
+      decoding="async"
+      data-i18n-alt="img_audiovisuals_banner_alt"
+    />
     <div class="container hero-content">
       <p class="kicker" data-i18n="page_hero_audiovisuals_kicker">Audiovisuales</p>
       <h1 id="page-hero-audiovisuals-title" data-i18n="page_hero_audiovisuals_title">Audiovisuales educativos</h1>
-      <p class="hero-text" data-i18n="page_hero_audiovisuals_text">Videos educativos en español de menos de 20 minutos
-        con subtítulos en inglés activados al reproducir.</p>
+      <p class="hero-text" data-i18n="page_hero_audiovisuals_text">Videos educativos en español de menos de 20 minutos con subtítulos en inglés activados al reproducir.</p>
     </div>
   </section>
 
   <main id="main-content" class="py-4">
     <section class="section" id="audiovisuals-content">
       <div class="container">
-        <h2 class="mb-4 pm-heading-with-icon"><img src="../images/site/icono-fuego.png" alt="" width="56" height="56"
-            loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="audiovisuals_available">Nuestros
-            documentales</span></h2>
-
+        <h2 class="mb-4 pm-heading-with-icon"><img src="../images/site/icono-fuego.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="audiovisuals_available">Nuestros documentales</span></h2>
+        
         <div class="row g-4">
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/bffze7j_wWE/hqdefault.jpg" alt="Bordes de placa en 10 minutos"
-                  loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="bffze7j_wWE"
-                  data-video-title="Bordes de placa en 10 minutos"
-                  aria-label="Ver Bordes de placa en 10 minutos en pantalla grande">
+                <img src="https://img.youtube.com/vi/bffze7j_wWE/hqdefault.jpg" alt="Bordes de placa en 10 minutos" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="bffze7j_wWE" data-video-title="Bordes de placa en 10 minutos" aria-label="Ver Bordes de placa en 10 minutos en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">🌐 Bordes de placa</h5>
-                <p class="card-text flex-grow-1">Resumen en español sobre los bordes de placa y cómo generan terremotos
-                  y volcanes.</p>
+                <p class="card-text flex-grow-1">Resumen en español sobre los bordes de placa y cómo generan terremotos y volcanes.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -105,18 +108,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/OCPjD_dzcls/hqdefault.jpg"
-                  alt="Evolución geológica de la Península Ibérica" loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="OCPjD_dzcls"
-                  data-video-title="Evolución geológica de la Península Ibérica"
-                  aria-label="Ver Evolución geológica de la Península Ibérica en pantalla grande">
+                <img src="https://img.youtube.com/vi/OCPjD_dzcls/hqdefault.jpg" alt="Evolución geológica de la Península Ibérica" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="OCPjD_dzcls" data-video-title="Evolución geológica de la Península Ibérica" aria-label="Ver Evolución geológica de la Península Ibérica en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">🧭 Iberia geológica</h5>
-                <p class="card-text flex-grow-1">Guía en español sobre la evolución geológica de la Península Ibérica.
-                </p>
+                <p class="card-text flex-grow-1">Guía en español sobre la evolución geológica de la Península Ibérica.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -125,17 +124,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/5i9zPNzfdbU/hqdefault.jpg" alt="Evolución de la Tierra"
-                  loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="5i9zPNzfdbU"
-                  data-video-title="Evolución de la Tierra" aria-label="Ver Evolución de la Tierra en pantalla grande">
+                <img src="https://img.youtube.com/vi/5i9zPNzfdbU/hqdefault.jpg" alt="Evolución de la Tierra" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="5i9zPNzfdbU" data-video-title="Evolución de la Tierra" aria-label="Ver Evolución de la Tierra en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">🌍 Evolución de la Tierra</h5>
-                <p class="card-text flex-grow-1">Explicación sencilla en español sobre el origen y los cambios del
-                  planeta.</p>
+                <p class="card-text flex-grow-1">Explicación sencilla en español sobre el origen y los cambios del planeta.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -144,18 +140,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/Mx4RpaJ9OOA/hqdefault.jpg"
-                  alt="Estructura y composición de la Tierra" loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="Mx4RpaJ9OOA"
-                  data-video-title="Estructura y composición de la Tierra"
-                  aria-label="Ver Estructura y composición de la Tierra en pantalla grande">
+                <img src="https://img.youtube.com/vi/Mx4RpaJ9OOA/hqdefault.jpg" alt="Estructura y composición de la Tierra" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="Mx4RpaJ9OOA" data-video-title="Estructura y composición de la Tierra" aria-label="Ver Estructura y composición de la Tierra en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">🧪 Estructura terrestre</h5>
-                <p class="card-text flex-grow-1">Video en español que describe las capas de la Tierra y sus materiales.
-                </p>
+                <p class="card-text flex-grow-1">Video en español que describe las capas de la Tierra y sus materiales.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -164,18 +156,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/ptO0m3BjghQ/hqdefault.jpg" alt="Escala de Tiempo Geológico"
-                  loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="ptO0m3BjghQ"
-                  data-video-title="Escala de Tiempo Geológico"
-                  aria-label="Ver Escala de Tiempo Geológico en pantalla grande">
+                <img src="https://img.youtube.com/vi/ptO0m3BjghQ/hqdefault.jpg" alt="Escala de Tiempo Geológico" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="ptO0m3BjghQ" data-video-title="Escala de Tiempo Geológico" aria-label="Ver Escala de Tiempo Geológico en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">⏳ Escala geológica</h5>
-                <p class="card-text flex-grow-1">Resumen en español del tiempo geológico y las grandes eras de la
-                  Tierra.</p>
+                <p class="card-text flex-grow-1">Resumen en español del tiempo geológico y las grandes eras de la Tierra.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -184,18 +172,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/UEx5hCcxO-Y/hqdefault.jpg" alt="La historia de la Tierra"
-                  loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="UEx5hCcxO-Y"
-                  data-video-title="La historia de la Tierra"
-                  aria-label="Ver La historia de la Tierra en pantalla grande">
+                <img src="https://img.youtube.com/vi/UEx5hCcxO-Y/hqdefault.jpg" alt="La historia de la Tierra" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="UEx5hCcxO-Y" data-video-title="La historia de la Tierra" aria-label="Ver La historia de la Tierra en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">📚 Historia de la Tierra</h5>
-                <p class="card-text flex-grow-1">Lección en español sobre los hitos clave del desarrollo geológico del
-                  planeta.</p>
+                <p class="card-text flex-grow-1">Lección en español sobre los hitos clave del desarrollo geológico del planeta.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -205,15 +189,13 @@
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
                 <img src="https://img.youtube.com/vi/3Vaj7YNepik/hqdefault.jpg" alt="Tipos de rocas" loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="3Vaj7YNepik"
-                  data-video-title="Tipos de rocas" aria-label="Ver Tipos de rocas en pantalla grande">
+                <button class="video-launch-button" type="button" data-video-id="3Vaj7YNepik" data-video-title="Tipos de rocas" aria-label="Ver Tipos de rocas en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">🪨 Tipos de rocas</h5>
-                <p class="card-text flex-grow-1">Explicación en español de las rocas ígneas, sedimentarias y
-                  metamórficas.</p>
+                <p class="card-text flex-grow-1">Explicación en español de las rocas ígneas, sedimentarias y metamórficas.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -222,17 +204,14 @@
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/Vx6ESMK4CCk/hqdefault.jpg" alt="Placas tectónicas"
-                  loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="Vx6ESMK4CCk"
-                  data-video-title="Placas tectónicas" aria-label="Ver Placas tectónicas en pantalla grande">
+                <img src="https://img.youtube.com/vi/Vx6ESMK4CCk/hqdefault.jpg" alt="Placas tectónicas" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="Vx6ESMK4CCk" data-video-title="Placas tectónicas" aria-label="Ver Placas tectónicas en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">🌍 Placas tectónicas</h5>
-                <p class="card-text flex-grow-1">Vídeo corto en español sobre el origen de los océanos y la tectónica de
-                  placas.</p>
+                <p class="card-text flex-grow-1">Vídeo corto en español sobre el origen de los océanos y la tectónica de placas.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
@@ -241,25 +220,20 @@
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card h-100">
               <div class="ratio ratio-16x9 video-thumb">
-                <img src="https://img.youtube.com/vi/Mpj8__oHbaw/hqdefault.jpg" alt="Evolución geológica de Iberia"
-                  loading="lazy" />
-                <button class="video-launch-button" type="button" data-video-id="Mpj8__oHbaw"
-                  data-video-title="Evolución geológica de Iberia"
-                  aria-label="Ver Evolución geológica de Iberia en pantalla grande">
+                <img src="https://img.youtube.com/vi/Mpj8__oHbaw/hqdefault.jpg" alt="Evolución geológica de Iberia" loading="lazy" />
+                <button class="video-launch-button" type="button" data-video-id="Mpj8__oHbaw" data-video-title="Evolución geológica de Iberia" aria-label="Ver Evolución geológica de Iberia en pantalla grande">
                   <span class="play-icon">▶</span>
                 </button>
               </div>
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title">🧭 Geología de Iberia</h5>
-                <p class="card-text flex-grow-1">Breve video en español sobre los cambios geológicos de la Península
-                  Ibérica.</p>
+                <p class="card-text flex-grow-1">Breve video en español sobre los cambios geológicos de la Península Ibérica.</p>
                 <small class="text-muted"><span class="badge bg-success">Subtítulos EN</span></small>
               </div>
             </article>
           </div>
         </div>
-        <p class="mt-4 lead">Haz clic en una miniatura para abrir el vídeo en pantalla grande. Todos duran menos de 20
-          minutos.</p>
+        <p class="mt-4 lead">Haz clic en una miniatura para abrir el vídeo en pantalla grande. Todos duran menos de 20 minutos.</p>
       </div>
     </section>
     <div class="video-overlay d-none" id="videoOverlay" aria-hidden="true">
@@ -267,9 +241,7 @@
       <div class="video-overlay-panel" role="dialog" aria-modal="true" aria-label="Reproductor de video">
         <button type="button" class="video-overlay-close" id="videoOverlayClose" aria-label="Cerrar video">×</button>
         <div class="video-overlay-content">
-          <iframe id="videoOverlayFrame" src="" title="Video en pantalla grande"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen loading="lazy"></iframe>
+          <iframe id="videoOverlayFrame" src="" title="Video en pantalla grande" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <p class="text-muted small mt-2">Subtítulos en inglés activados para todos los vídeos.</p>
       </div>
@@ -314,9 +286,12 @@
   </footer>
 
 
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="../data.js"></script>
-  <script defer src="../script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../data.js"></script>
+  <script src="../script.js"></script>
 </body>
-
 </html>
+
+
+
+

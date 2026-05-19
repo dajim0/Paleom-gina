@@ -11,19 +11,18 @@
     href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=2" />
+  <link rel="stylesheet" href="../styles.css" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm pm-topnav"
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm pm-topnav"
     data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
     <div class="container">
       <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2 pm-brand-lockup" href="index.html">
-        <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44"
-          decoding="async" />
+        <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44" decoding="async" />
         <span class="pm-brand-text">Paleomagina</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pmMainNav"
@@ -52,11 +51,22 @@
     </div>
   </nav>
 
-  <section class="page-hero" style="--hero-bg-image: url('../images/site/FOSILES.png'); --hero-bg-position: center 40%"
-    aria-labelledby="page-hero-about-title">
+  <section
+    class="page-hero"
+    style="--hero-bg-image: url('../images/site/FOSILES.png'); --hero-bg-position: center 40%"
+    aria-labelledby="page-hero-about-title"
+  >
     <div class="hero-overlay" aria-hidden="true"></div>
-    <img class="page-hero__media" src="../images/site/FOSILES.png" alt="" width="1920" height="640" loading="eager"
-      decoding="async" data-i18n-alt="img_fosil_alt" />
+    <img
+      class="page-hero__media"
+      src="../images/site/FOSILES.png"
+      alt=""
+      width="1920"
+      height="640"
+      loading="eager"
+      decoding="async"
+      data-i18n-alt="img_fosil_alt"
+    />
     <div class="container hero-content">
       <p class="kicker" data-i18n="page_hero_about_kicker">Sobre el centro</p>
       <h1 id="page-hero-about-title" data-i18n="page_hero_about_title">Conoce Paleomagina</h1>
@@ -67,205 +77,196 @@
   <main id="main-content" class="sobre-page-main">
     <div class="container sobre-page-layout">
       <div class="sobre-page-sections">
-        <section class="section" id="que-es">
-          <div class="container">
-            <div class="two-col content-split">
-              <div class="content-prose">
-                <p class="section-intro" data-i18n="que_es_intro"></p>
-                <ul>
-                  <li data-i18n="que_es_li_rocks"></li>
-                  <li data-i18n="que_es_li_landscape"></li>
-                  <li data-i18n="que_es_li_science"></li>
-                  <li data-i18n="que_es_li_history"></li>
-                </ul>
-                <p class="mb-2" data-i18n="que_es_combine"></p>
-                <ul class="mb-0">
-                  <li data-i18n="que_es_pillar_1"></li>
-                  <li data-i18n="que_es_pillar_2"></li>
-                  <li data-i18n="que_es_pillar_3"></li>
-                  <li data-i18n="que_es_pillar_4"></li>
-                  <li data-i18n="que_es_pillar_5"></li>
-                  <li data-i18n="que_es_pillar_6"></li>
-                  <li data-i18n="que_es_pillar_7"></li>
-                </ul>
-              </div>
-              <div class="sobre-que-es-media-stack">
-                <figure class="content-media-figure mb-0">
-                  <img src="../images/site/sobre-el-museo.png" alt="" width="1200" height="800" loading="lazy"
-                    decoding="async" data-i18n-alt="img_sobre_museo_alt" />
-                </figure>
-                <figure class="content-media-figure sobre-que-es-media-stack__item mb-0">
-                  <img src="../images/site/HUELLAS%20FOSILES_peeled(1).png" alt="" width="1200" height="800"
-                    loading="lazy" decoding="async" data-i18n-alt="img_huellas_fosiles_alt" />
-                </figure>
-                <figure class="content-media-figure sobre-que-es-media-stack__item mb-0">
-                  <img src="../images/site/HERRAMIENTAS%20PREHISTORICAS.png" alt="" width="1200" height="800"
-                    loading="lazy" decoding="async" data-i18n-alt="img_herramientas_prehistoricas_alt" />
-                </figure>
-              </div>
-            </div>
+    <section class="section" id="que-es">
+      <div class="container">
+        <div class="two-col content-split">
+          <div class="content-prose">
+            <p class="section-intro" data-i18n="que_es_intro"></p>
+            <ul>
+              <li data-i18n="que_es_li_rocks"></li>
+              <li data-i18n="que_es_li_landscape"></li>
+              <li data-i18n="que_es_li_science"></li>
+              <li data-i18n="que_es_li_history"></li>
+            </ul>
+            <p class="mb-2" data-i18n="que_es_combine"></p>
+            <ul class="mb-0">
+              <li data-i18n="que_es_pillar_1"></li>
+              <li data-i18n="que_es_pillar_2"></li>
+              <li data-i18n="que_es_pillar_3"></li>
+              <li data-i18n="que_es_pillar_4"></li>
+              <li data-i18n="que_es_pillar_5"></li>
+              <li data-i18n="que_es_pillar_6"></li>
+              <li data-i18n="que_es_pillar_7"></li>
+            </ul>
           </div>
-        </section>
-
-        <section class="section section-alt" id="objetivos-museo" aria-labelledby="obj-museo-title">
-          <div class="container">
-            <h2 id="obj-museo-title" class="pm-heading-with-icon"><img src="../images/site/icono-laboratorio.png" alt=""
-                width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span
-                data-i18n="obj_museum_title">Objetivos del museo</span></h2>
-            <p class="section-lead" data-i18n="obj_museum_intro"></p>
-            <div class="resource-grid">
-              <article class="card">
-                <h3 data-i18n="obj_sci_t">Objetivos científicos</h3>
-                <p class="small text-muted mb-2" data-i18n="obj_sci_intro"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="obj_sci_li1"></li>
-                  <li data-i18n="obj_sci_li2"></li>
-                  <li data-i18n="obj_sci_li3"></li>
-                  <li data-i18n="obj_sci_li4"></li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3 data-i18n="obj_edu_t">Objetivos educativos</h3>
-                <p class="small text-muted mb-2" data-i18n="obj_edu_intro"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="obj_edu_li1"></li>
-                  <li data-i18n="obj_edu_li2"></li>
-                  <li data-i18n="obj_edu_li3"></li>
-                  <li data-i18n="obj_edu_li4"></li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3 data-i18n="obj_tour_t">Objetivos turísticos</h3>
-                <p class="small text-muted mb-2" data-i18n="obj_tour_intro"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="obj_tour_li1"></li>
-                  <li data-i18n="obj_tour_li2"></li>
-                  <li data-i18n="obj_tour_li3"></li>
-                  <li data-i18n="obj_tour_li4"></li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3 data-i18n="obj_soc_t">Objetivos sociales</h3>
-                <p class="small text-muted mb-2" data-i18n="obj_soc_intro"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="obj_soc_li1"></li>
-                  <li data-i18n="obj_soc_li2"></li>
-                  <li data-i18n="obj_soc_li3"></li>
-                  <li data-i18n="obj_soc_li4"></li>
-                </ul>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="filosofia" aria-labelledby="filosofia-title">
-          <div class="container">
-            <h2 id="filosofia-title" class="pm-heading-with-icon"><img src="../images/site/icono-adn.png" alt=""
-                width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span
-                data-i18n="philosophy_title">Filosofía del proyecto</span></h2>
-            <div class="grid-cards">
-              <article class="card">
-                <h3 data-i18n="phil_archives_t">El paisaje como archivo</h3>
-                <p class="small text-muted mb-2" data-i18n="phil_archives_lead"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="phil_archives_li1"></li>
-                  <li data-i18n="phil_archives_li2"></li>
-                  <li data-i18n="phil_archives_li3"></li>
-                  <li data-i18n="phil_archives_li4"></li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3 data-i18n="phil_process_t">La ciencia como proceso</h3>
-                <p class="small text-muted mb-2" data-i18n="phil_process_lead"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="phil_process_li1"></li>
-                  <li data-i18n="phil_process_li2"></li>
-                  <li data-i18n="phil_process_li3"></li>
-                  <li data-i18n="phil_process_li4"></li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3 data-i18n="phil_emotion_t">Ciencia y emoción</h3>
-                <p class="small text-muted mb-2" data-i18n="phil_emotion_lead"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="phil_emotion_li1"></li>
-                  <li data-i18n="phil_emotion_li2"></li>
-                  <li data-i18n="phil_emotion_li3"></li>
-                  <li data-i18n="phil_emotion_li4"></li>
-                </ul>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section section-alt" id="edificio" aria-labelledby="edificio-title">
-          <div class="container">
-            <h2 id="edificio-title" class="pm-heading-with-icon"><img src="../images/site/icono-montanas.png" alt=""
-                width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span
-                data-i18n="building_title">El edificio</span></h2>
-            <p class="section-lead mb-4">
-              <span data-i18n="building_visit_teaser"></span>
-              <a href="ambitos.html" data-i18n="nav_exhibits">Ámbitos</a><span
-                data-i18n="building_visit_teaser_end"></span>
-            </p>
-            <div class="grid-cards">
-              <article class="card">
-                <h3 data-i18n="building_org_t">Organización</h3>
-                <p class="small text-muted mb-2" data-i18n="building_org_lead"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="building_org_li1"></li>
-                  <li data-i18n="building_org_li2"></li>
-                  <li data-i18n="building_org_li3"></li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3 data-i18n="building_spaces_t">Espacios</h3>
-                <p class="small text-muted mb-2" data-i18n="building_spaces_lead"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="building_spaces_li1"></li>
-                  <li data-i18n="building_spaces_li2"></li>
-                  <li data-i18n="building_spaces_li3"></li>
-                  <li data-i18n="building_spaces_li4"></li>
-                  <li data-i18n="building_spaces_li5"></li>
-                  <li data-i18n="building_spaces_li6"></li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3 data-i18n="building_access_t">Accesibilidad</h3>
-                <p class="small text-muted mb-2" data-i18n="building_access_lead"></p>
-                <ul class="small mb-0">
-                  <li data-i18n="building_access_li1"></li>
-                  <li data-i18n="building_access_li2"></li>
-                  <li data-i18n="building_access_li3"></li>
-                  <li data-i18n="building_access_li4"></li>
-                </ul>
-              </article>
-            </div>
-            <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_aerial_photo_title">Vista aérea de Sierra Magina
-            </h3>
-            <figure class="floor-figure mb-3">
-              <img src="../images/site/vista-aerea-sierra-magina.png" alt="" width="1920" height="640" loading="lazy"
-                decoding="async" data-i18n-alt="img_vista_aerea_alt" class="rounded w-100 shadow-sm"
-                style="border: 1px solid var(--border);" />
-              <figcaption class="text-muted mt-2 small" data-i18n="about_aerial_photo_caption"></figcaption>
+          <div class="sobre-que-es-media-stack">
+            <figure class="content-media-figure mb-0">
+              <img src="../images/site/sobre-el-museo.png" alt="" width="1200" height="800" loading="lazy"
+                decoding="async" data-i18n-alt="img_sobre_museo_alt" />
             </figure>
-            <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_building_photo_title">El centro de
-              interpretación</h3>
-            <figure class="floor-figure mb-3">
-              <img src="../images/site/museo-moderno.png" alt="" width="1200" height="800" loading="lazy"
-                decoding="async" data-i18n-alt="img_museo_moderno_alt" class="rounded w-100 shadow-sm"
-                style="border: 1px solid var(--border);" />
-              <figcaption class="text-muted mt-2 small" data-i18n="building_photo_caption"></figcaption>
+            <figure class="content-media-figure sobre-que-es-media-stack__item mb-0">
+              <img src="../images/site/HUELLAS%20FOSILES_peeled(1).png" alt="" width="1200" height="800" loading="lazy"
+                decoding="async" data-i18n-alt="img_huellas_fosiles_alt" />
             </figure>
-            <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_map_photo_title">Mapa arqueológico</h3>
-            <figure class="floor-figure mb-0">
-              <img src="../images/site/mapa-arqueologico.png" alt="" width="1400" height="900" loading="lazy"
-                decoding="async" data-i18n-alt="img_mapa_edificio_alt" class="rounded w-100 shadow-sm"
-                style="border: 1px solid var(--border);" />
-              <figcaption class="text-muted mt-2 small" data-i18n="building_map_caption"></figcaption>
+            <figure class="content-media-figure sobre-que-es-media-stack__item mb-0">
+              <img src="../images/site/HERRAMIENTAS%20PREHISTORICAS.png" alt="" width="1200" height="800" loading="lazy"
+                decoding="async" data-i18n-alt="img_herramientas_prehistoricas_alt" />
             </figure>
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="objetivos-museo" aria-labelledby="obj-museo-title">
+      <div class="container">
+        <h2 id="obj-museo-title" class="pm-heading-with-icon"><img src="../images/site/icono-laboratorio.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="obj_museum_title">Objetivos del museo</span></h2>
+        <p class="section-lead" data-i18n="obj_museum_intro"></p>
+        <div class="resource-grid">
+          <article class="card">
+            <h3 data-i18n="obj_sci_t">Objetivos científicos</h3>
+            <p class="small text-muted mb-2" data-i18n="obj_sci_intro"></p>
+            <ul class="small mb-0">
+              <li data-i18n="obj_sci_li1"></li>
+              <li data-i18n="obj_sci_li2"></li>
+              <li data-i18n="obj_sci_li3"></li>
+              <li data-i18n="obj_sci_li4"></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="obj_edu_t">Objetivos educativos</h3>
+            <p class="small text-muted mb-2" data-i18n="obj_edu_intro"></p>
+            <ul class="small mb-0">
+              <li data-i18n="obj_edu_li1"></li>
+              <li data-i18n="obj_edu_li2"></li>
+              <li data-i18n="obj_edu_li3"></li>
+              <li data-i18n="obj_edu_li4"></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="obj_tour_t">Objetivos turísticos</h3>
+            <p class="small text-muted mb-2" data-i18n="obj_tour_intro"></p>
+            <ul class="small mb-0">
+              <li data-i18n="obj_tour_li1"></li>
+              <li data-i18n="obj_tour_li2"></li>
+              <li data-i18n="obj_tour_li3"></li>
+              <li data-i18n="obj_tour_li4"></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="obj_soc_t">Objetivos sociales</h3>
+            <p class="small text-muted mb-2" data-i18n="obj_soc_intro"></p>
+            <ul class="small mb-0">
+              <li data-i18n="obj_soc_li1"></li>
+              <li data-i18n="obj_soc_li2"></li>
+              <li data-i18n="obj_soc_li3"></li>
+              <li data-i18n="obj_soc_li4"></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="filosofia" aria-labelledby="filosofia-title">
+      <div class="container">
+        <h2 id="filosofia-title" class="pm-heading-with-icon"><img src="../images/site/icono-adn.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="philosophy_title">Filosofía del proyecto</span></h2>
+        <div class="grid-cards">
+          <article class="card">
+            <h3 data-i18n="phil_archives_t">El paisaje como archivo</h3>
+            <p class="small text-muted mb-2" data-i18n="phil_archives_lead"></p>
+            <ul class="small mb-0">
+              <li data-i18n="phil_archives_li1"></li>
+              <li data-i18n="phil_archives_li2"></li>
+              <li data-i18n="phil_archives_li3"></li>
+              <li data-i18n="phil_archives_li4"></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="phil_process_t">La ciencia como proceso</h3>
+            <p class="small text-muted mb-2" data-i18n="phil_process_lead"></p>
+            <ul class="small mb-0">
+              <li data-i18n="phil_process_li1"></li>
+              <li data-i18n="phil_process_li2"></li>
+              <li data-i18n="phil_process_li3"></li>
+              <li data-i18n="phil_process_li4"></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="phil_emotion_t">Ciencia y emoción</h3>
+            <p class="small text-muted mb-2" data-i18n="phil_emotion_lead"></p>
+            <ul class="small mb-0">
+              <li data-i18n="phil_emotion_li1"></li>
+              <li data-i18n="phil_emotion_li2"></li>
+              <li data-i18n="phil_emotion_li3"></li>
+              <li data-i18n="phil_emotion_li4"></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="edificio" aria-labelledby="edificio-title">
+      <div class="container">
+        <h2 id="edificio-title" class="pm-heading-with-icon"><img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="building_title">El edificio</span></h2>
+        <p class="section-lead mb-4">
+          <span data-i18n="building_visit_teaser"></span>
+          <a href="ambitos.html" data-i18n="nav_exhibits">Ámbitos</a><span data-i18n="building_visit_teaser_end"></span>
+        </p>
+        <div class="grid-cards">
+          <article class="card">
+            <h3 data-i18n="building_org_t">Organización</h3>
+            <p class="small text-muted mb-2" data-i18n="building_org_lead"></p>
+            <ul class="small mb-0">
+              <li data-i18n="building_org_li1"></li>
+              <li data-i18n="building_org_li2"></li>
+              <li data-i18n="building_org_li3"></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="building_spaces_t">Espacios</h3>
+            <p class="small text-muted mb-2" data-i18n="building_spaces_lead"></p>
+            <ul class="small mb-0">
+              <li data-i18n="building_spaces_li1"></li>
+              <li data-i18n="building_spaces_li2"></li>
+              <li data-i18n="building_spaces_li3"></li>
+              <li data-i18n="building_spaces_li4"></li>
+              <li data-i18n="building_spaces_li5"></li>
+              <li data-i18n="building_spaces_li6"></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3 data-i18n="building_access_t">Accesibilidad</h3>
+            <p class="small text-muted mb-2" data-i18n="building_access_lead"></p>
+            <ul class="small mb-0">
+              <li data-i18n="building_access_li1"></li>
+              <li data-i18n="building_access_li2"></li>
+              <li data-i18n="building_access_li3"></li>
+              <li data-i18n="building_access_li4"></li>
+            </ul>
+          </article>
+        </div>
+        <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_aerial_photo_title">Vista aérea de Sierra Magina</h3>
+        <figure class="floor-figure mb-3">
+          <img src="../images/site/vista-aerea-sierra-magina.png" alt="" width="1920" height="640" loading="lazy"
+            decoding="async" data-i18n-alt="img_vista_aerea_alt"
+            class="rounded w-100 shadow-sm" style="border: 1px solid var(--border);" />
+          <figcaption class="text-muted mt-2 small" data-i18n="about_aerial_photo_caption"></figcaption>
+        </figure>
+        <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_building_photo_title">El centro de interpretación</h3>
+        <figure class="floor-figure mb-3">
+          <img src="../images/site/museo-moderno.png" alt="" width="1200" height="800" loading="lazy"
+            decoding="async" data-i18n-alt="img_museo_moderno_alt"
+            class="rounded w-100 shadow-sm" style="border: 1px solid var(--border);" />
+          <figcaption class="text-muted mt-2 small" data-i18n="building_photo_caption"></figcaption>
+        </figure>
+        <h3 class="h5 mt-4 mb-2 about-media-title" data-i18n="about_map_photo_title">Mapa arqueológico</h3>
+        <figure class="floor-figure mb-0">
+          <img src="../images/site/mapa-arqueologico.png" alt="" width="1400" height="900" loading="lazy"
+            decoding="async" data-i18n-alt="img_mapa_edificio_alt"
+            class="rounded w-100 shadow-sm" style="border: 1px solid var(--border);" />
+          <figcaption class="text-muted mt-2 small" data-i18n="building_map_caption"></figcaption>
+        </figure>
+      </div>
+    </section>
 
       </div>
     </div>
@@ -307,9 +308,11 @@
     </div>
   </footer>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="../data.js"></script>
-  <script defer src="../script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../data.js"></script>
+  <script src="../script.js"></script>
 </body>
 
 </html>
+
+
