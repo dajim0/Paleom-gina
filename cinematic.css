@@ -1,0 +1,1288 @@
+/* Paleomagina — experiencia cinematográfica (unificado) */
+
+/* cinematic-studio.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — sistema visual estudio (timing, luz, coherencia)
+   ═══════════════════════════════════════════════════════════════════ */
+
+html.pm-cinema {
+  /* Timing — curvas tipo estudio creativo */
+  --pm-ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --pm-ease-in-out: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --pm-duration-fast: 0.42s;
+  --pm-duration-mid: 0.72s;
+  --pm-duration-slow: 1.05s;
+  --pm-duration-reveal: 0.95s;
+  --pm-stagger-step: 0.055s;
+  --pm-stagger-max: 0.28s;
+
+  /* Luz ambiental */
+  --pm-cinema-ambient-a: rgba(166, 124, 61, 0.055);
+  --pm-cinema-ambient-b: rgba(32, 24, 16, 0.38);
+  --pm-cinema-fog: rgba(12, 10, 8, 0.28);
+  --pm-cinema-vignette: rgba(0, 0, 0, 0.22);
+  --pm-cinema-depth: 0.02rem;
+  --pm-section-bridge: color-mix(in srgb, var(--bg-alt) 42%, transparent);
+}
+
+html.pm-cinema[data-theme="light"] {
+  --pm-cinema-ambient-a: rgba(166, 124, 61, 0.04);
+  --pm-cinema-ambient-b: rgba(248, 242, 232, 0.55);
+  --pm-cinema-fog: rgba(248, 242, 232, 0.65);
+  --pm-cinema-vignette: rgba(28, 22, 14, 0.06);
+  --pm-section-bridge: color-mix(in srgb, var(--bg-alt) 55%, transparent);
+}
+
+/* Ritmo entre secciones */
+html.pm-cinema main section:not(.hero, .hero-simple, .page-hero) {
+  position: relative;
+}
+
+html.pm-cinema main section.section-alt:not(.hero)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(92%, 68rem);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--border) 55%, transparent),
+    transparent
+  );
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+html.pm-cinema[data-theme="dark"] main section.section-alt:not(.hero)::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--primary) 18%, transparent),
+    transparent
+  );
+}
+
+html.pm-cinema .pm-section-cinema {
+  transition: background-color var(--pm-duration-slow) var(--pm-ease-in-out);
+}
+
+/* Paneles: presencia sin “lift” de UI */
+html.pm-cinema :is(.content-prose, .pm-read-panel, .card) {
+  transition:
+    box-shadow var(--pm-duration-mid) var(--pm-ease-out),
+    border-color var(--pm-duration-mid) var(--pm-ease-out);
+}
+
+@media (hover: hover) {
+  html.pm-cinema :is(.content-prose, .pm-read-panel, .card):hover {
+    transform: none;
+    box-shadow: 0 10px 32px rgba(40, 32, 24, 0.06);
+  }
+
+  html.pm-cinema[data-theme="dark"] :is(.content-prose, .pm-read-panel, .card):hover {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Footer / header alineados con la atmósfera */
+html.pm-cinema footer {
+  border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+}
+
+html.pm-cinema[data-theme="dark"] footer {
+  border-top-color: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+/* cinematic-cursor.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — cursor puntero antiguo (nativo, alta visibilidad)
+   Rutas relativas a styles.css → images/site/
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root,
+html {
+  --pm-cursor-img: url("images/site/cursor-pointer.svg");
+  --pm-cursor-hotspot: 4 2;
+}
+
+html[data-theme="light"] {
+  --pm-cursor-img: url("images/site/cursor-pointer-light.svg");
+}
+
+@media (pointer: fine) {
+  html,
+  html body {
+    cursor: var(--pm-cursor-img) var(--pm-cursor-hotspot), auto;
+  }
+
+  html :is(
+    a,
+    button,
+    .btn,
+    label,
+    summary,
+    [role="button"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"],
+    .nav-link,
+    .lang-btn,
+    .theme-toggle,
+    .card,
+    .museum-zone,
+    .video-launch-button,
+    .museum-legend-item,
+    .clickable,
+    [tabindex]:not([tabindex="-1"])
+  ) {
+    cursor: var(--pm-cursor-img) var(--pm-cursor-hotspot), pointer;
+  }
+
+  html :is(input, textarea, select) {
+    cursor: text;
+  }
+
+  html :is(
+    .museum-map-wrapper,
+    [data-floor],
+    .timeline-track,
+    .timeline-draggable
+  ) {
+    cursor: var(--pm-cursor-img) var(--pm-cursor-hotspot), grab;
+  }
+}
+
+.pm-cursor {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html body,
+  html * {
+    cursor: auto !important;
+  }
+}
+
+/* cinematic-atmosphere.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — atmósfera global (minimal / estudio premium)
+   ═══════════════════════════════════════════════════════════════════ */
+
+html.pm-cinema {
+  scroll-behavior: smooth;
+}
+
+/* Capas fijas */
+.pm-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pm-atmosphere__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.82;
+  filter: blur(0.22px) contrast(1.08) saturate(1.06);
+  mix-blend-mode: soft-light;
+}
+
+html.pm-cinema[data-theme="dark"] .pm-atmosphere__canvas {
+  opacity: 1;
+  mix-blend-mode: normal;
+  filter: blur(0.18px) contrast(1.14) brightness(1.06) saturate(1.08);
+  animation: pm-breathe-particles-dark 16s ease-in-out infinite;
+}
+
+html.pm-cinema[data-theme="light"] .pm-atmosphere__canvas {
+  opacity: 0.72;
+  mix-blend-mode: multiply;
+  filter: blur(0.22px) contrast(1.04) saturate(0.98);
+}
+
+/* Velo sedimentario muy sutil (excavación / polvo en suspensión) */
+.pm-atmosphere__arch-dust {
+  position: absolute;
+  inset: -8%;
+  pointer-events: none;
+  opacity: 0.52;
+  mix-blend-mode: soft-light;
+  background:
+    radial-gradient(
+      ellipse 90% 70% at 18% 12%,
+      rgba(168, 132, 88, 0.11) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 75% 60% at 82% 78%,
+      rgba(120, 98, 72, 0.09) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 50% 100%,
+      rgba(88, 72, 58, 0.08) 0%,
+      transparent 48%
+    );
+  animation: pm-arch-dust-drift 48s ease-in-out infinite alternate;
+}
+
+html.pm-cinema[data-theme="dark"] .pm-atmosphere__arch-dust {
+  opacity: 0.78;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(
+      ellipse 90% 70% at 18% 12%,
+      rgba(238, 210, 165, 0.2) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 75% 60% at 82% 78%,
+      rgba(210, 175, 125, 0.16) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 50% 100%,
+      rgba(180, 150, 110, 0.12) 0%,
+      transparent 48%
+    );
+}
+
+html.pm-cinema[data-theme="light"] .pm-atmosphere__arch-dust {
+  opacity: 0.58;
+  mix-blend-mode: multiply;
+  background:
+    radial-gradient(
+      ellipse 90% 70% at 18% 12%,
+      rgba(142, 118, 82, 0.16) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 75% 60% at 82% 78%,
+      rgba(108, 92, 72, 0.13) 0%,
+      transparent 52%
+    );
+}
+
+@keyframes pm-breathe-particles-dark {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pm-arch-dust-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(1.2%, -0.8%, 0) scale(1.02);
+  }
+}
+
+.pm-atmosphere__ambient {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(ellipse 75% 60% at 20% 8%, var(--pm-cinema-ambient-a), transparent 62%),
+    radial-gradient(ellipse 55% 45% at 92% 72%, color-mix(in srgb, var(--primary) 5%, transparent), transparent 65%),
+    radial-gradient(ellipse 85% 65% at 50% 100%, var(--pm-cinema-ambient-b), transparent 72%);
+  opacity: 0.85;
+}
+
+.pm-atmosphere__fog {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: min(36vh, 260px);
+  opacity: 0.38;
+}
+
+.pm-atmosphere__fog--top {
+  top: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--pm-cinema-fog) 75%, transparent),
+    transparent
+  );
+}
+
+.pm-atmosphere__fog--bottom {
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--pm-cinema-fog) 80%, transparent),
+    transparent
+  );
+}
+
+.pm-atmosphere__vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 min(100px, 14vw) var(--pm-cinema-vignette);
+  opacity: 0.55;
+}
+
+@keyframes pm-ambient-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0.8%, -0.6%, 0); }
+}
+
+/* Parallax: cinematic-parallax.css */
+
+/* Navegación */
+html.pm-cinema .navbar.pm-topnav {
+  transition:
+    background-color var(--pm-duration-mid, 0.72s) var(--pm-ease-out, ease),
+    box-shadow var(--pm-duration-mid, 0.72s) var(--pm-ease-out, ease),
+    border-color var(--pm-duration-mid, 0.72s) var(--pm-ease-out, ease),
+    backdrop-filter var(--pm-duration-mid, 0.72s) var(--pm-ease-out, ease);
+}
+
+html.pm-cinema .navbar.pm-topnav.pm-nav--scrolled {
+  backdrop-filter: blur(12px) saturate(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.06);
+}
+
+html.pm-cinema[data-theme="dark"] .navbar.pm-topnav.pm-nav--scrolled {
+  background-color: color-mix(in srgb, var(--bg) 82%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+}
+
+html.pm-cinema[data-theme="light"] .navbar.pm-topnav.pm-nav--scrolled {
+  background-color: color-mix(in srgb, var(--card) 90%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+/* Transiciones entre páginas — sin blur ni escala */
+html.pm-cinema body.page-transition {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+html.pm-cinema body.page-transition.page-ready {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--pm-duration-mid, 0.72s) var(--pm-ease-out, cubic-bezier(0.22, 0.61, 0.36, 1)),
+    transform var(--pm-duration-slow, 1.05s) var(--pm-ease-out, cubic-bezier(0.22, 0.61, 0.36, 1));
+}
+
+html.pm-cinema body.page-transition.page-leaving {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--pm-duration-fast, 0.42s) var(--pm-ease-in-out, ease),
+    transform var(--pm-duration-fast, 0.42s) var(--pm-ease-in-out, ease);
+}
+
+html.pm-cinema body::before {
+  opacity: 0.16;
+  transition: opacity 1s var(--pm-ease-out, ease), border-color 1s ease;
+}
+
+html.pm-cinema[data-theme="dark"] body::before {
+  opacity: 0.2;
+  border-color: color-mix(in srgb, var(--primary) 45%, transparent);
+}
+
+html.pm-cinema header,
+html.pm-cinema main,
+html.pm-cinema footer,
+html.pm-cinema .pm-atmosphere {
+  isolation: isolate;
+}
+
+html.pm-cinema header,
+html.pm-cinema main,
+html.pm-cinema footer {
+  position: relative;
+  z-index: 1;
+}
+
+html.pm-cinema.pm-cinema-reduced .pm-atmosphere__canvas {
+  display: none;
+}
+
+html.pm-cinema.pm-cinema-reduced .pm-cinema-reveal,
+html.pm-cinema.pm-cinema-reduced .pm-cinema-reveal.pm-cinema-reveal--visible {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+html.pm-cinema.pm-cinema-reduced .hero-overlay,
+html.pm-cinema.pm-cinema-reduced .hero-content {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.pm-cinema .pm-atmosphere__ambient,
+  html.pm-cinema .pm-atmosphere__arch-dust {
+    animation: none;
+  }
+}
+
+/* Breathing: ver cinematic-breathing.css */
+
+/* cinematic-breathing.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — breathing ambiental (luz viva, casi imperceptible)
+   ═══════════════════════════════════════════════════════════════════ */
+
+html.pm-cinema {
+  --pm-breath-glow: rgba(200, 168, 110, 0.07);
+  --pm-breath-glow-soft: rgba(255, 245, 228, 0.04);
+}
+
+html.pm-cinema[data-theme="light"] {
+  --pm-breath-glow: rgba(140, 105, 55, 0.05);
+  --pm-breath-glow-soft: rgba(255, 252, 245, 0.06);
+}
+
+/* Capa dedicada al pulso de luz */
+.pm-atmosphere__breath {
+  position: absolute;
+  inset: -18%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 55% 48% at 28% 22%,
+      var(--pm-breath-glow-soft),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 50% 42% at 78% 68%,
+      var(--pm-breath-glow),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 70% 55% at 50% 50%,
+      color-mix(in srgb, var(--primary) 4%, transparent),
+      transparent 68%
+    );
+  opacity: 0.48;
+  animation: pm-breathe-glow 10s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* Pulso suave en capas existentes */
+.pm-atmosphere__ambient {
+  animation:
+    pm-ambient-drift 42s ease-in-out infinite alternate,
+    pm-breathe-ambient 12s ease-in-out infinite;
+}
+
+.pm-atmosphere__fog--top,
+.pm-atmosphere__fog--bottom {
+  animation: pm-breathe-fog 14s ease-in-out infinite;
+}
+
+.pm-atmosphere__fog--bottom {
+  animation-delay: -5s;
+}
+
+html.pm-cinema:not([data-theme="dark"]) .pm-atmosphere__canvas {
+  animation: pm-breathe-particles 16s ease-in-out infinite;
+}
+
+/* Viñeta respira muy leve (profundidad orgánica) */
+.pm-atmosphere__vignette {
+  animation: pm-breathe-vignette 18s ease-in-out infinite;
+}
+
+/* Borde decorativo del body */
+html.pm-cinema body::before {
+  animation: pm-breathe-border 11s ease-in-out infinite;
+}
+
+@keyframes pm-breathe-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.56;
+    transform: scale(1.02) translate3d(0.3%, -0.2%, 0);
+  }
+}
+
+@keyframes pm-breathe-ambient {
+  0%,
+  100% {
+    opacity: 0.8;
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    opacity: 0.9;
+    filter: brightness(1.03) saturate(1.02);
+  }
+}
+
+@keyframes pm-breathe-fog {
+  0%,
+  100% {
+    opacity: 0.34;
+  }
+  50% {
+    opacity: 0.42;
+  }
+}
+
+@keyframes pm-breathe-particles {
+  0%,
+  100% {
+    opacity: 0.76;
+  }
+  50% {
+    opacity: 0.86;
+  }
+}
+
+@keyframes pm-breathe-vignette {
+  0%,
+  100% {
+    opacity: 0.52;
+  }
+  50% {
+    opacity: 0.58;
+  }
+}
+
+@keyframes pm-breathe-border {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+
+html.pm-breath-paused .pm-atmosphere__breath,
+html.pm-breath-paused .pm-atmosphere__ambient,
+html.pm-breath-paused .pm-atmosphere__fog--top,
+html.pm-breath-paused .pm-atmosphere__fog--bottom,
+html.pm-breath-paused .pm-atmosphere__canvas,
+html.pm-breath-paused .pm-atmosphere__vignette,
+html.pm-breath-paused body::before {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm-atmosphere__breath {
+    display: none;
+  }
+
+  .pm-atmosphere__ambient {
+    animation: pm-ambient-drift 42s ease-in-out infinite alternate;
+  }
+
+  .pm-atmosphere__fog--top,
+  .pm-atmosphere__fog--bottom,
+  .pm-atmosphere__canvas,
+  .pm-atmosphere__vignette,
+  html.pm-cinema body::before {
+    animation: none;
+  }
+}
+
+/* cinematic-scroll.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — scroll suave
+   Transiciones de sección: cinematic-sections.css
+   ═══════════════════════════════════════════════════════════════════ */
+
+html.pm-smooth-scroll {
+  scroll-behavior: auto !important;
+}
+
+html.pm-scroll-enhanced {
+  scroll-behavior: smooth;
+}
+
+/* cinematic-parallax.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — parallax cinematográfico (capas, profundidad, scroll)
+   ═══════════════════════════════════════════════════════════════════ */
+
+html.pm-parallax {
+  --pm-parallax-hero-bg: 0.045;
+  --pm-parallax-hero-fg: -0.022;
+  --pm-parallax-hero-overlay: 0.032;
+}
+
+/* Capas de profundidad fijas (montadas por JS) */
+.pm-parallax-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pm-parallax-scene__layer {
+  position: absolute;
+  inset: -12%;
+  will-change: transform;
+  transition: transform 0.08s linear;
+}
+
+.pm-parallax-scene__layer--far {
+  background:
+    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(166, 124, 61, 0.07), transparent 58%),
+    radial-gradient(ellipse 70% 50% at 88% 75%, rgba(80, 60, 40, 0.06), transparent 62%);
+  opacity: 0.9;
+}
+
+.pm-parallax-scene__layer--mid {
+  background:
+    radial-gradient(ellipse 60% 45% at 70% 30%, rgba(210, 175, 120, 0.05), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(40, 30, 20, 0.08), transparent 50%);
+  opacity: 0.75;
+}
+
+html.pm-parallax[data-theme="light"] .pm-parallax-scene__layer--far {
+  background:
+    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(166, 124, 61, 0.05), transparent 58%),
+    radial-gradient(ellipse 70% 50% at 88% 75%, rgba(120, 95, 60, 0.04), transparent 62%);
+}
+
+html.pm-parallax[data-theme="light"] .pm-parallax-scene__layer--mid {
+  background:
+    radial-gradient(ellipse 60% 45% at 70% 30%, rgba(180, 140, 80, 0.04), transparent 55%);
+}
+
+/* Hero — capas a distinta velocidad (fondo mantiene animación pan en styles.css) */
+html.pm-parallax .hero-overlay,
+html.pm-parallax .page-hero .hero-overlay {
+  transform: translate3d(0, calc(var(--pm-scroll, 0px) * var(--pm-parallax-hero-overlay)), 0);
+}
+
+html.pm-parallax .hero-content,
+html.pm-parallax .page-hero .hero-content {
+  transform: translate3d(0, calc(var(--pm-scroll, 0px) * var(--pm-parallax-hero-fg)), 0);
+  z-index: 4;
+}
+
+/* Bloques de sección (contenedor entero, no rompe reveals internos) */
+html.pm-parallax .pm-parallax-block > .container {
+  transform: translate3d(0, var(--pm-block-shift, 0px), 0);
+  transition: transform 0.12s linear;
+  will-change: transform;
+}
+
+/* Medios e iconos con profundidad propia */
+html.pm-parallax [data-pm-float] {
+  transform: translate3d(0, var(--pm-float-shift, 0px), 0);
+  transition: transform 0.12s linear;
+  will-change: transform;
+}
+
+/* Sin parallax en el pie: evita franja del fondo de página bajo el footer */
+html.pm-parallax footer.site-footer,
+html.pm-parallax footer:not(.site-footer) {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.pm-parallax .hero-overlay,
+  html.pm-parallax .hero-content,
+  html.pm-parallax .pm-parallax-block > .container,
+  html.pm-parallax [data-pm-float],
+  html.pm-parallax footer {
+    transform: none !important;
+  }
+
+  .pm-parallax-scene {
+    display: none;
+  }
+}
+
+/* cinematic-text.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — animaciones de texto (blur solo durante la entrada)
+   ═══════════════════════════════════════════════════════════════════ */
+
+html.pm-cinema {
+  --pm-text-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --pm-text-duration-title: 1.05s;
+  --pm-text-duration-body: 0.9s;
+  --pm-text-duration-icon: 0.75s;
+}
+
+/* Estado inicial — solo texto, nunca imágenes */
+html.pm-cinema :is(
+  .pm-text-reveal--title,
+  .pm-text-reveal--body,
+  .pm-text-reveal--kicker
+):not(.pm-text-reveal--visible) {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translate3d(0, 1.1rem, 0);
+  transition:
+    opacity var(--pm-text-duration-body) var(--pm-text-ease),
+    transform var(--pm-text-duration-body) var(--pm-text-ease),
+    filter var(--pm-text-duration-body) var(--pm-text-ease);
+  transition-delay: var(--pm-text-delay, 0s);
+}
+
+html.pm-cinema h1.pm-text-reveal--title:not(.pm-text-reveal--visible) {
+  filter: blur(12px);
+  transform: translate3d(0, 1.25rem, 0);
+}
+
+html.pm-cinema .pm-text-reveal--title:not(.pm-text-reveal--visible) {
+  filter: blur(9px);
+  transform: translate3d(0, 1.15rem, 0);
+  transition-duration: var(--pm-text-duration-title), var(--pm-text-duration-title),
+    var(--pm-text-duration-title);
+}
+
+html.pm-cinema .pm-text-reveal--body:not(.pm-text-reveal--visible) {
+  filter: blur(5px);
+  transform: translate3d(0, 0.65rem, 0);
+}
+
+html.pm-cinema .pm-text-reveal--kicker:not(.pm-text-reveal--visible) {
+  filter: blur(4px);
+  transform: translate3d(0, 0.45rem, 0);
+}
+
+/* Iconos: solo fade, sin blur (evita imágenes borrosas) */
+html.pm-cinema img.pm-text-reveal--icon:not(.pm-text-reveal--visible) {
+  opacity: 0;
+  filter: none;
+  transform: translate3d(0, 0.35rem, 0) scale(0.96);
+  transition:
+    opacity var(--pm-text-duration-icon) var(--pm-text-ease),
+    transform var(--pm-text-duration-icon) var(--pm-text-ease);
+  transition-delay: var(--pm-text-delay, 0s);
+}
+
+/* Visible — nitidez total (mayor especificidad que reglas de tipo) */
+html.pm-cinema :is(
+  .pm-text-reveal--title,
+  .pm-text-reveal--body,
+  .pm-text-reveal--kicker,
+  img.pm-text-reveal--icon
+).pm-text-reveal--visible {
+  opacity: 1;
+  filter: none;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+html.pm-cinema img.pm-text-reveal--icon.pm-text-reveal--visible {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Bloques y tarjetas: cinematic-sections.css */
+
+/* Imágenes: sin blur de texto */
+html.pm-cinema img:not(.pm-text-reveal--icon),
+html.pm-cinema picture,
+html.pm-cinema video {
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.pm-cinema :is(.pm-text-reveal--title, .pm-text-reveal--body, .pm-text-reveal--kicker, img.pm-text-reveal--icon),
+  html.pm-cinema .pm-section-layer,
+  html.pm-cinema .pm-cinema-reveal,
+  html.pm-cinema .animate-on-scroll {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* cinematic-sections.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — transiciones cinematográficas entre secciones
+   ═══════════════════════════════════════════════════════════════════ */
+
+html.pm-cinema {
+  --pm-section-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --pm-section-duration: 1.15s;
+  --pm-section-layer-duration: 1s;
+}
+
+/* Puente visual entre secciones */
+html.pm-cinema main section.pm-section-cinema.section-alt::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(88%, 56rem);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--primary) 22%, transparent),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 1.2s var(--pm-section-ease);
+  pointer-events: none;
+  z-index: 2;
+}
+
+html.pm-cinema main section.pm-section-cinema.section-alt.pm-section-visible::before {
+  opacity: 0.55;
+}
+
+html.pm-cinema[data-theme="light"] main section.pm-section-cinema.section-alt::before {
+  opacity: 0;
+}
+
+html.pm-cinema[data-theme="light"] main section.pm-section-cinema.section-alt.pm-section-visible::before {
+  opacity: 0.4;
+}
+
+/* Sección entera: fade + profundidad (sin filter en el contenedor) */
+html.pm-cinema main section.pm-section-cinema:not(.hero):not(.hero-simple):not(.page-hero) {
+  position: relative;
+  isolation: isolate;
+}
+
+html.pm-cinema main section.pm-section-cinema:not(.pm-section-visible):not(.hero):not(.hero-simple):not(.page-hero) {
+  opacity: 0;
+  transform: translate3d(0, 2.25rem, 0);
+}
+
+html.pm-cinema main section.pm-section-cinema.pm-section-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity var(--pm-section-duration) var(--pm-section-ease),
+    transform calc(var(--pm-section-duration) + 0.15s) var(--pm-section-ease);
+}
+
+/* Velo cinematográfico que se disuelve al entrar */
+html.pm-cinema main section.pm-section-cinema::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg) 40%, transparent) 0%,
+    transparent 35%,
+    transparent 65%,
+    color-mix(in srgb, var(--bg-alt) 25%, transparent) 100%
+  );
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 1.4s var(--pm-section-ease);
+}
+
+html.pm-cinema main section.pm-section-cinema.pm-section-visible::after {
+  opacity: 0;
+}
+
+html.pm-cinema main section.pm-section-cinema > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Capas internas: fade + blur suave (solo durante entrada) */
+html.pm-cinema .pm-section-layer:not(.pm-section-visible) {
+  opacity: 0;
+  filter: blur(7px);
+  transform: translate3d(0, 1.15rem, 0) scale(0.992);
+  transition:
+    opacity var(--pm-section-layer-duration) var(--pm-section-ease),
+    transform var(--pm-section-layer-duration) var(--pm-section-ease),
+    filter var(--pm-section-layer-duration) var(--pm-section-ease);
+  transition-delay: var(--pm-layer-delay, 0s);
+}
+
+html.pm-cinema .pm-section-layer.pm-section-visible {
+  opacity: 1;
+  filter: none;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Imágenes dentro de capas: nunca blur */
+html.pm-cinema .pm-section-layer img,
+html.pm-cinema .pm-section-layer picture {
+  filter: none !important;
+}
+
+/* Tarjetas / paneles sueltos (sin capa de sección) */
+html.pm-cinema
+  .pm-cinema-reveal:not(.pm-section-layer):not(.pm-text-reveal):not(.pm-section-visible):not(
+    .pm-cinema-reveal--visible
+  ) {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translate3d(0, 1rem, 0);
+  transition:
+    opacity var(--pm-section-layer-duration) var(--pm-section-ease),
+    transform var(--pm-section-layer-duration) var(--pm-section-ease),
+    filter 0.95s var(--pm-section-ease);
+  transition-delay: var(--pm-reveal-delay, 0s);
+}
+
+html.pm-cinema .pm-cinema-reveal.pm-cinema-reveal--visible:not(.pm-section-layer) {
+  opacity: 1;
+  filter: none;
+  transform: translate3d(0, 0, 0);
+}
+
+html.pm-cinema .animate-on-scroll:not(.is-visible) {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translate3d(0, 0.85rem, 0);
+  transition:
+    opacity var(--pm-section-layer-duration) var(--pm-section-ease),
+    transform var(--pm-section-layer-duration) var(--pm-section-ease),
+    filter 0.9s var(--pm-section-ease);
+}
+
+html.pm-cinema .animate-on-scroll.is-visible {
+  opacity: 1;
+  filter: none;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.pm-cinema main section.pm-section-cinema,
+  html.pm-cinema .pm-section-layer,
+  html.pm-cinema .pm-cinema-reveal,
+  html.pm-cinema .animate-on-scroll {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  html.pm-cinema main section.pm-section-cinema::after {
+    display: none;
+  }
+}
+
+/* cinematic-audio.css */
+/* ═══════════════════════════════════════════════════════════════════
+   Paleomagina — botón de sonido en el hero (inferior izquierda + luz)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.pm-audio-fab-host {
+  /* .hero / .page-hero ya tienen position: relative */
+}
+
+.pm-audio-fab {
+  position: relative; /* contexto para ::before/::after; --in-hero/--fallback lo sustituyen */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(18, 14, 10, 0.62);
+  border: 2px solid rgba(255, 232, 190, 0.55);
+  backdrop-filter: blur(14px) saturate(1.25);
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  isolation: isolate;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(210, 175, 110, 0.35),
+    0 0 40px rgba(166, 124, 61, 0.28),
+    inset 0 1px 0 rgba(255, 248, 220, 0.22);
+  animation: pm-audio-fab-glow 3.6s ease-in-out infinite;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.5s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+}
+
+/* Halo de luz detrás del botón */
+.pm-audio-fab::before {
+  content: "";
+  position: absolute;
+  inset: -14px -18px -14px -10px;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse 120% 100% at 28% 50%,
+    rgba(255, 220, 150, 0.42) 0%,
+    rgba(210, 165, 90, 0.22) 38%,
+    rgba(166, 124, 61, 0.08) 62%,
+    transparent 78%
+  );
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(6px);
+  animation: pm-audio-fab-halo 3.6s ease-in-out infinite;
+}
+
+.pm-audio-fab__inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.95rem 0.55rem 0.7rem;
+}
+
+.pm-audio-fab__icon {
+  display: flex;
+  flex-shrink: 0;
+  line-height: 0;
+  color: rgba(255, 248, 235, 0.98);
+  filter: drop-shadow(0 0 6px rgba(255, 220, 150, 0.65));
+}
+
+.pm-audio-fab__label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow:
+    0 0 12px rgba(255, 210, 140, 0.55),
+    0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.pm-audio-fab:hover {
+  border-color: rgba(255, 238, 200, 0.85);
+  background: rgba(28, 22, 14, 0.75);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.5),
+    0 0 28px rgba(228, 200, 140, 0.5),
+    0 0 52px rgba(166, 124, 61, 0.4),
+    inset 0 1px 0 rgba(255, 252, 235, 0.3);
+}
+
+.pm-audio-fab:hover::before {
+  opacity: 1;
+  filter: blur(8px);
+}
+
+.pm-audio-fab--active {
+  border-color: color-mix(in srgb, var(--primary) 70%, #fff 30%);
+  background: color-mix(in srgb, rgba(22, 16, 10, 0.78) 80%, var(--primary) 20%);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.45),
+    0 0 32px color-mix(in srgb, var(--primary) 65%, #ffe8a8),
+    0 0 56px color-mix(in srgb, var(--primary) 45%, transparent),
+    inset 0 1px 0 rgba(255, 248, 220, 0.28);
+  animation: pm-audio-fab-glow-active 2.4s ease-in-out infinite;
+}
+
+.pm-audio-fab--active .pm-audio-fab__icon {
+  color: color-mix(in srgb, var(--primary) 25%, #fff 75%);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--primary) 80%, #fff));
+}
+
+.pm-audio-fab--active::before {
+  background: radial-gradient(
+    ellipse 130% 110% at 28% 50%,
+    color-mix(in srgb, var(--primary) 55%, #ffe8b0) 0%,
+    color-mix(in srgb, var(--primary) 35%, transparent) 45%,
+    transparent 75%
+  );
+  animation: pm-audio-fab-halo-active 2.4s ease-in-out infinite;
+}
+
+.pm-audio-fab--active::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary) 55%, rgba(255, 248, 220, 0.6));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 50%, transparent);
+  animation: pm-audio-fab-ring 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pm-audio-fab-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.45),
+      0 0 18px rgba(210, 175, 110, 0.3),
+      0 0 36px rgba(166, 124, 61, 0.22),
+      inset 0 1px 0 rgba(255, 248, 220, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.42),
+      0 0 26px rgba(228, 200, 140, 0.48),
+      0 0 48px rgba(166, 124, 61, 0.38),
+      inset 0 1px 0 rgba(255, 252, 235, 0.28);
+  }
+}
+
+@keyframes pm-audio-fab-glow-active {
+  0%,
+  100% {
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.45),
+      0 0 28px color-mix(in srgb, var(--primary) 55%, #ffe8a8),
+      0 0 48px color-mix(in srgb, var(--primary) 38%, transparent),
+      inset 0 1px 0 rgba(255, 248, 220, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 6px 26px rgba(0, 0, 0, 0.42),
+      0 0 38px color-mix(in srgb, var(--primary) 75%, #fff3c8),
+      0 0 64px color-mix(in srgb, var(--primary) 52%, transparent),
+      inset 0 1px 0 rgba(255, 252, 240, 0.35);
+  }
+}
+
+@keyframes pm-audio-fab-halo {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes pm-audio-fab-halo-active {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes pm-audio-fab-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
+}
+
+.pm-audio-fab--remembered:not(.pm-audio-fab--active) {
+  border-color: color-mix(in srgb, var(--primary) 60%, rgba(255, 248, 235, 0.55));
+}
+
+/* Posición: después de .pm-audio-fab base para no ser anulada por position:relative */
+.pm-audio-fab.pm-audio-fab--in-hero {
+  position: absolute;
+  top: auto;
+  bottom: 2.25rem;
+  left: max(1.25rem, env(safe-area-inset-left, 0px) + 0.5rem);
+  right: auto;
+  margin: 0;
+  z-index: 3;
+  transform: translateY(8px);
+  opacity: 0;
+}
+
+.pm-audio-fab.pm-audio-fab--in-hero.pm-audio-fab--mounted {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.pm-audio-fab.pm-audio-fab--in-hero:hover {
+  transform: translateY(-2px);
+}
+
+/* Fallback: inferior izquierda (páginas sin hero) */
+.pm-audio-fab.pm-audio-fab--fallback {
+  position: fixed;
+  bottom: 1.75rem;
+  left: max(1rem, env(safe-area-inset-left, 0px) + 0.5rem);
+  top: auto;
+  right: auto;
+  margin: 0;
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 10045;
+  color: var(--text);
+  background: color-mix(in srgb, var(--card) 92%, var(--primary) 8%);
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.14),
+    0 0 22px color-mix(in srgb, var(--primary) 28%, transparent),
+    0 0 40px color-mix(in srgb, var(--primary) 14%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.pm-audio-fab--fallback::before {
+  background: radial-gradient(
+    ellipse 120% 100% at 28% 50%,
+    color-mix(in srgb, var(--primary) 35%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+.pm-audio-fab--fallback .pm-audio-fab__icon {
+  color: color-mix(in srgb, var(--primary) 85%, var(--text));
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--primary) 40%, transparent));
+}
+
+.pm-audio-fab--fallback .pm-audio-fab__label {
+  color: var(--heading);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+@media (max-width: 767px) {
+  .pm-audio-fab.pm-audio-fab--in-hero {
+    bottom: 1.35rem;
+    left: max(0.85rem, env(safe-area-inset-left, 0px) + 0.35rem);
+  }
+
+  .pm-audio-fab__inner {
+    padding: 0.5rem 0.8rem 0.5rem 0.6rem;
+    gap: 0.35rem;
+  }
+
+  .pm-audio-fab__label {
+    font-size: 0.72rem;
+  }
+
+  .pm-audio-fab__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .pm-audio-fab.pm-audio-fab--fallback {
+    bottom: 1.25rem;
+    left: 0.65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pm-audio-fab {
+    display: none !important;
+  }
+}
+

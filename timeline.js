@@ -128,12 +128,12 @@ function initTimeline() {
   const eras = document.querySelectorAll('.timeline-era');
   if (!eras.length) return;
 
-  eras.forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.timeline-era').forEach(b => b.classList.remove('active'));
+  eras.forEach((btn) => {
+    btn.onclick = () => {
+      document.querySelectorAll('.timeline-era').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       renderTimeline(btn.dataset.time);
-    });
+    };
   });
 
   renderTimeline('stage1');
@@ -144,3 +144,5 @@ if (document.readyState === 'loading') {
 } else {
   initTimeline();
 }
+
+document.addEventListener('pm:navigation', initTimeline);
