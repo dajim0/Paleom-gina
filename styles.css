@@ -1,4 +1,6 @@
-﻿:root,
+﻿@import url("cinematic.css");
+
+:root,
 [data-theme="light"] {
   /* Modo dÃ­a: fondo claro, textura visible pero suavizada con velo claro (no parece modo oscuro) */
   --bg: #f4eee4;

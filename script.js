@@ -20,7 +20,7 @@ const THEME_ICON_MOON =
 const THEME_ICON_SUN =
   '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
 
-const pageTransitionDuration = 280;
+const pageTransitionDuration = 520;
 
 // ── Render grid de ámbitos (página ambitos.html) ─────────────────────
 function renderScopes(lang) {
@@ -178,6 +178,149 @@ function applyTheme(theme) {
   updateThemeButtonLabel();
 }
 
+// ── Navegación suave (mantiene audio sin cortes) ─────────────────────
+const AUDIO_STORAGE_KEY = "paleomagina-audio-enabled";
+let softNavInFlight = false;
+
+function isAudioPersistenceActive() {
+  try {
+    return localStorage.getItem(AUDIO_STORAGE_KEY) === "1";
+  } catch (_) {
+    return false;
+  }
+}
+
+function shouldUseSoftNavigation() {
+  return (
+    isAudioPersistenceActive() ||
+    window.PaleomaginaAudio?.isPlaying?.() === true
+  );
+}
+
+function getBodySwapNodes(root) {
+  return [...root.children].filter(
+    (el) =>
+      !(el.tagName === "NAV" && el.classList.contains("pm-topnav")) &&
+      el.tagName !== "SCRIPT" &&
+      !el.classList?.contains("pm-atmosphere")
+  );
+}
+
+function replaceBodyContentFrom(doc) {
+  const anchor = document.body.querySelector(":scope > script");
+  getBodySwapNodes().forEach((node) => node.remove());
+  getBodySwapNodes(doc.body).forEach((node) => {
+    document.body.insertBefore(document.importNode(node, true), anchor);
+  });
+}
+
+function syncPageMeta(doc) {
+  const title = doc.querySelector("title");
+  if (title) document.title = title.textContent;
+  const lang = doc.documentElement.getAttribute("lang");
+  if (lang) document.documentElement.lang = lang;
+}
+
+function loadScriptOnce(src) {
+  const file = src.split("/").pop();
+  if ([...document.scripts].some((s) => (s.src || "").includes(file))) {
+    return Promise.resolve();
+  }
+  return new Promise((resolve, reject) => {
+    const el = document.createElement("script");
+    el.src = new URL(src, window.location.href).href;
+    el.onload = () => resolve();
+    el.onerror = () => reject(new Error(`script ${src}`));
+    document.body.appendChild(el);
+  });
+}
+
+async function loadExtraScriptsFrom(doc) {
+  const tags = [...doc.body.querySelectorAll(":scope > script[src]")];
+  for (const tag of tags) {
+    const src = tag.getAttribute("src") || "";
+    if (
+      !src ||
+      src.includes("bootstrap") ||
+      src.includes("data.js") ||
+      src.includes("script.js")
+    ) {
+      continue;
+    }
+    await loadScriptOnce(src);
+  }
+}
+
+function syncTopNavFromDocument(doc) {
+  const liveNav = document.querySelector(".pm-topnav");
+  const newNav = doc.querySelector(".pm-topnav");
+  if (!liveNav || !newNav) return;
+
+  const liveList = liveNav.querySelector(".navbar-nav.pm-nav-scroll");
+  const newList = newNav.querySelector(".navbar-nav.pm-nav-scroll");
+  if (liveList && newList) {
+    liveList.replaceWith(document.importNode(newList, true));
+  }
+}
+
+function reinitializeAfterSoftNav(url, doc) {
+  if (doc) syncTopNavFromDocument(doc);
+  applyLanguage(currentLang);
+  initMainNavActiveState();
+  initScrollReveal();
+  window.PaleomaginaScroll?.scrollTo?.(0, { immediate: true });
+  window.PaleomaginaScroll?.sync?.();
+
+  if (window.PaleomaginaCinema?.refreshAfterNav) {
+    window.PaleomaginaCinema.refreshAfterNav();
+  } else {
+    window.PaleomaginaText?.refresh?.();
+    window.PaleomaginaSections?.refresh?.();
+    window.PaleomaginaParallax?.refresh?.();
+    window.PaleomaginaAtmosphere?.refreshParticles?.();
+  }
+
+  document.dispatchEvent(
+    new CustomEvent("pm:navigation", { detail: { url, soft: true } })
+  );
+}
+
+async function navigateSoft(url, { historyMode = "push" } = {}) {
+  if (softNavInFlight) return;
+  softNavInFlight = true;
+
+  try {
+    const res = await fetch(url, {
+      credentials: "same-origin",
+      headers: { Accept: "text/html" },
+    });
+    if (!res.ok) throw new Error(String(res.status));
+
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+
+    replaceBodyContentFrom(doc);
+    syncPageMeta(doc);
+
+    if (historyMode === "replace") {
+      history.replaceState({ pmSoft: true }, "", url);
+    } else {
+      history.pushState({ pmSoft: true }, "", url);
+    }
+
+    await loadExtraScriptsFrom(doc);
+    reinitializeAfterSoftNav(url, doc);
+
+    document.body.classList.remove("page-leaving");
+    document.body.classList.add("page-ready");
+    window.scrollTo(0, 0);
+  } catch (_) {
+    window.location.href = url;
+  } finally {
+    softNavInFlight = false;
+  }
+}
+
 // ── Transiciones de página ───────────────────────────────────────────
 function isNavigableInternalLink(link) {
   if (!link?.href) return false;
@@ -206,7 +349,23 @@ function enablePageTransitions() {
     if (!isNavigableInternalLink(link)) return;
     e.preventDefault();
     document.body.classList.add("page-leaving");
-    window.setTimeout(() => { window.location.href = link.href; }, pageTransitionDuration);
+
+    if (shouldUseSoftNavigation()) {
+      window.setTimeout(() => {
+        navigateSoft(link.href);
+      }, Math.round(pageTransitionDuration * 0.55));
+      return;
+    }
+
+    window.setTimeout(() => {
+      window.location.href = link.href;
+    }, pageTransitionDuration);
+  });
+
+  window.addEventListener("popstate", () => {
+    if (!shouldUseSoftNavigation()) return;
+    document.body.classList.add("page-leaving");
+    navigateSoft(window.location.href, { historyMode: "replace" });
   });
 }
 
@@ -234,51 +393,6 @@ function initMainNavActiveState() {
   });
 }
 
-// ── Subnavegación de la página Sobre ────────────────────────────────
-function initSobreSectionNav() {
-  const nav = document.querySelector(".sobre-section-nav");
-  if (!nav) return;
-  const links = [...nav.querySelectorAll("a.sobre-section-nav-link")];
-  const sections = links
-    .map((l) => { const id = l.getAttribute("href")?.replace("#", ""); return id ? document.getElementById(id) : null; })
-    .filter(Boolean);
-  if (!sections.length) return;
-
-  function setActiveNavById(id) {
-    links.forEach((l) => {
-      const on = l.getAttribute("href") === `#${id}`;
-      l.classList.toggle("active", on);
-      if (on) l.setAttribute("aria-current", "true");
-      else l.removeAttribute("aria-current");
-    });
-  }
-
-  function updateActive() {
-    const y = window.scrollY + 168;
-    let cur = sections[0].id;
-    for (const sec of sections) { if (sec.offsetTop <= y) cur = sec.id; }
-    setActiveNavById(cur);
-  }
-
-  let ticking = false;
-  window.addEventListener("scroll", () => {
-    if (!ticking) { requestAnimationFrame(() => { updateActive(); ticking = false; }); ticking = true; }
-  }, { passive: true });
-
-  links.forEach((l) => {
-    l.addEventListener("click", () => {
-      links.forEach((x) => { x.classList.remove("is-tapped"); window.clearTimeout(x._pmTapTimer); });
-      l.classList.add("is-tapped");
-      l._pmTapTimer = window.setTimeout(() => l.classList.remove("is-tapped"), 600);
-      const id = l.getAttribute("href")?.replace("#", "");
-      if (id) setActiveNavById(id);
-      window.requestAnimationFrame(() => window.requestAnimationFrame(updateActive));
-    });
-  });
-
-  updateActive();
-}
-
 function getTimeOfDayTheme(hour) {
   if (hour >= 5 && hour < 11) return { className: "time-morning", label: "Amanecer" };
   if (hour >= 11 && hour < 17) return { className: "time-afternoon", label: "Mediodía" };
@@ -287,18 +401,22 @@ function getTimeOfDayTheme(hour) {
 }
 
 function initTimeOfDayEffects() {
-  const chip = document.getElementById("timeOfDayChip");
-  if (!chip) return;
   const now = new Date();
   const theme = getTimeOfDayTheme(now.getHours());
   document.body.classList.remove("time-morning", "time-afternoon", "time-evening", "time-night");
   document.body.classList.add(theme.className);
-  chip.textContent = `${theme.label} · ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+  const chip = document.getElementById("timeOfDayChip");
+  if (chip) {
+    chip.textContent = `${theme.label} · ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+  }
 }
 
 function initScrollReveal() {
   const items = [...document.querySelectorAll(".animate-on-scroll")];
-  if (!items.length || !window.IntersectionObserver) {
+  if (!items.length) return;
+  if (document.documentElement.classList.contains("pm-cinema")) return;
+
+  if (!window.IntersectionObserver) {
     items.forEach((item) => item.classList.add("is-visible"));
     return;
   }
@@ -310,7 +428,7 @@ function initScrollReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.18 });
+  }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
 
   items.forEach((item) => observer.observe(item));
 }
@@ -321,7 +439,9 @@ function openVideoOverlay(videoId, videoTitle) {
   if (!overlay || !frame || !videoId) return;
   overlay.classList.remove("d-none");
   overlay.setAttribute("aria-hidden", "false");
+  document.body.classList.add("pm-scroll-locked");
   document.body.style.overflow = "hidden";
+  window.PaleomaginaScroll?.pause?.();
   frame.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&cc_load_policy=1&cc_lang_pref=en&hl=en`;
   frame.title = videoTitle || "Video en pantalla grande";
 }
@@ -333,25 +453,32 @@ function closeVideoOverlay() {
   frame.src = "";
   overlay.classList.add("d-none");
   overlay.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("pm-scroll-locked");
   document.body.style.overflow = "";
+  window.PaleomaginaScroll?.resume?.();
 }
 
 function initVideoOverlay() {
-  const buttons = document.querySelectorAll(".video-launch-button");
-  const closeBtn = document.getElementById("videoOverlayClose");
-  const backdrop = document.getElementById("videoOverlayBackdrop");
-  if (!buttons.length || !closeBtn || !backdrop) return;
+  if (window._pmVideoOverlayBound) return;
+  window._pmVideoOverlayBound = true;
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".video-launch-button");
+    if (btn) {
       const videoId = btn.dataset.videoId;
-      const title = btn.dataset.videoTitle || btn.getAttribute("aria-label") || "Video";
+      const title =
+        btn.dataset.videoTitle || btn.getAttribute("aria-label") || "Video";
       openVideoOverlay(videoId, title);
-    });
+      return;
+    }
+    if (
+      e.target.closest("#videoOverlayClose") ||
+      e.target.closest("#videoOverlayBackdrop")
+    ) {
+      closeVideoOverlay();
+    }
   });
 
-  closeBtn.addEventListener("click", closeVideoOverlay);
-  backdrop.addEventListener("click", closeVideoOverlay);
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       const overlay = document.getElementById("videoOverlay");
@@ -388,20 +515,40 @@ initMainNavActiveState();
 initTimeOfDayEffects();
 initScrollReveal();
 initVideoOverlay();
+loadCinematicAtmosphere();
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => {
-    initSobreSectionNav();
-  });
-} else {
-  initSobreSectionNav();
+function paleomaginaScriptBase() {
+  const ref = document.querySelector('script[src*="script.js"]');
+  if (!ref) return "";
+  const src = ref.getAttribute("src") || "script.js";
+  return src.replace(/[^/]*script\.js.*$/, "") || "./";
 }
+
+function loadPaleomaginaModule(fileName, onLoad) {
+  const base = paleomaginaScriptBase();
+  if (!base && !fileName) return;
+  const path = base + fileName;
+  if ([...document.scripts].some((s) => (s.src || "").includes(fileName))) {
+    onLoad?.();
+    return;
+  }
+  const s = document.createElement("script");
+  s.src = path;
+  s.defer = true;
+  if (onLoad) s.onload = onLoad;
+  document.head.appendChild(s);
+}
+
+function loadCinematicAtmosphere() {
+  loadPaleomaginaModule("cinematic.js");
+}
+
 /* ============================================
    MAPA INTERACTIVO - LÓGICA CON PLANTAS (VERSIÓN ESTABLE)
    ============================================ */
 
-// Solo ejecutar si existe el contenedor del mapa (index.html)
-if (document.getElementById('museumMapSVG')) {
+function initPaleomaginaMuseumMap() {
+  if (!document.getElementById("museumMapSVG")) return;
 
   const floorsData = {
     'P1': {
@@ -552,61 +699,67 @@ if (document.getElementById('museumMapSVG')) {
     }
   }
 
-  // Botones de planta
-  document.querySelectorAll('[data-floor]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-floor]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  if (mapImg.complete && mapImg.naturalWidth > 0) {
+    initMap();
+} else {
+    mapImg.onload = initMap;
+  }
+}
+
+function bindMuseumMapControls() {
+  document.querySelectorAll("[data-floor]").forEach((btn) => {
+    btn.onclick = () => {
+      document.querySelectorAll("[data-floor]").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
       renderMuseumMap(btn.dataset.floor);
-    });
+    };
   });
 
-  // Click en leyenda
-  const legendContainer = document.getElementById('museumMapLegend');
-  if (legendContainer) {
-    legendContainer.addEventListener('click', (e) => {
-      const btn = e.target.closest('.museum-legend-item');
+  const legendContainer = document.getElementById("museumMapLegend");
+  if (legendContainer && !legendContainer.dataset.pmBound) {
+    legendContainer.dataset.pmBound = "1";
+    legendContainer.addEventListener("click", (e) => {
+      const btn = e.target.closest(".museum-legend-item");
       if (!btn) return;
-      const svgContainer = document.getElementById('museumMapSVG');
+      const svgContainer = document.getElementById("museumMapSVG");
       if (!svgContainer) return;
       const polygon = svgContainer.querySelector(`[data-zone-id="${btn.dataset.zoneId}"]`);
       if (polygon) {
         polygon.click();
-        document.querySelectorAll('.museum-legend-item').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        document.querySelectorAll(".museum-legend-item").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
       }
     });
   }
 
-  // Cerrar panel
-  const panelCloseBtn = document.getElementById('panelCloseBtn');
-  if (panelCloseBtn) {
+  const panelCloseBtn = document.getElementById("panelCloseBtn");
+  if (panelCloseBtn && !panelCloseBtn.dataset.pmBound) {
+    panelCloseBtn.dataset.pmBound = "1";
     panelCloseBtn.onclick = () => {
-      const infoPanel = document.getElementById('museumMapInfoPanel');
-      if (infoPanel) infoPanel.classList.add('d-none');
-      document.querySelectorAll('.museum-zone').forEach(z => z.classList.remove('active'));
-      document.querySelectorAll('.museum-legend-item').forEach(b => b.classList.remove('active'));
+      const infoPanel = document.getElementById("museumMapInfoPanel");
+      if (infoPanel) infoPanel.classList.add("d-none");
+      document.querySelectorAll(".museum-zone").forEach((z) => z.classList.remove("active"));
+      document.querySelectorAll(".museum-legend-item").forEach((b) => b.classList.remove("active"));
     };
   }
+}
 
-  // Init
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => renderMuseumMap(currentFloor));
-  } else {
-    renderMuseumMap(currentFloor);
-  }
+if (!initPaleomaginaMuseumMap._langHooked && typeof window.applyLanguage === "function") {
+  initPaleomaginaMuseumMap._langHooked = true;
+  const originalApplyLanguage = window.applyLanguage;
+  window.applyLanguage = function (lang) {
+    originalApplyLanguage(lang);
+    if (document.getElementById("museumMapSVG")) {
+      renderMuseumMap(currentFloor);
+      const activeZone = document.querySelector(".museum-zone.active");
+      if (activeZone) activeZone.click();
+    }
+  };
+}
 
-  // Hook idioma seguro
-  if (typeof window.applyLanguage === 'function') {
-    const originalApplyLanguage = window.applyLanguage;
-    window.applyLanguage = function (lang) {
-      originalApplyLanguage(lang);
-      if (document.getElementById('museumMapSVG')) {
-        renderMuseumMap(currentFloor);
-        const activeZone = document.querySelector('.museum-zone.active');
-        if (activeZone) activeZone.click();
-      }
-    };
-  }
+bindMuseumMapControls();
+renderMuseumMap(currentFloor);
+}
 
-} // Fin del bloque de verificación del mapa
+initPaleomaginaMuseumMap();
+document.addEventListener("pm:navigation", initPaleomaginaMuseumMap);

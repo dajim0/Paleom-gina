@@ -20,6 +20,8 @@
     const noResults = document.getElementById("no-results");
     const glossaryList = document.getElementById("glossary-list");
     if (!searchInput || !noResults || !glossaryList) return;
+    if (searchInput.dataset.pmBound) return;
+    searchInput.dataset.pmBound = "1";
 
     searchInput.addEventListener("input", function (e) {
       const query = e.target.value.toLowerCase();
@@ -53,6 +55,8 @@
     if (typeof currentLang === "undefined" || typeof applyLanguage !== "function") return;
     renderGlossary(currentLang);
     initSearch();
+    if (window._pmGlossaryLangHook) return;
+    window._pmGlossaryLangHook = true;
     const originalApplyLanguage = window.applyLanguage;
     window.applyLanguage = function (lang) {
       originalApplyLanguage(lang);
@@ -67,4 +71,6 @@
   } else {
     init();
   }
+
+  document.addEventListener("pm:navigation", init);
 })();

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="pmc-fill-l" x1="6" y1="3" x2="22" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c9a04a"/>
+      <stop offset="50%" stop-color="#9a7028"/>
+      <stop offset="100%" stop-color="#5c4218"/>
+    </linearGradient>
+  </defs>
+  <path fill="#1a1408" d="M4 2 L4 23.5 L10.5 18.2 L13.2 26.8 L16.4 25.6 L12.6 16.8 L25.5 16.8 L4 2 Z"/>
+  <path fill="url(#pmc-fill-l)" stroke="#2a2010" stroke-width="1" stroke-linejoin="round" d="M4 2 L4 23.5 L10.5 18.2 L13.2 26.8 L16.4 25.6 L12.6 16.8 L25.5 16.8 L4 2 Z"/>
+  <path fill="rgba(255,252,240,0.5)" d="M6 5 L6 16.5 L10.2 13.2 L9.6 10 Z"/>
+</svg>
