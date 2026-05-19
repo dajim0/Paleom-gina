@@ -3,10 +3,10 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ── Estado global ────────────────────────────────────────────────────
-const defaultLang      = "es";
-let   currentLang      = defaultLang;
-const themeStorageKey  = "paleomagina-theme";
-let   currentTheme     = "light";
+const defaultLang = "es";
+let currentLang = defaultLang;
+const themeStorageKey = "paleomagina-theme";
+let currentTheme = "light";
 
 // ── Exponer helper de traducción (timeline.js y otros módulos) ───────
 function paleomaginaT(key) {
@@ -28,9 +28,9 @@ function renderScopes(lang) {
   if (!container) return;
   container.innerHTML = scopes
     .map((scope) => {
-      const title       = lang === "es" ? scope.title_es : scope.title_en;
+      const title = lang === "es" ? scope.title_es : scope.title_en;
       const description = scopeDescriptions[lang][scope.key];
-      const meta        = translations[lang].scope_meta;
+      const meta = translations[lang].scope_meta;
       return `
         <article class="card">
           <h3 class="scope-title"><span class="scope-code">${scope.code}</span> - ${title}</h3>
@@ -45,8 +45,8 @@ function renderScopes(lang) {
 function initAmbitosExhibitRoute() {
   const root = document.getElementById("exhibit-route-accordion");
   if (!root || typeof scopeContents === "undefined") return;
-  const lang     = currentLang === "en" ? "en" : "es";
-  const order    = ["AAN","A0","A1","A2","A3","A4","A5","A6","A7","A8","A9","ATZ"];
+  const lang = currentLang === "en" ? "en" : "es";
+  const order = ["AAN", "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "ATZ"];
   const accDomId = "exhibit-route-bs-accordion";
   root.innerHTML = "";
 
@@ -59,38 +59,38 @@ function initAmbitosExhibitRoute() {
     if (!sc) return;
 
     const collapseId = `exhibit-collapse-${code}`;
-    const headingId  = `exhibit-heading-${code}`;
-    const item       = document.createElement("div");
-    item.className   = "accordion-item";
+    const headingId = `exhibit-heading-${code}`;
+    const item = document.createElement("div");
+    item.className = "accordion-item";
 
     const hEl = document.createElement("h2");
     hEl.className = "accordion-header";
     hEl.id = headingId;
 
     const btn = document.createElement("button");
-    btn.type      = "button";
+    btn.type = "button";
     btn.className = `accordion-button${idx === 0 ? "" : " collapsed"}`;
-    btn.setAttribute("data-bs-toggle",  "collapse");
-    btn.setAttribute("data-bs-target",  `#${collapseId}`);
-    btn.setAttribute("aria-expanded",   idx === 0 ? "true" : "false");
-    btn.setAttribute("aria-controls",   collapseId);
+    btn.setAttribute("data-bs-toggle", "collapse");
+    btn.setAttribute("data-bs-target", `#${collapseId}`);
+    btn.setAttribute("aria-expanded", idx === 0 ? "true" : "false");
+    btn.setAttribute("aria-controls", collapseId);
     btn.textContent = sc.title;
 
     const region = document.createElement("div");
-    region.id        = collapseId;
+    region.id = collapseId;
     region.className = `accordion-collapse collapse${idx === 0 ? " show" : ""}`;
     region.setAttribute("aria-labelledby", headingId);
-    region.setAttribute("data-bs-parent",  `#${accDomId}`);
+    region.setAttribute("data-bs-parent", `#${accDomId}`);
 
     const body = document.createElement("div");
     body.className = "accordion-body";
 
     const p1 = document.createElement("p");
-    p1.className   = "small text-muted mb-2";
+    p1.className = "small text-muted mb-2";
     p1.textContent = sc.description;
 
     const p2 = document.createElement("p");
-    p2.className   = "mb-2";
+    p2.className = "mb-2";
     p2.textContent = sc.content;
 
     body.appendChild(p1);
@@ -98,7 +98,7 @@ function initAmbitosExhibitRoute() {
 
     if (sc.timeline) {
       const p3 = document.createElement("p");
-      p3.className   = "small fw-semibold mb-1";
+      p3.className = "small fw-semibold mb-1";
       p3.textContent = sc.timeline;
       body.appendChild(p3);
     }
@@ -162,8 +162,8 @@ function applyLanguage(lang) {
 // ── Botón de tema ────────────────────────────────────────────────────
 function updateThemeButtonLabel() {
   const labelKey = currentTheme === "dark" ? "theme_mode_light" : "theme_mode_dark";
-  const label    = translations[currentLang]?.[labelKey] || "Theme";
-  const icon     = currentTheme === "dark" ? THEME_ICON_SUN : THEME_ICON_MOON;
+  const label = translations[currentLang]?.[labelKey] || "Theme";
+  const icon = currentTheme === "dark" ? THEME_ICON_SUN : THEME_ICON_MOON;
   document.querySelectorAll(".theme-toggle").forEach((btn) => {
     btn.innerHTML = `<span class="theme-toggle-icon">${icon}</span><span class="visually-hidden">${label}</span>`;
     btn.setAttribute("aria-label", label);
@@ -174,7 +174,7 @@ function updateThemeButtonLabel() {
 function applyTheme(theme) {
   currentTheme = theme;
   document.documentElement.setAttribute("data-theme", theme);
-  try { localStorage.setItem(themeStorageKey, theme); } catch (_) {}
+  try { localStorage.setItem(themeStorageKey, theme); } catch (_) { }
   updateThemeButtonLabel();
 }
 
@@ -214,9 +214,9 @@ function enablePageTransitions() {
 function initMainNavActiveState() {
   const nav = document.querySelector(".pm-topnav");
   if (!nav) return;
-  const path    = window.location.pathname.replace(/\\/g, "/");
-  const segs    = path.split("/").filter(Boolean);
-  let   curFile = segs.length ? segs[segs.length - 1] : "";
+  const path = window.location.pathname.replace(/\\/g, "/");
+  const segs = path.split("/").filter(Boolean);
+  let curFile = segs.length ? segs[segs.length - 1] : "";
   if (!curFile.includes(".")) curFile = "index.html";
 
   nav.querySelectorAll("ul.navbar-nav a.nav-link").forEach((link) => {
@@ -224,13 +224,13 @@ function initMainNavActiveState() {
     if (!href || href.startsWith("#")) return;
     try {
       const resolved = new URL(href, window.location.href);
-      let   lf       = resolved.pathname.split("/").filter(Boolean).pop() || "";
+      let lf = resolved.pathname.split("/").filter(Boolean).pop() || "";
       if (!lf.includes(".")) lf = "index.html";
       const match = lf === curFile;
       link.classList.toggle("active", match);
       if (match) link.setAttribute("aria-current", "page");
-      else       link.removeAttribute("aria-current");
-    } catch {}
+      else link.removeAttribute("aria-current");
+    } catch { }
   });
 }
 
@@ -238,7 +238,7 @@ function initMainNavActiveState() {
 function initSobreSectionNav() {
   const nav = document.querySelector(".sobre-section-nav");
   if (!nav) return;
-  const links    = [...nav.querySelectorAll("a.sobre-section-nav-link")];
+  const links = [...nav.querySelectorAll("a.sobre-section-nav-link")];
   const sections = links
     .map((l) => { const id = l.getAttribute("href")?.replace("#", ""); return id ? document.getElementById(id) : null; })
     .filter(Boolean);
@@ -249,7 +249,7 @@ function initSobreSectionNav() {
       const on = l.getAttribute("href") === `#${id}`;
       l.classList.toggle("active", on);
       if (on) l.setAttribute("aria-current", "true");
-      else    l.removeAttribute("aria-current");
+      else l.removeAttribute("aria-current");
     });
   }
 
@@ -390,7 +390,9 @@ initScrollReveal();
 initVideoOverlay();
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initSobreSectionNav);
+  document.addEventListener("DOMContentLoaded", () => {
+    initSobreSectionNav();
+  });
 } else {
   initSobreSectionNav();
 }
@@ -401,210 +403,210 @@ if (document.readyState === "loading") {
 // Solo ejecutar si existe el contenedor del mapa (index.html)
 if (document.getElementById('museumMapSVG')) {
 
-const floorsData = {
-  'P1': {
-    image: '../images/site/Captura_de_pantalla_2026-05-13_132447.png',
-    zones: [
-      { zoneId: 'A0', name: { es: 'Bienvenida', en: 'Welcome' }, color: '#d4a373', points: '228,152 245,138 276,183 259,193 230,152', scopeKey: 'scope_a0' },
-      { zoneId: 'A1', name: { es: 'El mar de Tetis', en: 'The Tethys Sea' }, color: '#e07a5f', points: '214,226 276,184 289,198 355,155 372,227 231,253', scopeKey: 'scope_a1' },
-      { zoneId: 'A2', name: { es: 'Geología', en: 'Geology' }, color: '#f2cc8f', points: '279,132 348,117 354,151 311,179', scopeKey: 'scope_a2' },
-      { zoneId: 'A3', name: { es: 'Cuaternario', en: 'Quaternary' }, color: '#81b29a', points: '235,46 235,68 279,129 346,114 335,6 276,13 274,40', scopeKey: 'scope_a3' },
-      { zoneId: 'A4', name: { es: 'Neandertal', en: 'Neanderthal' }, color: '#3d5a80', points: '233,18 235,44 274,36 273,13', scopeKey: 'scope_a4' },
-      { zoneId: 'A5', name: { es: 'Paleolítico superior', en: 'Upper Paleolithic' }, color: '#98c1d9', points: '116,64 160,25 230,17 233,67 164,115', scopeKey: 'scope_a5' },
-      { zoneId: 'A6', name: { es: 'Neolítico', en: 'Neolithic' }, color: '#f4a261', points: '71,102 116,63 163,112 112,150', scopeKey: 'scope_a6' },
-      { zoneId: 'A7', name: { es: 'Calcolítico', en: 'Chalcolithic' }, color: '#ee6c4d', points: '20,148 56,188 111,150 71,105', scopeKey: 'scope_a7' },
-      { zoneId: 'A8', name: { es: 'Ciencia', en: 'Science' }, color: '#a8dadc', points: '57,188 38,212 31,203 14,225 1,160 16,150', scopeKey: 'scope_a8' },
-      { zoneId: 'ATZ', name: { es: 'Terraza', en: 'Terrace' }, color: '#1d3557', points: '14,228 52,203 59,215 68,292 29,303', scopeKey: 'scope_atz' },
-      { zoneId: 'AAN', name: { es: 'Antesala', en: 'Ante-room' }, color: '#457b9d', points: '210,119 225,111 230,118 251,97 268,121 229,148', scopeKey: 'scope_aan' }
-    ]
-  },
-  'PB': {
-    image: '../images/site/Captura_de_pantalla_2026-05-13_132657.png',
-    zones: [
-      { zoneId: 'PB_1', name: { es: 'Zona 1', en: 'Zone 1' }, color: '#d4a373', points: '560,175 738,52 795,287 722,341 736,359 702,383', scopeKey: 'scope_a0' },
-      { zoneId: 'PB_2', name: { es: 'Zona 2', en: 'Zone 2' }, color: '#e07a5f', points: '702,388 735,362 781,426 788,424 841,503 694,532 673,501 745,453', scopeKey: 'scope_aan' },
-      { zoneId: 'PB_3', name: { es: 'Zona 3', en: 'Zone 3' }, color: '#81b29a', points: '570,307 626,272 743,451 693,484', scopeKey: 'scope_a2' }
-    ]
-  }
-};
+  const floorsData = {
+    'P1': {
+      image: '../images/site/Captura_de_pantalla_2026-05-13_132447.png',
+      zones: [
+        { zoneId: 'A0', name: { es: 'Bienvenida', en: 'Welcome' }, color: '#d4a373', points: '228,152 245,138 276,183 259,193 230,152', scopeKey: 'scope_a0' },
+        { zoneId: 'A1', name: { es: 'El mar de Tetis', en: 'The Tethys Sea' }, color: '#e07a5f', points: '214,226 276,184 289,198 355,155 372,227 231,253', scopeKey: 'scope_a1' },
+        { zoneId: 'A2', name: { es: 'Geología', en: 'Geology' }, color: '#f2cc8f', points: '279,132 348,117 354,151 311,179', scopeKey: 'scope_a2' },
+        { zoneId: 'A3', name: { es: 'Cuaternario', en: 'Quaternary' }, color: '#81b29a', points: '235,46 235,68 279,129 346,114 335,6 276,13 274,40', scopeKey: 'scope_a3' },
+        { zoneId: 'A4', name: { es: 'Neandertal', en: 'Neanderthal' }, color: '#3d5a80', points: '233,18 235,44 274,36 273,13', scopeKey: 'scope_a4' },
+        { zoneId: 'A5', name: { es: 'Paleolítico superior', en: 'Upper Paleolithic' }, color: '#98c1d9', points: '116,64 160,25 230,17 233,67 164,115', scopeKey: 'scope_a5' },
+        { zoneId: 'A6', name: { es: 'Neolítico', en: 'Neolithic' }, color: '#f4a261', points: '71,102 116,63 163,112 112,150', scopeKey: 'scope_a6' },
+        { zoneId: 'A7', name: { es: 'Calcolítico', en: 'Chalcolithic' }, color: '#ee6c4d', points: '20,148 56,188 111,150 71,105', scopeKey: 'scope_a7' },
+        { zoneId: 'A8', name: { es: 'Ciencia', en: 'Science' }, color: '#a8dadc', points: '57,188 38,212 31,203 14,225 1,160 16,150', scopeKey: 'scope_a8' },
+        { zoneId: 'ATZ', name: { es: 'Terraza', en: 'Terrace' }, color: '#1d3557', points: '14,228 52,203 59,215 68,292 29,303', scopeKey: 'scope_atz' },
+        { zoneId: 'AAN', name: { es: 'Antesala', en: 'Ante-room' }, color: '#457b9d', points: '210,119 225,111 230,118 251,97 268,121 229,148', scopeKey: 'scope_aan' }
+      ]
+    },
+    'PB': {
+      image: '../images/site/Captura_de_pantalla_2026-05-13_132657.png',
+      zones: [
+        { zoneId: 'PB_1', name: { es: 'Zona 1', en: 'Zone 1' }, color: '#d4a373', points: '560,175 738,52 795,287 722,341 736,359 702,383', scopeKey: 'scope_a0' },
+        { zoneId: 'PB_2', name: { es: 'Zona 2', en: 'Zone 2' }, color: '#e07a5f', points: '702,388 735,362 781,426 788,424 841,503 694,532 673,501 745,453', scopeKey: 'scope_aan' },
+        { zoneId: 'PB_3', name: { es: 'Zona 3', en: 'Zone 3' }, color: '#81b29a', points: '570,307 626,272 743,451 693,484', scopeKey: 'scope_a2' }
+      ]
+    }
+  };
 
-let currentFloor = 'P1';
-let renderTaskId = 0;
+  let currentFloor = 'P1';
+  let renderTaskId = 0;
 
-function renderMuseumMap(floorKey) {
-  const taskId = ++renderTaskId;
-  currentFloor = floorKey;
+  function renderMuseumMap(floorKey) {
+    const taskId = ++renderTaskId;
+    currentFloor = floorKey;
 
-  const svgContainer = document.getElementById('museumMapSVG');
-  const tooltip = document.getElementById('museumMapTooltip');
-  const tooltipTitle = document.getElementById('tooltipTitle');
-  const tooltipDesc = document.getElementById('tooltipDesc');
-  const infoPanel = document.getElementById('museumMapInfoPanel');
-  const panelTitle = document.getElementById('panelTitle');
-  const panelContent = document.getElementById('panelContent');
-  const panelTimeline = document.getElementById('panelTimeline');
-  const panelFacts = document.getElementById('panelFacts');
-  const legendContainer = document.getElementById('museumMapLegend');
-  const mapImg = document.getElementById('museumMapBase');
-  
-  if (!svgContainer || !mapImg) return;
+    const svgContainer = document.getElementById('museumMapSVG');
+    const tooltip = document.getElementById('museumMapTooltip');
+    const tooltipTitle = document.getElementById('tooltipTitle');
+    const tooltipDesc = document.getElementById('tooltipDesc');
+    const infoPanel = document.getElementById('museumMapInfoPanel');
+    const panelTitle = document.getElementById('panelTitle');
+    const panelContent = document.getElementById('panelContent');
+    const panelTimeline = document.getElementById('panelTimeline');
+    const panelFacts = document.getElementById('panelFacts');
+    const legendContainer = document.getElementById('museumMapLegend');
+    const mapImg = document.getElementById('museumMapBase');
 
-  const floorData = floorsData[floorKey];
-  
-  // Limpieza del SVG
-  while (svgContainer.firstChild) {
-    svgContainer.removeChild(svgContainer.firstChild);
-  }
-  if (legendContainer) legendContainer.innerHTML = '';
-  if (infoPanel) infoPanel.classList.add('d-none');
-  if (tooltip) tooltip.classList.add('d-none');
+    if (!svgContainer || !mapImg) return;
 
-  if (!floorData || floorData.zones.length === 0) {
-    if (legendContainer) legendContainer.innerHTML = '<p class="text-muted small">Zonas no configuradas aún.</p>';
-    return;
-  }
+    const floorData = floorsData[floorKey];
 
-  mapImg.src = floorData.image;
+    // Limpieza del SVG
+    while (svgContainer.firstChild) {
+      svgContainer.removeChild(svgContainer.firstChild);
+    }
+    if (legendContainer) legendContainer.innerHTML = '';
+    if (infoPanel) infoPanel.classList.add('d-none');
+    if (tooltip) tooltip.classList.add('d-none');
 
-  function initMap() {
-    if (taskId !== renderTaskId) return;
+    if (!floorData || floorData.zones.length === 0) {
+      if (legendContainer) legendContainer.innerHTML = '<p class="text-muted small">Zonas no configuradas aún.</p>';
+      return;
+    }
 
-    const w = mapImg.naturalWidth;
-    const h = mapImg.naturalHeight;
-    svgContainer.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    svgContainer.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    mapImg.src = floorData.image;
 
-    floorData.zones.forEach(zone => {
-      const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-      polygon.setAttribute('points', zone.points);
-      polygon.setAttribute('class', 'museum-zone');
-      polygon.setAttribute('data-zone-id', zone.zoneId);
-      polygon.setAttribute('data-zone-color', zone.color);
-      polygon.setAttribute('data-scope-key', zone.scopeKey);
-      polygon.style.fill = zone.color;
+    function initMap() {
+      if (taskId !== renderTaskId) return;
 
-      polygon.addEventListener('mouseenter', (e) => {
-        if (taskId !== renderTaskId || !tooltip) return;
-        const lang = currentLang || 'es';
-        if (tooltipTitle) tooltipTitle.textContent = zone.name[lang] || zone.name.es;
-        if (tooltipDesc) tooltipDesc.textContent = scopeDescriptions?.[lang]?.[zone.scopeKey] || '';
-        const rect = svgContainer.getBoundingClientRect();
-        tooltip.style.left = `${e.clientX - rect.left}px`;
-        tooltip.style.top = `${e.clientY - rect.top}px`;
-        tooltip.classList.remove('d-none');
-      });
-      
-      polygon.addEventListener('mouseleave', () => {
-        if (tooltip) tooltip.classList.add('d-none');
-      });
+      const w = mapImg.naturalWidth;
+      const h = mapImg.naturalHeight;
+      svgContainer.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      svgContainer.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-      polygon.addEventListener('click', () => {
-        if (taskId !== renderTaskId) return;
-        document.querySelectorAll('.museum-zone').forEach(z => z.classList.remove('active'));
-        polygon.classList.add('active');
-        
-        const lang = currentLang || 'es';
-        const cleanId = zone.zoneId.replace('PB_', '');
-        const scopeData = scopeContents?.[cleanId]?.[lang] || scopeContents?.[zone.zoneId]?.[lang];
-        
-        if (scopeData && panelTitle && panelContent && infoPanel) {
-          panelTitle.textContent = scopeData.title;
-          panelContent.textContent = scopeData.content;
-          if (panelTimeline) panelTimeline.textContent = scopeData.timeline || '';
-          if (panelFacts) {
-            panelFacts.innerHTML = '';
-            if (Array.isArray(scopeData.facts)) {
-              scopeData.facts.forEach(fact => {
-                const li = document.createElement('li');
-                li.textContent = fact;
-                panelFacts.appendChild(li);
-              });
+      floorData.zones.forEach(zone => {
+        const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        polygon.setAttribute('points', zone.points);
+        polygon.setAttribute('class', 'museum-zone');
+        polygon.setAttribute('data-zone-id', zone.zoneId);
+        polygon.setAttribute('data-zone-color', zone.color);
+        polygon.setAttribute('data-scope-key', zone.scopeKey);
+        polygon.style.fill = zone.color;
+
+        polygon.addEventListener('mouseenter', (e) => {
+          if (taskId !== renderTaskId || !tooltip) return;
+          const lang = currentLang || 'es';
+          if (tooltipTitle) tooltipTitle.textContent = zone.name[lang] || zone.name.es;
+          if (tooltipDesc) tooltipDesc.textContent = scopeDescriptions?.[lang]?.[zone.scopeKey] || '';
+          const rect = svgContainer.getBoundingClientRect();
+          tooltip.style.left = `${e.clientX - rect.left}px`;
+          tooltip.style.top = `${e.clientY - rect.top}px`;
+          tooltip.classList.remove('d-none');
+        });
+
+        polygon.addEventListener('mouseleave', () => {
+          if (tooltip) tooltip.classList.add('d-none');
+        });
+
+        polygon.addEventListener('click', () => {
+          if (taskId !== renderTaskId) return;
+          document.querySelectorAll('.museum-zone').forEach(z => z.classList.remove('active'));
+          polygon.classList.add('active');
+
+          const lang = currentLang || 'es';
+          const cleanId = zone.zoneId.replace('PB_', '');
+          const scopeData = scopeContents?.[cleanId]?.[lang] || scopeContents?.[zone.zoneId]?.[lang];
+
+          if (scopeData && panelTitle && panelContent && infoPanel) {
+            panelTitle.textContent = scopeData.title;
+            panelContent.textContent = scopeData.content;
+            if (panelTimeline) panelTimeline.textContent = scopeData.timeline || '';
+            if (panelFacts) {
+              panelFacts.innerHTML = '';
+              if (Array.isArray(scopeData.facts)) {
+                scopeData.facts.forEach(fact => {
+                  const li = document.createElement('li');
+                  li.textContent = fact;
+                  panelFacts.appendChild(li);
+                });
+              }
+            }
+            infoPanel.classList.remove('d-none');
+
+            if (window.innerWidth < 768 && infoPanel.scrollIntoView) {
+              infoPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
           }
-          infoPanel.classList.remove('d-none');
-          
-          if (window.innerWidth < 768 && infoPanel.scrollIntoView) {
-            infoPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        }
+        });
+
+        svgContainer.appendChild(polygon);
       });
 
-      svgContainer.appendChild(polygon);
-    });
-
-    if (legendContainer) {
-      legendContainer.innerHTML = floorData.zones.map(zone => {
-        const lang = currentLang || 'es';
-        return `<button class="museum-legend-item" data-zone-id="${zone.zoneId}">
+      if (legendContainer) {
+        legendContainer.innerHTML = floorData.zones.map(zone => {
+          const lang = currentLang || 'es';
+          return `<button class="museum-legend-item" data-zone-id="${zone.zoneId}">
           <span class="museum-legend-swatch" style="background: ${zone.color}"></span>
           ${zone.name[lang] || zone.name.es}
         </button>`;
-      }).join('');
+        }).join('');
+      }
+    }
+
+    if (mapImg.complete && mapImg.naturalWidth > 0) {
+      initMap();
+    } else {
+      mapImg.onload = initMap;
     }
   }
 
-  if (mapImg.complete && mapImg.naturalWidth > 0) {
-    initMap();
-  } else {
-    mapImg.onload = initMap;
-  }
-}
-
-// Botones de planta
-document.querySelectorAll('[data-floor]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('[data-floor]').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderMuseumMap(btn.dataset.floor);
-  });
-});
-
-// Click en leyenda
-const legendContainer = document.getElementById('museumMapLegend');
-if (legendContainer) {
-  legendContainer.addEventListener('click', (e) => {
-    const btn = e.target.closest('.museum-legend-item');
-    if (!btn) return;
-    const svgContainer = document.getElementById('museumMapSVG');
-    if (!svgContainer) return;
-    const polygon = svgContainer.querySelector(`[data-zone-id="${btn.dataset.zoneId}"]`);
-    if (polygon) {
-      polygon.click();
-      document.querySelectorAll('.museum-legend-item').forEach(b => b.classList.remove('active'));
+  // Botones de planta
+  document.querySelectorAll('[data-floor]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-floor]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-    }
+      renderMuseumMap(btn.dataset.floor);
+    });
   });
-}
 
-// Cerrar panel
-const panelCloseBtn = document.getElementById('panelCloseBtn');
-if (panelCloseBtn) {
-  panelCloseBtn.onclick = () => {
-    const infoPanel = document.getElementById('museumMapInfoPanel');
-    if (infoPanel) infoPanel.classList.add('d-none');
-    document.querySelectorAll('.museum-zone').forEach(z => z.classList.remove('active'));
-    document.querySelectorAll('.museum-legend-item').forEach(b => b.classList.remove('active'));
-  };
-}
+  // Click en leyenda
+  const legendContainer = document.getElementById('museumMapLegend');
+  if (legendContainer) {
+    legendContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.museum-legend-item');
+      if (!btn) return;
+      const svgContainer = document.getElementById('museumMapSVG');
+      if (!svgContainer) return;
+      const polygon = svgContainer.querySelector(`[data-zone-id="${btn.dataset.zoneId}"]`);
+      if (polygon) {
+        polygon.click();
+        document.querySelectorAll('.museum-legend-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    });
+  }
 
-// Init
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => renderMuseumMap(currentFloor));
-} else {
-  renderMuseumMap(currentFloor);
-}
+  // Cerrar panel
+  const panelCloseBtn = document.getElementById('panelCloseBtn');
+  if (panelCloseBtn) {
+    panelCloseBtn.onclick = () => {
+      const infoPanel = document.getElementById('museumMapInfoPanel');
+      if (infoPanel) infoPanel.classList.add('d-none');
+      document.querySelectorAll('.museum-zone').forEach(z => z.classList.remove('active'));
+      document.querySelectorAll('.museum-legend-item').forEach(b => b.classList.remove('active'));
+    };
+  }
 
-// Hook idioma seguro
-if (typeof window.applyLanguage === 'function') {
-  const originalApplyLanguage = window.applyLanguage;
-  window.applyLanguage = function(lang) {
-    originalApplyLanguage(lang);
-    if (document.getElementById('museumMapSVG')) {
-      renderMuseumMap(currentFloor);
-      const activeZone = document.querySelector('.museum-zone.active');
-      if (activeZone) activeZone.click();
-    }
-  };
-}
+  // Init
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderMuseumMap(currentFloor));
+  } else {
+    renderMuseumMap(currentFloor);
+  }
+
+  // Hook idioma seguro
+  if (typeof window.applyLanguage === 'function') {
+    const originalApplyLanguage = window.applyLanguage;
+    window.applyLanguage = function (lang) {
+      originalApplyLanguage(lang);
+      if (document.getElementById('museumMapSVG')) {
+        renderMuseumMap(currentFloor);
+        const activeZone = document.querySelector('.museum-zone.active');
+        if (activeZone) activeZone.click();
+      }
+    };
+  }
 
 } // Fin del bloque de verificación del mapa
