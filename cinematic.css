@@ -23,6 +23,14 @@ html.pm-cinema {
   --pm-cinema-vignette: rgba(0, 0, 0, 0.22);
   --pm-cinema-depth: 0.02rem;
   --pm-section-bridge: color-mix(in srgb, var(--bg-alt) 42%, transparent);
+  --pm-cinema-light-x: 34%;
+  --pm-cinema-light-y: 18%;
+  --pm-cinema-scroll-glow: 0;
+  --pm-cinema-blue: rgba(6, 18, 32, 0.62);
+  --pm-cinema-amber: rgba(214, 145, 62, 0.16);
+  --pm-cinema-gold: rgba(232, 196, 126, 0.11);
+  --pm-cinema-black: rgba(3, 4, 6, 0.72);
+  --pm-reveal-depth: 1.8rem;
 }
 
 html.pm-cinema[data-theme="light"] {
@@ -31,6 +39,10 @@ html.pm-cinema[data-theme="light"] {
   --pm-cinema-fog: rgba(248, 242, 232, 0.65);
   --pm-cinema-vignette: rgba(28, 22, 14, 0.06);
   --pm-section-bridge: color-mix(in srgb, var(--bg-alt) 55%, transparent);
+  --pm-cinema-blue: rgba(30, 44, 58, 0.16);
+  --pm-cinema-amber: rgba(166, 104, 46, 0.11);
+  --pm-cinema-gold: rgba(255, 232, 180, 0.16);
+  --pm-cinema-black: rgba(26, 19, 13, 0.08);
 }
 
 /* Ritmo entre secciones */
@@ -96,75 +108,32 @@ html.pm-cinema[data-theme="dark"] footer {
   border-top-color: color-mix(in srgb, var(--primary) 12%, transparent);
 }
 
-/* cinematic-cursor.css */
-/* ═══════════════════════════════════════════════════════════════════
-   Paleomagina — cursor puntero antiguo (nativo, alta visibilidad)
-   Rutas relativas a styles.css → images/site/
-   ═══════════════════════════════════════════════════════════════════ */
-
-:root,
-html {
-  --pm-cursor-img: url("images/site/cursor-pointer.svg");
-  --pm-cursor-hotspot: 4 2;
+html.pm-cinema body {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% calc(0% + var(--pm-scroll-progress, 0) * 18%),
+      color-mix(in srgb, var(--pm-cinema-amber) 54%, transparent),
+      transparent 58%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--pm-cinema-blue) 48%, transparent) 0%,
+      transparent 34%,
+      color-mix(in srgb, var(--pm-cinema-black) 28%, transparent) 100%
+    );
 }
 
-html[data-theme="light"] {
-  --pm-cursor-img: url("images/site/cursor-pointer-light.svg");
+html.pm-cinema :is(.content-prose, .pm-read-panel, .card, .museum-section-panel, .timeline-section-panel) {
+  box-shadow:
+    var(--shadow),
+    0 22px 70px rgba(18, 12, 8, 0.08),
+    inset 0 1px 0 color-mix(in srgb, #fff 18%, transparent);
 }
 
-@media (pointer: fine) {
-  html,
-  html body {
-    cursor: var(--pm-cursor-img) var(--pm-cursor-hotspot), auto;
-  }
-
-  html :is(
-    a,
-    button,
-    .btn,
-    label,
-    summary,
-    [role="button"],
-    input[type="submit"],
-    input[type="button"],
-    input[type="reset"],
-    .nav-link,
-    .lang-btn,
-    .theme-toggle,
-    .card,
-    .museum-zone,
-    .video-launch-button,
-    .museum-legend-item,
-    .clickable,
-    [tabindex]:not([tabindex="-1"])
-  ) {
-    cursor: var(--pm-cursor-img) var(--pm-cursor-hotspot), pointer;
-  }
-
-  html :is(input, textarea, select) {
-    cursor: text;
-  }
-
-  html :is(
-    .museum-map-wrapper,
-    [data-floor],
-    .timeline-track,
-    .timeline-draggable
-  ) {
-    cursor: var(--pm-cursor-img) var(--pm-cursor-hotspot), grab;
-  }
-}
-
-.pm-cursor {
-  display: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html,
-  html body,
-  html * {
-    cursor: auto !important;
-  }
+html.pm-cinema[data-theme="dark"] :is(.content-prose, .pm-read-panel, .card, .museum-section-panel, .timeline-section-panel) {
+  box-shadow:
+    0 18px 62px rgba(0, 0, 0, 0.44),
+    0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent),
+    inset 0 1px 0 rgba(255, 236, 190, 0.055);
 }
 
 /* cinematic-atmosphere.css */
@@ -185,127 +154,80 @@ html.pm-cinema {
   overflow: hidden;
 }
 
-.pm-atmosphere__canvas {
+.pm-atmosphere__grade,
+.pm-atmosphere__light,
+.pm-atmosphere__ambient {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.82;
-  filter: blur(0.22px) contrast(1.08) saturate(1.06);
-  mix-blend-mode: soft-light;
+  inset: -18%;
+  pointer-events: none;
 }
 
-html.pm-cinema[data-theme="dark"] .pm-atmosphere__canvas {
+.pm-atmosphere__grade {
+  background:
+    radial-gradient(
+      ellipse 90% 72% at var(--pm-cinema-light-x) var(--pm-cinema-light-y),
+      var(--pm-cinema-gold) 0%,
+      rgba(214, 145, 62, calc(0.05 + var(--pm-cinema-scroll-glow) * 0.04)) 28%,
+      transparent 58%
+    ),
+    radial-gradient(ellipse 80% 72% at 82% 12%, var(--pm-cinema-blue), transparent 64%),
+    linear-gradient(
+      135deg,
+      var(--pm-cinema-black) 0%,
+      color-mix(in srgb, var(--bg) 40%, transparent) 42%,
+      rgba(114, 70, 30, 0.11) 100%
+    );
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+html.pm-cinema[data-theme="dark"] .pm-atmosphere__grade {
   opacity: 1;
   mix-blend-mode: normal;
-  filter: blur(0.18px) contrast(1.14) brightness(1.06) saturate(1.08);
-  animation: pm-breathe-particles-dark 16s ease-in-out infinite;
 }
 
-html.pm-cinema[data-theme="light"] .pm-atmosphere__canvas {
-  opacity: 0.72;
-  mix-blend-mode: multiply;
-  filter: blur(0.22px) contrast(1.04) saturate(0.98);
-}
-
-/* Velo sedimentario muy sutil (excavación / polvo en suspensión) */
-.pm-atmosphere__arch-dust {
-  position: absolute;
-  inset: -8%;
-  pointer-events: none;
-  opacity: 0.52;
-  mix-blend-mode: soft-light;
+.pm-atmosphere__light {
   background:
     radial-gradient(
-      ellipse 90% 70% at 18% 12%,
-      rgba(168, 132, 88, 0.11) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 75% 60% at 82% 78%,
-      rgba(120, 98, 72, 0.09) 0%,
-      transparent 52%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 100%,
-      rgba(88, 72, 58, 0.08) 0%,
-      transparent 48%
+      ellipse 42% 36% at calc(var(--pm-cinema-light-x) + 8%) var(--pm-cinema-light-y),
+      rgba(242, 198, 118, 0.18),
+      rgba(183, 103, 42, 0.08) 38%,
+      transparent 68%
     );
-  animation: pm-arch-dust-drift 48s ease-in-out infinite alternate;
-}
-
-html.pm-cinema[data-theme="dark"] .pm-atmosphere__arch-dust {
-  opacity: 0.78;
-  mix-blend-mode: screen;
-  background:
-    radial-gradient(
-      ellipse 90% 70% at 18% 12%,
-      rgba(238, 210, 165, 0.2) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 75% 60% at 82% 78%,
-      rgba(210, 175, 125, 0.16) 0%,
-      transparent 52%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 100%,
-      rgba(180, 150, 110, 0.12) 0%,
-      transparent 48%
-    );
-}
-
-html.pm-cinema[data-theme="light"] .pm-atmosphere__arch-dust {
-  opacity: 0.58;
-  mix-blend-mode: multiply;
-  background:
-    radial-gradient(
-      ellipse 90% 70% at 18% 12%,
-      rgba(142, 118, 82, 0.16) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 75% 60% at 82% 78%,
-      rgba(108, 92, 72, 0.13) 0%,
-      transparent 52%
-    );
-}
-
-@keyframes pm-breathe-particles-dark {
-  0%,
-  100% {
-    opacity: 0.9;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes pm-arch-dust-drift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  100% {
-    transform: translate3d(1.2%, -0.8%, 0) scale(1.02);
-  }
+  filter: blur(12px);
+  opacity: 0.62;
+  animation: pm-cinema-light-drift 18s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .pm-atmosphere__ambient {
-  position: absolute;
-  inset: -15%;
   background:
-    radial-gradient(ellipse 75% 60% at 20% 8%, var(--pm-cinema-ambient-a), transparent 62%),
-    radial-gradient(ellipse 55% 45% at 92% 72%, color-mix(in srgb, var(--primary) 5%, transparent), transparent 65%),
+    radial-gradient(ellipse 75% 60% at 18% 6%, var(--pm-cinema-ambient-a), transparent 62%),
+    radial-gradient(ellipse 55% 45% at 92% 72%, var(--pm-cinema-amber), transparent 66%),
     radial-gradient(ellipse 85% 65% at 50% 100%, var(--pm-cinema-ambient-b), transparent 72%);
   opacity: 0.85;
+}
+
+.pm-atmosphere__mist {
+  position: absolute;
+  inset: -22%;
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, transparent 0%, rgba(255, 235, 205, 0.045) 28%, transparent 54%),
+    linear-gradient(78deg, transparent 18%, color-mix(in srgb, var(--pm-cinema-fog) 34%, transparent) 50%, transparent 78%);
+  filter: blur(18px);
+  opacity: 0.5;
+  transform: translate3d(calc(var(--pm-scroll-progress, 0) * -2.5%), 0, 0);
+  animation: pm-cinema-mist-drift 34s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .pm-atmosphere__fog {
   position: absolute;
   left: 0;
   right: 0;
-  height: min(36vh, 260px);
-  opacity: 0.38;
+  height: min(42vh, 320px);
+  opacity: 0.34;
 }
 
 .pm-atmosphere__fog--top {
@@ -329,8 +251,30 @@ html.pm-cinema[data-theme="light"] .pm-atmosphere__arch-dust {
 .pm-atmosphere__vignette {
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 0 min(100px, 14vw) var(--pm-cinema-vignette);
-  opacity: 0.55;
+  box-shadow:
+    inset 0 0 min(130px, 18vw) var(--pm-cinema-vignette),
+    inset 0 -18vh 26vh rgba(0, 0, 0, 0.18);
+  opacity: 0.66;
+}
+
+@keyframes pm-cinema-light-drift {
+  0% {
+    transform: translate3d(-1.2%, -0.6%, 0) scale(1);
+    opacity: 0.54;
+  }
+  100% {
+    transform: translate3d(1.4%, 0.9%, 0) scale(1.04);
+    opacity: 0.72;
+  }
+}
+
+@keyframes pm-cinema-mist-drift {
+  0% {
+    transform: translate3d(-2%, -0.4%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(2.2%, 0.6%, 0) scale(1.025);
+  }
 }
 
 @keyframes pm-ambient-drift {
@@ -412,10 +356,6 @@ html.pm-cinema footer {
   z-index: 1;
 }
 
-html.pm-cinema.pm-cinema-reduced .pm-atmosphere__canvas {
-  display: none;
-}
-
 html.pm-cinema.pm-cinema-reduced .pm-cinema-reveal,
 html.pm-cinema.pm-cinema-reduced .pm-cinema-reveal.pm-cinema-reveal--visible {
   opacity: 1;
@@ -430,7 +370,8 @@ html.pm-cinema.pm-cinema-reduced .hero-content {
 
 @media (prefers-reduced-motion: reduce) {
   html.pm-cinema .pm-atmosphere__ambient,
-  html.pm-cinema .pm-atmosphere__arch-dust {
+  html.pm-cinema .pm-atmosphere__light,
+  html.pm-cinema .pm-atmosphere__mist {
     animation: none;
   }
 }
@@ -494,10 +435,6 @@ html.pm-cinema[data-theme="light"] {
   animation-delay: -5s;
 }
 
-html.pm-cinema:not([data-theme="dark"]) .pm-atmosphere__canvas {
-  animation: pm-breathe-particles 16s ease-in-out infinite;
-}
-
 /* Viñeta respira muy leve (profundidad orgánica) */
 .pm-atmosphere__vignette {
   animation: pm-breathe-vignette 18s ease-in-out infinite;
@@ -542,16 +479,6 @@ html.pm-cinema body::before {
   }
 }
 
-@keyframes pm-breathe-particles {
-  0%,
-  100% {
-    opacity: 0.76;
-  }
-  50% {
-    opacity: 0.86;
-  }
-}
-
 @keyframes pm-breathe-vignette {
   0%,
   100% {
@@ -573,10 +500,11 @@ html.pm-cinema body::before {
 }
 
 html.pm-breath-paused .pm-atmosphere__breath,
+html.pm-breath-paused .pm-atmosphere__light,
+html.pm-breath-paused .pm-atmosphere__mist,
 html.pm-breath-paused .pm-atmosphere__ambient,
 html.pm-breath-paused .pm-atmosphere__fog--top,
 html.pm-breath-paused .pm-atmosphere__fog--bottom,
-html.pm-breath-paused .pm-atmosphere__canvas,
 html.pm-breath-paused .pm-atmosphere__vignette,
 html.pm-breath-paused body::before {
   animation-play-state: paused;
@@ -593,7 +521,8 @@ html.pm-breath-paused body::before {
 
   .pm-atmosphere__fog--top,
   .pm-atmosphere__fog--bottom,
-  .pm-atmosphere__canvas,
+  .pm-atmosphere__light,
+  .pm-atmosphere__mist,
   .pm-atmosphere__vignette,
   html.pm-cinema body::before {
     animation: none;
@@ -623,47 +552,6 @@ html.pm-parallax {
   --pm-parallax-hero-bg: 0.045;
   --pm-parallax-hero-fg: -0.022;
   --pm-parallax-hero-overlay: 0.032;
-}
-
-/* Capas de profundidad fijas (montadas por JS) */
-.pm-parallax-scene {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.pm-parallax-scene__layer {
-  position: absolute;
-  inset: -12%;
-  will-change: transform;
-  transition: transform 0.08s linear;
-}
-
-.pm-parallax-scene__layer--far {
-  background:
-    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(166, 124, 61, 0.07), transparent 58%),
-    radial-gradient(ellipse 70% 50% at 88% 75%, rgba(80, 60, 40, 0.06), transparent 62%);
-  opacity: 0.9;
-}
-
-.pm-parallax-scene__layer--mid {
-  background:
-    radial-gradient(ellipse 60% 45% at 70% 30%, rgba(210, 175, 120, 0.05), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(40, 30, 20, 0.08), transparent 50%);
-  opacity: 0.75;
-}
-
-html.pm-parallax[data-theme="light"] .pm-parallax-scene__layer--far {
-  background:
-    radial-gradient(ellipse 80% 55% at 22% 18%, rgba(166, 124, 61, 0.05), transparent 58%),
-    radial-gradient(ellipse 70% 50% at 88% 75%, rgba(120, 95, 60, 0.04), transparent 62%);
-}
-
-html.pm-parallax[data-theme="light"] .pm-parallax-scene__layer--mid {
-  background:
-    radial-gradient(ellipse 60% 45% at 70% 30%, rgba(180, 140, 80, 0.04), transparent 55%);
 }
 
 /* Hero — capas a distinta velocidad (fondo mantiene animación pan en styles.css) */
@@ -705,10 +593,6 @@ html.pm-parallax footer:not(.site-footer) {
   html.pm-parallax [data-pm-float],
   html.pm-parallax footer {
     transform: none !important;
-  }
-
-  .pm-parallax-scene {
-    display: none;
   }
 }
 
@@ -818,8 +702,8 @@ html.pm-cinema video {
 
 html.pm-cinema {
   --pm-section-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --pm-section-duration: 1.15s;
-  --pm-section-layer-duration: 1s;
+  --pm-section-duration: 1.35s;
+  --pm-section-layer-duration: 1.18s;
 }
 
 /* Puente visual entre secciones */
@@ -863,15 +747,18 @@ html.pm-cinema main section.pm-section-cinema:not(.hero):not(.hero-simple):not(.
 
 html.pm-cinema main section.pm-section-cinema:not(.pm-section-visible):not(.hero):not(.hero-simple):not(.page-hero) {
   opacity: 0;
-  transform: translate3d(0, 2.25rem, 0);
+  transform: translate3d(0, var(--pm-reveal-depth), 0) scale(0.992);
+  clip-path: inset(7% 0 0 0 round 0.01px);
 }
 
 html.pm-cinema main section.pm-section-cinema.pm-section-visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0) scale(1);
+  clip-path: inset(0 0 0 0 round 0.01px);
   transition:
     opacity var(--pm-section-duration) var(--pm-section-ease),
-    transform calc(var(--pm-section-duration) + 0.15s) var(--pm-section-ease);
+    transform calc(var(--pm-section-duration) + 0.15s) var(--pm-section-ease),
+    clip-path calc(var(--pm-section-duration) + 0.2s) var(--pm-section-ease);
 }
 
 /* Velo cinematográfico que se disuelve al entrar */
@@ -904,8 +791,8 @@ html.pm-cinema main section.pm-section-cinema > .container {
 /* Capas internas: fade + blur suave (solo durante entrada) */
 html.pm-cinema .pm-section-layer:not(.pm-section-visible) {
   opacity: 0;
-  filter: blur(7px);
-  transform: translate3d(0, 1.15rem, 0) scale(0.992);
+  filter: blur(9px) saturate(0.92);
+  transform: translate3d(0, 1.35rem, 0) scale(0.988);
   transition:
     opacity var(--pm-section-layer-duration) var(--pm-section-ease),
     transform var(--pm-section-layer-duration) var(--pm-section-ease),
@@ -931,8 +818,8 @@ html.pm-cinema
     .pm-cinema-reveal--visible
   ) {
   opacity: 0;
-  filter: blur(5px);
-  transform: translate3d(0, 1rem, 0);
+  filter: blur(7px) saturate(0.94);
+  transform: translate3d(0, 1.2rem, 0) scale(0.992);
   transition:
     opacity var(--pm-section-layer-duration) var(--pm-section-ease),
     transform var(--pm-section-layer-duration) var(--pm-section-ease),

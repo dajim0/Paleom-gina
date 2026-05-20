@@ -277,7 +277,6 @@ function reinitializeAfterSoftNav(url, doc) {
     window.PaleomaginaText?.refresh?.();
     window.PaleomaginaSections?.refresh?.();
     window.PaleomaginaParallax?.refresh?.();
-    window.PaleomaginaAtmosphere?.refreshParticles?.();
   }
 
   document.dispatchEvent(
@@ -563,7 +562,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js");
+  loadPaleomaginaModule("cinematic.js?v=3");
 }
 
 /* ============================================

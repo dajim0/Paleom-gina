@@ -5,403 +5,6 @@
   const REDUCED =
     window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
 
-  const LAYERS = [
-    {
-      depth: 0.2,
-      countMul: 0.9,
-      speedMul: 0.32,
-      sizeMul: 0.55,
-      alphaMul: 0.52,
-      types: ["dust", "dust"],
-    },
-    {
-      depth: 0.52,
-      countMul: 1,
-      speedMul: 0.48,
-      sizeMul: 0.88,
-      alphaMul: 0.78,
-      types: ["dust", "grain", "grain"],
-    },
-    {
-      depth: 0.82,
-      countMul: 0.55,
-      speedMul: 0.62,
-      sizeMul: 1.05,
-      alphaMul: 0.92,
-      types: ["grain", "speck", "grain"],
-    },
-  ];
-
-  function lerp(a, b, t) {
-    return a + (b - a) * t;
-  }
-
-  function clamp(v, min, max) {
-    return Math.min(max, Math.max(min, v));
-  }
-
-  function particleBudget() {
-    const w = window.innerWidth;
-    const dark =
-      document.documentElement.getAttribute("data-theme") === "dark";
-    const mul = dark ? 1.12 : 1;
-    if (w < 480) return Math.round(38 * mul);
-    if (w < 900) return Math.round(64 * mul);
-    if (w < 1400) return Math.round(94 * mul);
-    return Math.round(112 * mul);
-  }
-
-  function themePalette() {
-    const dark =
-      document.documentElement.getAttribute("data-theme") === "dark";
-    return dark
-      ? {
-          sand: "238, 218, 178",
-          ochre: "224, 196, 148",
-          silt: "205, 192, 172",
-          charcoal: "168, 158, 142",
-          weights: [0.48, 0.34, 0.14, 0.04],
-          alphaBoost: 2.35,
-          sizeBoost: 1.2,
-        }
-      : {
-          sand: "148, 122, 86",
-          ochre: "132, 102, 66",
-          silt: "112, 102, 90",
-          charcoal: "78, 72, 64",
-          weights: [0.44, 0.32, 0.18, 0.06],
-          alphaBoost: 1.55,
-          sizeBoost: 1.08,
-        };
-  }
-
-  function pickColor(palette) {
-    const r = Math.random();
-    let acc = 0;
-    const keys = ["sand", "ochre", "silt", "charcoal"];
-    for (let i = 0; i < keys.length; i++) {
-      acc += palette.weights[i];
-      if (r < acc) return palette[keys[i]];
-    }
-    return palette.sand;
-  }
-
-  function pickType(layer) {
-    const types = layer.types;
-    return types[Math.floor(Math.random() * types.length)];
-  }
-
-  function createParticle(width, height, layer, palette) {
-    const kind = pickType(layer);
-    const color = pickColor(palette);
-    const angle = Math.random() * Math.PI * 2;
-    const drift = (0.004 + Math.random() * 0.014) * layer.speedMul;
-    const sizeBoost = palette.sizeBoost ?? 1;
-
-    const base = {
-      kind,
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: Math.cos(angle) * drift,
-      vy: (-0.006 - Math.random() * 0.022) * layer.speedMul,
-      a: (0.045 + Math.random() * 0.11) * layer.alphaMul,
-      phase: Math.random() * Math.PI * 2,
-      phaseSpeed: 0.04 + Math.random() * 0.1,
-      wobble: 0.08 + Math.random() * 0.22,
-      depth: layer.depth,
-      color,
-      rot: Math.random() * Math.PI,
-      rotSpeed: (Math.random() - 0.5) * 0.012,
-      settle: 0.988 + layer.depth * 0.006,
-    };
-
-    if (kind === "dust") {
-      base.r = (0.55 + Math.random() * 1.55) * layer.sizeMul * sizeBoost;
-      base.blur = 2.2 + Math.random() * 1.6;
-    } else if (kind === "grain") {
-      base.rx = (0.4 + Math.random() * 1) * layer.sizeMul * sizeBoost;
-      base.ry = base.rx * (0.28 + Math.random() * 0.35);
-      base.blur = 0.55 + Math.random() * 0.45;
-    } else {
-      base.size = (0.3 + Math.random() * 0.62) * layer.sizeMul * sizeBoost;
-      base.verts = [
-        { x: 0, y: -1 },
-        { x: 0.85 + Math.random() * 0.3, y: 0.2 + Math.random() * 0.4 },
-        { x: -0.7 - Math.random() * 0.25, y: 0.35 + Math.random() * 0.3 },
-      ];
-      base.blur = 0.35;
-    }
-
-    return base;
-  }
-
-  function seedParticles(state) {
-    const budget = particleBudget();
-    const palette = themePalette();
-    const items = [];
-
-    LAYERS.forEach((layer) => {
-      const n = Math.max(5, Math.round(budget * layer.countMul * 0.36));
-      for (let i = 0; i < n; i++) {
-        items.push(createParticle(state.width, state.height, layer, palette));
-      }
-    });
-
-    state.items = items;
-    state.palette = palette;
-  }
-
-  function applyAirCurrent(p, t) {
-    const nx = p.x * 0.0018 + t * 0.04;
-    const ny = p.y * 0.0014 + p.depth * 2;
-    p.vx += Math.sin(ny) * 0.00035 * (0.4 + p.depth);
-    p.vy += Math.cos(nx) * 0.00022 - 0.00008;
-  }
-
-  function applyScrollExcavation(p, scrollVel) {
-    const lift = scrollVel * 0.00042 * (0.15 + p.depth * 0.85);
-    p.vy -= lift;
-    p.vx += scrollVel * 0.00006 * Math.sin(p.phase + p.depth * 4);
-    if (Math.abs(scrollVel) > 0.5) {
-      p.vx += (Math.random() - 0.5) * 0.0008 * p.depth;
-    }
-  }
-
-  function applyPointerDisturbance(p, smoothPointer) {
-    const dx = p.x - smoothPointer.x;
-    const dy = p.y - smoothPointer.y;
-    const dist = Math.hypot(dx, dy);
-    const radius = 56 + p.depth * 36;
-    if (dist < radius && dist > 0.001) {
-      const influence = (1 - dist / radius) * 0.0032 * (0.2 + p.depth);
-      p.vx += (dx / dist) * influence;
-      p.vy += (dy / dist) * influence * 0.4;
-    }
-  }
-
-  function drawDust(ctx, p, alpha, t, scrollY) {
-    const wobbleX = Math.sin(t * p.phaseSpeed + p.phase) * p.wobble;
-    const wobbleY = Math.cos(t * p.phaseSpeed * 0.82 + p.phase) * p.wobble * 0.55;
-    const parallaxY = scrollY * (p.depth - 0.48) * 0.065;
-    const x = p.x + wobbleX;
-    const y = p.y + wobbleY - parallaxY;
-    const radius = p.r * p.blur;
-
-    const g = ctx.createRadialGradient(x, y, 0, x, y, radius);
-    g.addColorStop(0, `rgba(${p.color}, ${Math.min(alpha * 0.72, 0.95)})`);
-    g.addColorStop(0.45, `rgba(${p.color}, ${Math.min(alpha * 0.28, 0.65)})`);
-    g.addColorStop(1, `rgba(${p.color}, 0)`);
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  function drawGrain(ctx, p, alpha, t, scrollY) {
-    const wobbleX = Math.sin(t * p.phaseSpeed + p.phase) * p.wobble * 0.7;
-    const wobbleY = Math.cos(t * p.phaseSpeed * 0.9 + p.phase) * p.wobble * 0.45;
-    const parallaxY = scrollY * (p.depth - 0.48) * 0.072;
-    const x = p.x + wobbleX;
-    const y = p.y + wobbleY - parallaxY;
-    const rot = p.rot + t * p.rotSpeed;
-
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(rot);
-    ctx.globalAlpha = alpha * 0.85;
-
-    const g = ctx.createRadialGradient(0, 0, 0, 0, 0, p.rx * 2.2);
-    g.addColorStop(0, `rgba(${p.color}, ${alpha * 0.7})`);
-    g.addColorStop(0.5, `rgba(${p.color}, ${alpha * 0.22})`);
-    g.addColorStop(1, `rgba(${p.color}, 0)`);
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, p.rx, p.ry, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawSpeck(ctx, p, alpha, t, scrollY) {
-    const wobbleX = Math.sin(t * p.phaseSpeed * 1.1 + p.phase) * p.wobble * 0.5;
-    const wobbleY = Math.cos(t * p.phaseSpeed + p.phase) * p.wobble * 0.35;
-    const parallaxY = scrollY * (p.depth - 0.48) * 0.08;
-    const x = p.x + wobbleX;
-    const y = p.y + wobbleY - parallaxY;
-    const rot = p.rot + t * p.rotSpeed * 0.6;
-    const s = p.size;
-
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(rot);
-    ctx.globalAlpha = alpha * 0.75;
-    ctx.fillStyle = `rgba(${p.color}, ${alpha * 0.55})`;
-    ctx.beginPath();
-    p.verts.forEach((v, i) => {
-      const px = v.x * s;
-      const py = v.y * s;
-      if (i === 0) ctx.moveTo(px, py);
-      else ctx.lineTo(px, py);
-    });
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawParticle(ctx, p, alpha, t, scrollY) {
-    if (p.kind === "grain") drawGrain(ctx, p, alpha, t, scrollY);
-    else if (p.kind === "speck") drawSpeck(ctx, p, alpha, t, scrollY);
-    else drawDust(ctx, p, alpha, t, scrollY);
-  }
-
-  function createController(canvas) {
-    const ctx = canvas.getContext("2d", { alpha: true });
-    if (!ctx) return null;
-
-    const state = {
-      canvas,
-      ctx,
-      width: 0,
-      height: 0,
-      dpr: 1,
-      items: [],
-      palette: null,
-      pointer: { x: -9999, y: -9999, active: false },
-      smoothPointer: { x: -9999, y: -9999 },
-      scrollY: 0,
-      scrollVel: 0,
-      lastScrollY: 0,
-      running: false,
-      rafId: 0,
-    };
-
-    function resize() {
-      state.dpr = Math.min(window.devicePixelRatio || 1, 2);
-      state.width = window.innerWidth;
-      state.height = window.innerHeight;
-      canvas.width = Math.floor(state.width * state.dpr);
-      canvas.height = Math.floor(state.height * state.dpr);
-      canvas.style.width = state.width + "px";
-      canvas.style.height = state.height + "px";
-      ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
-      seedParticles(state);
-    }
-
-    function tick(now) {
-      if (!state.running) return;
-      state.rafId = requestAnimationFrame(tick);
-
-      const t = now * 0.001;
-      const { width, height, items, ctx: c } = state;
-
-      state.smoothPointer.x = lerp(
-        state.smoothPointer.x,
-        state.pointer.x,
-        0.06
-      );
-      state.smoothPointer.y = lerp(
-        state.smoothPointer.y,
-        state.pointer.y,
-        0.06
-      );
-
-      const scrollY =
-        window.PaleomaginaScroll?.getY?.() ?? window.scrollY ?? 0;
-      state.scrollVel = lerp(state.scrollVel, scrollY - state.lastScrollY, 0.12);
-      state.lastScrollY = scrollY;
-      state.scrollY = scrollY;
-
-      c.clearRect(0, 0, width, height);
-
-      const sorted = items.slice().sort((a, b) => a.depth - b.depth);
-
-      for (let i = 0; i < sorted.length; i++) {
-        const p = sorted[i];
-
-        applyAirCurrent(p, t);
-        applyScrollExcavation(p, state.scrollVel);
-        if (state.pointer.active) applyPointerDisturbance(p, state.smoothPointer);
-
-        p.vx *= p.settle;
-        p.vy *= p.settle;
-
-        p.x += p.vx;
-        p.y += p.vy;
-
-        const margin = 16;
-        if (p.y < -margin) {
-          p.y = height + margin;
-          p.x = Math.random() * width;
-        }
-        if (p.y > height + margin) {
-          p.y = -margin;
-          p.x = Math.random() * width;
-        }
-        if (p.x < -margin) p.x = width + margin;
-        if (p.x > width + margin) p.x = -margin;
-
-        const pulse = 0.82 + 0.18 * Math.sin(t * 0.14 + p.phase);
-        const scrollGlow =
-          1 + clamp(Math.abs(state.scrollVel) * 0.002, 0, 0.12) * p.depth;
-        const boost = state.palette?.alphaBoost ?? 1;
-        const alpha =
-          p.a * pulse * (0.82 + p.depth * 0.35) * scrollGlow * boost;
-
-        drawParticle(c, p, alpha, t, state.scrollY);
-      }
-    }
-
-    function onPointerMove(event) {
-      state.pointer.x = event.clientX;
-      state.pointer.y = event.clientY;
-      state.pointer.active = true;
-    }
-
-    function onPointerLeave() {
-      state.pointer.active = false;
-    }
-
-    function onScrollEvent(event) {
-      if (event.detail?.y != null) {
-        state.scrollY = event.detail.y;
-      }
-    }
-
-    resize();
-    window.addEventListener("resize", resize, { passive: true });
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    window.addEventListener("pointerleave", onPointerLeave);
-    window.addEventListener("pm-scroll", onScrollEvent);
-
-    return {
-      start() {
-        if (state.running) return;
-        state.running = true;
-        state.lastScrollY =
-          window.PaleomaginaScroll?.getY?.() ?? window.scrollY ?? 0;
-        state.rafId = requestAnimationFrame(tick);
-      },
-      stop() {
-        state.running = false;
-        cancelAnimationFrame(state.rafId);
-      },
-      refreshTheme() {
-        seedParticles(state);
-      },
-      destroy() {
-        this.stop();
-        window.removeEventListener("resize", resize);
-        window.removeEventListener("pointermove", onPointerMove);
-        window.removeEventListener("pointerleave", onPointerLeave);
-        window.removeEventListener("pm-scroll", onScrollEvent);
-      },
-    };
-  }
-
-  
-
-  let particles = null;
-
-  
   function mountBreathLayer() {
     const atmosphereEl = document.querySelector(".pm-atmosphere");
     if (!atmosphereEl || atmosphereEl.querySelector(".pm-atmosphere__breath")) return;
@@ -434,9 +37,10 @@
     wrap.className = "pm-atmosphere";
     wrap.setAttribute("aria-hidden", "true");
     wrap.innerHTML = [
-      '<canvas class="pm-atmosphere__canvas" id="pm-atmosphere-canvas"></canvas>',
-      '<div class="pm-atmosphere__arch-dust" aria-hidden="true"></div>',
+      '<div class="pm-atmosphere__grade"></div>',
+      '<div class="pm-atmosphere__light"></div>',
       '<div class="pm-atmosphere__ambient"></div>',
+      '<div class="pm-atmosphere__mist"></div>',
       '<div class="pm-atmosphere__fog pm-atmosphere__fog--top"></div>',
       '<div class="pm-atmosphere__fog pm-atmosphere__fog--bottom"></div>',
       '<div class="pm-atmosphere__vignette"></div>',
@@ -445,15 +49,6 @@
     document.body.prepend(wrap);
     document.documentElement.classList.add("pm-cinema");
     if (REDUCED) document.documentElement.classList.add("pm-cinema-reduced");
-  }
-
-  function initParticles() {
-    if (REDUCED) return null;
-
-    const canvas = document.getElementById("pm-atmosphere-canvas");
-    if (!canvas) return null;
-
-    return createController(canvas);
   }
 
   function initSectionReveal() {
@@ -499,37 +94,13 @@
     onScroll();
   }
 
-  function initVisibilityPause() {
-    document.addEventListener("visibilitychange", () => {
-      if (!particles) return;
-      if (document.hidden) particles.stop();
-      else particles.start();
-    });
-  }
-
-  function initThemeParticleRefresh() {
-    document.querySelectorAll(".theme-toggle").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        window.setTimeout(() => particles?.refreshTheme?.(), 80);
-      });
-    });
-  }
-
   function initAtmosphere() {
     mountLayers();
     initBreathing();
-    particles = initParticles();
     initSectionReveal();
     initScrollDepth();
     initNavScroll();
-    initVisibilityPause();
-    initThemeParticleRefresh();
-
-    if (particles) {
-      particles.start();
-    }
   }
-window.PaleomaginaAtmosphere = { refreshParticles: () => particles?.refreshTheme?.() };
 
 
   /* Scroll nativo: el hijack con wheel bloqueaba la página tras unificar módulos. */
@@ -591,6 +162,8 @@ window.PaleomaginaAtmosphere = { refreshParticles: () => particles?.refreshTheme
     const max = state.max > 0 ? state.max : getMaxScroll();
     const progress = max > 0 ? state.current / max : 0;
     root.style.setProperty("--pm-scroll-progress", String(progress));
+    root.style.setProperty("--pm-cinema-light-y", `${18 + progress * 38}%`);
+    root.style.setProperty("--pm-cinema-scroll-glow", String(progress));
     window.dispatchEvent(
       new CustomEvent("pm-scroll", {
         detail: {
@@ -810,26 +383,6 @@ window.PaleomaginaAtmosphere = { refreshParticles: () => particles?.refreshTheme
   function getScrollY() {
     return window.PaleomaginaScroll?.getY?.() ?? window.scrollY ?? 0;
   }
-
-  function __removedMountScene() {
-    if (document.querySelector(".pm-parallax-scene")) return;
-
-    const scene = document.createElement("motionless");
-    scene.className = "pm-parallax-scene";
-    scene.setAttribute("aria-hidden", "true");
-    scene.innerHTML = [
-      '<div class="pm-parallax-scene__layer pm-parallax-scene__layer--far" data-pm-speed="0.06"></div>',
-      '<div class="pm-parallax-scene__layer pm-parallax-scene__layer--mid" data-pm-speed="0.035"></div>',
-    ].join("");
-
-    const atmosphere = document.querySelector(".pm-atmosphere");
-    if (atmosphere) {
-      atmosphere.before(scene);
-    } else {
-      document.body.prepend(scene);
-    }
-  }
-
   function tagBlocks() {
     document
       .querySelectorAll("main section:not(.hero):not(.hero-simple):not(.page-hero)")
@@ -855,11 +408,6 @@ window.PaleomaginaAtmosphere = { refreshParticles: () => particles?.refreshTheme
     const root = document.documentElement;
 
     root.style.setProperty("--pm-scroll", `${scrollY}px`);
-
-    document.querySelectorAll(".pm-parallax-scene__layer").forEach((layer) => {
-      const speed = parseFloat(layer.dataset.pmSpeed) || 0.05;
-      layer.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
-    });
 
     document.querySelectorAll(".pm-parallax-block").forEach((block) => {
       const rect = block.getBoundingClientRect();
@@ -1554,7 +1102,6 @@ window.PaleomaginaAudio = {
 
 
   function refreshAfterNav() {
-    window.PaleomaginaAtmosphere?.refreshParticles?.();
     window.PaleomaginaText?.refresh?.();
     window.PaleomaginaSections?.refresh?.();
     window.PaleomaginaParallax?.refresh?.();
@@ -1569,7 +1116,6 @@ window.PaleomaginaAudio = {
     initAudio();
     window.PaleomaginaCinema = {
       refreshAfterNav,
-      refreshParticles: () => window.PaleomaginaAtmosphere?.refreshParticles?.(),
     };
   }
 
