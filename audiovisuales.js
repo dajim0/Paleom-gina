@@ -1,5 +1,5 @@
 (function () {
-  const state = { theme: null, playlist: null, scope: null };
+  const state = { theme: null, playlist: null, scope: null, libraryOpen: false };
 
   function t(key) {
     return typeof paleomaginaT === "function" ? paleomaginaT(key) : key;
@@ -219,11 +219,27 @@
   }
 
   function ensureAudiovisualContentVisible() {
+    const catalog = getCatalog(typeof currentLang === "undefined" ? "es" : currentLang);
+    const libraryTitle = document.getElementById("av-library-heading");
+    if (libraryTitle && catalog?.items) {
+      libraryTitle.textContent = t("audiovisuals_available") || libraryTitle.textContent || "Biblioteca de videos";
+    }
+
     document.querySelectorAll(
-      ".av-library-header, .av-library-header *, #av-grid .av-item-card, #av-grid .av-video-title"
+      ".av-library-section-title, .av-library-card, .av-library-card *, #av-grid .av-item-card, #av-grid .av-video-title"
     ).forEach((el) => {
-      el.classList.add("pm-text-reveal--visible", "pm-cinema-reveal--visible", "is-visible");
-      el.classList.remove("pm-cinema-reveal", "pm-text-reveal");
+      el.classList.remove(
+        "d-none",
+        "pm-cinema-reveal",
+        "pm-text-reveal",
+        "pm-text-reveal--title",
+        "pm-text-reveal--body",
+        "pm-cinema-reveal--visible"
+      );
+      el.classList.add("pm-text-reveal--visible", "pm-section-visible", "is-visible");
+      if (el.classList.contains("av-library-card")) {
+        el.style.setProperty("display", "flex", "important");
+      }
       el.style.setProperty("opacity", "1", "important");
       el.style.setProperty("filter", "none", "important");
       el.style.setProperty("transform", "none", "important");
@@ -231,31 +247,49 @@
     });
   }
 
+  function updateLibraryPanel() {
+    const panel = document.getElementById("av-library-panel");
+    const toggle = document.querySelector("[data-av-library-toggle]");
+    if (!panel || !toggle) return;
+
+    panel.hidden = false;
+    panel.classList.toggle("is-preview", !state.libraryOpen);
+    panel.classList.toggle("is-expanded", state.libraryOpen);
+    toggle.setAttribute("aria-expanded", String(state.libraryOpen));
+    toggle.textContent = t(state.libraryOpen ? "av_library_hide" : "av_library_show");
+    ensureAudiovisualContentVisible();
+  }
+
   function renderGrid(lang) {
     const grid = document.getElementById("av-grid");
     const empty = document.getElementById("av-empty");
     if (!grid) return;
     const items = filterItems(getCatalog(lang).items || []);
-    grid.innerHTML = items.map(renderCard).join("");
+    const visibleItems = state.libraryOpen ? items : items.slice(0, 2);
+    grid.innerHTML = visibleItems.map(renderCard).join("");
     if (empty) empty.classList.toggle("d-none", items.length > 0);
     renderActiveFilters(lang);
     ensureAudiovisualContentVisible();
+    updateLibraryPanel();
     requestAnimationFrame(ensureAudiovisualContentVisible);
     window.setTimeout(ensureAudiovisualContentVisible, 250);
   }
 
   function toggleTheme(id) {
     state.theme = state.theme === id ? null : id;
+    state.libraryOpen = true;
     renderAll(currentLang);
   }
 
   function setPlaylist(id) {
     state.playlist = id || null;
+    state.libraryOpen = true;
     renderAll(currentLang);
   }
 
   function setScope(scope) {
     state.scope = state.scope === scope ? null : scope;
+    state.libraryOpen = true;
     renderAll(currentLang);
   }
 
@@ -296,6 +330,12 @@
       const clearBtn = e.target.closest("[data-av-clear]");
       if (clearBtn) {
         clearFilters(clearBtn.dataset.avClear);
+        return;
+      }
+      const libraryToggle = e.target.closest("[data-av-library-toggle]");
+      if (libraryToggle) {
+        state.libraryOpen = !state.libraryOpen;
+        renderGrid(currentLang);
       }
     });
   }

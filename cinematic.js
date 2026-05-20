@@ -503,19 +503,23 @@ window.PaleomaginaParallax = { refresh: update };
     section.querySelectorAll(TITLE_SEL).forEach((el) => {
       if (el.closest(".pm-heading-with-icon")) return;
       if (el.closest(".hero, .hero-simple, .page-hero")) return;
-      if (el.closest(".av-library-header")) return;
+      if (el.closest(".av-library-card")) return;
       if (el.closest(".card, .pm-read-panel")) return;
       mark(el, "title", base);
     });
 
     section.querySelectorAll(BODY_SEL).forEach((el, i) => {
       if (el.closest(".hero, .hero-simple, .page-hero")) return;
-      if (el.closest(".av-library-header")) return;
+      if (el.closest(".av-library-card")) return;
       mark(el, "body", base + 0.04 + i * 0.025);
     });
 
     section.querySelectorAll(".card, .pm-read-panel").forEach((block) => {
-      if (block.classList.contains("av-item-card") || block.closest("#av-grid")) return;
+      if (
+        block.classList.contains("av-item-card") ||
+        block.classList.contains("av-library-card") ||
+        block.closest("#av-grid")
+      ) return;
       const t = block.querySelector(TITLE_SEL);
       if (t) mark(t, "title", 0.04);
       const intro = block.querySelector("p");
@@ -609,7 +613,7 @@ window.PaleomaginaParallax = { refresh: update };
     "h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .museum-section-heading, .pm-heading-with-icon";
 
   const REVEAL_SELECTOR = [
-    "main .card:not(.av-item-card):not(.pm-section-layer)",
+    "main .card:not(.av-item-card):not(.av-library-card):not(.pm-section-layer)",
     "main .content-prose:not(.pm-section-layer)",
     "main .pm-read-panel:not(.pm-section-layer)",
     "main .museum-section-panel:not(.pm-section-layer)",

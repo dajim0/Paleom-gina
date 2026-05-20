@@ -744,7 +744,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=6");
+  loadPaleomaginaModule("cinematic.js?v=8");
 }
 
 /* ============================================
