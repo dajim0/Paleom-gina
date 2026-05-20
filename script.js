@@ -379,7 +379,7 @@ function shouldUseSoftNavigation() {
   );
 }
 
-function getBodySwapNodes(root) {
+function getBodySwapNodes(root = document.body) {
   return [...root.children].filter(
     (el) =>
       !(el.tagName === "NAV" && el.classList.contains("pm-topnav")) &&

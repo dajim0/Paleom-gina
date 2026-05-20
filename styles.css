@@ -193,6 +193,31 @@ html:not([data-theme="dark"]) .list-group-item {
   border-color: var(--border);
 }
 
+.dinosaur-model-card {
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 28px 80px rgba(15, 12, 7, 0.14);
+}
+
+.dinosaur-model-card model-viewer {
+  width: 100%;
+  min-height: 420px;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), rgba(12, 10, 8, 0.95));
+  border-radius: 1rem;
+}
+
+@media (max-width: 767px) {
+  .dinosaur-model-card model-viewer {
+    min-height: 320px;
+  }
+}
+
+.dinosaur-picker button.active {
+  color: #fff;
+}
+
 html:not([data-theme="dark"]) .table {
   --bs-table-bg: color-mix(in srgb, var(--card) 45%, transparent);
   --bs-table-color: var(--text);
