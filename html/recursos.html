@@ -15,7 +15,7 @@
     href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=11" />
+  <link rel="stylesheet" href="../styles.css?v=51" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
@@ -80,72 +80,204 @@
     </div>
   </section>
 
-  <main id="main-content">
+  <main id="main-content" class="resources-page-main">
     <section class="section" id="visit-info" aria-labelledby="visit-info-title">
       <div class="container">
         <h2 id="visit-info-title" class="pm-heading-with-icon"><img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="resources_visit_title">Información práctica de visita</span></h2>
         <p class="section-lead" data-i18n="resources_visit_lead"></p>
-        <ul class="mb-0">
-          <li data-i18n="resources_visit_li1"></li>
-          <li data-i18n="resources_visit_li2"></li>
-          <li data-i18n="resources_visit_li3"></li>
-          <li data-i18n="resources_visit_li4"></li>
-          <li data-i18n="resources_visit_li5"></li>
-          <li data-i18n="resources_visit_li6"></li>
-        </ul>
+        <div class="visit-highlights">
+          <article class="visit-highlight-card">
+            <span class="visit-highlight-card__eyebrow" data-i18n="resources_visit_tag_time">Duración</span>
+            <strong data-i18n="resources_visit_card_time">90-120 min</strong>
+            <p data-i18n="resources_visit_li2"></p>
+          </article>
+          <article class="visit-highlight-card">
+            <span class="visit-highlight-card__eyebrow" data-i18n="resources_visit_tag_access">Accesibilidad</span>
+            <strong data-i18n="resources_visit_card_access">Recorrido accesible</strong>
+            <p data-i18n="resources_visit_li4"></p>
+          </article>
+          <article class="visit-highlight-card">
+            <span class="visit-highlight-card__eyebrow" data-i18n="resources_visit_tag_groups">Grupos</span>
+            <strong data-i18n="resources_visit_card_groups">Reserva previa</strong>
+            <p data-i18n="resources_visit_li3"></p>
+          </article>
+          <article class="visit-highlight-card">
+            <span class="visit-highlight-card__eyebrow" data-i18n="resources_visit_tag_location">Ubicación</span>
+            <strong data-i18n="resources_visit_card_location">Sierra Mágina</strong>
+            <p data-i18n="resources_visit_li5"></p>
+          </article>
+        </div>
       </div>
     </section>
 
     <section class="section section-alt" id="recursos" aria-labelledby="resources-title">
       <div class="container">
         <h2 id="resources-title" data-i18n="resources_title">Horario de visita</h2>
-        <div class="schedule-grid">
-          <article class="card schedule-card">
-            <h3>Horario general</h3>
+        <p class="section-lead" data-i18n="resources_schedule_intro">Organiza la visita con los horarios de apertura, pases guiados y servicios disponibles en sala.</p>
+
+        <article class="schedule-hero card">
+          <div class="schedule-hero__content">
+            <span class="kicker" data-i18n="resources_schedule_badge">Horario de apertura</span>
+            <h3 data-i18n="resources_schedule_main_title">Martes a domingo</h3>
+            <p data-i18n="resources_schedule_main_text">Apertura de mañana y tarde, con lunes de cierre técnico y ampliación los sábados.</p>
+          </div>
+          <div class="schedule-hero__panel" aria-label="Resumen de horario">
+            <span data-i18n="resources_schedule_today_label">Franja principal</span>
+            <strong>10:00 - 18:00</strong>
+            <small data-i18n="resources_schedule_today_note">Sábados hasta las 19:00</small>
+          </div>
+        </article>
+
+        <div class="schedule-grid schedule-grid--premium">
+          <article class="card schedule-card schedule-card--table">
+            <h3 data-i18n="resources_schedule_general_title">Horario general</h3>
             <table class="table schedule-table">
               <tbody>
                 <tr>
-                  <th>Martes a viernes</th>
+                  <th data-i18n="resources_schedule_weekdays">Martes a viernes</th>
                   <td>10:00 – 18:00</td>
                 </tr>
                 <tr>
-                  <th>Sábado</th>
+                  <th data-i18n="resources_schedule_saturday">Sábado</th>
                   <td>10:00 – 19:00</td>
                 </tr>
                 <tr>
-                  <th>Domingo</th>
+                  <th data-i18n="resources_schedule_sunday">Domingo</th>
                   <td>10:00 – 16:00</td>
                 </tr>
                 <tr>
-                  <th>Lunes</th>
-                  <td>Cerrado</td>
+                  <th data-i18n="resources_schedule_monday">Lunes</th>
+                  <td data-i18n="resources_schedule_closed">Cerrado</td>
                 </tr>
               </tbody>
             </table>
           </article>
           <article class="card schedule-card">
-            <h3>Visitas guiadas</h3>
+            <h3 data-i18n="resources_guided_title">Visitas guiadas</h3>
             <ul class="schedule-list mb-0">
-              <li>11:00 – Tour de orientación por los ámbitos</li>
-              <li>13:00 – Sesión temática de geología</li>
-              <li>16:00 – Experiencia de fósiles y relatos</li>
+              <li><strong>11:00</strong><span data-i18n="resources_guided_li1">Recorrido de orientación por los ámbitos.</span></li>
+              <li><strong>13:00</strong><span data-i18n="resources_guided_li2">Sesión temática sobre geología de Sierra Mágina.</span></li>
+              <li><strong>16:00</strong><span data-i18n="resources_guided_li3">Experiencia de fósiles, paisaje y relatos humanos.</span></li>
             </ul>
           </article>
           <article class="card schedule-card">
-            <h3>Reservas y grupos</h3>
+            <h3 data-i18n="resources_booking_title">Reservas y grupos</h3>
             <ul class="schedule-list mb-0">
-              <li>Reserva previa por correo o teléfono.</li>
-              <li>Grupos escolares: mañana y tarde, con espacio dedicado.</li>
-              <li>Recomendado confirmar al menos 48 horas antes.</li>
+              <li data-i18n="resources_booking_li1">Reserva previa por correo o teléfono.</li>
+              <li data-i18n="resources_booking_li2">Grupos escolares: mañana y tarde, con espacio dedicado.</li>
+              <li data-i18n="resources_booking_li3">Confirmación recomendada al menos 48 horas antes.</li>
             </ul>
           </article>
           <article class="card schedule-card">
-            <h3>Servicios</h3>
+            <h3 data-i18n="resources_services_title">Servicios</h3>
             <ul class="schedule-list mb-0">
-              <li>Recepción abierta desde las 09:45.</li>
-              <li>Accesibilidad con ascensor y circuitos sin barreras.</li>
-              <li>Zona de descanso y consulta didáctica en sala.</li>
+              <li data-i18n="resources_services_li1">Recepción abierta desde las 09:45.</li>
+              <li data-i18n="resources_services_li2">Ascensor y circuitos sin barreras.</li>
+              <li data-i18n="resources_services_li3">Zona de descanso y consulta didáctica en sala.</li>
             </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tickets" aria-labelledby="tickets-title">
+      <div class="container">
+        <h2 id="tickets-title" class="pm-heading-with-icon"><img src="../images/site/icono-fosiles.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="tickets_title">Entradas y tarifas</span></h2>
+        <p class="section-lead" data-i18n="tickets_intro">Tarifas de acceso al Centro de Interpretación Paleomágina.</p>
+
+        <div class="ticket-layout">
+          <article class="ticket-feature-card">
+            <span class="kicker" data-i18n="tickets_recommended_label">Tarifa principal</span>
+            <h3 data-i18n="tickets_main_title">Entrada general</h3>
+            <div class="ticket-price" aria-label="4 euros">
+              <span>4</span><sup>€</sup>
+            </div>
+            <p data-i18n="tickets_main_text">Acceso a la exposición permanente, recursos digitales en sala, línea temporal y terraza final.</p>
+            <div class="ticket-actions" data-ticket-product data-ticket-id="general" data-ticket-price="4" data-ticket-title-key="tickets_main_title">
+              <button class="btn btn-primary" type="button" data-cart-add="general" data-i18n="cart_add">Añadir al carrito</button>
+              <a class="btn btn-outline-primary" href="index.html#contacto" data-i18n="tickets_group_cta">Consulta para grupos</a>
+            </div>
+          </article>
+
+          <div class="ticket-tier-grid">
+            <article class="ticket-tier-card" data-ticket-product data-ticket-id="reduced" data-ticket-price="2" data-ticket-title-key="tickets_reduced_label">
+              <span data-i18n="tickets_reduced_label">Reducida</span>
+              <strong>2€</strong>
+              <p data-i18n="tickets_reduced_text">Estudiantes, mayores de 65 años, familias numerosas y personas desempleadas.</p>
+              <button class="btn btn-sm btn-outline-primary" type="button" data-cart-add="reduced" data-i18n="cart_add">Añadir al carrito</button>
+            </article>
+            <article class="ticket-tier-card" data-ticket-product data-ticket-id="free" data-ticket-price="0" data-ticket-title-key="tickets_free_label">
+              <span data-i18n="tickets_free_label">Gratuita</span>
+              <strong>0€</strong>
+              <p data-i18n="tickets_free_text">Menores de 8 años, docentes acreditados, personas con discapacidad y acompañante.</p>
+              <button class="btn btn-sm btn-outline-primary" type="button" data-cart-add="free" data-i18n="cart_add">Añadir al carrito</button>
+            </article>
+            <article class="ticket-tier-card" data-ticket-product data-ticket-id="school" data-ticket-price="3" data-ticket-title-key="tickets_school_label">
+              <span data-i18n="tickets_school_label">Escolares</span>
+              <strong>3€</strong>
+              <p data-i18n="tickets_school_text">Precio por alumno para grupos educativos con reserva previa y horario concertado.</p>
+              <button class="btn btn-sm btn-outline-primary" type="button" data-cart-add="school" data-i18n="cart_add">Añadir al carrito</button>
+            </article>
+            <article class="ticket-tier-card" data-ticket-product data-ticket-id="guided" data-ticket-price="6" data-ticket-title-key="tickets_guided_label">
+              <span data-i18n="tickets_guided_label">Visita guiada</span>
+              <strong>6€</strong>
+              <p data-i18n="tickets_guided_text">Entrada con recorrido guiado por ámbitos, geología, fósiles y paisaje.</p>
+              <button class="btn btn-sm btn-outline-primary" type="button" data-cart-add="guided" data-i18n="cart_add">Añadir al carrito</button>
+            </article>
+          </div>
+        </div>
+
+        <div class="purchase-strip ticket-cart" role="region" aria-labelledby="ticket-cart-title">
+          <div class="ticket-cart__intro">
+            <strong data-i18n="tickets_purchase_title">Modalidades de compra</strong>
+            <p data-i18n="tickets_purchase_text">Añade las entradas al carrito, revisa el total y finaliza la compra enviando la solicitud de reserva.</p>
+          </div>
+          <div class="ticket-cart__panel">
+            <div class="ticket-cart__header">
+              <strong id="ticket-cart-title" data-i18n="cart_title">Tu carrito</strong>
+              <button class="btn btn-sm btn-link ticket-cart__clear" type="button" data-cart-clear data-i18n="cart_clear">Vaciar</button>
+            </div>
+            <div class="ticket-cart__items" data-cart-items>
+              <p class="ticket-cart__empty" data-i18n="cart_empty">Todavía no has añadido entradas.</p>
+            </div>
+            <div class="ticket-cart__total">
+              <span data-i18n="cart_total">Total</span>
+              <strong data-cart-total>0€</strong>
+            </div>
+            <button class="btn btn-primary w-100" type="button" data-cart-checkout data-i18n="cart_checkout">Finalizar compra</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="visit-resources" aria-labelledby="visit-resources-title">
+      <div class="container">
+        <h2 id="visit-resources-title" class="pm-heading-with-icon"><img src="../images/site/icono-arqueologo.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="resources_more_title">Qué más puedes consultar</span></h2>
+        <p class="section-lead" data-i18n="resources_more_intro">Además del horario, esta página puede reunir los recursos que ayudan a preparar, seguir y ampliar la experiencia de Paleomágina.</p>
+        <div class="resource-grid visit-resource-grid">
+          <article class="card visit-resource-card">
+            <span class="visit-resource-card__number">01</span>
+            <h3 data-i18n="resources_more_before_title">Antes de venir</h3>
+            <p data-i18n="resources_more_before_text">Duración recomendada, accesibilidad, reserva de grupos y orientación básica para llegar al centro.</p>
+            <a class="btn btn-sm btn-outline-primary" href="#visit-info" data-i18n="resources_more_before_cta">Ver información práctica</a>
+          </article>
+          <article class="card visit-resource-card">
+            <span class="visit-resource-card__number">02</span>
+            <h3 data-i18n="resources_more_route_title">Durante el recorrido</h3>
+            <p data-i18n="resources_more_route_text">Mapa interactivo, línea temporal y explicación por ámbitos para situar cada sala dentro del relato.</p>
+            <a class="btn btn-sm btn-outline-primary" href="ambitos.html" data-i18n="resources_more_route_cta">Explorar ámbitos</a>
+          </article>
+          <article class="card visit-resource-card">
+            <span class="visit-resource-card__number">03</span>
+            <h3 data-i18n="resources_more_after_title">Después de la visita</h3>
+            <p data-i18n="resources_more_after_text">Audiovisuales, vocabulario científico y materiales de consulta para continuar el aprendizaje.</p>
+            <a class="btn btn-sm btn-outline-primary" href="audiovisuales.html" data-i18n="resources_more_after_cta">Ver audiovisuales</a>
+          </article>
+          <article class="card visit-resource-card">
+            <span class="visit-resource-card__number">04</span>
+            <h3 data-i18n="resources_more_groups_title">Centros educativos</h3>
+            <p data-i18n="resources_more_groups_text">Propuesta de visita por edades, talleres vinculados a los ámbitos y apoyo para actividades escolares.</p>
+            <a class="btn btn-sm btn-outline-primary" href="index.html#contacto" data-i18n="resources_more_groups_cta">Solicitar información</a>
           </article>
         </div>
       </div>
@@ -189,8 +321,8 @@
   </footer>
 
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="../data.js"></script>
-  <script defer src="../script.js?v=5"></script>
+  <script defer src="../data.js?v=9"></script>
+  <script defer src="../script.js?v=12"></script>
 </body>
 
 </html>

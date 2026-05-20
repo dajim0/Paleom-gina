@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles.css?v=11" />
+    <link rel="stylesheet" href="../styles.css?v=47" />
     <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="../images/site/favicon.png" />
   </head>
@@ -82,9 +82,9 @@
       </div>
     </section>
 
-    <main id="main-content" class="py-4">
+    <main id="main-content" class="py-4 ambitos-page-main">
       <div class="container">
-        <section class="section mb-4" aria-labelledby="expo-concept-h">
+        <section class="section mb-4 museum-section-panel ambitos-hover-card" aria-labelledby="expo-concept-h">
           <h2 id="expo-concept-h" class="h3 pm-heading-with-icon"><img src="../images/site/icono-adn.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="expo_concept_title">Concepto de la exposición permanente</span></h2>
           <p class="section-lead" data-i18n="expo_concept_lead"></p>
           <ul class="small mb-0">
@@ -96,13 +96,13 @@
           </ul>
         </section>
 
-        <section class="section section-alt mb-5" aria-labelledby="expo-route-detail-h">
+        <section class="section mb-5 museum-section-panel ambitos-hover-card" aria-labelledby="expo-route-detail-h">
           <h2 id="expo-route-detail-h" class="h3 pm-heading-with-icon"><img src="../images/site/icono-arqueologo.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="expo_route_detail_title">Recorrido expositivo por ámbitos</span></h2>
           <p class="section-lead" data-i18n="expo_route_detail_lead"></p>
           <div id="exhibit-route-accordion" class="pm-exhibit-route-root"></div>
         </section>
 
-        <section class="section section-alt mb-5" aria-labelledby="expo-title">
+        <section class="section mb-5 museum-section-panel ambitos-hover-card" aria-labelledby="expo-title">
           <h2 id="expo-title" class="h3 pm-heading-with-icon">
             <img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
             <span data-i18n="expo_permanent_title">Exposición permanente y recorrido</span>
@@ -111,20 +111,52 @@
           <div class="resource-grid mt-4">
             <article class="card">
               <h3 class="h5" data-i18n="route_rec_title">Recepción y planta baja</h3>
-              <p class="mb-0" data-i18n="route_rec_p"></p>
+              <p data-i18n="route_rec_p"></p>
+              <details class="route-card-details">
+                <summary data-i18n="route_more_details">Ver detalle</summary>
+                <ul class="small mb-0">
+                  <li data-i18n="route_rec_detail_1"></li>
+                  <li data-i18n="route_rec_detail_2"></li>
+                  <li data-i18n="route_rec_detail_3"></li>
+                </ul>
+              </details>
             </article>
             <article class="card">
               <h3 class="h5" data-i18n="route_stairs_title">Escaleras y transición</h3>
-              <p class="mb-0" data-i18n="route_stairs_p"></p>
+              <p data-i18n="route_stairs_p"></p>
+              <details class="route-card-details">
+                <summary data-i18n="route_more_details">Ver detalle</summary>
+                <ul class="small mb-0">
+                  <li data-i18n="route_stairs_detail_1"></li>
+                  <li data-i18n="route_stairs_detail_2"></li>
+                  <li data-i18n="route_stairs_detail_3"></li>
+                </ul>
+              </details>
             </article>
             <article class="card">
-              <h3 class="h5" data-i18n="route_aan_title">AAN — Antesala</h3>
-              <p class="mb-0" data-i18n="route_aan_p"></p>
+              <h3 class="h5" data-i18n="route_aan_title">Antesala</h3>
+              <p data-i18n="route_aan_p"></p>
+              <details class="route-card-details">
+                <summary data-i18n="route_more_details">Ver detalle</summary>
+                <ul class="small mb-0">
+                  <li data-i18n="route_aan_detail_1"></li>
+                  <li data-i18n="route_aan_detail_2"></li>
+                  <li data-i18n="route_aan_detail_3"></li>
+                </ul>
+              </details>
             </article>
             <article class="card">
-              <h3 class="h5" data-i18n="route_a0_tz_title">Ámbitos A0–A9 y terraza ATZ</h3>
+              <h3 class="h5" data-i18n="route_a0_tz_title">Secuencia expositiva y terraza final</h3>
               <p data-i18n="route_a0_tz_intro"></p>
-              <p class="mb-0" data-i18n="route_a0_tz_li"></p>
+              <p data-i18n="route_a0_tz_li"></p>
+              <details class="route-card-details">
+                <summary data-i18n="route_more_details">Ver detalle</summary>
+                <ul class="small mb-0">
+                  <li data-i18n="route_a0_tz_detail_1"></li>
+                  <li data-i18n="route_a0_tz_detail_2"></li>
+                  <li data-i18n="route_a0_tz_detail_3"></li>
+                </ul>
+              </details>
             </article>
             <article class="card">
               <h3 class="h5" data-i18n="route_resources_title">Recursos museográficos</h3>
@@ -134,6 +166,14 @@
                 <li data-i18n="route_resources_li2"></li>
                 <li data-i18n="route_resources_li3"></li>
               </ul>
+              <details class="route-card-details">
+                <summary data-i18n="route_more_details">Ver detalle</summary>
+                <ul class="small mb-0">
+                  <li data-i18n="route_resources_detail_1"></li>
+                  <li data-i18n="route_resources_detail_2"></li>
+                  <li data-i18n="route_resources_detail_3"></li>
+                </ul>
+              </details>
             </article>
             <article class="card">
               <h3 class="h5" data-i18n="route_public_title">Público objetivo</h3>
@@ -144,6 +184,14 @@
                 <li data-i18n="route_public_li3"></li>
                 <li data-i18n="route_public_li4"></li>
               </ul>
+              <details class="route-card-details">
+                <summary data-i18n="route_more_details">Ver detalle</summary>
+                <ul class="small mb-0">
+                  <li data-i18n="route_public_detail_1"></li>
+                  <li data-i18n="route_public_detail_2"></li>
+                  <li data-i18n="route_public_detail_3"></li>
+                </ul>
+              </details>
             </article>
             <article class="card">
               <h3 class="h5" data-i18n="route_exp_title">Experiencia del visitante</h3>
@@ -154,12 +202,20 @@
                 <li data-i18n="route_exp_li3"></li>
                 <li data-i18n="route_exp_li4"></li>
               </ul>
+              <details class="route-card-details">
+                <summary data-i18n="route_more_details">Ver detalle</summary>
+                <ul class="small mb-0">
+                  <li data-i18n="route_exp_detail_1"></li>
+                  <li data-i18n="route_exp_detail_2"></li>
+                  <li data-i18n="route_exp_detail_3"></li>
+                </ul>
+              </details>
             </article>
           </div>
         </section>
 
         <section class="mb-5" aria-labelledby="timeline-h">
-          <div class="timeline-section-panel">
+          <div class="timeline-section-panel museum-section-panel ambitos-hover-card">
             <h2 id="timeline-h" class="h3 mb-3 pm-heading-with-icon">
               <img src="../images/site/icono-fosiles.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
               <span data-i18n="timeline_title">Linea temporal interactiva</span>
@@ -184,11 +240,11 @@
             <p class="museum-section-lead text-center mb-4" data-i18n="museum_3d_intro">Pulsa en una zona coloreada para ver su descripción.</p>
 
             <div class="floor-switcher d-flex justify-content-center gap-2 mb-4" role="group" data-i18n-aria-label="museum_3d_floor_switch_aria" aria-label="Selector de planta del museo">
-              <button type="button" class="btn btn-sm btn-outline-primary active" data-floor="P1" id="btnFloorP1" data-i18n="museum_3d_floor_first">Planta primera</button>
-              <button type="button" class="btn btn-sm btn-outline-primary" data-floor="PB" id="btnFloorPB" data-i18n="museum_3d_floor_ground">Planta baja</button>
+              <button type="button" class="btn btn-sm btn-outline-primary active" data-floor="PB" id="btnFloorPB" data-i18n="museum_3d_floor_ground">Planta baja</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" data-floor="P1" id="btnFloorP1" data-i18n="museum_3d_floor_first">Planta primera</button>
             </div>
 
-            <div class="museum-map-wrapper position-relative mx-auto shadow-sm rounded overflow-hidden">
+            <div class="museum-map-wrapper position-relative mx-auto shadow-sm rounded">
               <img
                 src="../images/site/Captura_de_pantalla_2026-05-13_132657.png"
                 alt="Plano interactivo del Museo Paleomagina"
@@ -266,8 +322,8 @@
     </footer>
 
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script defer src="../data.js"></script>
-    <script defer src="../script.js?v=5"></script>
+    <script defer src="../data.js?v=4"></script>
+    <script defer src="../script.js?v=11"></script>
     <script defer src="../timeline.js"></script>
   </body>
 </html>

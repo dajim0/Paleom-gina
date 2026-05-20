@@ -1,0 +1,323 @@
+(function () {
+  const state = { theme: null, playlist: null, scope: null };
+
+  function t(key) {
+    return typeof paleomaginaT === "function" ? paleomaginaT(key) : key;
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function getCatalog(lang) {
+    return typeof getAudiovisualCatalog === "function"
+      ? getAudiovisualCatalog(lang)
+      : { routes: [], playlists: [], items: [], levels: {} };
+  }
+
+  function filterItems(items) {
+    return items.filter((item) => {
+      if (state.theme && item.theme !== state.theme) return false;
+      if (state.playlist && !(item.playlists || []).includes(state.playlist)) return false;
+      if (state.scope && item.scope !== state.scope) return false;
+      return true;
+    });
+  }
+
+  function renderRoutes(lang) {
+    const el = document.getElementById("av-routes-grid");
+    if (!el) return;
+    const { routes } = getCatalog(lang);
+    el.innerHTML = routes
+      .map(
+        (route) => `
+        <button
+          type="button"
+          class="av-route-card ${state.theme === route.id ? "is-active" : ""}"
+          data-av-theme="${route.id}"
+          aria-pressed="${state.theme === route.id}"
+        >
+          <span class="av-route-card__title">${escapeHtml(route.title)}</span>
+          <span class="av-route-card__text">${escapeHtml(route.text)}</span>
+        </button>
+      `
+      )
+      .join("");
+  }
+
+  function renderPlaylists(lang) {
+    const el = document.getElementById("av-playlists");
+    if (!el) return;
+    const { playlists } = getCatalog(lang);
+    const allLabel = t("av_filter_all");
+    el.innerHTML =
+      `<button type="button" class="av-playlist-btn ${!state.playlist ? "is-active" : ""}" data-av-playlist="" aria-pressed="${!state.playlist}">
+        <span class="av-playlist-btn__title">${escapeHtml(allLabel)}</span>
+        <span class="av-playlist-btn__text">${escapeHtml(t("audiovisuals_section_lead"))}</span>
+      </button>` +
+      playlists
+        .map(
+          (pl) => `
+          <button
+            type="button"
+            class="av-playlist-btn ${state.playlist === pl.id ? "is-active" : ""}"
+            data-av-playlist="${pl.id}"
+            aria-pressed="${state.playlist === pl.id}"
+          >
+            <span class="av-playlist-btn__title">${escapeHtml(pl.title)}</span>
+            <span class="av-playlist-btn__text">${escapeHtml(pl.text)}</span>
+          </button>
+        `
+        )
+        .join("");
+  }
+
+  function renderActiveFilters(lang) {
+    const el = document.getElementById("av-active-filters");
+    if (!el) return;
+    const { routes, playlists } = getCatalog(lang);
+    const chips = [];
+    if (state.theme) {
+      const route = routes.find((r) => r.id === state.theme);
+      if (route) chips.push({ type: "theme", label: route.title });
+    }
+    if (state.playlist) {
+      const pl = playlists.find((p) => p.id === state.playlist);
+      if (pl) chips.push({ type: "playlist", label: pl.title });
+    }
+    if (state.scope) chips.push({ type: "scope", label: state.scope });
+
+    if (!chips.length) {
+      el.innerHTML = "";
+      el.classList.add("d-none");
+      return;
+    }
+    el.classList.remove("d-none");
+    const clearLabel = t("av_filter_all");
+    el.innerHTML =
+      chips
+        .map(
+          (c) =>
+            `<span class="av-filter-chip">${escapeHtml(c.label)} <button type="button" class="av-filter-chip__clear" data-av-clear="${c.type}" aria-label="${escapeHtml(clearLabel)}">×</button></span>`
+        )
+        .join("") +
+      `<button type="button" class="btn btn-sm btn-outline-secondary av-clear-all" data-av-clear="all">${escapeHtml(clearLabel)}</button>`;
+  }
+
+  function renderLearnList(learn) {
+    if (!learn || !learn.length) return "";
+    return `
+      <div class="av-card-learn">
+        <strong class="av-card-label">${escapeHtml(t("av_learn_label"))}</strong>
+        <ul class="av-card-list">${learn.map((l) => `<li>${escapeHtml(l)}</li>`).join("")}</ul>
+      </div>
+    `;
+  }
+
+  function renderGlossaryTerms(terms) {
+    if (!terms || !terms.length) return "";
+    return `
+      <div class="av-card-glossary">
+        <strong class="av-card-label">${escapeHtml(t("av_glossary_label"))}</strong>
+        <div class="av-glossary-tags">
+          ${terms.map((term) => `<a class="av-glossary-tag" href="glosario.html">${escapeHtml(term)}</a>`).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderThumb(item) {
+    if (item.planned || !item.youtubeId) {
+      return `
+        <div class="ratio ratio-16x9 av-planned-thumb" aria-hidden="true">
+          <span class="av-planned-thumb__icon">${item.icon || "🎬"}</span>
+        </div>
+      `;
+    }
+    const title = escapeHtml(item.title);
+    const vid = escapeHtml(item.youtubeId);
+    const playLabel = currentLang === "en" ? `Play ${title}` : `Ver ${title}`;
+    return `
+      <div class="ratio ratio-16x9 video-thumb">
+        <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg" alt="" loading="lazy" decoding="async" />
+        <button
+          class="video-launch-button"
+          type="button"
+          data-video-id="${vid}"
+          data-video-title="${title}"
+          aria-label="${escapeHtml(playLabel)}"
+        >
+          <span class="play-icon" aria-hidden="true">▶</span>
+        </button>
+      </div>
+    `;
+  }
+
+  function renderBadges(item) {
+    const badges = [];
+    if (item.scope) {
+      badges.push(
+        `<button type="button" class="badge rounded-pill text-bg-primary av-scope-badge" data-av-scope="${escapeHtml(item.scope)}">${escapeHtml(item.scope)}</button>`
+      );
+    }
+    if (item.planned) {
+      badges.push(`<span class="badge rounded-pill text-bg-warning">${escapeHtml(t("av_planned_badge"))}</span>`);
+    } else if (item.source === "external") {
+      badges.push(`<span class="badge rounded-pill text-bg-secondary">${escapeHtml(t("av_external_badge"))}</span>`);
+    }
+    if (item.subtitle) {
+      badges.push(`<span class="badge rounded-pill text-bg-success">${escapeHtml(t("av_subtitle_badge"))}</span>`);
+    }
+    return badges.length ? `<div class="av-card-badges">${badges.join("")}</div>` : "";
+  }
+
+  function renderCard(item) {
+    const title = `${item.icon ? item.icon + " " : ""}${item.title}`;
+    const footer = item.planned
+      ? `<a class="btn btn-sm btn-outline-primary mt-auto" href="${escapeHtml(item.ambitoLink || "ambitos.html")}">${escapeHtml(t("av_planned_cta"))}</a>`
+      : item.scope
+        ? `<a class="btn btn-sm btn-link px-0 mt-auto" href="ambitos.html">${escapeHtml(t("av_scope_link"))} · ${escapeHtml(item.scope)}</a>`
+        : "";
+
+    const details =
+      (item.transcript
+        ? `
+        <details class="av-card-details">
+          <summary>${escapeHtml(t("av_transcript_toggle"))}</summary>
+          <p>${escapeHtml(item.transcript)}</p>
+        </details>`
+        : "") +
+      (item.teacher
+        ? `
+        <details class="av-card-details">
+          <summary>${escapeHtml(t("av_teacher_toggle"))}</summary>
+          <p>${escapeHtml(item.teacher)}</p>
+        </details>`
+        : "");
+
+    return `
+      <article class="col-12 col-lg-6 av-grid-item" role="listitem" data-theme="${escapeHtml(item.theme || "")}" data-scope="${escapeHtml(item.scope || "")}">
+        <div class="card h-100 av-item-card ${item.planned ? "av-item-card--planned" : ""}">
+          ${renderThumb(item)}
+          <div class="card-body d-flex flex-column">
+            ${renderBadges(item)}
+            <p class="av-video-title">${escapeHtml(title)}</p>
+            <p class="card-text text-muted small mb-2">${escapeHtml(item.duration || "")}</p>
+            <p class="card-text flex-grow-1">${escapeHtml(item.summary || "")}</p>
+            ${renderLearnList(item.learn)}
+            ${renderGlossaryTerms(item.glossary)}
+            ${details}
+            ${footer}
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function ensureAudiovisualContentVisible() {
+    document.querySelectorAll(
+      ".av-library-header, .av-library-header *, #av-grid .av-item-card, #av-grid .av-video-title"
+    ).forEach((el) => {
+      el.classList.add("pm-text-reveal--visible", "pm-cinema-reveal--visible", "is-visible");
+      el.classList.remove("pm-cinema-reveal", "pm-text-reveal");
+      el.style.setProperty("opacity", "1", "important");
+      el.style.setProperty("filter", "none", "important");
+      el.style.setProperty("transform", "none", "important");
+      el.style.setProperty("visibility", "visible", "important");
+    });
+  }
+
+  function renderGrid(lang) {
+    const grid = document.getElementById("av-grid");
+    const empty = document.getElementById("av-empty");
+    if (!grid) return;
+    const items = filterItems(getCatalog(lang).items || []);
+    grid.innerHTML = items.map(renderCard).join("");
+    if (empty) empty.classList.toggle("d-none", items.length > 0);
+    renderActiveFilters(lang);
+    ensureAudiovisualContentVisible();
+    requestAnimationFrame(ensureAudiovisualContentVisible);
+    window.setTimeout(ensureAudiovisualContentVisible, 250);
+  }
+
+  function toggleTheme(id) {
+    state.theme = state.theme === id ? null : id;
+    renderAll(currentLang);
+  }
+
+  function setPlaylist(id) {
+    state.playlist = id || null;
+    renderAll(currentLang);
+  }
+
+  function setScope(scope) {
+    state.scope = state.scope === scope ? null : scope;
+    renderAll(currentLang);
+  }
+
+  function clearFilters(type) {
+    if (type === "all" || type === "theme") state.theme = null;
+    if (type === "all" || type === "playlist") state.playlist = null;
+    if (type === "all" || type === "scope") state.scope = null;
+    renderAll(currentLang);
+  }
+
+  function renderAll(lang) {
+    renderRoutes(lang);
+    renderPlaylists(lang);
+    renderGrid(lang);
+  }
+
+  function bindEvents() {
+    const root = document.getElementById("audiovisuals-page");
+    if (!root || root.dataset.pmAvBound) return;
+    root.dataset.pmAvBound = "1";
+
+    root.addEventListener("click", (e) => {
+      const routeBtn = e.target.closest("[data-av-theme]");
+      if (routeBtn) {
+        toggleTheme(routeBtn.dataset.avTheme);
+        return;
+      }
+      const playlistBtn = e.target.closest("[data-av-playlist]");
+      if (playlistBtn && playlistBtn.closest("#av-playlists")) {
+        setPlaylist(playlistBtn.dataset.avPlaylist || null);
+        return;
+      }
+      const scopeBtn = e.target.closest("[data-av-scope]");
+      if (scopeBtn) {
+        setScope(scopeBtn.dataset.avScope);
+        return;
+      }
+      const clearBtn = e.target.closest("[data-av-clear]");
+      if (clearBtn) {
+        clearFilters(clearBtn.dataset.avClear);
+      }
+    });
+  }
+
+  function init() {
+    if (!document.getElementById("audiovisuals-page")) return;
+    if (typeof currentLang === "undefined" || typeof getAudiovisualCatalog !== "function") return;
+    bindEvents();
+    renderAll(currentLang);
+    if (window._pmAvLangHook) return;
+    window._pmAvLangHook = true;
+    const originalApplyLanguage = window.applyLanguage;
+    window.applyLanguage = function (lang) {
+      originalApplyLanguage(lang);
+      renderAll(lang);
+    };
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  document.addEventListener("pm:navigation", init);
+})();

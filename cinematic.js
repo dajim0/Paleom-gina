@@ -490,11 +490,11 @@ window.PaleomaginaParallax = { refresh: update };
     const icon = wrapper.querySelector(".pm-inline-icon");
     const heading = wrapper.querySelector(TITLE_SEL);
     if (icon) mark(icon, "icon", delayBase);
-    if (heading) mark(heading, "title", delayBase + 0.08);
+    if (heading) mark(heading, "title", delayBase + 0.03);
   }
 
   function tagSection(section, sectionIndex) {
-    const base = Math.min(sectionIndex * 0.04, 0.12);
+    const base = Math.min(sectionIndex * 0.015, 0.05);
 
     section.querySelectorAll(":scope .pm-heading-with-icon").forEach((wrapper) => {
       tagHeadingBlock(wrapper, base);
@@ -503,20 +503,23 @@ window.PaleomaginaParallax = { refresh: update };
     section.querySelectorAll(TITLE_SEL).forEach((el) => {
       if (el.closest(".pm-heading-with-icon")) return;
       if (el.closest(".hero, .hero-simple, .page-hero")) return;
+      if (el.closest(".av-library-header")) return;
       if (el.closest(".card, .pm-read-panel")) return;
       mark(el, "title", base);
     });
 
     section.querySelectorAll(BODY_SEL).forEach((el, i) => {
       if (el.closest(".hero, .hero-simple, .page-hero")) return;
-      mark(el, "body", base + 0.12 + i * 0.07);
+      if (el.closest(".av-library-header")) return;
+      mark(el, "body", base + 0.04 + i * 0.025);
     });
 
     section.querySelectorAll(".card, .pm-read-panel").forEach((block) => {
+      if (block.classList.contains("av-item-card") || block.closest("#av-grid")) return;
       const t = block.querySelector(TITLE_SEL);
-      if (t) mark(t, "title", 0.14);
+      if (t) mark(t, "title", 0.04);
       const intro = block.querySelector("p");
-      if (intro) mark(intro, "body", 0.22);
+      if (intro) mark(intro, "body", 0.07);
     });
   }
 
@@ -564,7 +567,7 @@ window.PaleomaginaParallax = { refresh: update };
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px 22% 0px" }
     );
 
     nodes.forEach((el) => {
@@ -596,7 +599,7 @@ window.PaleomaginaParallax = { refresh: update };
       document
         .querySelectorAll(".pm-text-reveal:not(.pm-text-reveal--visible)")
         .forEach(revealVisible);
-    }, 2800);
+    }, 900);
   }
 
   window.PaleomaginaText = { refresh: initText };
@@ -606,7 +609,7 @@ window.PaleomaginaParallax = { refresh: update };
     "h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .museum-section-heading, .pm-heading-with-icon";
 
   const REVEAL_SELECTOR = [
-    "main .card:not(.pm-section-layer)",
+    "main .card:not(.av-item-card):not(.pm-section-layer)",
     "main .content-prose:not(.pm-section-layer)",
     "main .pm-read-panel:not(.pm-section-layer)",
     "main .museum-section-panel:not(.pm-section-layer)",
@@ -632,7 +635,7 @@ window.PaleomaginaParallax = { refresh: update };
       child.classList.add("pm-section-layer");
       child.style.setProperty(
         "--pm-layer-delay",
-        `${Math.min(index * 0.09, 0.45)}s`
+        `${Math.min(index * 0.035, 0.14)}s`
       );
       index += 1;
     });
@@ -645,7 +648,7 @@ window.PaleomaginaParallax = { refresh: update };
 
     const layers = [...section.querySelectorAll(".pm-section-layer")];
     layers.forEach((layer, i) => {
-      window.setTimeout(() => revealElement(layer), 120 + i * 85);
+      window.setTimeout(() => revealElement(layer), 35 + i * 30);
     });
 
     section
@@ -654,7 +657,7 @@ window.PaleomaginaParallax = { refresh: update };
         window.setTimeout(() => {
           el.classList.add("pm-text-reveal--visible");
           el.style.removeProperty("filter");
-        }, 140 + i * 60);
+        }, 45 + i * 25);
       });
   }
 
@@ -688,7 +691,7 @@ window.PaleomaginaParallax = { refresh: update };
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px 22% 0px" }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -703,7 +706,7 @@ window.PaleomaginaParallax = { refresh: update };
 
     nodes.forEach((el, index) => {
       el.classList.add("pm-cinema-reveal");
-      el.style.setProperty("--pm-reveal-delay", `${Math.min(index * 0.05, 0.2)}s`);
+      el.style.setProperty("--pm-reveal-delay", `${Math.min(index * 0.02, 0.08)}s`);
     });
 
     const all = [...nodes, ...document.querySelectorAll(".animate-on-scroll")];
@@ -723,7 +726,7 @@ window.PaleomaginaParallax = { refresh: update };
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -7% 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px 22% 0px" }
     );
 
     all.forEach((el) => observer.observe(el));

@@ -12,9 +12,9 @@ html.pm-cinema {
   --pm-duration-fast: 0.42s;
   --pm-duration-mid: 0.72s;
   --pm-duration-slow: 1.05s;
-  --pm-duration-reveal: 0.95s;
-  --pm-stagger-step: 0.055s;
-  --pm-stagger-max: 0.28s;
+  --pm-duration-reveal: 0.48s;
+  --pm-stagger-step: 0.025s;
+  --pm-stagger-max: 0.12s;
 
   /* Luz ambiental */
   --pm-cinema-ambient-a: rgba(166, 124, 61, 0.055);
@@ -30,7 +30,7 @@ html.pm-cinema {
   --pm-cinema-amber: rgba(214, 145, 62, 0.16);
   --pm-cinema-gold: rgba(232, 196, 126, 0.11);
   --pm-cinema-black: rgba(3, 4, 6, 0.72);
-  --pm-reveal-depth: 1.8rem;
+  --pm-reveal-depth: 0.7rem;
 }
 
 html.pm-cinema[data-theme="light"] {
@@ -603,9 +603,9 @@ html.pm-parallax footer:not(.site-footer) {
 
 html.pm-cinema {
   --pm-text-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --pm-text-duration-title: 1.05s;
-  --pm-text-duration-body: 0.9s;
-  --pm-text-duration-icon: 0.75s;
+  --pm-text-duration-title: 0.5s;
+  --pm-text-duration-body: 0.42s;
+  --pm-text-duration-icon: 0.36s;
 }
 
 /* Estado inicial — solo texto, nunca imágenes */
@@ -615,8 +615,8 @@ html.pm-cinema :is(
   .pm-text-reveal--kicker
 ):not(.pm-text-reveal--visible) {
   opacity: 0;
-  filter: blur(10px);
-  transform: translate3d(0, 1.1rem, 0);
+  filter: blur(3px);
+  transform: translate3d(0, 0.35rem, 0);
   transition:
     opacity var(--pm-text-duration-body) var(--pm-text-ease),
     transform var(--pm-text-duration-body) var(--pm-text-ease),
@@ -625,20 +625,20 @@ html.pm-cinema :is(
 }
 
 html.pm-cinema h1.pm-text-reveal--title:not(.pm-text-reveal--visible) {
-  filter: blur(12px);
-  transform: translate3d(0, 1.25rem, 0);
+  filter: blur(4px);
+  transform: translate3d(0, 0.45rem, 0);
 }
 
 html.pm-cinema .pm-text-reveal--title:not(.pm-text-reveal--visible) {
-  filter: blur(9px);
-  transform: translate3d(0, 1.15rem, 0);
+  filter: blur(3px);
+  transform: translate3d(0, 0.4rem, 0);
   transition-duration: var(--pm-text-duration-title), var(--pm-text-duration-title),
     var(--pm-text-duration-title);
 }
 
 html.pm-cinema .pm-text-reveal--body:not(.pm-text-reveal--visible) {
-  filter: blur(5px);
-  transform: translate3d(0, 0.65rem, 0);
+  filter: blur(2px);
+  transform: translate3d(0, 0.25rem, 0);
 }
 
 html.pm-cinema .pm-text-reveal--kicker:not(.pm-text-reveal--visible) {
@@ -702,8 +702,8 @@ html.pm-cinema video {
 
 html.pm-cinema {
   --pm-section-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --pm-section-duration: 1.35s;
-  --pm-section-layer-duration: 1.18s;
+  --pm-section-duration: 0.55s;
+  --pm-section-layer-duration: 0.48s;
 }
 
 /* Puente visual entre secciones */
@@ -747,8 +747,8 @@ html.pm-cinema main section.pm-section-cinema:not(.hero):not(.hero-simple):not(.
 
 html.pm-cinema main section.pm-section-cinema:not(.pm-section-visible):not(.hero):not(.hero-simple):not(.page-hero) {
   opacity: 0;
-  transform: translate3d(0, var(--pm-reveal-depth), 0) scale(0.992);
-  clip-path: inset(7% 0 0 0 round 0.01px);
+  transform: translate3d(0, var(--pm-reveal-depth), 0) scale(0.998);
+  clip-path: inset(2% 0 0 0 round 0.01px);
 }
 
 html.pm-cinema main section.pm-section-cinema.pm-section-visible {
@@ -757,8 +757,8 @@ html.pm-cinema main section.pm-section-cinema.pm-section-visible {
   clip-path: inset(0 0 0 0 round 0.01px);
   transition:
     opacity var(--pm-section-duration) var(--pm-section-ease),
-    transform calc(var(--pm-section-duration) + 0.15s) var(--pm-section-ease),
-    clip-path calc(var(--pm-section-duration) + 0.2s) var(--pm-section-ease);
+    transform var(--pm-section-duration) var(--pm-section-ease),
+    clip-path var(--pm-section-duration) var(--pm-section-ease);
 }
 
 /* Velo cinematográfico que se disuelve al entrar */
@@ -776,7 +776,7 @@ html.pm-cinema main section.pm-section-cinema::after {
   opacity: 0.7;
   pointer-events: none;
   z-index: 1;
-  transition: opacity 1.4s var(--pm-section-ease);
+  transition: opacity 0.45s var(--pm-section-ease);
 }
 
 html.pm-cinema main section.pm-section-cinema.pm-section-visible::after {
@@ -791,8 +791,8 @@ html.pm-cinema main section.pm-section-cinema > .container {
 /* Capas internas: fade + blur suave (solo durante entrada) */
 html.pm-cinema .pm-section-layer:not(.pm-section-visible) {
   opacity: 0;
-  filter: blur(9px) saturate(0.92);
-  transform: translate3d(0, 1.35rem, 0) scale(0.988);
+  filter: blur(3px) saturate(0.98);
+  transform: translate3d(0, 0.45rem, 0) scale(0.998);
   transition:
     opacity var(--pm-section-layer-duration) var(--pm-section-ease),
     transform var(--pm-section-layer-duration) var(--pm-section-ease),
@@ -818,12 +818,12 @@ html.pm-cinema
     .pm-cinema-reveal--visible
   ) {
   opacity: 0;
-  filter: blur(7px) saturate(0.94);
-  transform: translate3d(0, 1.2rem, 0) scale(0.992);
+  filter: blur(3px) saturate(0.98);
+  transform: translate3d(0, 0.45rem, 0) scale(0.998);
   transition:
     opacity var(--pm-section-layer-duration) var(--pm-section-ease),
     transform var(--pm-section-layer-duration) var(--pm-section-ease),
-    filter 0.95s var(--pm-section-ease);
+    filter 0.42s var(--pm-section-ease);
   transition-delay: var(--pm-reveal-delay, 0s);
 }
 
@@ -835,12 +835,12 @@ html.pm-cinema .pm-cinema-reveal.pm-cinema-reveal--visible:not(.pm-section-layer
 
 html.pm-cinema .animate-on-scroll:not(.is-visible) {
   opacity: 0;
-  filter: blur(4px);
-  transform: translate3d(0, 0.85rem, 0);
+  filter: blur(2px);
+  transform: translate3d(0, 0.35rem, 0);
   transition:
     opacity var(--pm-section-layer-duration) var(--pm-section-ease),
     transform var(--pm-section-layer-duration) var(--pm-section-ease),
-    filter 0.9s var(--pm-section-ease);
+    filter 0.38s var(--pm-section-ease);
 }
 
 html.pm-cinema .animate-on-scroll.is-visible {

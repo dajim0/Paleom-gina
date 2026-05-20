@@ -69,16 +69,16 @@ function initAmbitosExhibitRoute() {
 
     const btn = document.createElement("button");
     btn.type      = "button";
-    btn.className = `accordion-button${idx === 0 ? "" : " collapsed"}`;
+    btn.className = "accordion-button collapsed";
     btn.setAttribute("data-bs-toggle",  "collapse");
     btn.setAttribute("data-bs-target",  `#${collapseId}`);
-    btn.setAttribute("aria-expanded",   idx === 0 ? "true" : "false");
+    btn.setAttribute("aria-expanded",   "false");
     btn.setAttribute("aria-controls",   collapseId);
     btn.textContent = sc.title;
 
     const region = document.createElement("div");
     region.id        = collapseId;
-    region.className = `accordion-collapse collapse${idx === 0 ? " show" : ""}`;
+    region.className = "accordion-collapse collapse";
     region.setAttribute("aria-labelledby", headingId);
     region.setAttribute("data-bs-parent",  `#${accDomId}`);
 
@@ -103,6 +103,13 @@ function initAmbitosExhibitRoute() {
       body.appendChild(p3);
     }
 
+    if (sc.related) {
+      const pRelated = document.createElement("p");
+      pRelated.className = "small route-related-note mb-2";
+      pRelated.textContent = sc.related;
+      body.appendChild(pRelated);
+    }
+
     if (Array.isArray(sc.facts) && sc.facts.length) {
       const ul = document.createElement("ul");
       ul.className = "small mb-0";
@@ -124,6 +131,180 @@ function initAmbitosExhibitRoute() {
   root.appendChild(acc);
   const aria = paleomaginaT("expo_route_accordion_aria");
   if (aria) acc.setAttribute("aria-label", aria);
+}
+
+// ── Carrito de entradas (recursos.html) ───────────────────────────────
+const ticketCartStorageKey = "paleomagina-ticket-cart";
+let ticketCart = {};
+
+function loadTicketCart() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(ticketCartStorageKey) || "{}");
+    ticketCart = saved && typeof saved === "object" ? saved : {};
+  } catch {
+    ticketCart = {};
+  }
+}
+
+function saveTicketCart() {
+  try { localStorage.setItem(ticketCartStorageKey, JSON.stringify(ticketCart)); } catch (_) {}
+}
+
+function getTicketProducts() {
+  return [...document.querySelectorAll("[data-ticket-product]")].reduce((acc, node) => {
+    const id = node.dataset.ticketId;
+    if (!id) return acc;
+    acc[id] = {
+      id,
+      price: Number(node.dataset.ticketPrice || 0),
+      titleKey: node.dataset.ticketTitleKey || "",
+    };
+    return acc;
+  }, {});
+}
+
+function formatTicketPrice(value) {
+  return `${Number(value || 0).toFixed(0)}€`;
+}
+
+function ticketProductTitle(product) {
+  return paleomaginaT(product.titleKey) || product.id;
+}
+
+function updateTicketCart(id, delta) {
+  const next = Math.max(0, Number(ticketCart[id] || 0) + delta);
+  if (next === 0) delete ticketCart[id];
+  else ticketCart[id] = next;
+  saveTicketCart();
+  renderTicketCart();
+}
+
+function clearTicketCart() {
+  ticketCart = {};
+  saveTicketCart();
+  renderTicketCart();
+}
+
+function ticketCartEntries() {
+  const products = getTicketProducts();
+  return Object.entries(ticketCart)
+    .map(([id, qty]) => ({ product: products[id], qty: Number(qty) || 0 }))
+    .filter((entry) => entry.product && entry.qty > 0);
+}
+
+function ticketCartTotal(entries = ticketCartEntries()) {
+  return entries.reduce((sum, entry) => sum + entry.product.price * entry.qty, 0);
+}
+
+function renderTicketCart() {
+  const itemsRoot = document.querySelector("[data-cart-items]");
+  const totalNode = document.querySelector("[data-cart-total]");
+  const checkoutBtn = document.querySelector("[data-cart-checkout]");
+  if (!itemsRoot || !totalNode || !checkoutBtn) return;
+
+  const entries = ticketCartEntries();
+  itemsRoot.innerHTML = "";
+
+  if (!entries.length) {
+    const empty = document.createElement("p");
+    empty.className = "ticket-cart__empty";
+    empty.textContent = paleomaginaT("cart_empty");
+    itemsRoot.appendChild(empty);
+  } else {
+    entries.forEach(({ product, qty }) => {
+      const row = document.createElement("div");
+      row.className = "ticket-cart__row";
+
+      const info = document.createElement("div");
+      const title = document.createElement("span");
+      title.className = "ticket-cart__item-title";
+      title.textContent = ticketProductTitle(product);
+      const meta = document.createElement("span");
+      meta.className = "ticket-cart__item-meta";
+      meta.textContent = `${formatTicketPrice(product.price)} x ${qty}`;
+      info.appendChild(title);
+      info.appendChild(meta);
+
+      const qtyControl = document.createElement("div");
+      qtyControl.className = "ticket-cart__qty";
+      qtyControl.innerHTML = `
+        <button type="button" data-cart-dec="${product.id}" aria-label="${paleomaginaT("cart_decrease")}">-</button>
+        <span>${qty}</span>
+        <button type="button" data-cart-inc="${product.id}" aria-label="${paleomaginaT("cart_increase")}">+</button>
+      `;
+
+      row.appendChild(info);
+      row.appendChild(qtyControl);
+      itemsRoot.appendChild(row);
+    });
+  }
+
+  totalNode.textContent = formatTicketPrice(ticketCartTotal(entries));
+  checkoutBtn.disabled = entries.length === 0;
+}
+
+function checkoutTicketCart() {
+  const entries = ticketCartEntries();
+  if (!entries.length) return;
+
+  const lines = entries.map(({ product, qty }) => {
+    const lineTotal = product.price * qty;
+    return `- ${ticketProductTitle(product)} x ${qty}: ${formatTicketPrice(lineTotal)}`;
+  });
+  const total = formatTicketPrice(ticketCartTotal(entries));
+  const subject = encodeURIComponent(paleomaginaT("cart_email_subject"));
+  const body = encodeURIComponent([
+    paleomaginaT("cart_email_intro"),
+    "",
+    ...lines,
+    "",
+    `${paleomaginaT("cart_total")}: ${total}`,
+    "",
+    paleomaginaT("cart_email_footer"),
+  ].join("\n"));
+  window.location.href = `mailto:info@paleomagina.org?subject=${subject}&body=${body}`;
+}
+
+function initTicketCart() {
+  if (!document.querySelector(".ticket-cart")) return;
+  loadTicketCart();
+  renderTicketCart();
+
+  if (window._pmTicketCartBound) return;
+  window._pmTicketCartBound = true;
+  document.addEventListener("click", (event) => {
+    const add = event.target.closest("[data-cart-add]");
+    if (add) {
+      event.preventDefault();
+      updateTicketCart(add.dataset.cartAdd, 1);
+      return;
+    }
+
+    const inc = event.target.closest("[data-cart-inc]");
+    if (inc) {
+      event.preventDefault();
+      updateTicketCart(inc.dataset.cartInc, 1);
+      return;
+    }
+
+    const dec = event.target.closest("[data-cart-dec]");
+    if (dec) {
+      event.preventDefault();
+      updateTicketCart(dec.dataset.cartDec, -1);
+      return;
+    }
+
+    if (event.target.closest("[data-cart-clear]")) {
+      event.preventDefault();
+      clearTicketCart();
+      return;
+    }
+
+    if (event.target.closest("[data-cart-checkout]")) {
+      event.preventDefault();
+      checkoutTicketCart();
+    }
+  });
 }
 
 // ── Aplica idioma ────────────────────────────────────────────────────
@@ -157,6 +338,7 @@ function applyLanguage(lang) {
   renderScopes(lang);
   updateThemeButtonLabel();
   initAmbitosExhibitRoute();
+  initTicketCart();
 }
 
 // ── Botón de tema ────────────────────────────────────────────────────
@@ -446,7 +628,7 @@ function initScrollReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
+  }, { threshold: 0.01, rootMargin: "0px 0px 18% 0px" });
 
   items.forEach((item) => observer.observe(item));
 }
@@ -562,7 +744,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=3");
+  loadPaleomaginaModule("cinematic.js?v=6");
 }
 
 /* ============================================
@@ -599,14 +781,43 @@ const floorsData = {
   }
 };
 
-let currentFloor = 'P1';
+let currentFloor = 'PB';
 let renderTaskId = 0;
+
+function positionMuseumMapTooltip(event, tooltip, container) {
+  if (!tooltip || !container) return;
+
+  const pad = 10;
+  const rect = container.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  tooltip.classList.remove('d-none');
+
+  const tw = tooltip.offsetWidth;
+  const th = tooltip.offsetHeight;
+  const half = tw / 2;
+
+  let left = x;
+  let top = y - th - 14;
+
+  if (left - half < pad) left = pad + half;
+  if (left + half > rect.width - pad) left = rect.width - pad - half;
+
+  if (top < pad) top = Math.min(y + 16, rect.height - th - pad);
+  if (top + th > rect.height - pad) top = rect.height - th - pad;
+
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
+  tooltip.style.transform = "translate(-50%, 0)";
+}
 
 function renderMuseumMap(floorKey) {
   const taskId = ++renderTaskId;
   currentFloor = floorKey;
 
   const svgContainer = document.getElementById('museumMapSVG');
+  const mapWrapper = document.querySelector('.museum-map-wrapper');
   const tooltip = document.getElementById('museumMapTooltip');
   const tooltipTitle = document.getElementById('tooltipTitle');
   const tooltipDesc = document.getElementById('tooltipDesc');
@@ -654,17 +865,17 @@ function renderMuseumMap(floorKey) {
       polygon.setAttribute('data-scope-key', zone.scopeKey);
       polygon.style.fill = zone.color;
 
-      polygon.addEventListener('mouseenter', (e) => {
-        if (taskId !== renderTaskId || !tooltip) return;
+      const showTooltip = (e) => {
+        if (taskId !== renderTaskId || !tooltip || !mapWrapper) return;
         const lang = currentLang || 'es';
         if (tooltipTitle) tooltipTitle.textContent = zone.name[lang] || zone.name.es;
         if (tooltipDesc) tooltipDesc.textContent = scopeDescriptions?.[lang]?.[zone.scopeKey] || '';
-        const rect = svgContainer.getBoundingClientRect();
-        tooltip.style.left = `${e.clientX - rect.left}px`;
-        tooltip.style.top = `${e.clientY - rect.top}px`;
-        tooltip.classList.remove('d-none');
-      });
-      
+        positionMuseumMapTooltip(e, tooltip, mapWrapper);
+      };
+
+      polygon.addEventListener('mouseenter', showTooltip);
+      polygon.addEventListener('mousemove', showTooltip);
+
       polygon.addEventListener('mouseleave', () => {
         if (tooltip) tooltip.classList.add('d-none');
       });

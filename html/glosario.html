@@ -17,7 +17,7 @@
       rel="stylesheet"
     />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles.css?v=11" />
+    <link rel="stylesheet" href="../styles.css?v=55" />
     <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="../images/site/favicon.png" />
   </head>
@@ -92,7 +92,8 @@
       <section class="section pt-4" id="glossary-content" aria-labelledby="glossary-search-title">
         <div class="container">
           <div class="pm-read-panel pm-read-panel--glossary">
-            <h2 class="visually-hidden" id="glossary-search-title">Busqueda</h2>
+            <h2 id="glossary-search-title" data-i18n="glossary_terms_panel_title">Términos del proyecto</h2>
+            <p class="section-lead" data-i18n="glossary_terms_panel_intro">Conceptos clave para comprender la geología, la paleontología, la arqueología y la experiencia museográfica de Paleomágina.</p>
             <div class="glossary-search">
               <input
                 type="search"
@@ -104,7 +105,7 @@
               />
             </div>
 
-            <dl class="glossary-list" id="glossary-list" role="region" aria-live="polite"></dl>
+            <div class="glossary-list" id="glossary-list" role="region" aria-live="polite"></div>
 
             <div id="no-results" class="section-lead d-none text-center mt-4">
               <p class="mb-0" data-i18n="glossary_no_results">No se encontraron resultados para tu búsqueda.</p>
@@ -115,31 +116,53 @@
 
       <section class="section section-alt pt-0" id="glossary-info" aria-labelledby="glossary-context-heading">
         <div class="container">
-          <div class="pm-read-panel pm-read-panel--glossary">
-            <h2 id="glossary-context-heading" data-i18n="glossary_context_title">Contexto científico</h2>
-            <div class="glossary-sections">
-              <details class="glossary-section-card">
-                <summary>🪨 Geología</summary>
-                <div class="glossary-section-body">
-                  <p>Explora cómo las capas de roca de Sierra Magina guardan pruebas de ambientes que cambiaron desde océanos cálidos hasta paisajes montañosos.</p>
-                  <p>La geología aquí descifra ciclos de sedimentación, fallas, volcanismo y erosión que construyen el relato del territorio.</p>
+          <div class="pm-read-panel pm-read-panel--glossary glossary-guide-panel">
+            <h2 id="glossary-context-heading" data-i18n="glossary_context_title">Cómo leer este glosario</h2>
+            <p class="section-lead" data-i18n="glossary_context_intro"></p>
+            <div class="glossary-guide-sections">
+              <details class="glossary-guide-card">
+                <summary data-i18n="glossary_guide_geo_title">Geología y paisaje</summary>
+                <div class="glossary-guide-body">
+                  <p data-i18n="glossary_guide_geo_p1"></p>
+                  <p data-i18n="glossary_guide_geo_p2"></p>
                 </div>
               </details>
-              <details class="glossary-section-card">
-                <summary>🐚 Paleontología</summary>
-                <div class="glossary-section-body">
-                  <p>Paleontología revela los fósiles de animales y plantas que vivieron en la región, conectando restos con tiempos y ecosistemas pasados.</p>
-                  <p>Los fósiles no solo son objetos antiguos: son pistas narrativas sobre cómo se transformó la vida en Sierra Magina.</p>
+              <details class="glossary-guide-card">
+                <summary data-i18n="glossary_guide_paleo_title">Paleontología</summary>
+                <div class="glossary-guide-body">
+                  <p data-i18n="glossary_guide_paleo_p1"></p>
+                  <p data-i18n="glossary_guide_paleo_p2"></p>
                 </div>
               </details>
-              <details class="glossary-section-card">
-                <summary>🏺 Arqueología</summary>
-                <div class="glossary-section-body">
-                  <p>Arqueología estudia los asentamientos, herramientas y artefactos humanos, desde el Neolítico hasta la Edad del Cobre.</p>
-                  <p>Aquí se lee la huella de personas y comunidades que interpretaron el paisaje como recurso, hogar y memoria.</p>
+              <details class="glossary-guide-card">
+                <summary data-i18n="glossary_guide_arch_title">Arqueología y evolución humana</summary>
+                <div class="glossary-guide-body">
+                  <p data-i18n="glossary_guide_arch_p1"></p>
+                  <p data-i18n="glossary_guide_arch_p2"></p>
+                </div>
+              </details>
+              <details class="glossary-guide-card">
+                <summary data-i18n="glossary_guide_method_title">Método científico</summary>
+                <div class="glossary-guide-body">
+                  <p data-i18n="glossary_guide_method_p1"></p>
+                  <p data-i18n="glossary_guide_method_p2"></p>
+                </div>
+              </details>
+              <details class="glossary-guide-card">
+                <summary data-i18n="glossary_guide_museo_title">Museografía y visita</summary>
+                <div class="glossary-guide-body">
+                  <p data-i18n="glossary_guide_museo_p1"></p>
+                  <p data-i18n="glossary_guide_museo_p2"></p>
                 </div>
               </details>
             </div>
+            <p class="glossary-guide-links-lead" data-i18n="glossary_guide_links_lead"></p>
+            <ul class="glossary-guide-links">
+              <li><a href="ambitos.html" data-i18n="nav_exhibits">Ámbitos</a></li>
+              <li><a href="ambitos.html#timeline-h" data-i18n="timeline_title">Línea temporal</a></li>
+              <li><a href="audiovisuales.html" data-i18n="nav_audiovisuals">Audiovisuales</a></li>
+              <li><a href="recursos.html" data-i18n="nav_resources">Recursos</a></li>
+            </ul>
           </div>
         </div>
       </section>
@@ -182,9 +205,9 @@
     </footer>
 
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script defer src="../data.js"></script>
-    <script defer src="../script.js?v=5"></script>
-    <script defer src="../glossary.js"></script>
+    <script defer src="../data.js?v=13"></script>
+    <script defer src="../script.js?v=12"></script>
+    <script defer src="../glossary.js?v=3"></script>
   </body>
 </html>
 
