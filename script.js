@@ -393,6 +393,25 @@ function initMainNavActiveState() {
   });
 }
 
+function keepTopNavFixed() {
+  const nav = document.querySelector(".pm-topnav");
+  if (!nav) return;
+
+  nav.classList.add("fixed-top");
+  nav.style.setProperty("position", "fixed", "important");
+  nav.style.setProperty("top", "0", "important");
+  nav.style.setProperty("right", "0", "important");
+  nav.style.setProperty("left", "0", "important");
+  nav.style.setProperty("width", "100%", "important");
+  nav.style.setProperty("z-index", "12000", "important");
+  nav.style.setProperty("transform", "none", "important");
+  nav.style.setProperty("background-color", "#212529", "important");
+
+  nav.querySelectorAll(".navbar-brand, .nav-link, .theme-toggle, .lang-btn").forEach((el) => {
+    el.style.setProperty("color", "rgba(255, 255, 255, 0.92)", "important");
+  });
+}
+
 function getTimeOfDayTheme(hour) {
   if (hour >= 5 && hour < 11) return { className: "time-morning", label: "Amanecer" };
   if (hour >= 11 && hour < 17) return { className: "time-afternoon", label: "Mediodía" };
@@ -512,10 +531,14 @@ applyTheme(initialTheme);
 applyLanguage(defaultLang);
 enablePageTransitions();
 initMainNavActiveState();
+keepTopNavFixed();
 initTimeOfDayEffects();
 initScrollReveal();
 initVideoOverlay();
 loadCinematicAtmosphere();
+window.addEventListener("scroll", keepTopNavFixed, { passive: true });
+window.addEventListener("resize", keepTopNavFixed);
+document.addEventListener("pm:navigation", keepTopNavFixed);
 
 function paleomaginaScriptBase() {
   const ref = document.querySelector('script[src*="script.js"]');
