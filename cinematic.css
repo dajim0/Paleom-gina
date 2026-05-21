@@ -58,23 +58,19 @@ html.pm-cinema main section.section-alt:not(.hero)::before {
   width: min(92%, 68rem);
   height: 1px;
   transform: translateX(-50%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--border) 55%, transparent),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--border) 55%, transparent),
+      transparent);
   opacity: 0.65;
   pointer-events: none;
 }
 
 html.pm-cinema[data-theme="dark"] main section.section-alt:not(.hero)::before {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--primary) 18%, transparent),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--primary) 18%, transparent),
+      transparent);
 }
 
 html.pm-cinema .pm-section-cinema {
@@ -112,14 +108,11 @@ html.pm-cinema body {
   background:
     radial-gradient(ellipse 120% 80% at 50% calc(0% + var(--pm-scroll-progress, 0) * 18%),
       color-mix(in srgb, var(--pm-cinema-amber) 54%, transparent),
-      transparent 58%
-    ),
-    linear-gradient(
-      180deg,
+      transparent 58%),
+    linear-gradient(180deg,
       color-mix(in srgb, var(--pm-cinema-blue) 48%, transparent) 0%,
       transparent 34%,
-      color-mix(in srgb, var(--pm-cinema-black) 28%, transparent) 100%
-    );
+      color-mix(in srgb, var(--pm-cinema-black) 28%, transparent) 100%);
 }
 
 html.pm-cinema :is(.content-prose, .pm-read-panel, .card, .museum-section-panel, .timeline-section-panel) {
@@ -164,19 +157,15 @@ html.pm-cinema {
 
 .pm-atmosphere__grade {
   background:
-    radial-gradient(
-      ellipse 90% 72% at var(--pm-cinema-light-x) var(--pm-cinema-light-y),
+    radial-gradient(ellipse 90% 72% at var(--pm-cinema-light-x) var(--pm-cinema-light-y),
       var(--pm-cinema-gold) 0%,
       rgba(214, 145, 62, calc(0.05 + var(--pm-cinema-scroll-glow) * 0.04)) 28%,
-      transparent 58%
-    ),
+      transparent 58%),
     radial-gradient(ellipse 80% 72% at 82% 12%, var(--pm-cinema-blue), transparent 64%),
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       var(--pm-cinema-black) 0%,
       color-mix(in srgb, var(--bg) 40%, transparent) 42%,
-      rgba(114, 70, 30, 0.11) 100%
-    );
+      rgba(114, 70, 30, 0.11) 100%);
   opacity: 0.9;
   mix-blend-mode: multiply;
 }
@@ -188,12 +177,10 @@ html.pm-cinema[data-theme="dark"] .pm-atmosphere__grade {
 
 .pm-atmosphere__light {
   background:
-    radial-gradient(
-      ellipse 42% 36% at calc(var(--pm-cinema-light-x) + 8%) var(--pm-cinema-light-y),
+    radial-gradient(ellipse 42% 36% at calc(var(--pm-cinema-light-x) + 8%) var(--pm-cinema-light-y),
       rgba(242, 198, 118, 0.18),
       rgba(183, 103, 42, 0.08) 38%,
-      transparent 68%
-    );
+      transparent 68%);
   filter: blur(12px);
   opacity: 0.62;
   animation: pm-cinema-light-drift 18s ease-in-out infinite alternate;
@@ -232,20 +219,16 @@ html.pm-cinema[data-theme="dark"] .pm-atmosphere__grade {
 
 .pm-atmosphere__fog--top {
   top: 0;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--pm-cinema-fog) 75%, transparent),
-    transparent
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--pm-cinema-fog) 75%, transparent),
+      transparent);
 }
 
 .pm-atmosphere__fog--bottom {
   bottom: 0;
-  background: linear-gradient(
-    0deg,
-    color-mix(in srgb, var(--pm-cinema-fog) 80%, transparent),
-    transparent
-  );
+  background: linear-gradient(0deg,
+      color-mix(in srgb, var(--pm-cinema-fog) 80%, transparent),
+      transparent);
 }
 
 .pm-atmosphere__vignette {
@@ -262,6 +245,7 @@ html.pm-cinema[data-theme="dark"] .pm-atmosphere__grade {
     transform: translate3d(-1.2%, -0.6%, 0) scale(1);
     opacity: 0.54;
   }
+
   100% {
     transform: translate3d(1.4%, 0.9%, 0) scale(1.04);
     opacity: 0.72;
@@ -272,14 +256,20 @@ html.pm-cinema[data-theme="dark"] .pm-atmosphere__grade {
   0% {
     transform: translate3d(-2%, -0.4%, 0) scale(1);
   }
+
   100% {
     transform: translate3d(2.2%, 0.6%, 0) scale(1.025);
   }
 }
 
 @keyframes pm-ambient-drift {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(0.8%, -0.6%, 0); }
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0.8%, -0.6%, 0);
+  }
 }
 
 /* Parallax: cinematic-parallax.css */
@@ -369,6 +359,7 @@ html.pm-cinema.pm-cinema-reduced .hero-content {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   html.pm-cinema .pm-atmosphere__ambient,
   html.pm-cinema .pm-atmosphere__light,
   html.pm-cinema .pm-atmosphere__mist {
@@ -399,21 +390,15 @@ html.pm-cinema[data-theme="light"] {
   inset: -18%;
   pointer-events: none;
   background:
-    radial-gradient(
-      ellipse 55% 48% at 28% 22%,
+    radial-gradient(ellipse 55% 48% at 28% 22%,
       var(--pm-breath-glow-soft),
-      transparent 58%
-    ),
-    radial-gradient(
-      ellipse 50% 42% at 78% 68%,
+      transparent 58%),
+    radial-gradient(ellipse 50% 42% at 78% 68%,
       var(--pm-breath-glow),
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 70% 55% at 50% 50%,
+      transparent 55%),
+    radial-gradient(ellipse 70% 55% at 50% 50%,
       color-mix(in srgb, var(--primary) 4%, transparent),
-      transparent 68%
-    );
+      transparent 68%);
   opacity: 0.48;
   animation: pm-breathe-glow 10s ease-in-out infinite;
   will-change: opacity, transform;
@@ -446,11 +431,13 @@ html.pm-cinema body::before {
 }
 
 @keyframes pm-breathe-glow {
+
   0%,
   100% {
     opacity: 0.4;
     transform: scale(1) translate3d(0, 0, 0);
   }
+
   50% {
     opacity: 0.56;
     transform: scale(1.02) translate3d(0.3%, -0.2%, 0);
@@ -458,11 +445,13 @@ html.pm-cinema body::before {
 }
 
 @keyframes pm-breathe-ambient {
+
   0%,
   100% {
     opacity: 0.8;
     filter: brightness(1) saturate(1);
   }
+
   50% {
     opacity: 0.9;
     filter: brightness(1.03) saturate(1.02);
@@ -470,30 +459,36 @@ html.pm-cinema body::before {
 }
 
 @keyframes pm-breathe-fog {
+
   0%,
   100% {
     opacity: 0.34;
   }
+
   50% {
     opacity: 0.42;
   }
 }
 
 @keyframes pm-breathe-vignette {
+
   0%,
   100% {
     opacity: 0.52;
   }
+
   50% {
     opacity: 0.58;
   }
 }
 
 @keyframes pm-breathe-border {
+
   0%,
   100% {
     opacity: 0.15;
   }
+
   50% {
     opacity: 0.22;
   }
@@ -567,7 +562,7 @@ html.pm-parallax .page-hero .hero-content {
 }
 
 /* Bloques de sección (contenedor entero, no rompe reveals internos) */
-html.pm-parallax .pm-parallax-block > .container {
+html.pm-parallax .pm-parallax-block>.container {
   transform: translate3d(0, var(--pm-block-shift, 0px), 0);
   transition: transform 0.12s linear;
   will-change: transform;
@@ -587,9 +582,10 @@ html.pm-parallax footer:not(.site-footer) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   html.pm-parallax .hero-overlay,
   html.pm-parallax .hero-content,
-  html.pm-parallax .pm-parallax-block > .container,
+  html.pm-parallax .pm-parallax-block>.container,
   html.pm-parallax [data-pm-float],
   html.pm-parallax footer {
     transform: none !important;
@@ -609,11 +605,9 @@ html.pm-cinema {
 }
 
 /* Estado inicial — solo texto, nunca imágenes */
-html.pm-cinema :is(
-  .pm-text-reveal--title,
+html.pm-cinema :is(.pm-text-reveal--title,
   .pm-text-reveal--body,
-  .pm-text-reveal--kicker
-):not(.pm-text-reveal--visible) {
+  .pm-text-reveal--kicker):not(.pm-text-reveal--visible) {
   opacity: 0;
   filter: blur(3px);
   transform: translate3d(0, 0.35rem, 0);
@@ -658,12 +652,10 @@ html.pm-cinema img.pm-text-reveal--icon:not(.pm-text-reveal--visible) {
 }
 
 /* Visible — nitidez total (mayor especificidad que reglas de tipo) */
-html.pm-cinema :is(
-  .pm-text-reveal--title,
+html.pm-cinema :is(.pm-text-reveal--title,
   .pm-text-reveal--body,
   .pm-text-reveal--kicker,
-  img.pm-text-reveal--icon
-).pm-text-reveal--visible {
+  img.pm-text-reveal--icon).pm-text-reveal--visible {
   opacity: 1;
   filter: none;
   transform: translate3d(0, 0, 0);
@@ -684,6 +676,7 @@ html.pm-cinema video {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   html.pm-cinema :is(.pm-text-reveal--title, .pm-text-reveal--body, .pm-text-reveal--kicker, img.pm-text-reveal--icon),
   html.pm-cinema .pm-section-layer,
   html.pm-cinema .pm-cinema-reveal,
@@ -715,12 +708,10 @@ html.pm-cinema main section.pm-section-cinema.section-alt::before {
   width: min(88%, 56rem);
   height: 1px;
   transform: translateX(-50%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--primary) 22%, transparent),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--primary) 22%, transparent),
+      transparent);
   opacity: 0;
   transition: opacity 1.2s var(--pm-section-ease);
   pointer-events: none;
@@ -766,13 +757,11 @@ html.pm-cinema main section.pm-section-cinema::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bg) 40%, transparent) 0%,
-    transparent 35%,
-    transparent 65%,
-    color-mix(in srgb, var(--bg-alt) 25%, transparent) 100%
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bg) 40%, transparent) 0%,
+      transparent 35%,
+      transparent 65%,
+      color-mix(in srgb, var(--bg-alt) 25%, transparent) 100%);
   opacity: 0.7;
   pointer-events: none;
   z-index: 1;
@@ -783,7 +772,7 @@ html.pm-cinema main section.pm-section-cinema.pm-section-visible::after {
   opacity: 0;
 }
 
-html.pm-cinema main section.pm-section-cinema > .container {
+html.pm-cinema main section.pm-section-cinema>.container {
   position: relative;
   z-index: 2;
 }
@@ -813,10 +802,7 @@ html.pm-cinema .pm-section-layer picture {
 }
 
 /* Tarjetas / paneles sueltos (sin capa de sección) */
-html.pm-cinema
-  .pm-cinema-reveal:not(.pm-section-layer):not(.pm-text-reveal):not(.pm-section-visible):not(
-    .pm-cinema-reveal--visible
-  ) {
+html.pm-cinema .pm-cinema-reveal:not(.pm-section-layer):not(.pm-text-reveal):not(.pm-section-visible):not(.pm-cinema-reveal--visible) {
   opacity: 0;
   filter: blur(3px) saturate(0.98);
   transform: translate3d(0, 0.45rem, 0) scale(0.998);
@@ -850,6 +836,7 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   html.pm-cinema main section.pm-section-cinema,
   html.pm-cinema .pm-section-layer,
   html.pm-cinema .pm-cinema-reveal,
@@ -865,17 +852,10 @@ html.pm-cinema .animate-on-scroll.is-visible {
   }
 }
 
-/* cinematic-audio.css */
-/* ═══════════════════════════════════════════════════════════════════
-   Paleomagina — botón de sonido en el hero (inferior izquierda + luz)
-   ═══════════════════════════════════════════════════════════════════ */
-
-.pm-audio-fab-host {
-  /* .hero / .page-hero ya tienen position: relative */
-}
 
 .pm-audio-fab {
-  position: relative; /* contexto para ::before/::after; --in-hero/--fallback lo sustituyen */
+  position: relative;
+  /* contexto para ::before/::after; --in-hero/--fallback lo sustituyen */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -908,13 +888,11 @@ html.pm-cinema .animate-on-scroll.is-visible {
   position: absolute;
   inset: -14px -18px -14px -10px;
   border-radius: 999px;
-  background: radial-gradient(
-    ellipse 120% 100% at 28% 50%,
-    rgba(255, 220, 150, 0.42) 0%,
-    rgba(210, 165, 90, 0.22) 38%,
-    rgba(166, 124, 61, 0.08) 62%,
-    transparent 78%
-  );
+  background: radial-gradient(ellipse 120% 100% at 28% 50%,
+      rgba(255, 220, 150, 0.42) 0%,
+      rgba(210, 165, 90, 0.22) 38%,
+      rgba(166, 124, 61, 0.08) 62%,
+      transparent 78%);
   z-index: -1;
   pointer-events: none;
   filter: blur(6px);
@@ -984,12 +962,10 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 .pm-audio-fab--active::before {
-  background: radial-gradient(
-    ellipse 130% 110% at 28% 50%,
-    color-mix(in srgb, var(--primary) 55%, #ffe8b0) 0%,
-    color-mix(in srgb, var(--primary) 35%, transparent) 45%,
-    transparent 75%
-  );
+  background: radial-gradient(ellipse 130% 110% at 28% 50%,
+      color-mix(in srgb, var(--primary) 55%, #ffe8b0) 0%,
+      color-mix(in srgb, var(--primary) 35%, transparent) 45%,
+      transparent 75%);
   animation: pm-audio-fab-halo-active 2.4s ease-in-out infinite;
 }
 
@@ -1005,6 +981,7 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 @keyframes pm-audio-fab-glow {
+
   0%,
   100% {
     box-shadow:
@@ -1013,6 +990,7 @@ html.pm-cinema .animate-on-scroll.is-visible {
       0 0 36px rgba(166, 124, 61, 0.22),
       inset 0 1px 0 rgba(255, 248, 220, 0.22);
   }
+
   50% {
     box-shadow:
       0 4px 18px rgba(0, 0, 0, 0.42),
@@ -1023,6 +1001,7 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 @keyframes pm-audio-fab-glow-active {
+
   0%,
   100% {
     box-shadow:
@@ -1031,6 +1010,7 @@ html.pm-cinema .animate-on-scroll.is-visible {
       0 0 48px color-mix(in srgb, var(--primary) 38%, transparent),
       inset 0 1px 0 rgba(255, 248, 220, 0.28);
   }
+
   50% {
     box-shadow:
       0 6px 26px rgba(0, 0, 0, 0.42),
@@ -1041,11 +1021,13 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 @keyframes pm-audio-fab-halo {
+
   0%,
   100% {
     opacity: 0.75;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.04);
@@ -1053,11 +1035,13 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 @keyframes pm-audio-fab-halo-active {
+
   0%,
   100% {
     opacity: 0.85;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.06);
@@ -1065,11 +1049,13 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 @keyframes pm-audio-fab-ring {
+
   0%,
   100% {
     transform: scale(1);
     opacity: 0.5;
   }
+
   50% {
     transform: scale(1.04);
     opacity: 0.9;
@@ -1128,11 +1114,9 @@ html.pm-cinema .animate-on-scroll.is-visible {
 }
 
 .pm-audio-fab--fallback::before {
-  background: radial-gradient(
-    ellipse 120% 100% at 28% 50%,
-    color-mix(in srgb, var(--primary) 35%, transparent) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse 120% 100% at 28% 50%,
+      color-mix(in srgb, var(--primary) 35%, transparent) 0%,
+      transparent 70%);
 }
 
 .pm-audio-fab--fallback .pm-audio-fab__icon {
@@ -1188,4 +1172,3 @@ html.pm-cinema .animate-on-scroll.is-visible {
     display: none !important;
   }
 }
-

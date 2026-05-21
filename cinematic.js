@@ -464,7 +464,7 @@
       btn.addEventListener("click", () => window.setTimeout(schedule, 50));
     });
   }
-window.PaleomaginaParallax = { refresh: update };
+  window.PaleomaginaParallax = { refresh: update };
 
 
   const TITLE_SEL =
@@ -745,7 +745,7 @@ window.PaleomaginaParallax = { refresh: update };
     initSections();
     initStandaloneReveals();
   }
-window.PaleomaginaSections = { refresh: initSectionsEntry };
+  window.PaleomaginaSections = { refresh: initSectionsEntry };
 
 
   const STORAGE_KEY = "paleomagina-audio-enabled";
@@ -753,7 +753,7 @@ window.PaleomaginaSections = { refresh: initSectionsEntry };
   const FADE_RESUME_SEC = 2;
   const FADE_OUT_SEC = 3;
   const TARGET_VOLUME = 0.038;
-const ICON_SOUND_OFF =
+  const ICON_SOUND_OFF =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
   const ICON_SOUND_ON =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.2a4 4 0 0 1 0 7.6"/><path d="M18.2 5.8a7.5 7.5 0 0 1 0 12.4"/></svg>';
@@ -906,11 +906,11 @@ const ICON_SOUND_OFF =
         g.gain.value = 0.22;
         track.connect(g);
         g.connect(master);
-        audio.play().catch(() => {});
-      } catch (_) {}
+        audio.play().catch(() => { });
+      } catch (_) { }
     });
 
-    audio.addEventListener("error", () => {});
+    audio.addEventListener("error", () => { });
     if (playing) audio.load();
   }
 
@@ -953,14 +953,14 @@ const ICON_SOUND_OFF =
     const fadeSec = options.resume ? FADE_RESUME_SEC : FADE_IN_SEC;
     try {
       if (ctx.state === "suspended") await ctx.resume();
-    } catch (_) {}
+    } catch (_) { }
     await fadeTo(TARGET_VOLUME, fadeSec);
     document.documentElement.classList.add("pm-audio-on");
     updateFab();
     fab?.classList.add("pm-audio-fab--remembered");
     try {
       localStorage.setItem(STORAGE_KEY, "1");
-    } catch (_) {}
+    } catch (_) { }
   }
 
   function stopAmbient() {
@@ -971,7 +971,7 @@ const ICON_SOUND_OFF =
     fab?.classList.remove("pm-audio-fab--remembered");
     try {
       localStorage.setItem(STORAGE_KEY, "0");
-    } catch (_) {}
+    } catch (_) { }
   }
 
   function updateFab() {
@@ -1362,7 +1362,7 @@ const ICON_SOUND_OFF =
       }, 50));
     });
   }
-window.PaleomaginaAudio = {
+  window.PaleomaginaAudio = {
     start: startAmbient,
     stop: stopAmbient,
     isPlaying: () => playing,

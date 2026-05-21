@@ -4,18 +4,18 @@
 
 // ── Ámbitos (lista ordenada para la grid) ───────────────────────────
 const scopes = [
-  { code: "AAN", key: "scope_aan", title_es: "Antesala",              title_en: "Ante-room" },
-  { code: "A0",  key: "scope_a0",  title_es: "Bienvenida",            title_en: "Welcome" },
-  { code: "A1",  key: "scope_a1",  title_es: "El mar de Tetis",       title_en: "The Tethys Sea" },
-  { code: "A2",  key: "scope_a2",  title_es: "Geologia y orografia",  title_en: "Geology and orography" },
-  { code: "A3",  key: "scope_a3",  title_es: "Cuaternario",           title_en: "Quaternary" },
-  { code: "A4",  key: "scope_a4",  title_es: "Mundo neandertal",      title_en: "Neanderthal world" },
-  { code: "A5",  key: "scope_a5",  title_es: "Paleolitico superior",  title_en: "Upper Paleolithic" },
-  { code: "A6",  key: "scope_a6",  title_es: "Neolitico",             title_en: "Neolithic" },
-  { code: "A7",  key: "scope_a7",  title_es: "Calcolitico",           title_en: "Chalcolithic" },
-  { code: "A8",  key: "scope_a8",  title_es: "Ciencia y ciudadanía",  title_en: "Science and citizenship" },
-  { code: "A9",  key: "scope_a9",  title_es: "Testimonios y voces",   title_en: "Testimonies and voices" },
-  { code: "ATZ", key: "scope_atz", title_es: "Terraza final",         title_en: "Final terrace" }
+  { code: "AAN", key: "scope_aan", title_es: "Antesala", title_en: "Ante-room" },
+  { code: "A0", key: "scope_a0", title_es: "Bienvenida", title_en: "Welcome" },
+  { code: "A1", key: "scope_a1", title_es: "El mar de Tetis", title_en: "The Tethys Sea" },
+  { code: "A2", key: "scope_a2", title_es: "Geologia y orografia", title_en: "Geology and orography" },
+  { code: "A3", key: "scope_a3", title_es: "Cuaternario", title_en: "Quaternary" },
+  { code: "A4", key: "scope_a4", title_es: "Mundo neandertal", title_en: "Neanderthal world" },
+  { code: "A5", key: "scope_a5", title_es: "Paleolitico superior", title_en: "Upper Paleolithic" },
+  { code: "A6", key: "scope_a6", title_es: "Neolitico", title_en: "Neolithic" },
+  { code: "A7", key: "scope_a7", title_es: "Calcolitico", title_en: "Chalcolithic" },
+  { code: "A8", key: "scope_a8", title_es: "Ciencia y ciudadanía", title_en: "Science and citizenship" },
+  { code: "A9", key: "scope_a9", title_es: "Testimonios y voces", title_en: "Testimonies and voices" },
+  { code: "ATZ", key: "scope_atz", title_es: "Terraza final", title_en: "Final terrace" }
 ];
 
 // ── Contenidos ampliados por ámbito ─────────────────────────────────
@@ -27,7 +27,7 @@ const scopeContents = {
       content: "Funciona como umbral afectivo y conceptual: vocabulario mínimo, escenografía que conecta con Sierra Mágina y una primera lectura del territorio como archivo de tiempo.",
       timeline: "Umbral de visita",
       related: "Conecta con la línea temporal inicial y prepara la lectura del mapa interactivo.",
-      facts: ["Impacto emocional y dimensión humana","Relación visual con el paisaje exterior","Preparación narrativa antes de la bienvenida"]
+      facts: ["Impacto emocional y dimensión humana", "Relación visual con el paisaje exterior", "Preparación narrativa antes de la bienvenida"]
     },
     en: {
       title: "Ante-room",
@@ -35,7 +35,7 @@ const scopeContents = {
       content: "It works as an affective and conceptual threshold: minimal vocabulary, staging linked to Sierra Mágina, and a first reading of the territory as an archive of time.",
       timeline: "Visit threshold",
       related: "Connects with the opening timeline and prepares the interactive map reading.",
-      facts: ["Emotional impact and human scale","Visual link to the outdoor landscape","Narrative preparation before the welcome area"]
+      facts: ["Emotional impact and human scale", "Visual link to the outdoor landscape", "Narrative preparation before the welcome area"]
     }
   },
   A0: {
@@ -45,7 +45,7 @@ const scopeContents = {
       content: "Este ámbito marca el inicio de tu recorrido. Sierra Mágina es una montaña que cuenta historias: de antiguos mares, de movimientos terrestres, de cambios climáticos, de los primeros humanos que la habitaron y de las sociedades que evolucionaron en su territorio. A través de ciencia basada en evidencias, reconstruimos esa historia.",
       timeline: "Hoy",
       related: "Se refuerza con el mapa interactivo, la orientación de planta baja y los recursos de visita.",
-      facts: ["Presenta el relato general del centro","Introduce cómo usar paneles, QR y vídeos","Sitúa Sierra Mágina como archivo geológico y humano"]
+      facts: ["Presenta el relato general del centro", "Introduce cómo usar paneles, QR y vídeos", "Sitúa Sierra Mágina como archivo geológico y humano"]
     },
     en: {
       title: "Welcome to Sierra Mágina",
@@ -53,7 +53,7 @@ const scopeContents = {
       content: "This area marks the start of your journey. Sierra Mágina is a mountain that tells stories: of ancient seas, of earth movements, of climate change, of the first humans who inhabited it, and of the societies that evolved in its territory. Through evidence-based science, we reconstruct that history.",
       timeline: "Today",
       related: "Supported by the interactive map, ground-floor orientation, and visitor resources.",
-      facts: ["Presents the overall narrative of the centre","Introduces panels, QR, and audiovisual resources","Frames Sierra Mágina as a geological and human archive"]
+      facts: ["Presents the overall narrative of the centre", "Introduces panels, QR, and audiovisual resources", "Frames Sierra Mágina as a geological and human archive"]
     }
   },
   A1: {
@@ -63,7 +63,7 @@ const scopeContents = {
       content: "Durante el Mesozoico, Sierra Mágina estuvo completamente sumergida bajo el Mar de Tetis, un vasto océano tropical. Los sedimentos depositados durante millones de años formaron capas que hoy contienen abundantes fósiles: ammonites, belemnites, bivalvos y otros organismos marinos. La lenta evaporación del mar dejó depósitos de sal y yeso que son visibles en las canteras actuales.",
       timeline: "Mesozoico (200-65 M.a.)",
       related: "Conecta con el glosario de Tetis, fósil y sedimento, y con las imágenes de fósiles del inicio.",
-      facts: ["Explica por qué aparecen fósiles marinos en una sierra interior","Introduce ammonites, belemnites y sedimentos carbonatados","Sirve como base para entender la geología posterior"]
+      facts: ["Explica por qué aparecen fósiles marinos en una sierra interior", "Introduce ammonites, belemnites y sedimentos carbonatados", "Sirve como base para entender la geología posterior"]
     },
     en: {
       title: "The Tethys Sea",
@@ -71,7 +71,7 @@ const scopeContents = {
       content: "During the Mesozoic Era, Sierra Mágina was completely submerged under the Tethys Sea, a vast tropical ocean. Sediments deposited over millions of years formed layers that today contain abundant fossils: ammonites, belemnites, bivalves, and other marine organisms. The slow evaporation of the sea left deposits of salt and gypsum visible in current quarries.",
       timeline: "Mesozoic (200-65 Ma)",
       related: "Connects with the glossary entries for Tethys, fossil, and sediment, and with fossil imagery on the home page.",
-      facts: ["Explains why marine fossils appear in an inland mountain range","Introduces ammonites, belemnites, and carbonate sediments","Provides the basis for understanding later geology"]
+      facts: ["Explains why marine fossils appear in an inland mountain range", "Introduces ammonites, belemnites, and carbonate sediments", "Provides the basis for understanding later geology"]
     }
   },
   A2: {
@@ -81,7 +81,7 @@ const scopeContents = {
       content: "Hace 65 millones de años comenzó el levantamiento de la cadena bética. Las capas marinas se plegaron, fracturaron y elevaron, transformando el fondo del océano en tierra. Las rocas calizas, dolomías y margas de origen marino son ahora los componentes principales de Sierra Mágina. La erosión ha modelado profundas gargantas y cuevas, creando un paisaje kárstico de gran belleza.",
       timeline: "Cenozoico (65 M.a. - hoy)",
       related: "Conecta con el mapa arqueológico, la terraza final y el glosario de paisaje kárstico.",
-      facts: ["Muestra cómo un fondo marino acaba formando montaña","Explica pliegues, fracturas, calizas y dolomías","Ayuda a leer cuevas, gargantas, laderas y miradores"]
+      facts: ["Muestra cómo un fondo marino acaba formando montaña", "Explica pliegues, fracturas, calizas y dolomías", "Ayuda a leer cuevas, gargantas, laderas y miradores"]
     },
     en: {
       title: "Geology and orography",
@@ -89,7 +89,7 @@ const scopeContents = {
       content: "Sixty-five million years ago, the uplift of the Betic chain began. Marine layers folded, fractured, and rose, transforming the ocean floor into land. Limestone, dolomite, and marl rocks of marine origin are now the main components of Sierra Mágina. Erosion has sculpted deep gorges and caves, creating a karst landscape of great beauty.",
       timeline: "Cenozoic (65 Ma - present)",
       related: "Connects with the archaeological map, final terrace, and karst landscape glossary.",
-      facts: ["Shows how an ancient seabed became a mountain range","Explains folds, faults, limestone, and dolomite","Helps read caves, gorges, slopes, and viewpoints"]
+      facts: ["Shows how an ancient seabed became a mountain range", "Explains folds, faults, limestone, and dolomite", "Helps read caves, gorges, slopes, and viewpoints"]
     }
   },
   A3: {
@@ -99,7 +99,7 @@ const scopeContents = {
       content: "Los últimos 2.5 millones de años estuvieron marcados por ciclos de frío intenso y calentamiento. Sierra Mágina experimentó múltiples glaciaciones que dejaron depósitos de sedimentos glaciares. La fauna cambió drásticamente: rinocerontes lanudos, mamuts, hienas de las cavernas y luego, los primeros humanos adaptados al frío. Los glaciares retrocedieron y el clima se estabilizó hace apenas 10.000 años.",
       timeline: "Cuaternario (2.5 M.a. - hoy)",
       related: "Conecta con la línea temporal interactiva y con la lectura de clima, fauna y primeros humanos.",
-      facts: ["Presenta cambios de clima y paisaje a escala humana","Introduce fauna fría, refugios y adaptación","Prepara el paso hacia neandertales y tecnología lítica"]
+      facts: ["Presenta cambios de clima y paisaje a escala humana", "Introduce fauna fría, refugios y adaptación", "Prepara el paso hacia neandertales y tecnología lítica"]
     },
     en: {
       title: "Quaternary",
@@ -107,7 +107,7 @@ const scopeContents = {
       content: "The last 2.5 million years were marked by cycles of intense cold and warming. Sierra Mágina experienced multiple glaciations that left glacial sediment deposits. Fauna changed dramatically: woolly rhinoceroses, mammoths, cave hyenas, and then the first humans adapted to cold. Glaciers retreated and the climate stabilized only 10,000 years ago.",
       timeline: "Quaternary (2.5 Ma - present)",
       related: "Connects with the interactive timeline and with climate, fauna, and early human interpretation.",
-      facts: ["Presents climate and landscape change at a human scale","Introduces cold fauna, refuges, and adaptation","Prepares the transition to Neanderthals and stone technology"]
+      facts: ["Presents climate and landscape change at a human scale", "Introduces cold fauna, refuges, and adaptation", "Prepares the transition to Neanderthals and stone technology"]
     }
   },
   A4: {
@@ -117,7 +117,7 @@ const scopeContents = {
       content: "Los neandertales (Homo neanderthalensis) dominaron Europa entre hace 400.000 y 40.000 años. En Sierra Mágina encontramos evidencias de su presencia: herramientas de piedra tallada, restos óseos y, en ocasiones, evidencias de enterramientos. Eran cazadores especializados, con cerebro comparable al nuestro, capaces de hacer fuego, cuidar a sus enfermos y posiblemente tener lenguaje. Se extinguieron hace 40.000 años, posiblemente tras la llegada de los Homo sapiens.",
       timeline: "Paleolítico Medio (400.000-40.000 a.C.)",
       related: "Conecta con la antesala, las herramientas prehistóricas y el glosario de Homo neanderthalensis.",
-      facts: ["Muestra formas de vida, caza, fuego y cuidado del grupo","Relaciona herramientas líticas con adaptación al entorno","Introduce debate científico sobre convivencia y desaparición"]
+      facts: ["Muestra formas de vida, caza, fuego y cuidado del grupo", "Relaciona herramientas líticas con adaptación al entorno", "Introduce debate científico sobre convivencia y desaparición"]
     },
     en: {
       title: "Neanderthal world",
@@ -125,7 +125,7 @@ const scopeContents = {
       content: "Neanderthals (Homo neanderthalensis) dominated Europe between 400,000 and 40,000 years ago. In Sierra Mágina we find evidence of their presence: flaked stone tools, bone remains, and occasionally burial evidence. They were specialized hunters with brains comparable to ours, capable of making fire, caring for the sick, and possibly having language. They went extinct 40,000 years ago, possibly after the arrival of Homo sapiens.",
       timeline: "Middle Paleolithic (400,000-40,000 BC)",
       related: "Connects with the ante-room, prehistoric tools, and the Homo neanderthalensis glossary entry.",
-      facts: ["Shows lifeways, hunting, fire, and group care","Links stone tools with environmental adaptation","Introduces scientific debate on coexistence and disappearance"]
+      facts: ["Shows lifeways, hunting, fire, and group care", "Links stone tools with environmental adaptation", "Introduces scientific debate on coexistence and disappearance"]
     }
   },
   A5: {
@@ -135,7 +135,7 @@ const scopeContents = {
       content: "Hace 40.000 años, los Homo sapiens llegaron a Europa y con ellos nuevas tecnologías y capacidades. El Paleolítico superior vio la explosión del arte: grabados en piedra, esculturas en marfil y hueso, posiblemente música. Las herramientas se hicieron más sofisticadas, con puntas de flecha especializadas para diferentes presas. Las redes sociales se ampliaron, el comercio a larga distancia se intensificó y aparecen los primeros santuarios compartidos.",
       timeline: "Paleolítico Superior (40.000-10.000 a.C.)",
       related: "En esta página, vídeos y recursos didácticos amplían el arte y la tecnología lítica de este ámbito.",
-      facts: ["Introduce simbolismo, arte y redes sociales más amplias","Explica herramientas especializadas y nuevas estrategias de caza","Permite trabajar talleres de grabado, pigmentos y lectura de huellas"]
+      facts: ["Introduce simbolismo, arte y redes sociales más amplias", "Explica herramientas especializadas y nuevas estrategias de caza", "Permite trabajar talleres de grabado, pigmentos y lectura de huellas"]
     },
     en: {
       title: "Upper Paleolithic",
@@ -143,7 +143,7 @@ const scopeContents = {
       content: "Forty thousand years ago, Homo sapiens arrived in Europe bringing new technologies and abilities. The Upper Paleolithic saw an explosion of art: stone engravings, ivory and bone sculptures, possibly music. Tools became more sophisticated, with specialized arrowheads for different prey. Social networks expanded, long-distance trade intensified, and the first shared sanctuaries appeared.",
       timeline: "Upper Paleolithic (40,000-10,000 BC)",
       related: "On this page, audiovisuals and educational resources expand the art and stone technology in this scope.",
-      facts: ["Introduces symbolism, art, and wider social networks","Explains specialised tools and new hunting strategies","Supports workshops on engraving, pigments, and trace reading"]
+      facts: ["Introduces symbolism, art, and wider social networks", "Explains specialised tools and new hunting strategies", "Supports workshops on engraving, pigments, and trace reading"]
     }
   },
   A6: {
@@ -153,7 +153,7 @@ const scopeContents = {
       content: "Hace 10.000 años comenzó la revolución neolítica. Las sociedades de cazadores-recolectores se transformaron en agricultoras y ganaderas. En Sierra Mágina encontramos evidencias de cereales cultivados, domesticación de cabras y ovejas, y asentamientos más permanentes. Esta transición permitió el crecimiento de la población, la especialización del trabajo y la acumulación de bienes. Aparecen las primeras cerámicas decoradas y los primeros templos colectivos.",
       timeline: "Neolítico (10.000-4.500 a.C.)",
       related: "Conecta con talleres educativos sobre cerámica, agricultura temprana y arqueología experimental.",
-      facts: ["Explica el paso hacia agricultura, ganadería y asentamientos estables","Introduce cerámica, molienda, almacenamiento y domesticación","Ayuda a comprender cambios sociales y nuevos ritmos de vida"]
+      facts: ["Explica el paso hacia agricultura, ganadería y asentamientos estables", "Introduce cerámica, molienda, almacenamiento y domesticación", "Ayuda a comprender cambios sociales y nuevos ritmos de vida"]
     },
     en: {
       title: "Neolithic",
@@ -161,7 +161,7 @@ const scopeContents = {
       content: "Ten thousand years ago, the Neolithic Revolution began. Hunter-gatherer societies transformed into farming and pastoral communities. In Sierra Mágina, we find evidence of cultivated cereals, domestication of goats and sheep, and more permanent settlements. This transition enabled population growth, labor specialization, and accumulation of goods. Decorated pottery and the first collective temples appear.",
       timeline: "Neolithic (10,000-4,500 BC)",
       related: "Connects with educational workshops on pottery, early farming, and experimental archaeology.",
-      facts: ["Explains the shift to farming, herding, and stable settlements","Introduces pottery, grinding, storage, and domestication","Helps understand social change and new rhythms of life"]
+      facts: ["Explains the shift to farming, herding, and stable settlements", "Introduces pottery, grinding, storage, and domestication", "Helps understand social change and new rhythms of life"]
     }
   },
   A7: {
@@ -171,7 +171,7 @@ const scopeContents = {
       content: "Hace 5.000 años, llegó la metalurgia del cobre. Este metal podía ser trabajado en frío y, mediante calor, forjado en herramientas más eficientes. La minería del cobre generó riqueza concentrada. Aparecen las primeras élites, fortificaciones y conflictos organizados. Los enterramientos calcolíticos muestran diferenciación social clara: algunos individuos reciben elaborados ajuares mientras otros tienen entierros sencillos. Se desarrollan sistemas complejos de intercambio comercial.",
       timeline: "Calcolítico (5.000-3.500 a.C.)",
       related: "Conecta con recursos sobre metalurgia, intercambio, desigualdad social y paisaje habitado.",
-      facts: ["Introduce el cobre como cambio tecnológico y social","Relaciona minería, intercambio y prestigio","Permite explicar fortificaciones, ajuares y desigualdad arqueológica"]
+      facts: ["Introduce el cobre como cambio tecnológico y social", "Relaciona minería, intercambio y prestigio", "Permite explicar fortificaciones, ajuares y desigualdad arqueológica"]
     },
     en: {
       title: "Chalcolithic",
@@ -179,7 +179,7 @@ const scopeContents = {
       content: "Five thousand years ago, copper metallurgy arrived. This metal could be worked cold and, through heat, forged into more efficient tools. Copper mining generated concentrated wealth. The first elites, fortifications, and organized conflicts appear. Chalcolithic burials show clear social differentiation: some individuals receive elaborate grave goods while others have simple burials. Complex systems of commercial exchange develop.",
       timeline: "Chalcolithic (5,000-3,500 BC)",
       related: "Connects with resources on metallurgy, exchange, social inequality, and inhabited landscapes.",
-      facts: ["Introduces copper as a technological and social shift","Links mining, exchange, and prestige","Explains fortifications, grave goods, and archaeological inequality"]
+      facts: ["Introduces copper as a technological and social shift", "Links mining, exchange, and prestige", "Explains fortifications, grave goods, and archaeological inequality"]
     }
   },
   A8: {
@@ -189,7 +189,7 @@ const scopeContents = {
       content: "La investigación arqueológica en Sierra Mágina sigue un método científico riguroso: observación, hipótesis, experimentación y conclusiones basadas en evidencias. Excavamos, registramos en 3D, analizamos en laboratorio, datamos con carbono-14 y comparamos con otras regiones. Además, abrimos las investigaciones a la ciudadanía: participan en excavaciones, aprenden a identificar artefactos y comprenden cómo reconstruimos la historia. El patrimonio de Sierra Mágina es de todos y para todos.",
       timeline: "Presente y futuro",
       related: "Conecta con recursos, vídeos y glosario para mostrar cómo se construye el conocimiento.",
-      facts: ["Explica excavación, registro, laboratorio, datación y comparación","Muestra que el patrimonio se protege mejor cuando se entiende","Abre la puerta a participación, talleres y divulgación"]
+      facts: ["Explica excavación, registro, laboratorio, datación y comparación", "Muestra que el patrimonio se protege mejor cuando se entiende", "Abre la puerta a participación, talleres y divulgación"]
     },
     en: {
       title: "Science and citizenship",
@@ -197,7 +197,7 @@ const scopeContents = {
       content: "Archaeological research in Sierra Mágina follows a rigorous scientific method: observation, hypothesis, experimentation, and evidence-based conclusions. We excavate, record in 3D, analyze in the lab, date with carbon-14, and compare with other regions. We also open research to citizens: they participate in digs, learn to identify artifacts, and understand how we reconstruct history. Sierra Mágina's heritage belongs to everyone and is for everyone.",
       timeline: "Present and future",
       related: "Connects with resources, audiovisuals, and the glossary to show how knowledge is built.",
-      facts: ["Explains excavation, recording, laboratory work, dating, and comparison","Shows that heritage is better protected when understood","Opens the door to participation, workshops, and outreach"]
+      facts: ["Explains excavation, recording, laboratory work, dating, and comparison", "Shows that heritage is better protected when understood", "Opens the door to participation, workshops, and outreach"]
     }
   },
   A9: {
@@ -207,7 +207,7 @@ const scopeContents = {
       content: "Cierra el circuito interior con voces reales: cómo se investiga, qué significa el patrimonio para quien vive en el entorno y cómo la memoria colectiva dialoga con la evidencia científica.",
       timeline: "Memoria y ciudadanía",
       related: "Los vídeos de esta página recogen voces de investigación y memoria territorial enlazadas con este cierre del recorrido.",
-      facts: ["Humaniza el relato científico con voces reales","Recoge memoria territorial y experiencias de visita","Funciona como puente entre investigación, emoción y comunidad"]
+      facts: ["Humaniza el relato científico con voces reales", "Recoge memoria territorial y experiencias de visita", "Funciona como puente entre investigación, emoción y comunidad"]
     },
     en: {
       title: "Testimonies and voices",
@@ -215,7 +215,7 @@ const scopeContents = {
       content: "It closes the indoor circuit with real voices: how research happens, what heritage means for people who live nearby, and how collective memory dialogues with scientific evidence.",
       timeline: "Memory and citizenship",
       related: "Audiovisuals on this page gather research voices and territorial memory linked to this closing section of the route.",
-      facts: ["Humanises the scientific narrative through real voices","Collects territorial memory and visitor experiences","Acts as a bridge between research, emotion, and community"]
+      facts: ["Humanises the scientific narrative through real voices", "Collects territorial memory and visitor experiences", "Acts as a bridge between research, emotion, and community"]
     }
   },
   ATZ: {
@@ -225,7 +225,7 @@ const scopeContents = {
       content: "La visita no termina en sala: el horizonte pasa a ser parte de la exposición. Allí se relaciona lo visto en vitrinas y paneles con laderas, crestas y valles, cerrando el relato entre evidencia y territorio real.",
       timeline: "Todas las eras",
       related: "Conecta con el mapa arqueológico, la vista aérea y la lectura final del paisaje.",
-      facts: ["Convierte el horizonte real en última pieza del museo","Relaciona geología, poblamiento, caminos y memoria territorial","Invita a continuar la visita fuera del edificio"]
+      facts: ["Convierte el horizonte real en última pieza del museo", "Relaciona geología, poblamiento, caminos y memoria territorial", "Invita a continuar la visita fuera del edificio"]
     },
     en: {
       title: "Final terrace",
@@ -233,7 +233,7 @@ const scopeContents = {
       content: "The visit does not end indoors: the horizon becomes part of the exhibition. What you saw in cases and panels connects with slopes, ridges, and valleys, closing the narrative between evidence and the real territory.",
       timeline: "All eras",
       related: "Connects with the archaeological map, aerial view, and final landscape reading.",
-      facts: ["Turns the real horizon into the final museum piece","Links geology, settlement, routes, and territorial memory","Invites visitors to continue beyond the building"]
+      facts: ["Turns the real horizon into the final museum piece", "Links geology, settlement, routes, and territorial memory", "Invites visitors to continue beyond the building"]
     }
   }
 };
@@ -415,67 +415,67 @@ const glossary = {
 // ── Índice QR ────────────────────────────────────────────────────────
 const qrIndex = {
   es: {
-    A0:  { url: "/ambitos/bienvenida",          label: "Bienvenida",           floor: "PB" },
-    A1:  { url: "/ambitos/tetis",               label: "El mar de Tetis",      floor: "P1" },
-    A2:  { url: "/ambitos/geologia",            label: "Geología y orografía", floor: "P1" },
-    A3:  { url: "/ambitos/cuaternario",         label: "Cuaternario",          floor: "P1" },
-    A4:  { url: "/ambitos/neandertales",        label: "Mundo neandertal",     floor: "P1" },
-    A5:  { url: "/ambitos/paleolitico-superior",label: "Paleolítico superior", floor: "P1" },
-    A6:  { url: "/ambitos/neolitico",           label: "Neolítico",            floor: "P1" },
-    A7:  { url: "/ambitos/calcolitico",         label: "Calcolítico",          floor: "P1" },
-    A8:  { url: "/ambitos/ciencia",             label: "Ciencia y ciudadanía", floor: "P1" },
-    ATZ: { url: "/ambitos/terraza",             label: "Terraza y paisaje",    floor: "P1" }
+    A0: { url: "/ambitos/bienvenida", label: "Bienvenida", floor: "PB" },
+    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1" },
+    A2: { url: "/ambitos/geologia", label: "Geología y orografía", floor: "P1" },
+    A3: { url: "/ambitos/cuaternario", label: "Cuaternario", floor: "P1" },
+    A4: { url: "/ambitos/neandertales", label: "Mundo neandertal", floor: "P1" },
+    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1" },
+    A6: { url: "/ambitos/neolitico", label: "Neolítico", floor: "P1" },
+    A7: { url: "/ambitos/calcolitico", label: "Calcolítico", floor: "P1" },
+    A8: { url: "/ambitos/ciencia", label: "Ciencia y ciudadanía", floor: "P1" },
+    ATZ: { url: "/ambitos/terraza", label: "Terraza y paisaje", floor: "P1" }
   },
   en: {
-    A0:  { url: "/exhibits/welcome",     label: "Welcome",                floor: "GF" },
-    A1:  { url: "/exhibits/tethys",      label: "The Tethys Sea",         floor: "F1" },
-    A2:  { url: "/exhibits/geology",     label: "Geology and orography",  floor: "F1" },
-    A3:  { url: "/exhibits/quaternary",  label: "Quaternary",             floor: "F1" },
-    A4:  { url: "/exhibits/neanderthals",label: "Neanderthal world",      floor: "F1" },
-    A5:  { url: "/exhibits/paleolithic", label: "Upper Paleolithic",      floor: "F1" },
-    A6:  { url: "/exhibits/neolithic",   label: "Neolithic",              floor: "F1" },
-    A7:  { url: "/exhibits/chalcolithic",label: "Chalcolithic",           floor: "F1" },
-    A8:  { url: "/exhibits/science",     label: "Science and citizenship",floor: "F1" },
-    ATZ: { url: "/exhibits/terrace",     label: "Terrace and landscape",  floor: "F1" }
+    A0: { url: "/exhibits/welcome", label: "Welcome", floor: "GF" },
+    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1" },
+    A2: { url: "/exhibits/geology", label: "Geology and orography", floor: "F1" },
+    A3: { url: "/exhibits/quaternary", label: "Quaternary", floor: "F1" },
+    A4: { url: "/exhibits/neanderthals", label: "Neanderthal world", floor: "F1" },
+    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1" },
+    A6: { url: "/exhibits/neolithic", label: "Neolithic", floor: "F1" },
+    A7: { url: "/exhibits/chalcolithic", label: "Chalcolithic", floor: "F1" },
+    A8: { url: "/exhibits/science", label: "Science and citizenship", floor: "F1" },
+    ATZ: { url: "/exhibits/terrace", label: "Terrace and landscape", floor: "F1" }
   }
 };
 
 // ── Funciones de acceso ──────────────────────────────────────────────
 function getScopeContent(code, lang) { return scopeContents[code]?.[lang || "es"] || null; }
-function getGlossary(lang)           { return glossary[lang || "es"] || []; }
+function getGlossary(lang) { return glossary[lang || "es"] || []; }
 function getAudiovisuals(lang) {
   return typeof getAudiovisualCatalog === "function" ? getAudiovisualCatalog(lang).items || [] : [];
 }
-function getQRInfo(code, lang)       { return qrIndex[lang || "es"]?.[code] || null; }
+function getQRInfo(code, lang) { return qrIndex[lang || "es"]?.[code] || null; }
 
 // ── Descripciones cortas para tooltips del mapa ──────────────────────
 const scopeDescriptions = {
   es: {
     scope_aan: "Umbral emocional y primera lectura del territorio antes de la secuencia numerada.",
-    scope_a0:  "Introducción al museo y guía de visita.",
-    scope_a1:  "Origen marino del territorio y fósiles del Tetis.",
-    scope_a2:  "Lectura del relieve, rocas y procesos geológicos.",
-    scope_a3:  "Clima, fauna y cambios ambientales del Cuaternario.",
-    scope_a4:  "Vida cotidiana, tecnología y evidencias neandertales.",
-    scope_a5:  "Innovaciones humanas del Paleolítico superior.",
-    scope_a6:  "Primeras comunidades agricultoras y ganaderas.",
-    scope_a7:  "Metalurgia temprana y transformaciones sociales.",
-    scope_a8:  "Método científico, participación ciudadana y patrimonio.",
-    scope_a9:  "Voces de investigadores y vecindario; memoria territorial y ciudadanía.",
+    scope_a0: "Introducción al museo y guía de visita.",
+    scope_a1: "Origen marino del territorio y fósiles del Tetis.",
+    scope_a2: "Lectura del relieve, rocas y procesos geológicos.",
+    scope_a3: "Clima, fauna y cambios ambientales del Cuaternario.",
+    scope_a4: "Vida cotidiana, tecnología y evidencias neandertales.",
+    scope_a5: "Innovaciones humanas del Paleolítico superior.",
+    scope_a6: "Primeras comunidades agricultoras y ganaderas.",
+    scope_a7: "Metalurgia temprana y transformaciones sociales.",
+    scope_a8: "Método científico, participación ciudadana y patrimonio.",
+    scope_a9: "Voces de investigadores y vecindario; memoria territorial y ciudadanía.",
     scope_atz: "Cierre en paisaje: el museo continúa en Sierra Mágina."
   },
   en: {
     scope_aan: "Emotional threshold and first reading of the territory before numbered scopes.",
-    scope_a0:  "Museum introduction and visit guide.",
-    scope_a1:  "Marine origin of the territory and Tethys fossils.",
-    scope_a2:  "Reading relief, rocks, and geological processes.",
-    scope_a3:  "Climate, fauna, and environmental changes in the Quaternary.",
-    scope_a4:  "Daily life, technology, and Neanderthal evidence.",
-    scope_a5:  "Human innovations in the Upper Paleolithic.",
-    scope_a6:  "First farming and herding communities.",
-    scope_a7:  "Early metallurgy and social transformations.",
-    scope_a8:  "Scientific method, citizen engagement, and heritage.",
-    scope_a9:  "Researchers and neighbours' voices; territorial memory and citizenship.",
+    scope_a0: "Museum introduction and visit guide.",
+    scope_a1: "Marine origin of the territory and Tethys fossils.",
+    scope_a2: "Reading relief, rocks, and geological processes.",
+    scope_a3: "Climate, fauna, and environmental changes in the Quaternary.",
+    scope_a4: "Daily life, technology, and Neanderthal evidence.",
+    scope_a5: "Human innovations in the Upper Paleolithic.",
+    scope_a6: "First farming and herding communities.",
+    scope_a7: "Early metallurgy and social transformations.",
+    scope_a8: "Scientific method, citizen engagement, and heritage.",
+    scope_a9: "Researchers and neighbours' voices; territorial memory and citizenship.",
     scope_atz: "Landscape closure: the museum continues outdoors."
   }
 };

@@ -271,16 +271,12 @@ html {
   /* Textura + velo de tema + velo intermedio (--pm-texture-mid: claro de día, casi negro de noche) */
   background-color: var(--bg);
   background-image:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       color-mix(in srgb, var(--bg) var(--pm-html-veil-top), transparent),
-      color-mix(in srgb, var(--bg) var(--pm-html-veil-bottom), transparent)
-    ),
-    linear-gradient(
-      180deg,
+      color-mix(in srgb, var(--bg) var(--pm-html-veil-bottom), transparent)),
+    linear-gradient(180deg,
       color-mix(in srgb, var(--pm-texture-mid) var(--pm-texture-scrim-top), transparent),
-      color-mix(in srgb, var(--pm-texture-mid) var(--pm-texture-scrim-bottom), transparent)
-    ),
+      color-mix(in srgb, var(--pm-texture-mid) var(--pm-texture-scrim-bottom), transparent)),
     var(--pm-page-texture);
   background-size: auto, auto, cover;
   background-position: 0 0, 0 0, center top;
@@ -387,7 +383,7 @@ nav.pm-topnav,
 
 /* Desktop: una sola línea; la lista hace scroll horizontal si no cabe */
 @media (min-width: 992px) {
-  .pm-topnav > .container {
+  .pm-topnav>.container {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -506,27 +502,27 @@ footer {
 
 /* Titulos y cuerpo: modo dia nitido (sin sombra que difumina el trazo sobre textura clara) */
 main section:not(.hero, .hero-simple) :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6),
-main#main-content > .container > :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+main#main-content>.container> :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
   color: var(--heading);
 }
 
 html:not([data-theme="dark"]) main section:not(.hero, .hero-simple) :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6),
-html:not([data-theme="dark"]) main#main-content > .container > :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+html:not([data-theme="dark"]) main#main-content>.container> :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
   text-shadow: none;
 }
 
 html:not([data-theme="dark"]) main section:not(.hero, .hero-simple) :where(p, li, dd, .lead, .section-lead, .section-intro, .hero-text),
-html:not([data-theme="dark"]) main#main-content > .container :where(p, li, dd, .lead, .section-lead, .section-intro) {
+html:not([data-theme="dark"]) main#main-content>.container :where(p, li, dd, .lead, .section-lead, .section-intro) {
   text-shadow: none;
 }
 
 [data-theme="dark"] main section:not(.hero, .hero-simple) :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6),
-[data-theme="dark"] main#main-content > .container > :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+[data-theme="dark"] main#main-content>.container> :where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
   text-shadow: 0 0.06em 0.2em rgba(0, 0, 0, 0.55);
 }
 
 [data-theme="dark"] main section:not(.hero, .hero-simple) :where(p, li, dd, .lead, .section-lead, .section-intro, .hero-text),
-[data-theme="dark"] main#main-content > .container :where(p, li, dd, .lead, .section-lead, .section-intro) {
+[data-theme="dark"] main#main-content>.container :where(p, li, dd, .lead, .section-lead, .section-intro) {
   text-shadow: 0 0.05em 0.16em rgba(0, 0, 0, 0.42);
 }
 
@@ -613,7 +609,7 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
   top: 0;
   z-index: 10;
   /* Usamos rgba con variables o un color solido con transparencia */
-  background: rgba(242, 236, 226, 0.96); 
+  background: rgba(242, 236, 226, 0.96);
   /* Nota: Para que el header cambie suavemente en modo oscuro, 
      idealmente deberias usar una variable para el fondo del header tambien, 
      pero aqui aplicamos transicion a la propiedad background */
@@ -904,10 +900,8 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
 .page-hero .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    rgba(57, 43, 30, var(--pm-hero-overlay-a)),
-    rgba(57, 43, 30, var(--pm-hero-overlay-b))
-  );
+  background: linear-gradient(rgba(57, 43, 30, var(--pm-hero-overlay-a)),
+      rgba(57, 43, 30, var(--pm-hero-overlay-b)));
   z-index: 1;
   pointer-events: none;
 }
@@ -934,6 +928,7 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
   0% {
     transform: scale(1.08) translate3d(-2%, -1%, 0);
   }
+
   100% {
     transform: scale(1.18) translate3d(2%, 1%, 0);
   }
@@ -981,7 +976,7 @@ h2 {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 [data-theme="dark"] .btn-primary {
@@ -1043,7 +1038,7 @@ h2 {
   gap: 1rem;
 }
 
-.time-stage-card > * {
+.time-stage-card>* {
   position: relative;
   z-index: 1;
 }
@@ -1115,19 +1110,24 @@ h2 {
 }
 
 @keyframes pulse-slow {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.01); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.01);
+  }
 }
 
 body.time-morning .hero-overlay,
 body.time-afternoon .hero-overlay,
 body.time-evening .hero-overlay,
 body.time-night .hero-overlay {
-  background: linear-gradient(
-    180deg,
-    rgba(55, 38, 15, 0.76),
-    rgba(32, 20, 10, 0.26)
-  ), radial-gradient(circle at top center, var(--hero-sun-glow, rgba(255, 255, 230, 0.14)), transparent 28%);
+  background: linear-gradient(180deg,
+      rgba(55, 38, 15, 0.76),
+      rgba(32, 20, 10, 0.26)), radial-gradient(circle at top center, var(--hero-sun-glow, rgba(255, 255, 230, 0.14)), transparent 28%);
 }
 
 body.time-morning {
@@ -1156,7 +1156,7 @@ body.time-night {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.08), transparent 18%),
-              radial-gradient(circle at 25% 80%, rgba(255, 255, 255, 0.06), transparent 12%);
+    radial-gradient(circle at 25% 80%, rgba(255, 255, 255, 0.06), transparent 12%);
   pointer-events: none;
 }
 
@@ -1265,7 +1265,7 @@ body.time-night {
   padding: 2.65rem 0;
 }
 
-.sobre-page-main .section > .container {
+.sobre-page-main .section>.container {
   max-width: min(1200px, 100%);
 }
 
@@ -1417,10 +1417,12 @@ body.time-night {
     filter: brightness(1.35);
     box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.2), 0 4px 0 rgba(0, 0, 0, 0.12), 0 0 0 0 rgba(168, 56, 32, 0.65);
   }
+
   55% {
     filter: brightness(1.08);
     box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.2), 0 4px 0 rgba(0, 0, 0, 0.12), 0 0 0 14px rgba(168, 56, 32, 0);
   }
+
   100% {
     filter: brightness(1);
     box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.2), 0 4px 0 rgba(0, 0, 0, 0.12), 0 8px 22px rgba(166, 124, 61, 0.5),
@@ -1442,10 +1444,12 @@ body.time-night {
     filter: brightness(1.25);
     box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(240, 180, 160, 0.55);
   }
+
   55% {
     filter: brightness(1.08);
     box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.35), 0 0 0 14px rgba(240, 180, 160, 0);
   }
+
   100% {
     filter: brightness(1);
     box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.35), 0 4px 0 rgba(0, 0, 0, 0.25), 0 8px 24px rgba(228, 200, 140, 0.38),
@@ -1500,84 +1504,85 @@ body.time-night {
 
 /* Resalte naranja al pasar el cursor (solo hover, todas las páginas) */
 @media (hover: hover) {
+
   .sobre-page-main .section,
-  main#main-content > .container > section,
-  main .section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)),
-  main#main-content > .container.content-prose,
+  main#main-content>.container>section,
+  main .section:not(.hero, .page-hero, .hero-simple)>.container:not(:has(.content-prose)),
+  main#main-content>.container.content-prose,
   .content-prose,
   .museum-section-panel,
   .timeline-section-panel,
   .pm-read-panel,
-  .hero-simple > .container,
+  .hero-simple>.container,
   .glossary-entry {
     transition: background-color 0.35s ease, box-shadow 0.35s ease, color 0.25s ease;
   }
 
   .sobre-page-main .section:hover,
-  main#main-content > .container > section:not(.museum-section-wrap):hover,
-  main#main-content > .container > section.museum-section-wrap:hover > .museum-section-panel,
-  main#main-content > .container > section:has(> .timeline-section-panel):hover > .timeline-section-panel,
-  main .section:not(.hero, .page-hero, .hero-simple):hover > .container:not(:has(.content-prose)),
-  main#main-content > .container.content-prose:hover,
+  main#main-content>.container>section:not(.museum-section-wrap):hover,
+  main#main-content>.container>section.museum-section-wrap:hover>.museum-section-panel,
+  main#main-content>.container>section:has(> .timeline-section-panel):hover>.timeline-section-panel,
+  main .section:not(.hero, .page-hero, .hero-simple):hover>.container:not(:has(.content-prose)),
+  main#main-content>.container.content-prose:hover,
   .content-prose:hover,
   .museum-section-panel:hover,
   .timeline-section-panel:hover,
   .pm-read-panel:hover,
-  .hero-simple > .container:hover,
+  .hero-simple>.container:hover,
   .glossary-entry:hover {
     box-shadow: inset 6px 0 0 var(--primary), var(--pm-read-panel-shadow);
   }
 
   .sobre-page-main .section:not(.section-alt):hover,
-  main#main-content > .container > section:not(.section-alt):not(.museum-section-wrap):hover,
-  main .section:not(.section-alt, .hero, .page-hero, .hero-simple):hover > .container:not(:has(.content-prose)),
-  main#main-content > .container.content-prose:hover,
+  main#main-content>.container>section:not(.section-alt):not(.museum-section-wrap):hover,
+  main .section:not(.section-alt, .hero, .page-hero, .hero-simple):hover>.container:not(:has(.content-prose)),
+  main#main-content>.container.content-prose:hover,
   .content-prose:hover,
   .museum-section-panel:hover,
   .pm-read-panel:hover,
-  .hero-simple > .container:hover {
+  .hero-simple>.container:hover {
     background: linear-gradient(90deg, rgba(166, 124, 61, 0.11) 0%, transparent 52%);
   }
 
   .sobre-page-main .section.section-alt:hover,
-  main#main-content > .container > section.section-alt:not(.museum-section-wrap):hover,
-  main .section.section-alt:not(.hero, .page-hero, .hero-simple):hover > .container:not(:has(.content-prose)) {
+  main#main-content>.container>section.section-alt:not(.museum-section-wrap):hover,
+  main .section.section-alt:not(.hero, .page-hero, .hero-simple):hover>.container:not(:has(.content-prose)) {
     background: linear-gradient(90deg, rgba(166, 124, 61, 0.14) 0%, transparent 48%);
   }
 
   [data-theme="dark"] .sobre-page-main .section:not(.section-alt):hover,
-  [data-theme="dark"] main#main-content > .container > section:not(.section-alt):not(.museum-section-wrap):hover,
-  [data-theme="dark"] main .section:not(.section-alt, .hero, .page-hero, .hero-simple):hover > .container:not(:has(.content-prose)),
-  [data-theme="dark"] main#main-content > .container.content-prose:hover,
+  [data-theme="dark"] main#main-content>.container>section:not(.section-alt):not(.museum-section-wrap):hover,
+  [data-theme="dark"] main .section:not(.section-alt, .hero, .page-hero, .hero-simple):hover>.container:not(:has(.content-prose)),
+  [data-theme="dark"] main#main-content>.container.content-prose:hover,
   [data-theme="dark"] .content-prose:hover,
   [data-theme="dark"] .museum-section-panel:hover,
   [data-theme="dark"] .pm-read-panel:hover,
-  [data-theme="dark"] .hero-simple > .container:hover {
+  [data-theme="dark"] .hero-simple>.container:hover {
     background: linear-gradient(90deg, rgba(228, 200, 140, 0.09) 0%, transparent 52%);
   }
 
   [data-theme="dark"] .sobre-page-main .section.section-alt:hover,
-  [data-theme="dark"] main#main-content > .container > section.section-alt:not(.museum-section-wrap):hover,
-  [data-theme="dark"] main .section.section-alt:not(.hero, .page-hero, .hero-simple):hover > .container:not(:has(.content-prose)) {
+  [data-theme="dark"] main#main-content>.container>section.section-alt:not(.museum-section-wrap):hover,
+  [data-theme="dark"] main .section.section-alt:not(.hero, .page-hero, .hero-simple):hover>.container:not(:has(.content-prose)) {
     background: linear-gradient(90deg, rgba(228, 200, 140, 0.11) 0%, transparent 48%);
   }
 
   .sobre-page-main .section:hover :is(h2, h3, .h2, .h3, .museum-section-heading),
-  main#main-content > .container > section:hover :is(h2, h3, .h2, .h3, .museum-section-heading),
-  main .section:hover > .container:not(:has(.content-prose)) :is(h2, h3, .h2, .h3),
-  main#main-content > .container.content-prose:hover :is(h2, h3),
+  main#main-content>.container>section:hover :is(h2, h3, .h2, .h3, .museum-section-heading),
+  main .section:hover>.container:not(:has(.content-prose)) :is(h2, h3, .h2, .h3),
+  main#main-content>.container.content-prose:hover :is(h2, h3),
   .content-prose:hover :is(h2, h3),
   .museum-section-panel:hover .museum-section-heading,
   .timeline-section-panel:hover :is(h2, h3),
   .pm-read-panel:hover :is(h2, h3),
-  .hero-simple > .container:hover :is(h2, h3),
+  .hero-simple>.container:hover :is(h2, h3),
   .glossary-entry:hover .glossary-term {
     color: var(--primary);
   }
 
   .sobre-page-main .section:hover :is(.section-lead, .section-intro, .content-prose, .museum-section-lead, .lead),
-  main#main-content > .container > section:hover :is(.section-lead, .section-intro, .museum-section-lead, .lead),
-  main .section:hover > .container:not(:has(.content-prose)) :is(.section-lead, .section-intro),
+  main#main-content>.container>section:hover :is(.section-lead, .section-intro, .museum-section-lead, .lead),
+  main .section:hover>.container:not(:has(.content-prose)) :is(.section-lead, .section-intro),
   .content-prose:hover,
   .museum-section-panel:hover .museum-section-lead,
   .timeline-section-panel:hover .lead {
@@ -1585,7 +1590,7 @@ body.time-night {
   }
 
   .sobre-page-main .section:hover :is(.card, .floor-figure),
-  main#main-content > .container > section:hover .card,
+  main#main-content>.container>section:hover .card,
   main .section:hover .card,
   .content-prose:hover .card {
     font-weight: 400;
@@ -1613,7 +1618,7 @@ body.time-night {
 }
 
 .card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .video-thumb {
@@ -1695,6 +1700,53 @@ body.time-night {
   width: 100%;
   height: 100%;
   border: 0;
+  background: transparent !important;
+}
+
+.index-video-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 12050;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+}
+
+.index-video-intro-overlay.d-none {
+  display: none !important;
+}
+
+.index-video-intro-player {
+  width: min(98vw, 1200px);
+  max-width: 100%;
+  max-height: calc(100vh - 2rem);
+  border: 0;
+  background: transparent !important;
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .index-video-intro-overlay {
+    padding: 0.5rem;
+  }
+
+  .index-video-intro-player {
+    width: min(100vw, 100%);
+    max-width: 100%;
+    max-height: calc(100vh - 1.5rem);
+    border-radius: 0.75rem;
+  }
+}
+
+body.index-video-intro-visible {
+  overflow: hidden;
+}
+
+video,
+iframe {
+  background: transparent !important;
 }
 
 .video-overlay-close {
@@ -2567,6 +2619,7 @@ button:focus-visible {
 
 /* Reducir movimiento para usuarios sensibles */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -2881,7 +2934,7 @@ button:focus-visible {
   line-height: 1.8;
 }
 
-.hero-simple > .container {
+.hero-simple>.container {
   padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
   border-radius: var(--pm-read-panel-radius);
   border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
@@ -3077,8 +3130,8 @@ button:focus-visible {
 }
 
 #audiovisuals-page .pm-read-panel,
-#audiovisuals-content > .container,
-#audiovisuals-page .section-alt > .container {
+#audiovisuals-content>.container,
+#audiovisuals-page .section-alt>.container {
   position: relative;
 }
 
@@ -3301,6 +3354,7 @@ html.pm-cinema .av-library-card__text {
     opacity: 0;
     transform: translateY(-0.35rem);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -3715,23 +3769,24 @@ h3 {
 }
 
 @media (hover: hover) {
-  main#main-content > .container > section .resource-grid .card:hover,
-  main#main-content > .container > section .pm-exhibit-route-accordion .accordion-item:hover {
+
+  main#main-content>.container>section .resource-grid .card:hover,
+  main#main-content>.container>section .pm-exhibit-route-accordion .accordion-item:hover {
     box-shadow: inset 6px 0 0 var(--primary), 0 12px 40px rgba(90, 74, 55, 0.15);
     background: linear-gradient(90deg, rgba(166, 124, 61, 0.12) 0%, color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 58%);
   }
 
-  [data-theme="dark"] main#main-content > .container > section .resource-grid .card:hover,
-  [data-theme="dark"] main#main-content > .container > section .pm-exhibit-route-accordion .accordion-item:hover {
+  [data-theme="dark"] main#main-content>.container>section .resource-grid .card:hover,
+  [data-theme="dark"] main#main-content>.container>section .pm-exhibit-route-accordion .accordion-item:hover {
     background: linear-gradient(90deg, rgba(228, 200, 140, 0.1) 0%, color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 58%);
   }
 
-  main#main-content > .container > section .resource-grid .card:hover :is(h2, h3, h4, .h2, .h3, .h4, .h5),
-  main#main-content > .container > section .pm-exhibit-route-accordion .accordion-item:hover .accordion-button {
+  main#main-content>.container>section .resource-grid .card:hover :is(h2, h3, h4, .h2, .h3, .h4, .h5),
+  main#main-content>.container>section .pm-exhibit-route-accordion .accordion-item:hover .accordion-button {
     color: var(--primary);
   }
 
-  main#main-content > .container > section .pm-exhibit-route-accordion .accordion-item:hover .accordion-body {
+  main#main-content>.container>section .pm-exhibit-route-accordion .accordion-item:hover .accordion-body {
     font-weight: 600;
   }
 }
@@ -3834,9 +3889,12 @@ textarea:focus-visible {
 
 /* Loading animation */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -3852,6 +3910,7 @@ textarea:focus-visible {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -4001,8 +4060,7 @@ img:hover {
 }
 
 /* Paneles de texto: mismo fondo que línea temporal (timeline-fondo.png) */
-:is(
-  .content-prose,
+:is(.content-prose,
   .pm-read-panel,
   main#main-content > .container.content-prose,
   main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4015,15 +4073,13 @@ img:hover {
   .museum-section-panel,
   .timeline-section-panel,
   .pm-exhibit-route-accordion .accordion-item,
-  .qr-card
-) {
+  .qr-card) {
   position: relative;
   overflow: hidden;
   isolation: isolate;
 }
 
-:is(
-  .content-prose,
+:is(.content-prose,
   .pm-read-panel,
   main#main-content > .container.content-prose,
   main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4036,8 +4092,7 @@ img:hover {
   .museum-section-panel,
   .timeline-section-panel,
   .pm-exhibit-route-accordion .accordion-item,
-  .qr-card
-)::before {
+  .qr-card)::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -4047,8 +4102,7 @@ img:hover {
   pointer-events: none;
 }
 
-[data-theme="dark"] :is(
-  .content-prose,
+[data-theme="dark"] :is(.content-prose,
   .pm-read-panel,
   main#main-content > .container.content-prose,
   main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4061,13 +4115,11 @@ img:hover {
   .museum-section-panel,
   .timeline-section-panel,
   .pm-exhibit-route-accordion .accordion-item,
-  .qr-card
-)::before {
+  .qr-card)::before {
   opacity: var(--pm-panel-fondo-opacity-dark);
 }
 
-:is(
-  .content-prose,
+:is(.content-prose,
   .pm-read-panel,
   main#main-content > .container.content-prose,
   main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4080,22 +4132,18 @@ img:hover {
   .museum-section-panel,
   .timeline-section-panel,
   .pm-exhibit-route-accordion .accordion-item,
-  .qr-card
-)::after {
+  .qr-card)::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, #fffdf8 84%, transparent),
-    color-mix(in srgb, #f4eee4 72%, transparent)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, #fffdf8 84%, transparent),
+      color-mix(in srgb, #f4eee4 72%, transparent));
 }
 
-[data-theme="dark"] :is(
-  .content-prose,
+[data-theme="dark"] :is(.content-prose,
   .pm-read-panel,
   main#main-content > .container.content-prose,
   main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4108,17 +4156,13 @@ img:hover {
   .museum-section-panel,
   .timeline-section-panel,
   .pm-exhibit-route-accordion .accordion-item,
-  .qr-card
-)::after {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bg-alt) 55%, transparent),
-    color-mix(in srgb, var(--bg-alt) 35%, transparent)
-  );
+  .qr-card)::after {
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bg-alt) 55%, transparent),
+      color-mix(in srgb, var(--bg-alt) 35%, transparent));
 }
 
-:is(
-  .content-prose,
+:is(.content-prose,
   .pm-read-panel,
   main#main-content > .container.content-prose,
   main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4131,8 +4175,7 @@ img:hover {
   .museum-section-panel,
   .timeline-section-panel,
   .pm-exhibit-route-accordion .accordion-item,
-  .qr-card
-) > * {
+  .qr-card)>* {
   position: relative;
   z-index: 1;
 }
@@ -4147,11 +4190,11 @@ img:hover {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.timeline-section-panel > h2 {
+.timeline-section-panel>h2 {
   color: var(--heading);
 }
 
-.timeline-section-panel > .lead {
+.timeline-section-panel>.lead {
   color: color-mix(in srgb, var(--text) 52%, var(--muted) 48%);
 }
 
@@ -4236,8 +4279,7 @@ img:hover {
     box-shadow: inset 6px 0 0 var(--primary), var(--shadow);
   }
 
-  html:not([data-theme="dark"]) :is(
-    .content-prose,
+  html:not([data-theme="dark"]) :is(.content-prose,
     .pm-read-panel,
     main#main-content > .container.content-prose,
     main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4250,19 +4292,15 @@ img:hover {
     .museum-section-panel,
     .timeline-section-panel,
     .pm-exhibit-route-accordion .accordion-item,
-    .qr-card
-  ):hover::after {
-    background: linear-gradient(
-      105deg,
-      rgba(166, 124, 61, 0.32) 0%,
-      rgba(166, 124, 61, 0.1) 26%,
-      color-mix(in srgb, #fffdf8 78%, transparent) 52%,
-      color-mix(in srgb, #f4eee4 66%, transparent) 100%
-    );
+    .qr-card):hover::after {
+    background: linear-gradient(105deg,
+        rgba(166, 124, 61, 0.32) 0%,
+        rgba(166, 124, 61, 0.1) 26%,
+        color-mix(in srgb, #fffdf8 78%, transparent) 52%,
+        color-mix(in srgb, #f4eee4 66%, transparent) 100%);
   }
 
-  [data-theme="dark"] :is(
-    .content-prose,
+  [data-theme="dark"] :is(.content-prose,
     .pm-read-panel,
     main#main-content > .container.content-prose,
     main section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)),
@@ -4275,23 +4313,20 @@ img:hover {
     .museum-section-panel,
     .timeline-section-panel,
     .pm-exhibit-route-accordion .accordion-item,
-    .qr-card
-  ):hover::after {
-    background: linear-gradient(
-      105deg,
-      rgba(228, 200, 140, 0.26) 0%,
-      rgba(228, 200, 140, 0.08) 28%,
-      color-mix(in srgb, var(--bg-alt) 52%, transparent) 55%,
-      color-mix(in srgb, var(--bg-alt) 34%, transparent) 100%
-    );
+    .qr-card):hover::after {
+    background: linear-gradient(105deg,
+        rgba(228, 200, 140, 0.26) 0%,
+        rgba(228, 200, 140, 0.08) 28%,
+        color-mix(in srgb, var(--bg-alt) 52%, transparent) 55%,
+        color-mix(in srgb, var(--bg-alt) 34%, transparent) 100%);
   }
 
   .timeline-section-panel:hover .pm-heading-with-icon span,
-  .timeline-section-panel:hover > h2 {
+  .timeline-section-panel:hover>h2 {
     color: var(--primary);
   }
 
-  .timeline-section-panel:hover > .lead {
+  .timeline-section-panel:hover>.lead {
     color: color-mix(in srgb, var(--primary) 55%, var(--text) 45%);
     font-weight: 600;
   }
@@ -4355,7 +4390,7 @@ img:hover {
 }
 
 /* Páginas legales / texto único en container */
-main#main-content > .container.content-prose {
+main#main-content>.container.content-prose {
   max-width: min(48rem, 100%);
   margin-inline: auto;
   padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
@@ -4368,7 +4403,7 @@ main#main-content > .container.content-prose {
 }
 
 /* Secciones con .container (Recursos, Sobre, parte de Inicio, etc.): tarjeta si no hay .content-prose (evita doble caja) */
-main section:not(.hero, .hero-simple) > .container:not(:has(.content-prose)):not(:has(.pm-read-panel)) {
+main section:not(.hero, .hero-simple)>.container:not(:has(.content-prose)):not(:has(.pm-read-panel)) {
   padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
   border-radius: var(--pm-read-panel-radius);
   border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
@@ -4379,7 +4414,7 @@ main section:not(.hero, .hero-simple) > .container:not(:has(.content-prose)):not
 }
 
 /* Ámbitos: main > .container > section (sin .container interno) */
-main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap):not(:has(> .timeline-section-panel)) {
+main#main-content>.container>section:not(.hero-simple):not(.museum-section-wrap):not(:has(> .timeline-section-panel)) {
   padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
   border-radius: var(--pm-read-panel-radius);
   border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
@@ -4392,33 +4427,33 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 
 /* Ámbitos: resalte hover (después del panel base para ganar en cascada) */
 @media (hover: hover) {
-  main#main-content > .container > section:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
+  main#main-content>.container>section:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
     box-shadow: inset 6px 0 0 var(--primary), var(--pm-read-panel-shadow);
     border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
   }
 
-  main#main-content > .container > section:not(.section-alt):not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
+  main#main-content>.container>section:not(.section-alt):not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
     background: linear-gradient(90deg, rgba(166, 124, 61, 0.11) 0%, var(--pm-read-panel-bg) 52%);
   }
 
-  main#main-content > .container > section.section-alt:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
+  main#main-content>.container>section.section-alt:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
     background: linear-gradient(90deg, rgba(166, 124, 61, 0.14) 0%, var(--pm-read-panel-bg) 48%);
   }
 
-  [data-theme="dark"] main#main-content > .container > section:not(.section-alt):not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
+  [data-theme="dark"] main#main-content>.container>section:not(.section-alt):not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
     background: linear-gradient(90deg, rgba(228, 200, 140, 0.09) 0%, var(--pm-read-panel-bg) 52%);
   }
 
-  [data-theme="dark"] main#main-content > .container > section.section-alt:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
+  [data-theme="dark"] main#main-content>.container>section.section-alt:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
     background: linear-gradient(90deg, rgba(228, 200, 140, 0.11) 0%, var(--pm-read-panel-bg) 48%);
   }
 
-  main#main-content > .container > section:not(.museum-section-wrap):hover :is(h2, h3, .h2, .h3, .museum-section-heading),
-  main#main-content > .container > section:not(.museum-section-wrap):hover .pm-heading-with-icon span {
+  main#main-content>.container>section:not(.museum-section-wrap):hover :is(h2, h3, .h2, .h3, .museum-section-heading),
+  main#main-content>.container>section:not(.museum-section-wrap):hover .pm-heading-with-icon span {
     color: var(--primary);
   }
 
-  main#main-content > .container > section:not(.museum-section-wrap):hover :is(.section-lead, .section-intro, .lead) {
+  main#main-content>.container>section:not(.museum-section-wrap):hover :is(.section-lead, .section-intro, .lead) {
     font-weight: 600;
   }
 }
@@ -4472,6 +4507,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 
 /* Print styles */
 @media print {
+
   .site-header,
   .navbar,
   .pm-topnav,
@@ -4499,25 +4535,25 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   border-radius: 8px;
   overflow: hidden;
   background: #f0f0f0;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Ocean/Marine Scene */
 .ocean-scene {
-  background: linear-gradient(180deg,#0a4a8a 0%,#1a6fba 40%,#2a9fca 100%);
+  background: linear-gradient(180deg, #0a4a8a 0%, #1a6fba 40%, #2a9fca 100%);
 }
 
 .ocean-water {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.07) 19px);
+  background: repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255, 255, 255, 0.07) 19px);
 }
 
 .ammonite {
   position: absolute;
   top: 25px;
   left: 70px;
-  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
   animation: float 3s ease-in-out infinite;
 }
 
@@ -4526,13 +4562,31 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
   animation: rise 3s ease-in infinite;
 }
 
-.b1 { left: 40px; bottom: 30px; animation-delay: 0s; }
-.b2 { left: 120px; bottom: 20px; animation-delay: 1s; width: 5px; height: 5px; }
-.b3 { left: 200px; bottom: 40px; animation-delay: 2s; width: 6px; height: 6px; }
+.b1 {
+  left: 40px;
+  bottom: 30px;
+  animation-delay: 0s;
+}
+
+.b2 {
+  left: 120px;
+  bottom: 20px;
+  animation-delay: 1s;
+  width: 5px;
+  height: 5px;
+}
+
+.b3 {
+  left: 200px;
+  bottom: 40px;
+  animation-delay: 2s;
+  width: 6px;
+  height: 6px;
+}
 
 .fish {
   position: absolute;
@@ -4566,7 +4620,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 
 /* Geology Scene */
 .geology-scene {
-  background: linear-gradient(180deg,#c8e0f0 0%,#8ab0d0 100%);
+  background: linear-gradient(180deg, #c8e0f0 0%, #8ab0d0 100%);
 }
 
 .mountain-3d {
@@ -4595,12 +4649,20 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   padding-left: 8px;
   font-size: 0.62rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.s1 { background: #8a9080; }
-.s2 { background: #9a6050; }
-.s3 { background: #b08060; }
+.s1 {
+  background: #8a9080;
+}
+
+.s2 {
+  background: #9a6050;
+}
+
+.s3 {
+  background: #b08060;
+}
 
 /* Quaternary/Mammoth Scene */
 .quaternary-scene {
@@ -4622,14 +4684,28 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 
 .snowflake {
   position: absolute;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
   animation: snowfall 4s linear infinite;
 }
 
-.sf1 { top: 10px; left: 20px; animation-delay: 0s; }
-.sf2 { top: 5px; left: 180px; animation-delay: 1.5s; }
-.sf3 { top: 20px; left: 100px; animation-delay: 3s; }
+.sf1 {
+  top: 10px;
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.sf2 {
+  top: 5px;
+  left: 180px;
+  animation-delay: 1.5s;
+}
+
+.sf3 {
+  top: 20px;
+  left: 100px;
+  animation-delay: 3s;
+}
 
 /* Neandertal/Cave Scene */
 .cave-scene {
@@ -4639,7 +4715,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 .cave-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 60% 50%, rgba(255,120,30,0.25) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 60% 50%, rgba(255, 120, 30, 0.25) 0%, transparent 70%);
 }
 
 .cave-arch {
@@ -4648,7 +4724,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   left: 0;
   right: 0;
   height: 80%;
-  background: radial-gradient(ellipse at 50% -10%, transparent 55%, rgba(0,0,0,0.8) 56%);
+  background: radial-gradient(ellipse at 50% -10%, transparent 55%, rgba(0, 0, 0, 0.8) 56%);
   pointer-events: none;
 }
 
@@ -4710,7 +4786,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   left: -20px;
   right: -20px;
   height: 80px;
-  background: radial-gradient(ellipse at 50% 100%, rgba(255,100,0,0.4) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 100, 0, 0.4) 0%, transparent 70%);
   border-radius: 50%;
 }
 
@@ -4718,7 +4794,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   position: absolute;
   bottom: 20px;
   right: 30px;
-  filter: drop-shadow(0 0 8px rgba(255,120,30,0.6));
+  filter: drop-shadow(0 0 8px rgba(255, 120, 30, 0.6));
 }
 
 .stone-tools {
@@ -4737,9 +4813,19 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   transform-origin: bottom;
 }
 
-.t1 { transform: rotate(-15deg); }
-.t2 { height: 16px; transform: rotate(5deg); }
-.t3 { height: 14px; transform: rotate(20deg); }
+.t1 {
+  transform: rotate(-15deg);
+}
+
+.t2 {
+  height: 16px;
+  transform: rotate(5deg);
+}
+
+.t3 {
+  height: 14px;
+  transform: rotate(20deg);
+}
 
 .cave-painting {
   position: absolute;
@@ -4758,7 +4844,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 .sky-neo {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg,#87ceeb 0%,#b8e0a0 100%);
+  background: linear-gradient(180deg, #87ceeb 0%, #b8e0a0 100%);
 }
 
 .field {
@@ -4790,7 +4876,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   position: absolute;
   bottom: 55px;
   right: 20px;
-  filter: drop-shadow(4px 8px 10px rgba(0,0,0,0.3));
+  filter: drop-shadow(4px 8px 10px rgba(0, 0, 0, 0.3));
 }
 
 .hut {
@@ -4844,49 +4930,94 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 /* ------------------------------------------------------------------------ */
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes rise {
-  0% { transform: translateY(0); opacity: 0.5; }
-  100% { transform: translateY(-160px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(-160px);
+    opacity: 0;
+  }
 }
 
 @keyframes swim {
-  0%, 100% { transform: translateX(0) scaleX(1); }
-  50% { transform: translateX(-15px) scaleX(-1); }
+
+  0%,
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+
+  50% {
+    transform: translateX(-15px) scaleX(-1);
+  }
 }
 
 @keyframes snowfall {
-  0% { transform: translateY(-10px); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translateY(60px); opacity: 0; }
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(60px);
+    opacity: 0;
+  }
 }
 
 @keyframes flicker {
-  0% { transform: scaleX(1) scaleY(1); }
-  100% { transform: scaleX(0.9) scaleY(1.05); }
+  0% {
+    transform: scaleX(1) scaleY(1);
+  }
+
+  100% {
+    transform: scaleX(0.9) scaleY(1.05);
+  }
 }
 
 @keyframes sway {
-  0% { transform: rotate(-3deg); }
-  100% { transform: rotate(3deg); }
+  0% {
+    transform: rotate(-3deg);
+  }
+
+  100% {
+    transform: rotate(3deg);
+  }
 }
 
 @keyframes rotateArrow3D {
   0% {
     transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
   }
+
   25% {
     transform: rotateX(15deg) rotateY(90deg) rotateZ(0deg);
   }
+
   50% {
     transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
   }
+
   75% {
     transform: rotateX(-15deg) rotateY(270deg) rotateZ(0deg);
   }
+
   100% {
     transform: rotateX(0deg) rotateY(360deg) rotateZ(0deg);
   }
@@ -5001,8 +5132,15 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 }
 
 @keyframes slideUp {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 #museumMapLegend {
@@ -5038,18 +5176,29 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   width: 12px;
   height: 12px;
   border-radius: 3px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }
 
 [data-theme="dark"] .museum-legend-swatch {
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 768px) {
-  .museum-map-wrapper { max-width: 100%; }
-  .museum-map-tooltip { max-width: 220px; font-size: 0.8rem; }
-  .museum-map-panel { position: static; margin-top: 1rem; border-radius: 0.5rem; }
+  .museum-map-wrapper {
+    max-width: 100%;
+  }
+
+  .museum-map-tooltip {
+    max-width: 220px;
+    font-size: 0.8rem;
+  }
+
+  .museum-map-panel {
+    position: static;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+  }
 }
 
 .museum-zone:focus-visible {
@@ -5058,8 +5207,8 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
 }
 
 /* Garantia final: la navegacion principal permanece visible al hacer scroll. */
-body > nav.navbar.pm-topnav,
-body > nav.navbar.pm-topnav.fixed-top {
+body>nav.navbar.pm-topnav,
+body>nav.navbar.pm-topnav.fixed-top {
   position: fixed !important;
   top: 0 !important;
   right: 0 !important;
@@ -5095,38 +5244,38 @@ html.pm-cinema body.page-transition.page-leaving footer {
 }
 
 /* La barra superior mantiene el mismo aspecto oscuro aunque se haga scroll. */
-body > nav.navbar.pm-topnav,
-body > nav.navbar.pm-topnav.pm-nav--scrolled,
-html.pm-cinema body > nav.navbar.pm-topnav,
-html.pm-cinema body > nav.navbar.pm-topnav.pm-nav--scrolled,
-html.pm-cinema[data-theme="light"] body > nav.navbar.navbar-dark.bg-dark.pm-topnav,
-html.pm-cinema[data-theme="light"] body > nav.navbar.navbar-dark.bg-dark.pm-topnav.pm-nav--scrolled,
-html.pm-cinema[data-theme="dark"] body > nav.navbar.navbar-dark.bg-dark.pm-topnav,
-html.pm-cinema[data-theme="dark"] body > nav.navbar.navbar-dark.bg-dark.pm-topnav.pm-nav--scrolled {
+body>nav.navbar.pm-topnav,
+body>nav.navbar.pm-topnav.pm-nav--scrolled,
+html.pm-cinema body>nav.navbar.pm-topnav,
+html.pm-cinema body>nav.navbar.pm-topnav.pm-nav--scrolled,
+html.pm-cinema[data-theme="light"] body>nav.navbar.navbar-dark.bg-dark.pm-topnav,
+html.pm-cinema[data-theme="light"] body>nav.navbar.navbar-dark.bg-dark.pm-topnav.pm-nav--scrolled,
+html.pm-cinema[data-theme="dark"] body>nav.navbar.navbar-dark.bg-dark.pm-topnav,
+html.pm-cinema[data-theme="dark"] body>nav.navbar.navbar-dark.bg-dark.pm-topnav.pm-nav--scrolled {
   background-color: #212529 !important;
   border-bottom: 0 !important;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
 
-body > nav.navbar.pm-topnav .navbar-brand,
-body > nav.navbar.pm-topnav .nav-link,
-body > nav.navbar.pm-topnav .theme-toggle,
-body > nav.navbar.pm-topnav .lang-btn,
-html.pm-cinema[data-theme="light"] body > nav.navbar.pm-topnav .navbar-brand,
-html.pm-cinema[data-theme="light"] body > nav.navbar.pm-topnav .nav-link,
-html.pm-cinema[data-theme="light"] body > nav.navbar.pm-topnav .theme-toggle,
-html.pm-cinema[data-theme="light"] body > nav.navbar.pm-topnav .lang-btn {
+body>nav.navbar.pm-topnav .navbar-brand,
+body>nav.navbar.pm-topnav .nav-link,
+body>nav.navbar.pm-topnav .theme-toggle,
+body>nav.navbar.pm-topnav .lang-btn,
+html.pm-cinema[data-theme="light"] body>nav.navbar.pm-topnav .navbar-brand,
+html.pm-cinema[data-theme="light"] body>nav.navbar.pm-topnav .nav-link,
+html.pm-cinema[data-theme="light"] body>nav.navbar.pm-topnav .theme-toggle,
+html.pm-cinema[data-theme="light"] body>nav.navbar.pm-topnav .lang-btn {
   color: rgba(255, 255, 255, 0.92) !important;
 }
 
-body > nav.navbar.pm-topnav .nav-link:hover,
-body > nav.navbar.pm-topnav .nav-link:focus-visible,
-body > nav.navbar.pm-topnav .navbar-brand:hover,
-body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
+body>nav.navbar.pm-topnav .nav-link:hover,
+body>nav.navbar.pm-topnav .nav-link:focus-visible,
+body>nav.navbar.pm-topnav .navbar-brand:hover,
+body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   color: #fff !important;
 }
 
-[data-theme="dark"] body > nav.navbar.pm-topnav .navbar-nav .nav-link.active {
+[data-theme="dark"] body>nav.navbar.pm-topnav .navbar-nav .nav-link.active {
   color: #f5efe4 !important;
   background: linear-gradient(180deg, #7a5a33 0%, #5f4327 100%) !important;
   border: 1px solid rgba(226, 196, 142, 0.28);
@@ -5134,8 +5283,8 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   filter: none !important;
 }
 
-[data-theme="dark"] body > nav.navbar.pm-topnav .navbar-nav .nav-link.active:hover,
-[data-theme="dark"] body > nav.navbar.pm-topnav .navbar-nav .nav-link.active:focus-visible {
+[data-theme="dark"] body>nav.navbar.pm-topnav .navbar-nav .nav-link.active:hover,
+[data-theme="dark"] body>nav.navbar.pm-topnav .navbar-nav .nav-link.active:focus-visible {
   color: #fff8ec !important;
   background: linear-gradient(180deg, #866238 0%, #684a2b 100%) !important;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 3px 10px rgba(0, 0, 0, 0.32) !important;
@@ -5165,11 +5314,9 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, #fffdf8 84%, transparent),
-    color-mix(in srgb, #f4eee4 72%, transparent)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, #fffdf8 84%, transparent),
+      color-mix(in srgb, #f4eee4 72%, transparent));
 }
 
 [data-theme="dark"] .sobre-page-main #edificio .floor-figure.card::before {
@@ -5177,26 +5324,25 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
 }
 
 [data-theme="dark"] .sobre-page-main #edificio .floor-figure.card::after {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bg-alt) 55%, transparent),
-    color-mix(in srgb, var(--bg-alt) 35%, transparent)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bg-alt) 55%, transparent),
+      color-mix(in srgb, var(--bg-alt) 35%, transparent));
 }
 
-.sobre-page-main #edificio .floor-figure.card > * {
+.sobre-page-main #edificio .floor-figure.card>* {
   position: relative;
   z-index: 1;
 }
 
 /* Sobre el museo: el resalte debe pertenecer a cada tarjeta, no a la sección completa. */
 @media (hover: hover) {
+
   .sobre-page-main .section:hover,
   .sobre-page-main .section.section-alt:hover,
-  .sobre-page-main .section:hover > .container,
+  .sobre-page-main .section:hover>.container,
   [data-theme="dark"] .sobre-page-main .section:hover,
   [data-theme="dark"] .sobre-page-main .section.section-alt:hover,
-  [data-theme="dark"] .sobre-page-main .section:hover > .container {
+  [data-theme="dark"] .sobre-page-main .section:hover>.container {
     background: transparent;
     box-shadow: none;
   }
@@ -5214,34 +5360,30 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .sobre-page-main .card:hover {
     border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
     box-shadow: inset 4px 0 0 var(--primary), 0 12px 40px rgba(90, 74, 55, 0.15);
-    background: linear-gradient(
-      90deg,
-      rgba(166, 124, 61, 0.12) 0%,
-      color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 58%
-    );
+    background: linear-gradient(90deg,
+        rgba(166, 124, 61, 0.12) 0%,
+        color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 58%);
   }
 
   [data-theme="dark"] .sobre-page-main .card:hover {
-    background: linear-gradient(
-      90deg,
-      rgba(228, 200, 140, 0.1) 0%,
-      color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 58%
-    );
+    background: linear-gradient(90deg,
+        rgba(228, 200, 140, 0.1) 0%,
+        color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent) 58%);
   }
 
   .sobre-page-main #que-es:hover,
   .sobre-page-main #filosofia:hover,
-  .sobre-page-main #que-es:hover > .container,
-  .sobre-page-main #filosofia:hover > .container,
+  .sobre-page-main #que-es:hover>.container,
+  .sobre-page-main #filosofia:hover>.container,
   [data-theme="dark"] .sobre-page-main #que-es:hover,
   [data-theme="dark"] .sobre-page-main #filosofia:hover,
-  [data-theme="dark"] .sobre-page-main #que-es:hover > .container,
-  [data-theme="dark"] .sobre-page-main #filosofia:hover > .container {
+  [data-theme="dark"] .sobre-page-main #que-es:hover>.container,
+  [data-theme="dark"] .sobre-page-main #filosofia:hover>.container {
     background: transparent !important;
     box-shadow: none !important;
   }
 
-  .sobre-page-main #filosofia:hover > .container {
+  .sobre-page-main #filosofia:hover>.container {
     background: transparent !important;
     box-shadow: inset 4px 0 0 var(--primary), var(--pm-read-panel-shadow) !important;
     border-color: color-mix(in srgb, var(--primary) 45%, var(--border)) !important;
@@ -5259,10 +5401,8 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
 }
 
 /* Ámbitos: como Inicio  sin hover no se ve timeline-fondo; al pasar el cursor sí. */
-.ambitos-page-main :is(
-  .museum-section-panel,
-  .timeline-section-panel
-):not(#timeline-detail) {
+.ambitos-page-main :is(.museum-section-panel,
+  .timeline-section-panel):not(#timeline-detail) {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -5276,10 +5416,8 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.35s ease;
 }
 
-.ambitos-page-main :is(
-  .museum-section-panel,
-  .timeline-section-panel
-):not(#timeline-detail)::before {
+.ambitos-page-main :is(.museum-section-panel,
+  .timeline-section-panel):not(#timeline-detail)::before {
   content: "" !important;
   position: absolute;
   inset: 0;
@@ -5290,10 +5428,8 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   transition: opacity 0.35s ease;
 }
 
-.ambitos-page-main :is(
-  .museum-section-panel,
-  .timeline-section-panel
-):not(#timeline-detail)::after {
+.ambitos-page-main :is(.museum-section-panel,
+  .timeline-section-panel):not(#timeline-detail)::after {
   content: "" !important;
   position: absolute;
   inset: 0;
@@ -5301,42 +5437,34 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.35s ease;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, #fffdf8 84%, transparent),
-    color-mix(in srgb, #f4eee4 72%, transparent)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, #fffdf8 84%, transparent),
+      color-mix(in srgb, #f4eee4 72%, transparent));
 }
 
-[data-theme="dark"] .ambitos-page-main :is(
-  .museum-section-panel,
-  .timeline-section-panel
-):not(#timeline-detail)::after {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--bg-alt) 55%, transparent),
-    color-mix(in srgb, var(--bg-alt) 35%, transparent)
-  );
+[data-theme="dark"] .ambitos-page-main :is(.museum-section-panel,
+  .timeline-section-panel):not(#timeline-detail)::after {
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bg-alt) 55%, transparent),
+      color-mix(in srgb, var(--bg-alt) 35%, transparent));
 }
 
-.ambitos-page-main :is(
-  .museum-section-panel,
-  .timeline-section-panel
-):not(#timeline-detail) > * {
+.ambitos-page-main :is(.museum-section-panel,
+  .timeline-section-panel):not(#timeline-detail)>* {
   position: relative;
   z-index: 1;
 }
 
 /* La línea temporal: fondo solo en el panel exterior, no en la ficha de texto/foto. */
-.ambitos-page-main > .container > section:has(> .timeline-section-panel) {
+.ambitos-page-main>.container>section:has(> .timeline-section-panel) {
   background: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
   padding-inline: 0;
 }
 
-.ambitos-page-main > .container > section:has(> .timeline-section-panel)::before,
-.ambitos-page-main > .container > section:has(> .timeline-section-panel)::after {
+.ambitos-page-main>.container>section:has(> .timeline-section-panel)::before,
+.ambitos-page-main>.container>section:has(> .timeline-section-panel)::after {
   content: none !important;
 }
 
@@ -5351,54 +5479,41 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
 }
 
 @media (hover: hover) {
-  .ambitos-page-main :is(
-    .museum-section-panel,
-    .timeline-section-panel
-  ):not(#timeline-detail):hover {
+
+  .ambitos-page-main :is(.museum-section-panel,
+    .timeline-section-panel):not(#timeline-detail):hover {
     transform: translateY(-2px);
     border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
     box-shadow: inset 4px 0 0 var(--primary), 0 12px 40px rgba(90, 74, 55, 0.15);
   }
 
-  .ambitos-page-main :is(
-    .museum-section-panel,
-    .timeline-section-panel
-  ):not(#timeline-detail):hover::before {
+  .ambitos-page-main :is(.museum-section-panel,
+    .timeline-section-panel):not(#timeline-detail):hover::before {
     opacity: var(--pm-panel-fondo-opacity) !important;
   }
 
-  .ambitos-page-main :is(
-    .museum-section-panel,
-    .timeline-section-panel
-  ):not(#timeline-detail):hover::after {
+  .ambitos-page-main :is(.museum-section-panel,
+    .timeline-section-panel):not(#timeline-detail):hover::after {
     opacity: 1;
-    background: linear-gradient(
-      105deg,
-      rgba(166, 124, 61, 0.32) 0%,
-      rgba(166, 124, 61, 0.1) 26%,
-      color-mix(in srgb, #fffdf8 78%, transparent) 52%,
-      color-mix(in srgb, #f4eee4 66%, transparent) 100%
-    );
+    background: linear-gradient(105deg,
+        rgba(166, 124, 61, 0.32) 0%,
+        rgba(166, 124, 61, 0.1) 26%,
+        color-mix(in srgb, #fffdf8 78%, transparent) 52%,
+        color-mix(in srgb, #f4eee4 66%, transparent) 100%);
   }
 
-  [data-theme="dark"] .ambitos-page-main :is(
-    .museum-section-panel,
-    .timeline-section-panel
-  ):not(#timeline-detail):hover::before {
+  [data-theme="dark"] .ambitos-page-main :is(.museum-section-panel,
+    .timeline-section-panel):not(#timeline-detail):hover::before {
     opacity: var(--pm-panel-fondo-opacity-dark) !important;
   }
 
-  [data-theme="dark"] .ambitos-page-main :is(
-    .museum-section-panel,
-    .timeline-section-panel
-  ):not(#timeline-detail):hover::after {
-    background: linear-gradient(
-      105deg,
-      rgba(228, 200, 140, 0.26) 0%,
-      rgba(228, 200, 140, 0.08) 28%,
-      color-mix(in srgb, var(--bg-alt) 52%, transparent) 55%,
-      color-mix(in srgb, var(--bg-alt) 34%, transparent) 100%
-    );
+  [data-theme="dark"] .ambitos-page-main :is(.museum-section-panel,
+    .timeline-section-panel):not(#timeline-detail):hover::after {
+    background: linear-gradient(105deg,
+        rgba(228, 200, 140, 0.26) 0%,
+        rgba(228, 200, 140, 0.08) 28%,
+        color-mix(in srgb, var(--bg-alt) 52%, transparent) 55%,
+        color-mix(in srgb, var(--bg-alt) 34%, transparent) 100%);
   }
 
   .ambitos-page-main .timeline-section-panel .timeline-detail.card:hover {
@@ -5423,72 +5538,61 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
 }
 
 /* Ámbitos: los elementos internos no deben tapar el panel completo del section. */
-.ambitos-page-main > .container > section.museum-section-panel :is(
-  .resource-grid,
+.ambitos-page-main>.container>section.museum-section-panel :is(.resource-grid,
   .pm-exhibit-route-accordion,
   .pm-exhibit-route-accordion .accordion-header,
   .pm-exhibit-route-accordion .accordion-collapse,
   .resource-grid .card,
   .pm-exhibit-route-accordion .accordion-item,
   .pm-exhibit-route-accordion .accordion-button,
-  .pm-exhibit-route-accordion .accordion-body
-) {
+  .pm-exhibit-route-accordion .accordion-body) {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
 }
 
-[data-theme="dark"] .ambitos-page-main > .container > section.museum-section-panel :is(
-  .resource-grid,
+[data-theme="dark"] .ambitos-page-main>.container>section.museum-section-panel :is(.resource-grid,
   .pm-exhibit-route-accordion,
   .pm-exhibit-route-accordion .accordion-header,
   .pm-exhibit-route-accordion .accordion-collapse,
   .resource-grid .card,
   .pm-exhibit-route-accordion .accordion-item,
   .pm-exhibit-route-accordion .accordion-button,
-  .pm-exhibit-route-accordion .accordion-body
-) {
+  .pm-exhibit-route-accordion .accordion-body) {
   background: transparent !important;
 }
 
-.ambitos-page-main > .container > section.museum-section-panel :is(
-  .resource-grid,
+.ambitos-page-main>.container>section.museum-section-panel :is(.resource-grid,
   .pm-exhibit-route-accordion,
   .pm-exhibit-route-accordion .accordion-header,
   .pm-exhibit-route-accordion .accordion-collapse,
   .resource-grid .card,
   .pm-exhibit-route-accordion .accordion-item,
   .pm-exhibit-route-accordion .accordion-button,
-  .pm-exhibit-route-accordion .accordion-body
-)::before,
-.ambitos-page-main > .container > section.museum-section-panel :is(
-  .resource-grid,
+  .pm-exhibit-route-accordion .accordion-body)::before,
+.ambitos-page-main>.container>section.museum-section-panel :is(.resource-grid,
   .pm-exhibit-route-accordion,
   .pm-exhibit-route-accordion .accordion-header,
   .pm-exhibit-route-accordion .accordion-collapse,
   .resource-grid .card,
   .pm-exhibit-route-accordion .accordion-item,
   .pm-exhibit-route-accordion .accordion-button,
-  .pm-exhibit-route-accordion .accordion-body
-)::after {
+  .pm-exhibit-route-accordion .accordion-body)::after {
   content: none !important;
 }
 
 @media (hover: hover) {
-  .ambitos-page-main > .container > section.museum-section-panel :is(
-    .resource-grid .card,
-    .pm-exhibit-route-accordion .accordion-item
-  ):hover {
+
+  .ambitos-page-main>.container>section.museum-section-panel :is(.resource-grid .card,
+    .pm-exhibit-route-accordion .accordion-item):hover {
     transform: none;
     border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
     background: transparent !important;
     box-shadow: none !important;
   }
 
-  [data-theme="dark"] .ambitos-page-main > .container > section.museum-section-panel :is(
-    .resource-grid .card,
-    .pm-exhibit-route-accordion .accordion-item
-  ):hover {
+  [data-theme="dark"] .ambitos-page-main>.container>section.museum-section-panel :is(.resource-grid .card,
+    .pm-exhibit-route-accordion .accordion-item):hover {
     background: transparent !important;
   }
 }
@@ -5523,66 +5627,56 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   pointer-events: none !important;
   opacity: 0 !important;
   transition: opacity 0.35s ease !important;
-  background: linear-gradient(
-    105deg,
-    rgba(166, 124, 61, 0.32) 0%,
-    rgba(166, 124, 61, 0.1) 26%,
-    color-mix(in srgb, #fffdf8 78%, transparent) 52%,
-    color-mix(in srgb, #f4eee4 66%, transparent) 100%
-  ) !important;
+  background: linear-gradient(105deg,
+      rgba(166, 124, 61, 0.32) 0%,
+      rgba(166, 124, 61, 0.1) 26%,
+      color-mix(in srgb, #fffdf8 78%, transparent) 52%,
+      color-mix(in srgb, #f4eee4 66%, transparent) 100%) !important;
 }
 
-.ambitos-page-main .ambitos-hover-card > * {
+.ambitos-page-main .ambitos-hover-card>* {
   position: relative !important;
   z-index: 1 !important;
 }
 
-.ambitos-page-main .ambitos-hover-card :is(
-  .resource-grid,
+.ambitos-page-main .ambitos-hover-card :is(.resource-grid,
   .resource-grid .card,
   .pm-exhibit-route-accordion,
   .pm-exhibit-route-accordion .accordion-item,
   .pm-exhibit-route-accordion .accordion-header,
   .pm-exhibit-route-accordion .accordion-button,
   .pm-exhibit-route-accordion .accordion-collapse,
-  .pm-exhibit-route-accordion .accordion-body
-) {
+  .pm-exhibit-route-accordion .accordion-body) {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
 }
 
-.ambitos-page-main .ambitos-hover-card :is(
-  .resource-grid,
+.ambitos-page-main .ambitos-hover-card :is(.resource-grid,
   .resource-grid .card,
   .pm-exhibit-route-accordion,
   .pm-exhibit-route-accordion .accordion-item,
   .pm-exhibit-route-accordion .accordion-header,
   .pm-exhibit-route-accordion .accordion-button,
   .pm-exhibit-route-accordion .accordion-collapse,
-  .pm-exhibit-route-accordion .accordion-body
-)::before,
-.ambitos-page-main .ambitos-hover-card :is(
-  .resource-grid,
+  .pm-exhibit-route-accordion .accordion-body)::before,
+.ambitos-page-main .ambitos-hover-card :is(.resource-grid,
   .resource-grid .card,
   .pm-exhibit-route-accordion,
   .pm-exhibit-route-accordion .accordion-item,
   .pm-exhibit-route-accordion .accordion-header,
   .pm-exhibit-route-accordion .accordion-button,
   .pm-exhibit-route-accordion .accordion-collapse,
-  .pm-exhibit-route-accordion .accordion-body
-)::after {
+  .pm-exhibit-route-accordion .accordion-body)::after {
   content: none !important;
 }
 
 [data-theme="dark"] .ambitos-page-main .ambitos-hover-card::after {
-  background: linear-gradient(
-    105deg,
-    rgba(228, 200, 140, 0.26) 0%,
-    rgba(228, 200, 140, 0.08) 28%,
-    color-mix(in srgb, var(--bg-alt) 52%, transparent) 55%,
-    color-mix(in srgb, var(--bg-alt) 34%, transparent) 100%
-  ) !important;
+  background: linear-gradient(105deg,
+      rgba(228, 200, 140, 0.26) 0%,
+      rgba(228, 200, 140, 0.08) 28%,
+      color-mix(in srgb, var(--bg-alt) 52%, transparent) 55%,
+      color-mix(in srgb, var(--bg-alt) 34%, transparent) 100%) !important;
 }
 
 @media (hover: hover) {
@@ -5590,12 +5684,10 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
     transform: translateY(-2px) !important;
     border-color: color-mix(in srgb, var(--primary) 45%, var(--border)) !important;
     background-image:
-      linear-gradient(
-        105deg,
+      linear-gradient(105deg,
         rgba(166, 124, 61, 0.12) 0%,
         color-mix(in srgb, #fffdf8 28%, transparent) 52%,
-        color-mix(in srgb, #f4eee4 18%, transparent) 100%
-      ),
+        color-mix(in srgb, #f4eee4 18%, transparent) 100%),
       url("images/site/timeline-fondo.png") !important;
     background-position: center !important;
     background-size: cover !important;
@@ -5617,12 +5709,10 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
   [data-theme="dark"] .ambitos-page-main .ambitos-hover-card:hover {
     background-image:
-      linear-gradient(
-        105deg,
+      linear-gradient(105deg,
         rgba(228, 200, 140, 0.1) 0%,
         color-mix(in srgb, var(--bg-alt) 24%, transparent) 55%,
-        color-mix(in srgb, var(--bg-alt) 16%, transparent) 100%
-      ),
+        color-mix(in srgb, var(--bg-alt) 16%, transparent) 100%),
       url("images/site/timeline-fondo.png") !important;
   }
 }
@@ -5733,36 +5823,32 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
 /* Legibilidad global: títulos naranjas/dorados en tarjetas al hacer hover. */
 @media (hover: hover) {
-  :is(
-    .card,
+
+  :is(.card,
     .pm-read-panel,
     .museum-section-panel,
     .timeline-section-panel,
     .content-prose,
     .glossary-entry,
     main#main-content > .container > section,
-    main .section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose))
-  ):hover :is(h2, h3, h4, .h2, .h3, .h4, .h5, .museum-section-heading, .pm-heading-with-icon span, .accordion-button) {
+    main .section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose))):hover :is(h2, h3, h4, .h2, .h3, .h4, .h5, .museum-section-heading, .pm-heading-with-icon span, .accordion-button) {
     color: #8a4b12 !important;
     text-shadow:
       0 1px 0 rgba(255, 250, 240, 0.9),
       0 0 12px rgba(255, 245, 220, 0.55);
   }
 
-  [data-theme="dark"] :is(
-    .card,
+  [data-theme="dark"] :is(.card,
     .pm-read-panel,
     .museum-section-panel,
     .timeline-section-panel,
     .content-prose,
     .glossary-entry,
     main#main-content > .container > section,
-    main .section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose))
-  ):hover :is(h2, h3, h4, .h2, .h3, .h4, .h5, .museum-section-heading, .pm-heading-with-icon span, .accordion-button) {
+    main .section:not(.hero, .page-hero, .hero-simple) > .container:not(:has(.content-prose))):hover :is(h2, h3, h4, .h2, .h3, .h4, .h5, .museum-section-heading, .pm-heading-with-icon span, .accordion-button) {
     color: #ffd58a !important;
     text-shadow:
       0 1px 2px rgba(0, 0, 0, 0.85),
       0 0 14px rgba(166, 124, 61, 0.38);
   }
 }
-

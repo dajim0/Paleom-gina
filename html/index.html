@@ -32,13 +32,21 @@
 </head>
 
 <body>
-
+  <div class="index-video-intro-overlay" id="indexVideoIntroOverlay" aria-hidden="false">
+    <video id="indexIntroVideo" class="index-video-intro-player" autoplay muted playsinline preload="auto"
+      aria-label="Vídeo de introducción">
+      <source src="../images/321168_sin_fondo.webm" type="video/webm" />
+      <source src="../images/321168_tiny.mp4" type="video/mp4" />
+      Tu navegador no admite la reproducción de video.
+    </video>
+  </div>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm pm-topnav"
     data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
     <div class="container">
       <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2 pm-brand-lockup" href="index.html">
-        <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44" decoding="async" />
+        <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44"
+          decoding="async" />
         <span class="pm-brand-text">Paleomágina</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pmMainNav"
@@ -49,11 +57,12 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-nowrap pm-nav-scroll">
           <li class="nav-item"><a class="nav-link active" href="index.html" data-i18n="nav_home">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="sobre.html" data-i18n="nav_about">Paleomágina</a></li>
-          <li class="nav-item"><a class="nav-link" href="ambitos.html" data-i18n="nav_exhibits">Recorrido expositivo</a></li>
+          <li class="nav-item"><a class="nav-link" href="ambitos.html" data-i18n="nav_exhibits">Recorrido expositivo</a>
+          </li>
           <li class="nav-item"><a class="nav-link" href="recursos.html" data-i18n="nav_resources">Visita</a></li>
           <li class="nav-item"><a class="nav-link" href="glosario.html" data-i18n="nav_glossary">Glosario</a></li>
-          <li class="nav-item"><a class="nav-link" href="audiovisuales.html"
-              data-i18n="nav_audiovisuals">Vídeos</a></li>
+          <li class="nav-item"><a class="nav-link" href="audiovisuales.html" data-i18n="nav_audiovisuals">Vídeos</a>
+          </li>
         </ul>
         <div class="d-flex flex-nowrap align-items-center gap-2 ms-lg-2 pm-nav-controls">
           <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria"
@@ -86,7 +95,8 @@
         <div class="two-col content-split content-split--middle">
           <div class="content-prose">
             <h2 id="home-teaser-title" class="pm-heading-with-icon">
-              <img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
+              <img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async"
+                class="pm-inline-icon" />
               <span data-i18n="home_teaser_title">Introducción</span>
             </h2>
             <p class="section-intro mb-3" data-i18n="home_teaser_intro"></p>
@@ -106,28 +116,35 @@
     <section class="section section-alt time-showcase" id="time-showcase" aria-labelledby="time-showcase-title">
       <div class="container">
         <div class="pm-heading-with-icon mb-4">
-          <img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" />
+          <img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async"
+            class="pm-inline-icon" />
           <h2 id="time-showcase-title">Viaje visual por eras</h2>
         </div>
-        <p class="section-intro mb-4">Siente cómo el paisaje cambia a cada hora y descubre escenas de tiempo profundo que emergen en movimiento.</p>
+        <p class="section-intro mb-4">Siente cómo el paisaje cambia a cada hora y descubre escenas de tiempo profundo
+          que emergen en movimiento.</p>
         <div class="time-stage-grid">
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
-              <img src="../images/site/FOSILES.png" alt="Fósiles como rastro del tiempo profundo" width="1200" height="800" loading="lazy" decoding="async" />
+              <img src="../images/site/FOSILES.png" alt="Fósiles como rastro del tiempo profundo" width="1200"
+                height="800" loading="lazy" decoding="async" />
             </figure>
             <h3>Tierra primitiva</h3>
             <p>Desde mares tibios hasta rocas en formación: un viaje que cobra vida con texturas y brillo suave.</p>
           </article>
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
-              <img src="../images/site/HERRAMIENTAS PREHISTORICAS.png" alt="Herramientas prehistóricas vinculadas al poblamiento humano" width="1200" height="800" loading="lazy" decoding="async" />
+              <img src="../images/site/HERRAMIENTAS PREHISTORICAS.png"
+                alt="Herramientas prehistóricas vinculadas al poblamiento humano" width="1200" height="800"
+                loading="lazy" decoding="async" />
             </figure>
             <h3>Hombres y fósiles</h3>
             <p>Ritmos humanos y reliquias en movimiento, con efectos de luz que acompañan cada etapa.</p>
           </article>
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
-              <img src="../images/site/ciencia-tecnologia.png" alt="Ciencia y tecnología aplicadas a la interpretación del patrimonio" width="1200" height="800" loading="lazy" decoding="async" />
+              <img src="../images/site/ciencia-tecnologia.png"
+                alt="Ciencia y tecnología aplicadas a la interpretación del patrimonio" width="1200" height="800"
+                loading="lazy" decoding="async" />
             </figure>
             <h3>Presente y futuro</h3>
             <p>Un vistazo al Antropoceno en el que la naturaleza y la tecnología se cruzan en una escena dinámica.</p>
@@ -142,10 +159,14 @@
     <section class="section" id="contacto" aria-labelledby="home-contact-title">
       <div class="container two-col content-split content-split--middle">
         <div>
-          <h2 id="home-contact-title" class="pm-heading-with-icon"><img src="../images/site/icono-laboratorio.png" alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="footer_contact">Contacto</span></h2>
-          <p class="section-intro mb-3" data-i18n="contact_intro">Escribenos para organizar visitas escolares, actividades en grupo y colaboraciones cientificas.</p>
+          <h2 id="home-contact-title" class="pm-heading-with-icon"><img src="../images/site/icono-laboratorio.png"
+              alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span
+              data-i18n="footer_contact">Contacto</span></h2>
+          <p class="section-intro mb-3" data-i18n="contact_intro">Escribenos para organizar visitas escolares,
+            actividades en grupo y colaboraciones cientificas.</p>
           <ul class="list-unstyled mb-0 contact-details">
-            <li class="mb-2"><strong>Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></li>
+            <li class="mb-2"><strong>Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a>
+            </li>
             <li class="mb-2"><strong>Teléfono:</strong><br /><a href="tel:+34000000000">+34 000 000 000</a></li>
             <li class="mb-0"><strong>Ubicación:</strong><br /><span>Sierra Mágina, Jaén</span></li>
           </ul>
@@ -153,15 +174,9 @@
         <div class="card qr-card">
           <h3 class="h5" data-i18n="contact_quick_access">Acceso rapido</h3>
           <p class="mb-3" data-i18n="contact_qr_help">Escanea para abrir la pagina principal del proyecto.</p>
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://paleomagina.example/inicio"
-            data-i18n-alt="contact_qr_alt"
-            alt="Código QR para acceder al inicio de Paleomágina"
-            width="180"
-            height="180"
-            loading="lazy"
-            decoding="async"
-          />
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://paleomagina.example/inicio"
+            data-i18n-alt="contact_qr_alt" alt="Código QR para acceder al inicio de Paleomágina" width="180"
+            height="180" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
@@ -210,7 +225,3 @@
 
 
 </html>
-
-
-
-
