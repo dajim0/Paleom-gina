@@ -1,8 +1,8 @@
-﻿@import url("cinematic.css?v=4");
+@import url("cinematic.css?v=5");
 
 :root,
 [data-theme="light"] {
-  /* Modo dÃ­a: fondo claro, textura visible pero suavizada con velo claro (no parece modo oscuro) */
+  /* Modo día: fondo claro, textura visible pero suavizada con velo claro (no parece modo oscuro) */
   --bg: #f4eee4;
   --bg-alt: #ece3d4;
   --text: #1e1914;
@@ -26,10 +26,10 @@
   --footer-link-hover: #ffffff;
   color-scheme: light;
   --pm-page-texture: url("images/site/fondo-general.png");
-  /* Velo con color de tema (crema): mas % = textura mas discreta */
+  /* Velo con color de tema (crema): más % = textura más discreta */
   --pm-html-veil-top: 30%;
   --pm-html-veil-bottom: 24%;
-  /* Capa media: tinte blanco/crema sobre la foto â€” lee bien y no oscurece el modo dÃ­a */
+  /* Capa media: tinte blanco/crema sobre la foto, lee bien y no oscurece el modo día */
   --pm-texture-mid: #fffdf8;
   --pm-texture-scrim-top: 36%;
   --pm-texture-scrim-bottom: 46%;
@@ -71,7 +71,7 @@
   --footer-link: #f0d9a8;
   --footer-link-hover: #ffffff;
   color-scheme: dark;
-  /* Modo noche: mas contraste con el modo dÃ­a (fondo y velo mas marcados) */
+  /* Modo noche: más contraste con el modo día (fondo y velo más marcados) */
   --pm-html-veil-top: 44%;
   --pm-html-veil-bottom: 38%;
   --pm-texture-mid: #070605;
@@ -268,7 +268,7 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   min-height: 100%;
-  /* Textura + velo de tema + velo intermedio (--pm-texture-mid: claro de dÃ­a, casi negro de noche) */
+  /* Textura + velo de tema + velo intermedio (--pm-texture-mid: claro de día, casi negro de noche) */
   background-color: var(--bg);
   background-image:
     linear-gradient(
@@ -325,7 +325,7 @@ nav.pm-topnav,
   padding: 0.45rem 0.65rem;
 }
 
-/* PÃ¡gina actual en la barra superior (junto a idioma / modo oscuro) */
+/* Página actual en la barra superior (junto a idioma / modo oscuro) */
 .navbar.pm-topnav .navbar-nav .nav-link {
   border-radius: 999px;
   transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease,
@@ -385,7 +385,7 @@ nav.pm-topnav,
   border-color: rgba(255, 255, 255, 0.35);
 }
 
-/* Desktop: una sola lÃ­nea; la lista hace scroll horizontal si no cabe */
+/* Desktop: una sola línea; la lista hace scroll horizontal si no cabe */
 @media (min-width: 992px) {
   .pm-topnav > .container {
     display: flex;
@@ -841,7 +841,7 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
   transition: color 0.4s ease;
 }
 
-/* Hero inicio + cabeceras de secciÃ³n (misma altura y animaciÃ³n) */
+/* Hero inicio + cabeceras de sección (misma altura y animación) */
 .hero,
 .page-hero {
   position: relative;
@@ -1229,7 +1229,7 @@ body.time-night {
   align-items: center;
 }
 
-/* Iconos decorativos PNG (fondo transparente) junto a tÃ­tulos */
+/* Iconos decorativos PNG (fondo transparente) junto a títulos */
 .pm-heading-with-icon {
   display: flex;
   align-items: center;
@@ -1244,7 +1244,7 @@ body.time-night {
   flex-shrink: 0;
 }
 
-/* PÃ¡gina Sobre: contenido a ancho pleno + espacio para barra Ã­ndice inferior */
+/* Página Sobre: contenido a ancho pleno + espacio para barra índice inferior */
 .sobre-page-main {
   position: relative;
   padding-bottom: calc(4.15rem + env(safe-area-inset-bottom, 0px));
@@ -1274,7 +1274,7 @@ body.time-night {
   scroll-margin-bottom: 5rem;
 }
 
-/* Ãndice Sobre: barra fija abajo (siempre visible; no tapa el hero superior) */
+/* Índice Sobre: barra fija abajo (siempre visible; no tapa el hero superior) */
 .sobre-nav-float {
   position: fixed;
   left: 0;
@@ -1459,7 +1459,7 @@ body.time-night {
   }
 }
 
-/* Ãmbitos: acordeÃ³n del recorrido AANâ€“ATZ */
+/* Ámbitos: acordeón del recorrido AAN-ATZ */
 .pm-exhibit-route-root {
   margin-top: 0.35rem;
 }
@@ -1498,7 +1498,7 @@ body.time-night {
   background: color-mix(in srgb, var(--bg-alt) var(--pm-surface-band-pct), transparent);
 }
 
-/* Resalte naranja al pasar el cursor (solo hover, todas las pÃ¡ginas) */
+/* Resalte naranja al pasar el cursor (solo hover, todas las páginas) */
 @media (hover: hover) {
   .sobre-page-main .section,
   main#main-content > .container > section,
@@ -2333,7 +2333,7 @@ figcaption {
   background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
 }
 
-/* --- RecreaciÃ³n interactiva del museo (planta + panel) --- */
+/* --- Recreación interactiva del museo (planta + panel) --- */
 .museum-section-wrap {
   position: relative;
 }
@@ -2426,7 +2426,7 @@ figcaption {
   color: var(--footer-link-hover);
 }
 
-/* Footer dentro de <main> (p. ej. index sin </main>): mismos colores que el resto de pÃ¡ginas */
+/* Footer dentro de <main> (p. ej. index sin </main>): mismos colores que el resto de páginas */
 main .site-footer a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-brand):not(.filter-btn) {
   color: var(--footer-link);
 }
@@ -2556,14 +2556,14 @@ button:focus-visible {
    Estilos de accesibilidad mejorada (WCAG 2.1 AA)
    ============================================ */
 
-/* Focus visible mejorado para navegaciÃ³n por teclado */
+/* Focus visible mejorado para navegación por teclado */
 :focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Tema explÃ­cito vÃ­a [data-theme]; no forzar :root con prefers-color-scheme (chocaba con modo claro) */
+/* Tema explícito vía [data-theme]; no forzar :root con prefers-color-scheme (chocaba con modo claro) */
 
 /* Reducir movimiento para usuarios sensibles */
 @media (prefers-reduced-motion: reduce) {
@@ -2577,7 +2577,7 @@ button:focus-visible {
   }
 }
 
-/* Estilos para tÃ©rminos del glosario */
+/* Estilos para términos del glosario */
 .glossary-list {
   padding: 0;
   margin: 2rem 0;
@@ -2610,7 +2610,7 @@ button:focus-visible {
 }
 
 .glossary-group__summary::after {
-  content: "▾";
+  content: "?";
   color: var(--primary);
   transition: transform 0.2s ease;
 }
@@ -2663,7 +2663,7 @@ button:focus-visible {
 }
 
 .glossary-entry summary::after {
-  content: "▾";
+  content: "?";
   float: right;
   transition: transform 0.2s ease;
 }
@@ -2710,7 +2710,7 @@ button:focus-visible {
   color: var(--text);
 }
 
-/* Estilos para bÃºsqueda */
+/* Estilos para búsqueda */
 .glossary-search {
   margin: 2rem 0;
 }
@@ -2811,7 +2811,7 @@ button:focus-visible {
 }
 
 .glossary-guide-card summary::after {
-  content: "▾";
+  content: "?";
   float: right;
   color: var(--primary);
   transition: transform 0.2s ease;
@@ -2860,7 +2860,7 @@ button:focus-visible {
   text-decoration: underline;
 }
 
-/* SecciÃ³n hero simplificada (sin banda crema: mismo fondo general que el resto) */
+/* Sección hero simplificada (sin banda crema: mismo fondo general que el resto) */
 .hero-simple {
   padding: 4rem 0;
   text-align: center;
@@ -3598,7 +3598,7 @@ h3 {
   line-height: 1.3;
 }
 
-/* Objetivos tÃ¡ctiles sin convertir todos los enlaces en bloques de 44px */
+/* Objetivos táctiles sin convertir todos los enlaces en bloques de 44px */
 .navbar .nav-link,
 .pm-topnav .navbar-brand {
   display: inline-flex;
@@ -3642,7 +3642,7 @@ h3 {
   text-shadow: 0 2px 8px rgba(190, 79, 46, 0.15);
 }
 
-/* NavegaciÃ³n mejorada con underline animation */
+/* Navegación mejorada con underline animation */
 .nav-list a {
   position: relative;
   padding-bottom: 4px;
@@ -3702,7 +3702,7 @@ h3 {
   box-shadow: 0 8px 25px rgba(186, 145, 91, 0.4);
 }
 
-/* Tarjetas con efecto de elevaciÃ³n */
+/* Tarjetas con efecto de elevación */
 .card {
   position: relative;
   overflow: hidden;
@@ -3812,7 +3812,7 @@ textarea:focus-visible {
   color: var(--muted);
 }
 
-/* CertificaciÃ³n badges */
+/* Certificación badges */
 .cert-badge {
   display: inline-flex;
   align-items: center;
@@ -3827,7 +3827,7 @@ textarea:focus-visible {
 }
 
 .cert-badge::before {
-  content: 'âœ“';
+  content: "\2713";
   font-weight: 700;
   color: var(--accent);
 }
@@ -3862,7 +3862,7 @@ textarea:focus-visible {
   animation: fadeInUp 0.5s ease-out;
 }
 
-/* Hover effect para imÃ¡genes */
+/* Hover effect para imágenes */
 img {
   transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -4354,7 +4354,7 @@ img:hover {
   -webkit-backdrop-filter: saturate(1.08) blur(12px);
 }
 
-/* PÃ¡ginas legales / texto Ãºnico en container */
+/* Páginas legales / texto único en container */
 main#main-content > .container.content-prose {
   max-width: min(48rem, 100%);
   margin-inline: auto;
@@ -4378,7 +4378,7 @@ main section:not(.hero, .hero-simple) > .container:not(:has(.content-prose)):not
   -webkit-backdrop-filter: saturate(1.06) blur(10px);
 }
 
-/* Ãmbitos: main > .container > section (sin .container interno) */
+/* Ámbitos: main > .container > section (sin .container interno) */
 main#main-content > .container > section:not(.hero-simple):not(.museum-section-wrap):not(:has(> .timeline-section-panel)) {
   padding: var(--pm-read-panel-padding-block) var(--pm-read-panel-padding-inline);
   border-radius: var(--pm-read-panel-radius);
@@ -4390,7 +4390,7 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   transition: background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-/* Ãmbitos: resalte hover (despuÃ©s del panel base para ganar en cascada) */
+/* Ámbitos: resalte hover (después del panel base para ganar en cascada) */
 @media (hover: hover) {
   main#main-content > .container > section:not(.museum-section-wrap):not(:has(> .timeline-section-panel)):hover {
     box-shadow: inset 6px 0 0 var(--primary), var(--pm-read-panel-shadow);
@@ -4488,9 +4488,9 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   }
 }
 
-/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
+/* ------------------------------------------------------------------------ */
 /* MUSEUM 3D SCENES - ANIMATED 3D VISUALIZATIONS */
-/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
+/* ------------------------------------------------------------------------ */
 
 .obj3d {
   position: relative;
@@ -4839,9 +4839,9 @@ main#main-content > .container > section:not(.hero-simple):not(.museum-section-w
   cursor: grabbing;
 }
 
-/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
+/* ------------------------------------------------------------------------ */
 /* ANIMATIONS FOR 3D SCENES */
-/* â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” */
+/* ------------------------------------------------------------------------ */
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -5258,7 +5258,7 @@ body > nav.navbar.pm-topnav .navbar-brand:focus-visible {
   background: transparent !important;
 }
 
-/* Ámbitos: como Inicio — sin hover no se ve timeline-fondo; al pasar el cursor sí. */
+/* Ámbitos: como Inicio  sin hover no se ve timeline-fondo; al pasar el cursor sí. */
 .ambitos-page-main :is(
   .museum-section-panel,
   .timeline-section-panel

@@ -1102,6 +1102,10 @@ html.pm-cinema .animate-on-scroll.is-visible {
   transform: translateY(-2px);
 }
 
+.pm-narration-fab.pm-audio-fab--in-hero {
+  bottom: 5.65rem;
+}
+
 /* Fallback: inferior izquierda (páginas sin hero) */
 .pm-audio-fab.pm-audio-fab--fallback {
   position: fixed;
@@ -1141,10 +1145,18 @@ html.pm-cinema .animate-on-scroll.is-visible {
   text-shadow: 0 0 10px color-mix(in srgb, var(--primary) 25%, transparent);
 }
 
+.pm-narration-fab.pm-audio-fab--fallback {
+  bottom: 5rem;
+}
+
 @media (max-width: 767px) {
   .pm-audio-fab.pm-audio-fab--in-hero {
     bottom: 1.35rem;
     left: max(0.85rem, env(safe-area-inset-left, 0px) + 0.35rem);
+  }
+
+  .pm-narration-fab.pm-audio-fab--in-hero {
+    bottom: 4.45rem;
   }
 
   .pm-audio-fab__inner {
@@ -1165,10 +1177,14 @@ html.pm-cinema .animate-on-scroll.is-visible {
     bottom: 1.25rem;
     left: 0.65rem;
   }
+
+  .pm-narration-fab.pm-audio-fab--fallback {
+    bottom: 4.25rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pm-audio-fab {
+  .pm-audio-fab:not(.pm-narration-fab) {
     display: none !important;
   }
 }

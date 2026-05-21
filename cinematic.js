@@ -757,12 +757,22 @@ const ICON_SOUND_OFF =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
   const ICON_SOUND_ON =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.2a4 4 0 0 1 0 7.6"/><path d="M18.2 5.8a7.5 7.5 0 0 1 0 12.4"/></svg>';
+  const ICON_NARRATION_OFF =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8"/><path d="M8 11h6"/></svg>';
+  const ICON_NARRATION_ON =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h5"/><path d="M16 8.5a3 3 0 0 1 0 5"/><path d="M18.4 6.2a6.5 6.5 0 0 1 0 9.6"/></svg>';
 
   let ctx = null;
   let master = null;
   let nodes = [];
   let playing = false;
   let fab = null;
+  let narrationFab = null;
+  let narrationActive = false;
+  let narrationQueue = [];
+  let narrationIndex = 0;
+  let ambientDuckedForNarration = false;
+  let preferredNarrationVoice = null;
 
   function t(key, fallback) {
     return window.paleomaginaT?.(key) ?? fallback;
@@ -983,35 +993,273 @@ const ICON_SOUND_OFF =
     fab.classList.toggle("pm-audio-fab--active", playing);
   }
 
+  function supportsNarration() {
+    return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  }
+
+  function getNarrationLanguage() {
+    const lang = document.documentElement.lang || "es";
+    return lang.toLowerCase().startsWith("en") ? "en-GB" : "es-ES";
+  }
+
+  function voiceMatchesLanguage(voice, lang) {
+    const voiceLang = (voice?.lang || "").toLowerCase();
+    const wanted = lang.toLowerCase();
+    const wantedBase = wanted.split("-")[0];
+    return voiceLang === wanted || voiceLang.startsWith(`${wantedBase}-`);
+  }
+
+  function scoreNarrationVoice(voice, lang) {
+    const name = (voice?.name || "").toLowerCase();
+    const voiceLang = (voice?.lang || "").toLowerCase();
+    let score = 0;
+
+    if (voiceLang === lang.toLowerCase()) score += 80;
+    else if (voiceMatchesLanguage(voice, lang)) score += 55;
+    if (voice?.localService) score += 4;
+
+    [
+      ["natural", 45],
+      ["neural", 45],
+      ["online", 28],
+      ["premium", 24],
+      ["google", 22],
+      ["microsoft", 18],
+      ["helena", 16],
+      ["elvira", 16],
+      ["alvaro", 14],
+      ["pablo", 12],
+      ["sonia", 16],
+      ["libby", 14],
+      ["jenny", 14],
+      ["aria", 14],
+      ["guy", 10],
+      ["desktop", -8],
+      ["compact", -10],
+    ].forEach(([needle, value]) => {
+      if (name.includes(needle)) score += value;
+    });
+
+    return score;
+  }
+
+  function choosePreferredNarrationVoice() {
+    if (!supportsNarration()) return null;
+    const lang = getNarrationLanguage();
+    const voices = window.speechSynthesis.getVoices?.() || [];
+    const candidates = voices.filter((voice) => voiceMatchesLanguage(voice, lang));
+    const pool = candidates.length ? candidates : voices;
+    preferredNarrationVoice = pool
+      .slice()
+      .sort((a, b) => scoreNarrationVoice(b, lang) - scoreNarrationVoice(a, lang))[0] || null;
+    return preferredNarrationVoice;
+  }
+
+  function getPreferredNarrationVoice() {
+    if (!preferredNarrationVoice || !voiceMatchesLanguage(preferredNarrationVoice, getNarrationLanguage())) {
+      return choosePreferredNarrationVoice();
+    }
+    return preferredNarrationVoice;
+  }
+
+  function isVisibleTextNode(el) {
+    if (!el || el.closest("[aria-hidden='true'], [hidden], nav, footer, script, style, noscript")) return false;
+    const style = window.getComputedStyle(el);
+    return style.display !== "none" && style.visibility !== "hidden" && Number(style.opacity || 1) !== 0;
+  }
+
+  function normalizeNarrationText(text) {
+    return (text || "")
+      .replace(/\s+/g, " ")
+      .replace(/\s+([,.;:!?])/g, "$1")
+      .trim();
+  }
+
+  function collectNarrationText() {
+    const main = document.getElementById("main-content") || document.querySelector("main");
+    if (!main) return "";
+
+    const selector = [
+      "h1",
+      "h2",
+      "h3",
+      "p",
+      "li",
+      "summary",
+      ".section-lead",
+      ".hero-text",
+      ".kicker",
+      ".card-title",
+      ".av-video-title"
+    ].join(",");
+
+    const seen = new Set();
+    const parts = [];
+    main.querySelectorAll(selector).forEach((el) => {
+      if (!isVisibleTextNode(el)) return;
+      if (el.closest("button, .btn, .video-overlay, .av-active-filters")) return;
+      const text = normalizeNarrationText(el.textContent);
+      if (!text || text.length < 3 || seen.has(text)) return;
+      seen.add(text);
+      parts.push(text);
+    });
+
+    return parts.join(". ");
+  }
+
+  function splitNarrationText(text) {
+    const clean = normalizeNarrationText(text);
+    if (!clean) return [];
+
+    const sentences = clean.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [clean];
+    const chunks = [];
+    let current = "";
+    sentences.forEach((sentence) => {
+      const next = normalizeNarrationText(sentence);
+      if (!next) return;
+      if ((current + " " + next).trim().length > 220 && current) {
+        chunks.push(current);
+        current = next;
+      } else {
+        current = `${current} ${next}`.trim();
+      }
+    });
+    if (current) chunks.push(current);
+    return chunks;
+  }
+
+  function duckAmbientForNarration() {
+    if (!playing || !ctx || !master) return;
+    ambientDuckedForNarration = true;
+    fadeTo(0.004, 0.8);
+  }
+
+  function restoreAmbientAfterNarration() {
+    if (!ambientDuckedForNarration) return;
+    ambientDuckedForNarration = false;
+    if (playing && ctx && master && !document.hidden) {
+      fadeTo(TARGET_VOLUME, 1.2);
+    }
+  }
+
+  function updateNarrationFab() {
+    if (!narrationFab) return;
+    const available = supportsNarration();
+    const ariaLabel = !available
+      ? t("narration_unavailable", "La narración por voz no está disponible en este navegador")
+      : narrationActive
+        ? t("narration_toggle_off", "Detener relato de esta página")
+        : t("narration_toggle_on", "Escuchar relato de esta página");
+    const shortLabel = t("narration_fab_label", "Relato");
+    narrationFab.innerHTML = `
+      <span class="pm-audio-fab__inner">
+        <span class="pm-audio-fab__icon">${narrationActive ? ICON_NARRATION_ON : ICON_NARRATION_OFF}</span>
+        <span class="pm-audio-fab__label">${shortLabel}</span>
+      </span>
+      <span class="visually-hidden">${ariaLabel}</span>
+    `;
+    narrationFab.disabled = !available;
+    narrationFab.setAttribute("aria-label", ariaLabel);
+    narrationFab.title = ariaLabel;
+    narrationFab.setAttribute("aria-pressed", narrationActive ? "true" : "false");
+    narrationFab.classList.toggle("pm-audio-fab--active", narrationActive);
+  }
+
+  function finishNarration() {
+    narrationActive = false;
+    narrationQueue = [];
+    narrationIndex = 0;
+    restoreAmbientAfterNarration();
+    updateNarrationFab();
+  }
+
+  function speakNarrationChunk() {
+    if (!narrationActive || narrationIndex >= narrationQueue.length) {
+      finishNarration();
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(narrationQueue[narrationIndex]);
+    utterance.lang = getNarrationLanguage();
+    utterance.voice = getPreferredNarrationVoice();
+    utterance.rate = 0.9;
+    utterance.pitch = 0.96;
+    utterance.volume = 1;
+    utterance.onend = () => {
+      narrationIndex += 1;
+      speakNarrationChunk();
+    };
+    utterance.onerror = finishNarration;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function startNarration() {
+    if (!supportsNarration()) return;
+    window.speechSynthesis.cancel();
+    narrationQueue = splitNarrationText(collectNarrationText());
+    if (!narrationQueue.length) return;
+    choosePreferredNarrationVoice();
+    narrationIndex = 0;
+    narrationActive = true;
+    duckAmbientForNarration();
+    updateNarrationFab();
+    speakNarrationChunk();
+  }
+
+  function stopNarration() {
+    if (supportsNarration()) window.speechSynthesis.cancel();
+    finishNarration();
+  }
+
   function findPageHero() {
     return document.querySelector(".hero, .page-hero, .hero-simple");
   }
 
   function relocateFab() {
-    if (!fab) return;
+    if (!fab && !narrationFab) return;
 
     document.querySelectorAll(".pm-audio-fab-host").forEach((host) => {
       host.classList.remove("pm-audio-fab-host");
     });
-    fab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+    [fab, narrationFab].forEach((button) => {
+      button?.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+    });
 
     const hero = findPageHero();
     if (hero) {
       hero.classList.add("pm-audio-fab-host");
-      fab.classList.add("pm-audio-fab--in-hero");
-      hero.appendChild(fab);
+      [fab, narrationFab].forEach((button) => {
+        if (!button) return;
+        button.classList.add("pm-audio-fab--in-hero");
+        hero.appendChild(button);
+      });
     } else {
-      fab.classList.add("pm-audio-fab--fallback");
-      document.body.appendChild(fab);
+      [fab, narrationFab].forEach((button) => {
+        if (!button) return;
+        button.classList.add("pm-audio-fab--fallback");
+        document.body.appendChild(button);
+      });
     }
 
-    fab.classList.add("pm-audio-fab--mounted");
+    fab?.classList.add("pm-audio-fab--mounted");
+    narrationFab?.classList.add("pm-audio-fab--mounted");
     updateFab();
+    updateNarrationFab();
   }
 
   function mountFab() {
-    if (document.querySelector(".pm-audio-fab")) {
-      fab = document.querySelector(".pm-audio-fab");
+    if (document.querySelector(".pm-audio-fab:not(.pm-narration-fab)")) {
+      fab = document.querySelector(".pm-audio-fab:not(.pm-narration-fab)");
+      narrationFab = document.querySelector(".pm-narration-fab");
+      if (!narrationFab) {
+        narrationFab = document.createElement("button");
+        narrationFab.type = "button";
+        narrationFab.className = "pm-audio-fab pm-narration-fab";
+        narrationFab.addEventListener("click", () => {
+          if (narrationActive) stopNarration();
+          else startNarration();
+        });
+      }
       relocateFab();
       return;
     }
@@ -1024,19 +1272,21 @@ const ICON_SOUND_OFF =
       else startAmbient();
     });
 
-    const hero = findPageHero();
-    if (hero) {
-      hero.classList.add("pm-audio-fab-host");
-      fab.classList.add("pm-audio-fab--in-hero");
-      hero.appendChild(fab);
-    } else {
-      fab.classList.add("pm-audio-fab--fallback");
-      document.body.appendChild(fab);
-    }
+    narrationFab = document.createElement("button");
+    narrationFab.type = "button";
+    narrationFab.className = "pm-audio-fab pm-narration-fab";
+    narrationFab.addEventListener("click", () => {
+      if (narrationActive) stopNarration();
+      else startNarration();
+    });
+
+    relocateFab();
 
     updateFab();
+    updateNarrationFab();
     window.requestAnimationFrame(() => {
       fab?.classList.add("pm-audio-fab--mounted");
+      narrationFab?.classList.add("pm-audio-fab--mounted");
     });
   }
 
@@ -1085,9 +1335,8 @@ const ICON_SOUND_OFF =
   }
 
   function initAudio() {
-    if (REDUCED) return;
     mountFab();
-    restoreAmbientFromStorage();
+    if (!REDUCED) restoreAmbientFromStorage();
     window.addEventListener("pageshow", (event) => {
       if (event.persisted && isAudioEnabledInStorage() && !playing) {
         restoreAmbientFromStorage();
@@ -1095,8 +1344,22 @@ const ICON_SOUND_OFF =
     });
     document.addEventListener("visibilitychange", onVisibility);
     document.addEventListener("pm:navigation", relocateFab);
+    document.addEventListener("pm:navigation", stopNarration);
+    window.addEventListener("beforeunload", stopNarration);
+    if (supportsNarration()) {
+      choosePreferredNarrationVoice();
+      window.speechSynthesis.onvoiceschanged = () => {
+        choosePreferredNarrationVoice();
+        updateNarrationFab();
+      };
+    }
     document.querySelectorAll(".lang-btn").forEach((btn) => {
-      btn.addEventListener("click", () => window.setTimeout(updateFab, 50));
+      btn.addEventListener("click", () => window.setTimeout(() => {
+        stopNarration();
+        choosePreferredNarrationVoice();
+        updateFab();
+        updateNarrationFab();
+      }, 50));
     });
   }
 window.PaleomaginaAudio = {
@@ -1104,6 +1367,12 @@ window.PaleomaginaAudio = {
     stop: stopAmbient,
     isPlaying: () => playing,
     isEnabled: isAudioEnabledInStorage,
+    relocateFab,
+  };
+  window.PaleomaginaNarration = {
+    start: startNarration,
+    stop: stopNarration,
+    isPlaying: () => narrationActive,
     relocateFab,
   };
 
