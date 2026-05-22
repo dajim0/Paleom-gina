@@ -7,6 +7,7 @@ const defaultLang = "es";
 const langStorageKey = "paleomagina-lang";
 let currentLang = defaultLang;
 const themeStorageKey = "paleomagina-theme";
+const themeSourceStorageKey = "paleomagina-theme-source";
 let currentTheme = "light";
 
 function normalizeLang(lang) {
@@ -685,10 +686,15 @@ function updateThemeButtonLabel() {
   });
 }
 
-function applyTheme(theme) {
+function applyTheme(theme, { persist = true } = {}) {
   currentTheme = theme;
   document.documentElement.setAttribute("data-theme", theme);
-  try { localStorage.setItem(themeStorageKey, theme); } catch (_) { }
+  if (persist) {
+    try {
+      localStorage.setItem(themeStorageKey, theme);
+      localStorage.setItem(themeSourceStorageKey, "manual");
+    } catch (_) { }
+  }
   updateThemeButtonLabel();
 }
 
@@ -861,6 +867,7 @@ function enablePageTransitions() {
     const link = e.target.closest("a[href]");
     if (!isNavigableInternalLink(link)) return;
     e.preventDefault();
+    closeTopNavMenu();
     document.body.classList.add("page-leaving");
 
     if (shouldUseSoftNavigation()) {
@@ -903,6 +910,34 @@ function initMainNavActiveState() {
       if (match) link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     } catch { }
+  });
+}
+
+function closeTopNavMenu() {
+  const nav = document.querySelector(".pm-topnav");
+  const menu = document.getElementById("pmMainNav");
+  const toggler = nav?.querySelector(".navbar-toggler");
+  if (!menu || !menu.classList.contains("show")) return;
+
+  try {
+    const collapse = window.bootstrap?.Collapse?.getOrCreateInstance(menu, { toggle: false });
+    collapse?.hide();
+  } catch (_) {
+    menu.classList.remove("show");
+  }
+
+  toggler?.classList.add("collapsed");
+  toggler?.setAttribute("aria-expanded", "false");
+}
+
+function initMobileMenuAutoClose() {
+  if (document.documentElement.dataset.pmMenuAutoClose === "1") return;
+  document.documentElement.dataset.pmMenuAutoClose = "1";
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest(".pm-topnav .nav-link, .pm-topnav .navbar-brand");
+    if (!link) return;
+    closeTopNavMenu();
   });
 }
 
@@ -1188,13 +1223,18 @@ function initIndexIntroVideo() {
   const enableIntroSound = () => {
     if (hidden || introSoundEnabled) return;
     introSoundEnabled = true;
+    video.muted = true;
     soundButton?.classList.add("index-video-intro-sound--active");
     soundButton?.setAttribute("aria-pressed", "true");
     if (soundButton) soundButton.textContent = paleomaginaT("intro_sound_active") || "Sonido activado";
+    video.play().catch(() => {
+      overlay.classList.add("index-video-intro-overlay--paused");
+    });
     scheduleIntroAudio();
   };
 
-  const hideIntro = () => {
+  const hideIntro = (event) => {
+    event?.preventDefault?.();
     if (hidden) return;
     hidden = true;
     if (doNotShowInput?.checked) setSkipIntroPreference(true);
@@ -1225,7 +1265,9 @@ function initIndexIntroVideo() {
   video.addEventListener("error", hideIntro, { once: true });
   soundButton?.setAttribute("aria-pressed", "false");
   soundButton?.addEventListener("click", enableIntroSound);
+  soundButton?.addEventListener("pointerup", enableIntroSound);
   skipButton?.addEventListener("click", hideIntro);
+  skipButton?.addEventListener("pointerup", hideIntro);
   doNotShowInput?.addEventListener("change", () => {
     if (!doNotShowInput.checked) setSkipIntroPreference(false);
   });
@@ -1251,24 +1293,26 @@ document.querySelectorAll(".lang-btn").forEach((btn) => {
 });
 
 document.querySelectorAll(".theme-toggle").forEach((btn) => {
-  btn.addEventListener("click", () => applyTheme(currentTheme === "dark" ? "light" : "dark"));
+  btn.addEventListener("click", () => applyTheme(currentTheme === "dark" ? "light" : "dark", { persist: true }));
 });
 
 // ── Init tema ────────────────────────────────────────────────────────
 let initialTheme = "light";
 try {
   const saved = localStorage.getItem(themeStorageKey);
-  if (saved === "light" || saved === "dark") { initialTheme = saved; }
+  const savedSource = localStorage.getItem(themeSourceStorageKey);
+  if (savedSource === "manual" && (saved === "light" || saved === "dark")) { initialTheme = saved; }
   else if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) { initialTheme = "dark"; }
 } catch {
   if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) initialTheme = "dark";
 }
 
-applyTheme(initialTheme);
+applyTheme(initialTheme, { persist: false });
 applyLanguage(getInitialLang());
 applyGlossaryTermFromUrl();
 enablePageTransitions();
 initMainNavActiveState();
+initMobileMenuAutoClose();
 keepTopNavFixed();
 initTimeOfDayEffects();
 initScrollReveal();
@@ -1302,7 +1346,12 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=24");
+  const load = () => loadPaleomaginaModule("cinematic.js?v=26");
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(load, { timeout: 900 });
+  } else {
+    window.setTimeout(load, 120);
+  }
 }
 
 /* ============================================

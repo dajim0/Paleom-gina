@@ -6199,6 +6199,11 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   object-fit: cover;
 }
 
+.territory-map-image:hover {
+  transform: none;
+  filter: none;
+}
+
 .territory-map-markers {
   position: absolute;
   inset: 0;
@@ -6211,56 +6216,37 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   transform: translate(-50%, -50%);
   width: var(--marker-size, 10%);
   aspect-ratio: 1;
-  border: 2px solid rgba(255, 248, 238, 0.92);
+  border: 1px solid rgba(255, 238, 200, 0.78);
   border-radius: 999px;
-  background: rgba(166, 124, 61, 0.16);
+  background: rgba(92, 45, 14, 0.04);
   box-shadow:
-    inset 0 0 0 1px rgba(92, 45, 14, 0.42),
-    0 8px 18px rgba(0, 0, 0, 0.24);
+    inset 0 0 0 1.5px rgba(92, 45, 14, 0.42),
+    inset 0 0 10px rgba(255, 240, 210, 0.16),
+    0 2px 8px rgba(0, 0, 0, 0.16);
   pointer-events: auto;
   cursor: pointer;
   line-height: 1;
   padding: 0;
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .territory-map-marker::before {
-  content: "";
-  position: absolute;
-  inset: -0.55rem;
-  border: 2px solid rgba(243, 196, 107, 0);
-  border-radius: inherit;
-  opacity: 0;
-  transform: scale(0.72);
-  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  content: none;
 }
 
 .territory-map-marker.is-active,
 .territory-map-marker:hover {
-  transform: translate(-50%, -50%) scale(1.08);
-  border-color: #f3c46b;
-  background: rgba(166, 124, 61, 0.28);
+  transform: translate(-50%, -50%);
+  border-color: rgba(245, 202, 122, 0.9);
+  background: rgba(166, 124, 61, 0.1);
   box-shadow:
-    inset 0 0 0 1px rgba(92, 45, 14, 0.42),
-    0 0 0 3px rgba(243, 196, 107, 0.28),
-    0 10px 24px rgba(0, 0, 0, 0.34);
+    inset 0 0 0 2px rgba(92, 45, 14, 0.48),
+    inset 0 0 12px rgba(255, 236, 190, 0.22),
+    0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .territory-map-marker.is-active::before {
-  opacity: 1;
-  transform: scale(1);
-  border-color: rgba(243, 196, 107, 0.82);
-  animation: territory-marker-pulse 1.35s ease-in-out infinite;
-}
-
-@keyframes territory-marker-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(243, 196, 107, 0.34);
-  }
-  50% {
-    box-shadow: 0 0 0 0.45rem rgba(243, 196, 107, 0.05);
-  }
+  content: none;
 }
 
 .territory-map-list {
@@ -6549,5 +6535,783 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
   .pm-narration-fab.pm-audio-fab--in-hero {
     bottom: auto;
+  }
+}
+
+/* Ajustes globales de fluidez y móvil */
+@media (max-width: 991.98px) {
+  .pm-topnav .navbar-collapse {
+    max-height: calc(100dvh - 4.25rem);
+    overflow-y: auto;
+    padding-top: 0.65rem;
+  }
+
+  .pm-topnav .navbar-nav.pm-nav-scroll {
+    flex-wrap: wrap !important;
+    overflow: visible;
+    gap: 0.35rem;
+  }
+
+  .pm-topnav .navbar-nav.pm-nav-scroll .nav-link {
+    display: block;
+    width: 100%;
+    white-space: normal;
+  }
+
+  .pm-topnav .pm-nav-controls {
+    flex-wrap: wrap !important;
+    justify-content: flex-start;
+    padding: 0.65rem 0 0.25rem;
+  }
+
+  .schedule-hero,
+  .ticket-layout,
+  .ticket-main-card,
+  .content-split,
+  .two-col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body::before,
+  .pm-atmosphere,
+  .hero::before,
+  .page-hero::before,
+  .time-showcase::after,
+  .index-video-intro-shell::before,
+  .index-video-intro-shell::after {
+    animation: none !important;
+  }
+
+  .section {
+    padding: 2.85rem 0;
+  }
+
+  .hero,
+  .page-hero,
+  .hero-simple {
+    min-height: auto;
+    padding: 6.25rem 0 5.75rem;
+  }
+
+  .hero-content,
+  .page-hero .hero-content,
+  .hero-simple > .container {
+    text-align: left;
+  }
+
+  .hero h1,
+  .page-hero h1,
+  .hero-simple h1 {
+    font-size: clamp(2rem, 11vw, 3.1rem);
+    line-height: 1.02;
+  }
+
+  .hero-text,
+  .section-lead,
+  .section-intro {
+    font-size: 1rem;
+  }
+
+  .time-stage-grid,
+  .resource-grid,
+  .objectives-grid,
+  .av-route-grid,
+  .av-library-grid,
+  .visit-highlight-grid,
+  .visit-journey-grid,
+  .glossary-guide-sections {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pm-read-panel,
+  .card,
+  .time-stage-card,
+  .territory-map-panel {
+    border-radius: 1rem;
+  }
+
+  .table-responsive,
+  .ticket-cart__items,
+  .glossary-list,
+  .territory-map-canvas {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .territory-map-canvas {
+    border-radius: 1rem;
+  }
+
+  .territory-map-marker {
+    border-width: 1px;
+    box-shadow:
+      inset 0 0 0 1.5px rgba(92, 45, 14, 0.4),
+      inset 0 0 8px rgba(255, 240, 210, 0.14),
+      0 2px 6px rgba(0, 0, 0, 0.14);
+  }
+
+  .territory-map-marker::before,
+  .territory-map-marker.is-active::before {
+    animation: none !important;
+    inset: -0.28rem;
+  }
+
+  .territory-map-card {
+    grid-template-columns: 2.15rem 1fr;
+    padding: 0.75rem;
+  }
+
+  .territory-map-card__icon {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+
+  .pm-hero-audio-controls {
+    gap: 0.55rem;
+    align-items: flex-start;
+  }
+
+  .pm-audio-fab {
+    min-width: 0;
+    min-height: 2.55rem;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.82rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+  }
+
+  .pm-audio-fab__icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .pm-audio-fab__inner {
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pm-navbar-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pm-brand-text {
+    font-size: 1rem;
+  }
+
+  .index-video-intro-copy {
+    bottom: 9.25rem;
+  }
+
+  .index-video-intro-copy strong {
+    max-width: 11ch;
+    font-size: clamp(1.9rem, 12vw, 3.1rem);
+  }
+
+  .index-video-intro-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .index-video-intro-skip,
+  .index-video-intro-sound {
+    width: 100%;
+  }
+
+  .pm-hero-audio-controls {
+    bottom: 0.75rem;
+  }
+}
+
+/* Pulido visual móvil: textos largos y botones siempre visibles */
+@media (max-width: 767.98px) {
+  main :where(h1, h2, h3, h4, h5, h6),
+  .hero-text,
+  .section-lead,
+  .section-intro,
+  .content-prose p,
+  .card p,
+  .glossary-definition,
+  .av-library-card__text,
+  .av-route-card__text,
+  .av-playlist-btn__text,
+  .territory-map-card__body,
+  .territory-map-panel {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  main :where(h1, h2, h3, .h1, .h2, .h3),
+  .hero-text,
+  .section-lead,
+  .section-intro {
+    text-wrap: balance;
+  }
+
+  main :where(p, li, dd),
+  .glossary-definition,
+  .av-library-card__text,
+  .av-route-card__text,
+  .av-playlist-btn__text {
+    text-wrap: pretty;
+    line-height: 1.62;
+  }
+
+  main .btn:not(.btn-close),
+  main .filter-btn,
+  main .av-playlist-btn,
+  main .video-launch-button,
+  main .museum-legend-item,
+  main .territory-map-card {
+    width: 100%;
+    max-width: 100%;
+    min-height: 2.75rem;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main .btn:not(.btn-close),
+  main .filter-btn,
+  main .video-launch-button {
+    display: inline-flex;
+  }
+
+  .btn-group,
+  .timeline,
+  .ticket-actions,
+  .av-filters,
+  .av-playlists,
+  .dino-stage-actions,
+  .museum-map-controls,
+  .glossary-guide-links,
+  .pm-scope-crosslinks,
+  .teacher-sheet-main ul:has(.btn) {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    width: 100%;
+  }
+
+  .ticket-actions .btn,
+  .visit-resource-card .btn,
+  .resources-more-card .btn,
+  .teacher-sheet-main .btn,
+  .time-showcase-cta .btn,
+  .home-visit-journey-card .btn,
+  .av-library-toggle {
+    width: 100%;
+  }
+
+  .ticket-cart__qty {
+    justify-content: flex-end;
+  }
+
+  .ticket-cart__qty button,
+  .av-filter-chip__clear,
+  .btn-close {
+    width: auto;
+    min-width: 2.25rem;
+  }
+
+  .av-filter-chip {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+
+  .av-active-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .pm-hero-audio-controls {
+    position: static;
+    margin-top: 1.35rem;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .pm-hero-audio-controls .pm-audio-fab--in-hero {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .pm-audio-fab--fallback {
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+  }
+
+  .pm-narration-fab.pm-audio-fab--fallback {
+    bottom: 4.1rem;
+  }
+
+  .page-hero,
+  .hero-simple {
+    padding-bottom: 3.25rem;
+  }
+
+  .hero {
+    padding-bottom: 4rem;
+  }
+
+  .index-video-intro-copy {
+    text-align: left;
+  }
+
+  .index-video-intro-actions {
+    gap: 0.6rem;
+  }
+
+  .index-video-intro-skip,
+  .index-video-intro-sound,
+  .index-video-intro-remember {
+    width: 100%;
+  }
+
+  .index-video-intro-remember {
+    justify-content: flex-start;
+    padding: 0.65rem 0.75rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  main :where(.card, .pm-read-panel, .ticket-feature-card, .ticket-tier-card, .av-library-card, .av-route-card, .glossary-entry) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-content,
+  .page-hero .hero-content,
+  .hero-simple > .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .glossary-group__summary,
+  .glossary-guide-card summary {
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .glossary-group__summary strong {
+    white-space: normal;
+    text-align: right;
+  }
+}
+
+/* Móvil: botones compactos e iconos para controles persistentes */
+@media (max-width: 767.98px) {
+  main .btn:not(.btn-close),
+  main .filter-btn,
+  main .video-launch-button,
+  main .museum-legend-item,
+  main .territory-map-card {
+    width: auto;
+    min-width: 0;
+    min-height: 2.45rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .btn-group,
+  .timeline,
+  .ticket-actions,
+  .av-filters,
+  .av-playlists,
+  .dino-stage-actions,
+  .museum-map-controls,
+  .glossary-guide-links,
+  .pm-scope-crosslinks,
+  .teacher-sheet-main ul:has(.btn) {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+    width: 100%;
+  }
+
+  .timeline-section-panel .timeline .timeline-era.btn,
+  .filter-btn,
+  .av-scope-badge,
+  .av-filter-chip {
+    flex: 0 1 auto;
+  }
+
+  .ticket-actions .btn,
+  .visit-resource-card .btn,
+  .resources-more-card .btn,
+  .teacher-sheet-main .btn,
+  .time-showcase-cta .btn,
+  .home-visit-journey-card .btn,
+  .av-library-toggle {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .hero-content > .btn,
+  .time-showcase-cta .btn,
+  .ticket-cart [data-cart-checkout],
+  .av-library-toggle {
+    width: 100%;
+    border-radius: 1rem;
+  }
+
+  .pm-hero-audio-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.65rem;
+    width: auto;
+    margin-top: 1rem;
+  }
+
+  .pm-hero-audio-controls .pm-audio-fab--in-hero,
+  .pm-audio-fab--fallback {
+    width: 2.85rem;
+    height: 2.85rem;
+    min-width: 2.85rem;
+    min-height: 2.85rem;
+    flex: 0 0 2.85rem;
+    padding: 0;
+    border-radius: 999px;
+  }
+
+  .pm-audio-fab__inner {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .pm-audio-fab__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .pm-audio-fab__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .pm-audio-fab--fallback {
+    left: auto;
+    right: 0.85rem;
+    bottom: 0.85rem;
+  }
+
+  .pm-narration-fab.pm-audio-fab--fallback {
+    bottom: 4rem;
+  }
+}
+
+/* Corrección móvil: botones visibles, separados y con etiqueta clara */
+@media (max-width: 767.98px) {
+  .btn-group,
+  .timeline,
+  .ticket-actions,
+  .av-filters,
+  .av-playlists,
+  .dino-stage-actions,
+  .museum-map-controls,
+  .glossary-guide-links,
+  .pm-scope-crosslinks,
+  .teacher-sheet-main ul:has(.btn) {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(min(10.5rem, 100%), 1fr));
+    gap: 0.7rem;
+    align-items: stretch;
+  }
+
+  main .btn:not(.btn-close),
+  main .filter-btn,
+  main .video-launch-button,
+  main .museum-legend-item {
+    width: 100%;
+    min-height: 2.65rem;
+    padding: 0.58rem 0.85rem;
+    border-radius: 0.95rem;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .timeline-section-panel .timeline .timeline-era.btn {
+    min-height: 2.6rem;
+  }
+
+  .pm-hero-audio-controls {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+    width: 100%;
+    max-width: 22rem;
+    margin-top: 1.1rem;
+  }
+
+  .pm-audio-fab.pm-audio-fab--in-hero,
+  .pm-narration-fab.pm-audio-fab--in-hero {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 2.75rem !important;
+    padding: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    border-radius: 999px;
+  }
+
+  .pm-audio-fab__inner {
+    width: 100%;
+    height: 100%;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.7rem;
+    justify-content: center;
+    gap: 0.42rem;
+  }
+
+  .pm-audio-fab__label {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+    border: 0 !important;
+    font-size: 0.72rem;
+    line-height: 1.1;
+    max-width: 6.2rem;
+  }
+
+  .pm-audio-fab__icon {
+    flex: 0 0 1.15rem;
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .pm-audio-fab.pm-audio-fab--fallback,
+  .pm-narration-fab.pm-audio-fab--fallback {
+    position: fixed !important;
+    bottom: max(0.8rem, env(safe-area-inset-bottom, 0px) + 0.55rem) !important;
+    top: auto !important;
+    width: calc(50vw - 1.1rem) !important;
+    min-width: 0 !important;
+    min-height: 2.75rem !important;
+    padding: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .pm-audio-fab.pm-audio-fab--fallback {
+    left: 0.75rem !important;
+    right: auto !important;
+  }
+
+  .pm-narration-fab.pm-audio-fab--fallback {
+    left: auto !important;
+    right: 0.75rem !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .pm-audio-fab__label {
+    font-size: 0.68rem;
+    max-width: 5.2rem;
+  }
+
+  .pm-audio-fab__inner {
+    padding-inline: 0.5rem;
+  }
+}
+
+/* Intro dinosaurio: composición móvil sin solapes */
+@media (max-width: 767.98px) {
+  .index-video-intro-overlay {
+    align-items: stretch;
+    justify-items: stretch;
+  }
+
+  .index-video-intro-shell {
+    width: 100vw;
+    height: 100dvh;
+    min-height: 100svh;
+  }
+
+  .index-video-intro-player {
+    position: absolute;
+    top: 7dvh;
+    left: 50%;
+    width: min(92vw, 430px);
+    height: min(38dvh, 340px);
+    transform: translateX(-50%) scale(0.94);
+  }
+
+  .index-video-intro-overlay--ready .index-video-intro-player,
+  .index-video-intro-overlay--paused .index-video-intro-player {
+    transform: translateX(-50%) scale(0.94);
+  }
+
+  .index-video-intro-copy {
+    top: 45dvh;
+    bottom: auto;
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+    padding: 0.9rem 0.95rem;
+    border: 1px solid rgba(228, 200, 140, 0.2);
+    border-radius: 1.15rem;
+    background: rgba(8, 10, 9, 0.54);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .index-video-intro-copy span {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .index-video-intro-copy strong {
+    max-width: 13ch;
+    font-size: clamp(1.9rem, 10vw, 3.2rem);
+    line-height: 0.98;
+  }
+
+  .index-video-intro-sub {
+    max-width: 32rem;
+    margin-top: 0.55rem;
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+
+  .index-video-intro-actions {
+    left: 1rem;
+    right: 1rem;
+    bottom: max(1.05rem, env(safe-area-inset-bottom, 0px) + 0.8rem);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    max-width: none;
+  }
+
+  .index-video-intro-skip,
+  .index-video-intro-sound {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.62rem 0.72rem;
+    font-size: 0.86rem;
+    line-height: 1.15;
+  }
+
+  .index-video-intro-remember {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: center;
+    padding: 0.58rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(8, 10, 9, 0.42);
+    font-size: 0.82rem;
+  }
+
+  .index-video-intro-progress {
+    padding-inline: 1rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .index-video-intro-shell--leaving .index-video-intro-player {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) scale(0.9);
+  }
+
+  .index-video-intro-shell--leaving .index-video-intro-copy,
+  .index-video-intro-shell--leaving .index-video-intro-actions,
+  .index-video-intro-shell--leaving .index-video-intro-progress {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+}
+
+@media (max-width: 420px) {
+  .index-video-intro-player {
+    top: 5.5dvh;
+    height: 34dvh;
+  }
+
+  .index-video-intro-copy {
+    top: 41.5dvh;
+  }
+}
+
+@media (max-height: 640px) and (max-width: 767.98px) {
+  .index-video-intro-player {
+    top: 4dvh;
+    height: 30dvh;
+  }
+
+  .index-video-intro-copy {
+    top: 34.5dvh;
+    padding: 0.72rem 0.82rem;
+  }
+
+  .index-video-intro-copy strong {
+    font-size: clamp(1.55rem, 8.6vw, 2.4rem);
+  }
+
+  .index-video-intro-sub {
+    display: none;
+  }
+
+  .index-video-intro-actions {
+    gap: 0.5rem;
+  }
+}
+
+/* Fluidez escritorio: menos repintado y menos reflow en hover */
+@media (min-width: 992px) {
+  @supports (content-visibility: auto) {
+    main :is(.section, .hero-simple, .content-prose, .pm-read-panel, .museum-section-panel, .timeline-section-panel) {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 720px;
+    }
+
+    main :is(.card, .time-stage-card, .ticket-feature-card, .ticket-tier-card, .av-library-card, .av-route-card, .glossary-entry) {
+      contain: layout paint;
+    }
+  }
+
+  @media (hover: hover) {
+    .sobre-page-main .section:hover :is(.section-lead, .section-intro, .content-prose, .museum-section-lead, .lead),
+    main#main-content>.container>section:hover :is(.section-lead, .section-intro, .museum-section-lead, .lead),
+    main .section:hover>.container:not(:has(.content-prose)) :is(.section-lead, .section-intro),
+    .content-prose:hover,
+    .museum-section-panel:hover .museum-section-lead,
+    .timeline-section-panel:hover .lead {
+      font-weight: inherit;
+    }
+  }
+
+  html.pm-parallax .pm-parallax-block,
+  html.pm-parallax [data-pm-float],
+  .pm-cinema-reveal,
+  .pm-section-layer,
+  .pm-text-reveal {
+    will-change: transform, opacity;
   }
 }
