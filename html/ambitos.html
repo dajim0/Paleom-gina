@@ -11,7 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=85" />
+  <link rel="stylesheet" href="../styles.css?v=93" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="../images/site/favicon.png" />
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -236,16 +236,36 @@
         </div>
       </section>
 
+      <section class="section mb-5 museum-section-panel ambitos-hover-card" id="territory-map-section"
+        aria-labelledby="territory-map-heading">
+        <h2 id="territory-map-heading" class="h3 pm-heading-with-icon mb-2">
+          <img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async"
+            class="pm-inline-icon" />
+          <span data-i18n="territory_map_title">Sierra Mágina en el territorio</span>
+        </h2>
+        <p class="section-lead mb-4" data-i18n="territory_map_lead"></p>
+        <div id="territory-map-root">
+          <div id="territory-map-panel" class="card territory-map-panel border-0 shadow-sm">
+            <div class="card-body">
+              <p class="small text-muted mb-2" data-i18n="territory_map_hint"></p>
+              <h3 id="territory-map-panel-title" class="h5 mb-2"></h3>
+              <p id="territory-map-panel-desc" class="small mb-3"></p>
+              <button type="button" id="territory-map-panel-btn" class="btn btn-sm btn-primary d-none"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section mb-5" aria-labelledby="dino-3d-h">
         <div class="card border-0 shadow-sm overflow-hidden">
           <div class="card-body">
             <h2 id="dino-3d-h" class="h3 pm-heading-with-icon mb-3">
               <img src="../images/site/icono-fosiles.png" alt="Icono dinosaurio" width="56" height="56" loading="lazy"
                 decoding="async" class="pm-inline-icon" />
-              <span>Selecciona un dinosaurio 3D</span>
+              <span data-i18n="dino_3d_title">Exploración 3D (Mesozoico)</span>
             </h2>
-            <p class="lead mb-4">Pulsa sobre un dinosaurio para verlo en 3D y explorar su figura en el ámbito Mesozoico.
-            </p>
+            <p class="lead mb-2" data-i18n="dino_3d_lead"></p>
+            <p class="small text-muted mb-4" data-i18n="dino_3d_disclaimer"></p>
             <div class="dinosaur-picker mb-4">
               <div class="d-flex flex-wrap gap-2 mb-3" role="group" aria-label="Selecciona un dinosaurio">
                 <button type="button" class="btn btn-outline-primary"
@@ -261,7 +281,7 @@
                   data-title="Stegosaurus">Stegosaurus</button>
                 <button type="button" class="btn btn-outline-secondary ms-auto" id="dinoBackButton">Volver</button>
               </div>
-              <p class="small text-muted mb-0" id="dinoSelectionHint">Elige un dinosaurio para verlo en 3D.</p>
+              <p class="small text-muted mb-0" id="dinoSelectionHint" data-i18n="dino_3d_hint"></p>
             </div>
             <div class="dinosaur-model-card">
               <model-viewer id="dinoViewer" src="../models/niknet_art-tyrannosaurus-3232.glb" alt="Tyrannosaurus rex 3D"
@@ -363,8 +383,8 @@
   </footer>
 
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="../data.js?v=21"></script>
-  <script defer src="../script.js?v=26"></script>
+  <script defer src="../data.js?v=22"></script>
+  <script defer src="../script.js?v=36"></script>
   <script defer src="../timeline.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
