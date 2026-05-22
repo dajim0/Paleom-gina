@@ -9,8 +9,14 @@ const themeStorageKey = "paleomagina-theme";
 let currentTheme = "light";
 
 // ── Exponer helper de traducción (timeline.js y otros módulos) ───────
-function paleomaginaT(key) {
-  return translations[currentLang]?.[key] ?? translations.es[key] ?? "";
+function paleomaginaT(key, replacements) {
+  let text = translations[currentLang]?.[key] ?? translations.es[key] ?? "";
+  if (replacements && typeof replacements === "object") {
+    Object.entries(replacements).forEach(([name, value]) => {
+      text = text.replace(new RegExp(`\\{${name}\\}`, "g"), value);
+    });
+  }
+  return text;
 }
 window.paleomaginaT = paleomaginaT;
 
@@ -701,7 +707,9 @@ function initIndexIntroVideo() {
   let stepsAudio = null;
   let roarAudio = null;
   let introAudioTimers = [];
-  let introSoundEnabled = false;
+  let introSoundEnabled = true;
+  let stepsStarted = false;
+  let roarPlayed = false;
   document.body.classList.add("index-video-intro-visible");
   overlay.setAttribute("aria-hidden", "false");
 
@@ -728,18 +736,24 @@ function initIndexIntroVideo() {
     const isSteps = kind === "steps";
     if (isSteps && stepsAudio) return;
     if (!isSteps && roarAudio) return;
-
-    const audio = new Audio(getIntroAudioUrl(isSteps ? "PASOS.mp3" : "RUGIDO.mp3"));
+    const src = getIntroAudioUrl(isSteps ? "PASOS.mp3" : "RUGIDO.mp3");
+    const audio = new Audio();
+    audio.src = src;
     audio.volume = isSteps ? 0.16 : 0.18;
     audio.preload = "auto";
     audio.loop = isSteps;
-    if (isSteps) stepsAudio = audio;
-    else roarAudio = audio;
-    audio.play().catch(() => {
-      cleanupIntroAudio(audio);
+    // if we can, sync playback position to the video so it sounds aligned
+    try {
+      if (isSteps) stepsAudio = audio;
+      else roarAudio = audio;
+      // Try to play; may be blocked until a user gesture
+      audio.play().catch(() => {
+        // ignore; we'll attempt again on next user gesture or timeupdate
+      });
+    } catch (e) {
       if (isSteps && stepsAudio === audio) stepsAudio = null;
       if (!isSteps && roarAudio === audio) roarAudio = null;
-    });
+    }
   };
 
   const stopSteps = () => {
@@ -763,30 +777,53 @@ function initIndexIntroVideo() {
   };
 
   const scheduleIntroAudio = () => {
-    if (hidden || !introSoundEnabled || introAudioTimers.length) return;
+    // Deprecated: scheduling via timeouts can drift and be blocked; we rely
+    // on the `timeupdate` handler and `syncIntroAudio` to keep audio aligned.
+    if (hidden || !introSoundEnabled) return;
+    // Ensure audio elements are created and preloaded so they can start
+    if (!stepsAudio) playIntroAudio("steps");
+    if (!roarAudio) playIntroAudio("roar");
+  };
+
+  const syncIntroAudio = () => {
+    if (hidden || !introSoundEnabled) return;
     const cues = getIntroAudioCues();
     const currentMs = (video.currentTime || 0) * 1000;
-    const addCue = (callback, targetMs) => {
-      if (targetMs <= currentMs) return;
-      introAudioTimers.push(window.setTimeout(callback, targetMs - currentMs));
-    };
 
-    if (currentMs < cues.stepsEndMs) {
-      if (currentMs >= cues.stepsStartMs) playIntroAudio("steps");
-      else addCue(() => playIntroAudio("steps"), cues.stepsStartMs);
-      addCue(stopSteps, cues.stepsEndMs);
+    // Steps: should play between stepsStartMs and stepsEndMs
+    if (currentMs >= cues.stepsStartMs && currentMs < cues.stepsEndMs) {
+      if (!stepsAudio) playIntroAudio("steps");
+      if (stepsAudio) {
+        const desiredSec = Math.max(0, (currentMs - cues.stepsStartMs) / 1000);
+        if (Math.abs((stepsAudio.currentTime || 0) - desiredSec) > 0.12) {
+          try { stepsAudio.currentTime = desiredSec; } catch (e) {}
+        }
+        if (stepsAudio.paused) stepsAudio.play().catch(() => {});
+        stepsStarted = true;
+      }
+    } else {
+      if (stepsStarted) stopSteps();
+      stepsStarted = false;
     }
 
-    if (currentMs >= cues.roarMs - 800 && currentMs <= cues.roarMs + 2200) {
-      playIntroAudio("roar");
-    } else {
-      addCue(() => playIntroAudio("roar"), cues.roarMs);
+    // Roar: play once when we pass the cue
+    if (currentMs >= cues.roarMs && !roarPlayed) {
+      if (!roarAudio) playIntroAudio("roar");
+      if (roarAudio) {
+        const desiredSec = Math.max(0, (currentMs - cues.roarMs) / 1000);
+        try { roarAudio.currentTime = desiredSec; } catch (e) {}
+        roarAudio.play().catch(() => {});
+        roarPlayed = true;
+      }
     }
   };
 
   const bindIntroAudioAfterGesture = () => {
     const resumeIntroAudio = () => {
-      if (!hidden && introSoundEnabled) scheduleIntroAudio();
+      if (!hidden && introSoundEnabled) {
+        // attempt to play and sync immediately
+        syncIntroAudio();
+      }
     };
     overlay.addEventListener("pointerdown", resumeIntroAudio, { once: true });
     document.addEventListener("keydown", resumeIntroAudio, { once: true });
@@ -797,7 +834,35 @@ function initIndexIntroVideo() {
     introSoundEnabled = true;
     soundButton?.classList.add("index-video-intro-sound--active");
     soundButton?.setAttribute("aria-pressed", "true");
-    scheduleIntroAudio();
+    // Ensure any previous timers/audio are stopped before scheduling
+    stopIntroAudio();
+
+    // Calculate cues and play immediately as this is a user gesture
+    const cues = getIntroAudioCues();
+    const currentMs = (video.currentTime || 0) * 1000;
+
+    // Start steps if we're before the end cue
+    if (currentMs < cues.stepsEndMs) {
+      playIntroAudio("steps");
+      // schedule stopping steps at the end cue
+      const stopDelay = Math.max(0, cues.stepsEndMs - currentMs);
+      introAudioTimers.push(window.setTimeout(stopSteps, stopDelay));
+    }
+
+    // Schedule or play the roar depending on timing
+    const roarDelay = cues.roarMs - currentMs;
+    if (roarDelay <= 0) {
+      playIntroAudio("roar");
+    } else {
+      introAudioTimers.push(window.setTimeout(() => playIntroAudio("roar"), roarDelay));
+    }
+  };
+
+  const disableIntroSound = () => {
+    introSoundEnabled = false;
+    soundButton?.classList.remove("index-video-intro-sound--active");
+    soundButton?.setAttribute("aria-pressed", "false");
+    stopIntroAudio();
   };
 
   const hideIntro = () => {
@@ -811,22 +876,43 @@ function initIndexIntroVideo() {
       document.body.classList.remove("index-video-intro-visible");
       video.pause();
       stopIntroAudio();
+      // remove timeupdate listener
+      video.removeEventListener('timeupdate', syncIntroAudio);
     }, 520);
   };
 
   video.addEventListener("canplay", () => overlay.classList.add("index-video-intro-overlay--ready"), { once: true });
-  video.addEventListener("loadedmetadata", scheduleIntroAudio, { once: true });
+  video.addEventListener("loadedmetadata", () => {
+    // Preload/create audio elements and attempt initial sync
+    scheduleIntroAudio();
+    syncIntroAudio();
+    // attach timeupdate for continuous sync
+    video.addEventListener('timeupdate', syncIntroAudio);
+  }, { once: true });
   video.addEventListener("ended", hideIntro, { once: true });
   video.addEventListener("error", hideIntro, { once: true });
-  soundButton?.setAttribute("aria-pressed", "false");
-  soundButton?.addEventListener("click", enableIntroSound);
+  // Set initial visual state
+  soundButton?.setAttribute("aria-pressed", "true");
+  soundButton?.classList.add("index-video-intro-sound--active");
+  // Toggle behavior: click disables if enabled, enables if disabled
+  soundButton?.addEventListener("click", () => {
+    if (introSoundEnabled) disableIntroSound();
+    else enableIntroSound();
+  });
   skipButton?.addEventListener("click", hideIntro);
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !hidden) hideIntro();
   });
 
   fallbackTimer = window.setTimeout(hideIntro, 14000);
-  scheduleIntroAudio();
+  // Try to enable and play intro sound by default. Browsers may block this
+  // if there's no prior user gesture; bindIntroAudioAfterGesture will
+  // resume scheduling when the user interacts.
+  try {
+    enableIntroSound();
+  } catch (e) {
+    // ignore; playback may be blocked
+  }
   bindIntroAudioAfterGesture();
   video.play().catch(() => {
     overlay.classList.add("index-video-intro-overlay--paused");

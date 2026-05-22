@@ -36,17 +36,19 @@
     aria-label="Introducción inmersiva de Paleomágina" aria-hidden="false">
     <div class="index-video-intro-shell">
       <video id="indexIntroVideo" class="index-video-intro-player" autoplay muted playsinline preload="auto"
-        aria-label="Dinosaurio de introducción">
+        data-i18n-aria-label="intro_video_aria">
         <source src="../images/321168_sin_fondo.webm" type="video/webm" />
         Tu navegador no admite la reproducción de video.
       </video>
       <div class="index-video-intro-copy" aria-hidden="true">
-        <span>Tiempo profundo</span>
-        <strong>Paleomágina despierta</strong>
+        <span data-i18n="intro_overlay_deep_time">Tiempo profundo</span>
+        <strong data-i18n="intro_overlay_awakens">Paleomágina despierta</strong>
       </div>
       <div class="index-video-intro-actions">
-        <button type="button" class="index-video-intro-sound" id="indexIntroSound">Sonido dinosaurio</button>
-        <button type="button" class="index-video-intro-skip" id="indexIntroSkip">Entrar al museo</button>
+        <button type="button" class="index-video-intro-sound" id="indexIntroSound"
+          data-i18n="intro_overlay_sound_label">Sonido dinosaurio</button>
+        <button type="button" class="index-video-intro-skip" id="indexIntroSkip"
+          data-i18n="intro_overlay_skip_label">Entrar al museo</button>
       </div>
     </div>
   </div>
@@ -128,40 +130,44 @@
         <div class="pm-heading-with-icon mb-4">
           <img src="../images/site/icono-montanas.png" alt="" width="56" height="56" loading="lazy" decoding="async"
             class="pm-inline-icon" />
-          <h2 id="time-showcase-title">Viaje visual por eras</h2>
+          <h2 id="time-showcase-title" data-i18n="time_showcase_title">Viaje visual por eras</h2>
         </div>
-        <p class="section-intro mb-4">Siente cómo el paisaje cambia a cada hora y descubre escenas de tiempo profundo
+        <p class="section-intro mb-4" data-i18n="time_showcase_intro">Siente cómo el paisaje cambia a cada hora y
+          descubre escenas de tiempo profundo
           que emergen en movimiento.</p>
         <div class="time-stage-grid">
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
               <img src="../images/site/FOSILES.png" alt="Fósiles como rastro del tiempo profundo" width="1200"
-                height="800" loading="lazy" decoding="async" />
+                height="800" loading="lazy" decoding="async" data-i18n-alt="img_time_stage_1_alt" />
             </figure>
-            <h3>Tierra primitiva</h3>
-            <p>Desde mares tibios hasta rocas en formación: un viaje que cobra vida con texturas y brillo suave.</p>
+            <h3 data-i18n="time_stage_1_title">Tierra primitiva</h3>
+            <p data-i18n="time_stage_1_text">Desde mares tibios hasta rocas en formación: un viaje que cobra vida con
+              texturas y brillo suave.</p>
           </article>
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
               <img src="../images/site/HERRAMIENTAS PREHISTORICAS.png"
                 alt="Herramientas prehistóricas vinculadas al poblamiento humano" width="1200" height="800"
-                loading="lazy" decoding="async" />
+                loading="lazy" decoding="async" data-i18n-alt="img_time_stage_2_alt" />
             </figure>
-            <h3>Hombres y fósiles</h3>
-            <p>Ritmos humanos y reliquias en movimiento, con efectos de luz que acompañan cada etapa.</p>
+            <h3 data-i18n="time_stage_2_title">Hombres y fósiles</h3>
+            <p data-i18n="time_stage_2_text">Ritmos humanos y reliquias en movimiento, con efectos de luz que acompañan
+              cada etapa.</p>
           </article>
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
               <img src="../images/site/ciencia-tecnologia.png"
                 alt="Ciencia y tecnología aplicadas a la interpretación del patrimonio" width="1200" height="800"
-                loading="lazy" decoding="async" />
+                loading="lazy" decoding="async" data-i18n-alt="img_time_stage_3_alt" />
             </figure>
-            <h3>Presente y futuro</h3>
-            <p>Un vistazo al Antropoceno en el que la naturaleza y la tecnología se cruzan en una escena dinámica.</p>
+            <h3 data-i18n="time_stage_3_title">Presente y futuro</h3>
+            <p data-i18n="time_stage_3_text">Un vistazo al Antropoceno en el que la naturaleza y la tecnología se cruzan
+              en una escena dinámica.</p>
           </article>
         </div>
         <div class="time-showcase-cta text-center mt-4">
-          <a class="btn btn-primary" href="ambitos.html">Explorar ámbitos</a>
+          <a class="btn btn-primary" href="ambitos.html" data-i18n="time_showcase_cta">Explorar ámbitos</a>
         </div>
       </div>
     </section>
@@ -175,10 +181,13 @@
           <p class="section-intro mb-3" data-i18n="contact_intro">Escríbenos para organizar visitas escolares,
             actividades en grupo y colaboraciones científicas.</p>
           <ul class="list-unstyled mb-0 contact-details">
-            <li class="mb-2"><strong>Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a>
+            <li class="mb-2"><strong data-i18n="contact_label_email">Email:</strong><br /><a
+                href="mailto:info@paleomagina.org">info@paleomagina.org</a>
             </li>
-            <li class="mb-2"><strong>Teléfono:</strong><br /><a href="tel:+34000000000">+34 000 000 000</a></li>
-            <li class="mb-0"><strong>Ubicación:</strong><br /><span>Sierra Mágina, Jaén</span></li>
+            <li class="mb-2"><strong data-i18n="contact_label_phone">Teléfono:</strong><br /><a
+                href="tel:+34000000000">+34 000 000 000</a></li>
+            <li class="mb-0"><strong data-i18n="contact_label_location">Ubicación:</strong><br /><span
+                data-i18n="contact_location_address">Sierra Mágina, Jaén</span></li>
           </ul>
         </div>
         <div class="card qr-card">
@@ -199,7 +208,7 @@
         <p data-i18n="footer_p">Sierra Mágina, ciencia y patrimonio al alcance de todos.</p>
       </div>
       <div>
-        <h3>Recursos</h3>
+        <h3 data-i18n="footer_resources">Recursos</h3>
         <ul>
           <li><a href="glosario.html" data-i18n="res_glossary">Glosario</a></li>
           <li><a href="audiovisuales.html" data-i18n="res_audiovisual">Vídeos</a></li>
@@ -209,9 +218,11 @@
       </div>
       <div>
         <h3 data-i18n="footer_contact">Contacto</h3>
-        <p><strong>Email:</strong><br><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
-        <p><strong>Teléfono:</strong><br>+34 000 000 000</p>
-        <p><strong>Ubicación:</strong><br><span>Sierra Mágina, Jaén</span></p>
+        <p><strong data-i18n="contact_label_email">Email:</strong><br><a
+            href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+        <p><strong data-i18n="contact_label_phone">Teléfono:</strong><br>+34 000 000 000</p>
+        <p><strong data-i18n="contact_label_location">Ubicación:</strong><br><span
+            data-i18n="contact_location_address">Sierra Mágina, Jaén</span></p>
       </div>
       <div>
         <h3 data-i18n="footer_legal_heading">Información legal</h3>
@@ -224,7 +235,8 @@
       </div>
     </div>
     <div class="container footer-copy">
-      <p class="mb-0">© 2026 Centro de Interpretación Paleomágina. Todos los derechos reservados.</p>
+      <p class="mb-0" data-i18n="footer_copy">© 2026 Centro de Interpretación Paleomágina. Todos los derechos
+        reservados.</p>
     </div>
   </footer>
 
