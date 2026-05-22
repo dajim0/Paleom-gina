@@ -771,8 +771,10 @@
   let narrationActive = false;
   let narrationQueue = [];
   let narrationIndex = 0;
+  let narrationAudio = null;
   let ambientDuckedForNarration = false;
   let preferredNarrationVoice = null;
+  const NARRATION_VOLUME = 0.38;
 
   function t(key, fallback) {
     return window.paleomaginaT?.(key) ?? fallback;
@@ -997,9 +999,51 @@
     return "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
   }
 
+  function supportsRecordedNarration() {
+    return typeof Audio !== "undefined";
+  }
+
+  function hasNarrationPlayback() {
+    return supportsRecordedNarration() || supportsNarration();
+  }
+
   function getNarrationLanguage() {
     const lang = document.documentElement.lang || "es";
     return lang.toLowerCase().startsWith("en") ? "en-GB" : "es-ES";
+  }
+
+  function getNarrationLangSlug() {
+    return getNarrationLanguage().toLowerCase().startsWith("en") ? "en" : "es";
+  }
+
+  function getPageNarrationSlug() {
+    const file = window.location.pathname.split("/").pop() || "index.html";
+    return file.replace(/\.html?$/i, "") || "index";
+  }
+
+  function getRecordedNarrationFileName() {
+    const pageAudio = {
+      index: "INICIO.mp3",
+      sobre: "PALEOMAGINA.mp3",
+      ambitos: "RECORRIDO EXPOSITIVO.mp3",
+      recursos: "VISITA.mp3",
+      glosario: "GLOSARIO.mp3",
+      audiovisuales: "VIDEOS.mp3",
+    };
+    const pageSlug = getPageNarrationSlug();
+    if (getNarrationLangSlug() === "es" && pageAudio[pageSlug]) return pageAudio[pageSlug];
+    return `${pageSlug}-${getNarrationLangSlug()}.mp3`;
+  }
+
+  function getCinematicBaseUrl() {
+    const script = document.currentScript || document.querySelector('script[src*="cinematic.js"]');
+    if (!script?.src) return new URL("../", window.location.href);
+    return new URL("./", script.src);
+  }
+
+  function getRecordedNarrationUrl() {
+    const fileName = getRecordedNarrationFileName();
+    return new URL(`audio/relatos/${fileName}`, getCinematicBaseUrl()).href;
   }
 
   function voiceMatchesLanguage(voice, lang) {
@@ -1144,9 +1188,9 @@
 
   function updateNarrationFab() {
     if (!narrationFab) return;
-    const available = supportsNarration();
+    const available = hasNarrationPlayback();
     const ariaLabel = !available
-      ? t("narration_unavailable", "La narración por voz no está disponible en este navegador")
+      ? t("narration_unavailable", "La narración no está disponible en este navegador")
       : narrationActive
         ? t("narration_toggle_off", "Detener relato de esta página")
         : t("narration_toggle_on", "Escuchar relato de esta página");
@@ -1169,8 +1213,17 @@
     narrationActive = false;
     narrationQueue = [];
     narrationIndex = 0;
+    cleanupRecordedNarration();
     restoreAmbientAfterNarration();
     updateNarrationFab();
+  }
+
+  function cleanupRecordedNarration() {
+    if (!narrationAudio) return;
+    narrationAudio.pause();
+    narrationAudio.removeAttribute("src");
+    narrationAudio.load();
+    narrationAudio = null;
   }
 
   function speakNarrationChunk() {
@@ -1184,7 +1237,7 @@
     utterance.voice = getPreferredNarrationVoice();
     utterance.rate = 0.9;
     utterance.pitch = 0.96;
-    utterance.volume = 1;
+    utterance.volume = NARRATION_VOLUME;
     utterance.onend = () => {
       narrationIndex += 1;
       speakNarrationChunk();
@@ -1193,17 +1246,57 @@
     window.speechSynthesis.speak(utterance);
   }
 
-  function startNarration() {
-    if (!supportsNarration()) return;
+  function startSpeechNarration() {
+    if (!supportsNarration()) {
+      finishNarration();
+      return;
+    }
     window.speechSynthesis.cancel();
     narrationQueue = splitNarrationText(collectNarrationText());
-    if (!narrationQueue.length) return;
+    if (!narrationQueue.length) {
+      finishNarration();
+      return;
+    }
     choosePreferredNarrationVoice();
     narrationIndex = 0;
+    speakNarrationChunk();
+  }
+
+  function playRecordedNarration() {
+    if (!supportsRecordedNarration()) {
+      startSpeechNarration();
+      return;
+    }
+
+    const audio = new Audio(getRecordedNarrationUrl());
+    narrationAudio = audio;
+    audio.volume = NARRATION_VOLUME;
+    audio.preload = "auto";
+    audio.addEventListener("ended", finishNarration, { once: true });
+    audio.addEventListener("error", () => {
+      if (narrationAudio !== audio || !narrationActive) return;
+      cleanupRecordedNarration();
+      startSpeechNarration();
+    }, { once: true });
+
+    const playPromise = audio.play();
+    if (playPromise?.catch) {
+      playPromise.catch(() => {
+        if (narrationAudio !== audio || !narrationActive) return;
+        cleanupRecordedNarration();
+        startSpeechNarration();
+      });
+    }
+  }
+
+  function startNarration() {
+    if (!hasNarrationPlayback()) return;
+    if (supportsNarration()) window.speechSynthesis.cancel();
+    cleanupRecordedNarration();
     narrationActive = true;
     duckAmbientForNarration();
     updateNarrationFab();
-    speakNarrationChunk();
+    playRecordedNarration();
   }
 
   function stopNarration() {

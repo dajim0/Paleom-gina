@@ -26,23 +26,33 @@
     href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=78" />
+  <link rel="stylesheet" href="../styles.css?v=81" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
 
 <body>
-  <div class="index-video-intro-overlay" id="indexVideoIntroOverlay" aria-hidden="false">
-    <video id="indexIntroVideo" class="index-video-intro-player" autoplay muted playsinline preload="auto"
-      aria-label="Vídeo de introducción">
-      <source src="../images/321168_sin_fondo.webm" type="video/webm" />
-      <source src="../images/321168_tiny.mp4" type="video/mp4" />
-      Tu navegador no admite la reproducción de video.
-    </video>
+  <div class="index-video-intro-overlay" id="indexVideoIntroOverlay" role="dialog" aria-modal="true"
+    aria-label="Introducción inmersiva de Paleomágina" aria-hidden="false">
+    <div class="index-video-intro-shell">
+      <video id="indexIntroVideo" class="index-video-intro-player" autoplay muted playsinline preload="auto"
+        aria-label="Dinosaurio de introducción">
+        <source src="../images/321168_sin_fondo.webm" type="video/webm" />
+        Tu navegador no admite la reproducción de video.
+      </video>
+      <div class="index-video-intro-copy" aria-hidden="true">
+        <span>Tiempo profundo</span>
+        <strong>Paleomágina despierta</strong>
+      </div>
+      <div class="index-video-intro-actions">
+        <button type="button" class="index-video-intro-sound" id="indexIntroSound">Sonido dinosaurio</button>
+        <button type="button" class="index-video-intro-skip" id="indexIntroSkip">Entrar al museo</button>
+      </div>
+    </div>
   </div>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm pm-topnav"
-    data-i18n-aria-label="nav_main_aria" aria-label="Navegacion principal">
+    data-i18n-aria-label="nav_main_aria" aria-label="Navegación principal">
     <div class="container">
       <a class="navbar-brand fw-bold d-inline-flex align-items-center gap-2 pm-brand-lockup" href="index.html">
         <img src="../images/site/paleomagina-logo.png" alt="" class="pm-navbar-logo" width="44" height="44"
@@ -50,7 +60,7 @@
         <span class="pm-brand-text">Paleomágina</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pmMainNav"
-        aria-controls="pmMainNav" aria-expanded="false" aria-label="Abrir menu">
+        aria-controls="pmMainNav" aria-expanded="false" aria-label="Abrir menú">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="pmMainNav">
@@ -162,8 +172,8 @@
           <h2 id="home-contact-title" class="pm-heading-with-icon"><img src="../images/site/icono-laboratorio.png"
               alt="" width="56" height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span
               data-i18n="footer_contact">Contacto</span></h2>
-          <p class="section-intro mb-3" data-i18n="contact_intro">Escribenos para organizar visitas escolares,
-            actividades en grupo y colaboraciones cientificas.</p>
+          <p class="section-intro mb-3" data-i18n="contact_intro">Escríbenos para organizar visitas escolares,
+            actividades en grupo y colaboraciones científicas.</p>
           <ul class="list-unstyled mb-0 contact-details">
             <li class="mb-2"><strong>Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a>
             </li>
@@ -172,8 +182,8 @@
           </ul>
         </div>
         <div class="card qr-card">
-          <h3 class="h5" data-i18n="contact_quick_access">Acceso rapido</h3>
-          <p class="mb-3" data-i18n="contact_qr_help">Escanea para abrir la pagina principal del proyecto.</p>
+          <h3 class="h5" data-i18n="contact_quick_access">Acceso rápido</h3>
+          <p class="mb-3" data-i18n="contact_qr_help">Escanea para abrir la página principal del proyecto.</p>
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://paleomagina.example/inicio"
             data-i18n-alt="contact_qr_alt" alt="Código QR para acceder al inicio de Paleomágina" width="180"
             height="180" loading="lazy" decoding="async" />
@@ -219,8 +229,8 @@
   </footer>
 
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="../data.js?v=19"></script>
-  <script defer src="../script.js?v=14"></script>
+  <script defer src="../data.js?v=21"></script>
+  <script defer src="../script.js?v=22"></script>
 </body>
 
 

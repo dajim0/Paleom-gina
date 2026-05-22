@@ -692,19 +692,145 @@ function initVideoOverlay() {
 function initIndexIntroVideo() {
   const overlay = document.getElementById("indexVideoIntroOverlay");
   const video = document.getElementById("indexIntroVideo");
+  const skipButton = document.getElementById("indexIntroSkip");
+  const soundButton = document.getElementById("indexIntroSound");
   if (!overlay || !video) return;
 
+  let hidden = false;
+  let fallbackTimer = null;
+  let stepsAudio = null;
+  let roarAudio = null;
+  let introAudioTimers = [];
+  let introSoundEnabled = false;
   document.body.classList.add("index-video-intro-visible");
   overlay.setAttribute("aria-hidden", "false");
 
-  const hideIntro = () => {
-    overlay.classList.add("d-none");
-    overlay.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("index-video-intro-visible");
+  const getIntroAudioUrl = (fileName) => new URL(`../audio/${fileName}`, window.location.href).href;
+
+  const cleanupIntroAudio = (audio) => {
+    if (!audio) return;
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load();
   };
 
-  video.addEventListener("ended", hideIntro);
-  video.play().catch(() => { });
+  const stopIntroAudio = () => {
+    introAudioTimers.forEach((timer) => window.clearTimeout(timer));
+    introAudioTimers = [];
+    cleanupIntroAudio(stepsAudio);
+    cleanupIntroAudio(roarAudio);
+    stepsAudio = null;
+    roarAudio = null;
+  };
+
+  const playIntroAudio = (kind) => {
+    if (hidden) return;
+    const isSteps = kind === "steps";
+    if (isSteps && stepsAudio) return;
+    if (!isSteps && roarAudio) return;
+
+    const audio = new Audio(getIntroAudioUrl(isSteps ? "PASOS.mp3" : "RUGIDO.mp3"));
+    audio.volume = isSteps ? 0.16 : 0.18;
+    audio.preload = "auto";
+    audio.loop = isSteps;
+    if (isSteps) stepsAudio = audio;
+    else roarAudio = audio;
+    audio.play().catch(() => {
+      cleanupIntroAudio(audio);
+      if (isSteps && stepsAudio === audio) stepsAudio = null;
+      if (!isSteps && roarAudio === audio) roarAudio = null;
+    });
+  };
+
+  const stopSteps = () => {
+    cleanupIntroAudio(stepsAudio);
+    stepsAudio = null;
+  };
+
+  const getIntroAudioCues = () => {
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    const stepsEndMs = duration
+      ? Math.min(Math.max(duration * 0.48 * 1000, 3200), 6200)
+      : 4800;
+    const roarMs = duration
+      ? Math.min(Math.max(duration * 0.56 * 1000, stepsEndMs + 350), 8200)
+      : 5600;
+    return {
+      stepsStartMs: 350,
+      stepsEndMs,
+      roarMs,
+    };
+  };
+
+  const scheduleIntroAudio = () => {
+    if (hidden || !introSoundEnabled || introAudioTimers.length) return;
+    const cues = getIntroAudioCues();
+    const currentMs = (video.currentTime || 0) * 1000;
+    const addCue = (callback, targetMs) => {
+      if (targetMs <= currentMs) return;
+      introAudioTimers.push(window.setTimeout(callback, targetMs - currentMs));
+    };
+
+    if (currentMs < cues.stepsEndMs) {
+      if (currentMs >= cues.stepsStartMs) playIntroAudio("steps");
+      else addCue(() => playIntroAudio("steps"), cues.stepsStartMs);
+      addCue(stopSteps, cues.stepsEndMs);
+    }
+
+    if (currentMs >= cues.roarMs - 800 && currentMs <= cues.roarMs + 2200) {
+      playIntroAudio("roar");
+    } else {
+      addCue(() => playIntroAudio("roar"), cues.roarMs);
+    }
+  };
+
+  const bindIntroAudioAfterGesture = () => {
+    const resumeIntroAudio = () => {
+      if (!hidden && introSoundEnabled) scheduleIntroAudio();
+    };
+    overlay.addEventListener("pointerdown", resumeIntroAudio, { once: true });
+    document.addEventListener("keydown", resumeIntroAudio, { once: true });
+  };
+
+  const enableIntroSound = () => {
+    if (hidden) return;
+    introSoundEnabled = true;
+    soundButton?.classList.add("index-video-intro-sound--active");
+    soundButton?.setAttribute("aria-pressed", "true");
+    scheduleIntroAudio();
+  };
+
+  const hideIntro = () => {
+    if (hidden) return;
+    hidden = true;
+    window.clearTimeout(fallbackTimer);
+    overlay.classList.add("index-video-intro-overlay--leaving");
+    window.setTimeout(() => {
+      overlay.classList.add("d-none");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("index-video-intro-visible");
+      video.pause();
+      stopIntroAudio();
+    }, 520);
+  };
+
+  video.addEventListener("canplay", () => overlay.classList.add("index-video-intro-overlay--ready"), { once: true });
+  video.addEventListener("loadedmetadata", scheduleIntroAudio, { once: true });
+  video.addEventListener("ended", hideIntro, { once: true });
+  video.addEventListener("error", hideIntro, { once: true });
+  soundButton?.setAttribute("aria-pressed", "false");
+  soundButton?.addEventListener("click", enableIntroSound);
+  skipButton?.addEventListener("click", hideIntro);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !hidden) hideIntro();
+  });
+
+  fallbackTimer = window.setTimeout(hideIntro, 14000);
+  scheduleIntroAudio();
+  bindIntroAudioAfterGesture();
+  video.play().catch(() => {
+    overlay.classList.add("index-video-intro-overlay--paused");
+  });
 }
 
 // ── Listeners globales ───────────────────────────────────────────────
@@ -763,7 +889,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=10");
+  loadPaleomaginaModule("cinematic.js?v=14");
 }
 
 /* ============================================
