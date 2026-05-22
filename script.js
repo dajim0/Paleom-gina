@@ -710,6 +710,7 @@ function initIndexIntroVideo() {
   let introSoundEnabled = true;
   let stepsStarted = false;
   let roarPlayed = false;
+  let audioCtx = null, pasosBuffer = null, rugidoBuffer = null, pasosSource = null, rugidoSource = null, pasosGain = null, rugidoGain = null, lastSync = 0;
   document.body.classList.add("index-video-intro-visible");
   overlay.setAttribute("aria-hidden", "false");
 
@@ -731,25 +732,26 @@ function initIndexIntroVideo() {
     roarAudio = null;
   };
 
+  
+
   const playIntroAudio = (kind) => {
     if (hidden) return;
     const isSteps = kind === "steps";
     if (isSteps && stepsAudio) return;
     if (!isSteps && roarAudio) return;
+    
+
+    // Fallback to HTMLAudio when WebAudio API isn't available
     const src = getIntroAudioUrl(isSteps ? "PASOS.mp3" : "RUGIDO.mp3");
     const audio = new Audio();
     audio.src = src;
     audio.volume = isSteps ? 0.16 : 0.18;
     audio.preload = "auto";
     audio.loop = isSteps;
-    // if we can, sync playback position to the video so it sounds aligned
     try {
       if (isSteps) stepsAudio = audio;
       else roarAudio = audio;
-      // Try to play; may be blocked until a user gesture
-      audio.play().catch(() => {
-        // ignore; we'll attempt again on next user gesture or timeupdate
-      });
+      audio.play().catch(() => {});
     } catch (e) {
       if (isSteps && stepsAudio === audio) stepsAudio = null;
       if (!isSteps && roarAudio === audio) roarAudio = null;
@@ -821,12 +823,57 @@ function initIndexIntroVideo() {
   const bindIntroAudioAfterGesture = () => {
     const resumeIntroAudio = () => {
       if (!hidden && introSoundEnabled) {
-        // attempt to play and sync immediately
+        // resume AudioContext if present and attempt to play/sync immediately
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
         syncIntroAudio();
+        // hide the hint UI when the user gestures
+        try { hideSoundHint(); } catch (_) {}
       }
     };
     overlay.addEventListener("pointerdown", resumeIntroAudio, { once: true });
     document.addEventListener("keydown", resumeIntroAudio, { once: true });
+  };
+
+  // Hint element shown when autoplay is blocked: creates a large tappable area
+  let soundHintElement = null;
+  const createSoundHintElement = () => {
+    if (soundHintElement) return soundHintElement;
+    const hint = document.createElement('div');
+    hint.className = 'index-video-intro-sound-hint';
+    hint.setAttribute('role', 'button');
+    hint.setAttribute('tabindex', '0');
+    const label = (typeof paleomaginaT === 'function') ? paleomaginaT('intro_sound_hint') || 'Toca para activar sonido' : 'Toca para activar sonido';
+    hint.innerHTML = `
+      <div class="index-video-intro-sound-hint__inner">
+        <strong>${label}</strong>
+        <div class="index-video-intro-sound-hint__sub">${(typeof paleomaginaT === 'function') ? paleomaginaT('intro_sound_hint_sub') || 'Pulsa aquí para activar audio y continuar' : 'Pulsa aquí para activar audio y continuar'}</div>
+      </div>`;
+
+    const activate = (ev) => {
+      ev?.preventDefault();
+      try { enableIntroSound(); } catch (_) {}
+      video.play().catch(() => {});
+      hideSoundHint();
+    };
+
+    hint.addEventListener('pointerdown', activate);
+    hint.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') activate(e); });
+    soundHintElement = hint;
+    return soundHintElement;
+  };
+
+  const showSoundHint = () => {
+    if (!overlay) return;
+    const el = createSoundHintElement();
+    if (!overlay.contains(el)) overlay.appendChild(el);
+    overlay.classList.add('index-video-intro-overlay--show-hint');
+    el.classList.remove('d-none');
+  };
+
+  const hideSoundHint = () => {
+    if (!overlay || !soundHintElement) return;
+    try { overlay.classList.remove('index-video-intro-overlay--show-hint'); } catch (_) {}
+    try { soundHintElement.classList.add('d-none'); } catch (_) {}
   };
 
   const enableIntroSound = () => {
@@ -836,6 +883,7 @@ function initIndexIntroVideo() {
     soundButton?.setAttribute("aria-pressed", "true");
     // Ensure any previous timers/audio are stopped before scheduling
     stopIntroAudio();
+    // proceed to schedule audio playback
 
     // Calculate cues and play immediately as this is a user gesture
     const cues = getIntroAudioCues();
@@ -916,6 +964,8 @@ function initIndexIntroVideo() {
   bindIntroAudioAfterGesture();
   video.play().catch(() => {
     overlay.classList.add("index-video-intro-overlay--paused");
+    // Show prominent hint so user can tap to enable audio (gesture-backed)
+    try { showSoundHint(); } catch (_) {}
   });
 }
 
