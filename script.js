@@ -4,9 +4,22 @@
 
 // ── Estado global ────────────────────────────────────────────────────
 const defaultLang = "es";
+const langStorageKey = "paleomagina-lang";
 let currentLang = defaultLang;
 const themeStorageKey = "paleomagina-theme";
 let currentTheme = "light";
+
+function normalizeLang(lang) {
+  return lang === "en" ? "en" : "es";
+}
+
+function getInitialLang() {
+  try {
+    const saved = localStorage.getItem(langStorageKey);
+    if (saved === "es" || saved === "en") return saved;
+  } catch (_) { }
+  return defaultLang;
+}
 
 // ── Exponer helper de traducción (timeline.js y otros módulos) ───────
 function paleomaginaT(key) {
@@ -178,38 +191,27 @@ function initTerritoryMap() {
   const panel = document.getElementById("territory-map-panel");
   const panelTitle = document.getElementById("territory-map-panel-title");
   const panelDesc = document.getElementById("territory-map-panel-desc");
+  const panelEvidence = document.getElementById("territory-map-panel-evidence");
   const panelBtn = document.getElementById("territory-map-panel-btn");
 
   const selectPoint = (point) => {
     root.querySelectorAll(".territory-map-marker").forEach((m) => {
       m.classList.toggle("is-active", m.dataset.pointId === point.id);
     });
-    root.querySelectorAll(".territory-map-list-item").forEach((b) => {
+    root.querySelectorAll(".territory-map-card").forEach((b) => {
       b.classList.toggle("active", b.dataset.pointId === point.id);
     });
     if (panelTitle) panelTitle.textContent = point.title[lang] || point.title.es;
     if (panelDesc) panelDesc.textContent = point.desc[lang] || point.desc.es;
+    if (panelEvidence) panelEvidence.textContent = point.evidence?.[lang] || point.evidence?.es || "";
     if (panelBtn) {
       panelBtn.classList.remove("d-none");
-      panelBtn.textContent = paleomaginaT("territory_map_open_scope") || "Abrir ámbito en el recorrido";
+      const scopeLabel = paleomaginaT("territory_map_scope_label") || "Ámbito relacionado";
+      const openLabel = paleomaginaT("territory_map_open_scope") || "Abrir ámbito en el recorrido";
+      panelBtn.textContent = `${openLabel} · ${scopeLabel} ${point.scope}`;
       panelBtn.onclick = () => openPaleomaginaScope(point.scope);
     }
   };
-
-  const svgNs = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(svgNs, "svg");
-  svg.setAttribute("class", "territory-map-svg");
-  svg.setAttribute("viewBox", "0 0 100 100");
-  svg.setAttribute("role", "img");
-  const aria = paleomaginaT("territory_map_aria");
-  if (aria) svg.setAttribute("aria-label", aria);
-
-  const bg = document.createElementNS(svgNs, "rect");
-  bg.setAttribute("width", "100");
-  bg.setAttribute("height", "100");
-  bg.setAttribute("rx", "8");
-  bg.setAttribute("class", "territory-map-bg");
-  svg.appendChild(bg);
 
   const markersWrap = document.createElement("div");
   markersWrap.className = "territory-map-markers";
@@ -221,34 +223,38 @@ function initTerritoryMap() {
     btn.dataset.pointId = point.id;
     btn.style.left = `${point.x}%`;
     btn.style.top = `${point.y}%`;
+    if (point.size) btn.style.setProperty("--marker-size", `${point.size}%`);
     btn.title = point.title[lang] || point.title.es;
-    btn.innerHTML = `<span aria-hidden="true">${point.icon || "📍"}</span><span class="visually-hidden">${btn.title}</span>`;
+    btn.innerHTML = `<span aria-hidden="true"></span><span class="visually-hidden">${btn.title}</span>`;
     btn.addEventListener("click", () => selectPoint(point));
     markersWrap.appendChild(btn);
-
-    const circle = document.createElementNS(svgNs, "circle");
-    circle.setAttribute("cx", String(point.x));
-    circle.setAttribute("cy", String(point.y));
-    circle.setAttribute("r", "2.2");
-    circle.setAttribute("class", "territory-map-dot");
-    circle.dataset.pointId = point.id;
-    circle.addEventListener("click", () => selectPoint(point));
-    svg.appendChild(circle);
   });
 
   const mapShell = document.createElement("div");
   mapShell.className = "territory-map-canvas position-relative";
-  mapShell.appendChild(svg);
+  const mapImg = document.createElement("img");
+  mapImg.className = "territory-map-image";
+  mapImg.src = "../images/site/mapa interpretativo.png";
+  mapImg.alt = paleomaginaT("territory_map_aria") || "Mapa interpretativo de Sierra Mágina";
+  mapImg.loading = "lazy";
+  mapImg.decoding = "async";
+  mapShell.appendChild(mapImg);
   mapShell.appendChild(markersWrap);
 
   const list = document.createElement("div");
-  list.className = "territory-map-list d-flex flex-column gap-2";
+  list.className = "territory-map-list";
   territoryPoints.forEach((point) => {
     const item = document.createElement("button");
     item.type = "button";
-    item.className = "territory-map-list-item btn btn-sm btn-outline-secondary text-start";
+    item.className = "territory-map-card";
     item.dataset.pointId = point.id;
-    item.innerHTML = `<span class="me-2">${point.icon || "📍"}</span>${point.title[lang] || point.title.es}`;
+    item.innerHTML = `
+      <span class="territory-map-card__icon" aria-hidden="true">${point.icon || "📍"}</span>
+      <span class="territory-map-card__body">
+        <strong>${point.title[lang] || point.title.es}</strong>
+        <small>${point.kind?.[lang] || point.kind?.es || ""} · ${point.scope}</small>
+      </span>
+    `;
     item.addEventListener("click", () => selectPoint(point));
     list.appendChild(item);
   });
@@ -632,6 +638,7 @@ function initTicketCart() {
 
 // ── Aplica idioma ────────────────────────────────────────────────────
 function applyLanguage(lang) {
+  lang = normalizeLang(lang);
   currentLang = lang;
   document.documentElement.lang = lang;
 
@@ -1183,7 +1190,7 @@ function initIndexIntroVideo() {
     introSoundEnabled = true;
     soundButton?.classList.add("index-video-intro-sound--active");
     soundButton?.setAttribute("aria-pressed", "true");
-    if (soundButton) soundButton.textContent = "Sonido activado";
+    if (soundButton) soundButton.textContent = paleomaginaT("intro_sound_active") || "Sonido activado";
     scheduleIntroAudio();
   };
 
@@ -1236,7 +1243,11 @@ function initIndexIntroVideo() {
 
 // ── Listeners globales ───────────────────────────────────────────────
 document.querySelectorAll(".lang-btn").forEach((btn) => {
-  btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+  btn.addEventListener("click", () => {
+    const lang = normalizeLang(btn.dataset.lang);
+    try { localStorage.setItem(langStorageKey, lang); } catch (_) { }
+    applyLanguage(lang);
+  });
 });
 
 document.querySelectorAll(".theme-toggle").forEach((btn) => {
@@ -1254,7 +1265,7 @@ try {
 }
 
 applyTheme(initialTheme);
-applyLanguage(defaultLang);
+applyLanguage(getInitialLang());
 applyGlossaryTermFromUrl();
 enablePageTransitions();
 initMainNavActiveState();
@@ -1291,7 +1302,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=22");
+  loadPaleomaginaModule("cinematic.js?v=24");
 }
 
 /* ============================================

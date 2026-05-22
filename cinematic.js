@@ -752,8 +752,8 @@
   const FADE_IN_SEC = 6;
   const FADE_RESUME_SEC = 2;
   const FADE_OUT_SEC = 3;
-  const TARGET_VOLUME = 0.038;
-  const NARRATION_DUCKED_AMBIENT_VOLUME = 0.018;
+  const TARGET_VOLUME = 0.085;
+  const NARRATION_DUCKED_AMBIENT_VOLUME = 0.035;
   const ICON_SOUND_OFF =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
   const ICON_SOUND_ON =
@@ -775,7 +775,7 @@
   let narrationAudio = null;
   let ambientDuckedForNarration = false;
   let preferredNarrationVoice = null;
-  const NARRATION_VOLUME = 0.38;
+  const NARRATION_VOLUME = 0.24;
   const PAGE_NARRATIONS = {
     es: {
       index:
@@ -983,7 +983,9 @@
 
   async function fadeTo(value, duration) {
     if (!ctx || !master) return;
-    if (ctx.state === "suspended") await ctx.resume();
+    if (ctx.state === "suspended") {
+      try { await ctx.resume(); } catch (_) { }
+    }
     const now = ctx.currentTime;
     master.gain.cancelScheduledValues(now);
     master.gain.setValueAtTime(master.gain.value, now);
@@ -992,9 +994,9 @@
 
   function isAudioEnabledInStorage() {
     try {
-      return localStorage.getItem(STORAGE_KEY) === "1";
+      return localStorage.getItem(STORAGE_KEY) !== "0";
     } catch (_) {
-      return false;
+      return true;
     }
   }
 
@@ -1491,6 +1493,7 @@
   }
 
   async function restoreAmbientFromStorage() {
+    if (!shouldShowPageAudioControls()) return;
     if (!isAudioEnabledInStorage()) return;
     fab?.classList.add("pm-audio-fab--remembered");
     if (playing) {
