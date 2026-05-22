@@ -752,7 +752,8 @@
   const FADE_IN_SEC = 6;
   const FADE_RESUME_SEC = 2;
   const FADE_OUT_SEC = 3;
-  const TARGET_VOLUME = 0.038;
+  const TARGET_VOLUME = 0.085;
+  const NARRATION_DUCKED_AMBIENT_VOLUME = 0.035;
   const ICON_SOUND_OFF =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
   const ICON_SOUND_ON =
@@ -774,7 +775,57 @@
   let narrationAudio = null;
   let ambientDuckedForNarration = false;
   let preferredNarrationVoice = null;
-  const NARRATION_VOLUME = 0.38;
+  const NARRATION_VOLUME = 0.24;
+  const PAGE_NARRATIONS = {
+    es: {
+      index:
+        "Bienvenido a Paleomágina. Esta página abre el viaje por Sierra Mágina como archivo del tiempo: mares antiguos, montañas, fósiles, evolución humana y patrimonio. Antes de entrar en detalle puedes orientarte con el viaje visual por eras y preparar la visita con recursos para antes, durante y después del recorrido.",
+      sobre:
+        "Paleomágina es un centro de interpretación para leer Sierra Mágina a través de evidencias. La visita conecta paisaje, ciencia y patrimonio, explica los objetivos del museo y muestra cómo el edificio organiza el relato desde la bienvenida hasta la terraza final.",
+      ambitos:
+        "El recorrido expositivo avanza por ámbitos. Cada sección enlaza tiempo geológico, fósiles, sociedades prehistóricas, método científico y paisaje. Puedes abrir un ámbito con su QR, consultar vídeos relacionados, saltar al glosario y localizarlo en el plano del museo.",
+      recursos:
+        "La página de visita reúne la información práctica: horarios, accesibilidad, reservas, entradas, recursos digitales y ficha docente. Está pensada para preparar la llegada al centro y organizar grupos escolares o visitas guiadas.",
+      glosario:
+        "El glosario reúne términos clave para comprender Paleomágina: geología, paleontología, arqueología, evolución humana, museografía y patrimonio. Puedes buscar un concepto y relacionarlo con vídeos y ámbitos del recorrido.",
+      audiovisuales:
+        "La biblioteca audiovisual completa la visita con vídeos antes, durante y después del recorrido. Cada pieza se vincula a un ámbito del museo y a términos del glosario para seguir aprendiendo desde casa o desde el aula.",
+      "ficha-docente":
+        "Esta ficha docente resume objetivos, tiempos y recursos para una visita escolar a Paleomágina. Propone una preparación previa, un itinerario en sala y actividades de continuidad mediante vídeos, glosario y mapa.",
+      "aviso-legal":
+        "Aviso legal de Paleomágina. Esta página recoge la información básica de titularidad, condiciones de uso y responsabilidades del sitio web.",
+      privacidad:
+        "Política de privacidad de Paleomágina. Aquí se explica el tratamiento de datos personales, los canales de contacto y los derechos de las personas usuarias.",
+      cookies:
+        "Política de cookies de Paleomágina. Esta página resume qué cookies puede utilizar el sitio, con qué finalidad y cómo gestionarlas desde el navegador.",
+      accesibilidad:
+        "Declaración de accesibilidad de Paleomágina. El sitio busca facilitar la navegación, la lectura y el acceso a los contenidos digitales para todas las personas.",
+    },
+    en: {
+      index:
+        "Welcome to Paleomágina. This page opens the journey through Sierra Mágina as an archive of time: ancient seas, mountains, fossils, human evolution, and heritage. You can begin with the visual journey through eras and prepare your visit with resources for before, during, and after the route.",
+      sobre:
+        "Paleomágina is an interpretation centre for reading Sierra Mágina through evidence. The visit connects landscape, science, and heritage, explains the museum goals, and shows how the building organises the story from welcome to final terrace.",
+      ambitos:
+        "The exhibition route moves through scopes. Each section links geological time, fossils, prehistoric societies, scientific method, and landscape. You can open a scope by QR, consult related videos, jump to glossary terms, and locate it on the museum plan.",
+      recursos:
+        "The visit page gathers practical information: schedules, accessibility, bookings, tickets, digital resources, and the teacher sheet. It helps prepare arrival at the centre and organise school groups or guided visits.",
+      glosario:
+        "The glossary gathers key terms for understanding Paleomágina: geology, palaeontology, archaeology, human evolution, museography, and heritage. You can search a concept and connect it with videos and exhibition scopes.",
+      audiovisuales:
+        "The audiovisual library extends the visit with videos for before, during, and after the route. Each item links to a museum scope and glossary terms for continued learning at home or in class.",
+      "ficha-docente":
+        "This teacher sheet summarises objectives, timings, and resources for a school visit to Paleomágina. It suggests advance preparation, an in-gallery itinerary, and follow-up activities through videos, glossary, and map.",
+      "aviso-legal":
+        "Legal notice for Paleomágina. This page includes basic ownership information, website terms of use, and responsibilities.",
+      privacidad:
+        "Privacy policy for Paleomágina. This page explains personal data processing, contact channels, and user rights.",
+      cookies:
+        "Cookie policy for Paleomágina. This page summarises which cookies the website may use, their purpose, and how to manage them in the browser.",
+      accesibilidad:
+        "Accessibility statement for Paleomágina. The website aims to support navigation, reading, and access to digital content for all users.",
+    },
+  };
 
   function t(key, fallback) {
     return window.paleomaginaT?.(key) ?? fallback;
@@ -932,7 +983,9 @@
 
   async function fadeTo(value, duration) {
     if (!ctx || !master) return;
-    if (ctx.state === "suspended") await ctx.resume();
+    if (ctx.state === "suspended") {
+      try { await ctx.resume(); } catch (_) { }
+    }
     const now = ctx.currentTime;
     master.gain.cancelScheduledValues(now);
     master.gain.setValueAtTime(master.gain.value, now);
@@ -941,9 +994,9 @@
 
   function isAudioEnabledInStorage() {
     try {
-      return localStorage.getItem(STORAGE_KEY) === "1";
+      return localStorage.getItem(STORAGE_KEY) !== "0";
     } catch (_) {
-      return false;
+      return true;
     }
   }
 
@@ -1019,6 +1072,12 @@
   function getPageNarrationSlug() {
     const file = window.location.pathname.split("/").pop() || "index.html";
     return file.replace(/\.html?$/i, "") || "index";
+  }
+
+  function getPageNarrationText() {
+    const lang = getNarrationLangSlug();
+    const slug = getPageNarrationSlug();
+    return PAGE_NARRATIONS[lang]?.[slug] || PAGE_NARRATIONS.es?.[slug] || "";
   }
 
   function getRecordedNarrationFileName() {
@@ -1175,7 +1234,7 @@
   function duckAmbientForNarration() {
     if (!playing || !ctx || !master) return;
     ambientDuckedForNarration = true;
-    fadeTo(0.004, 0.8);
+    fadeTo(NARRATION_DUCKED_AMBIENT_VOLUME, 0.8);
   }
 
   function restoreAmbientAfterNarration() {
@@ -1252,7 +1311,7 @@
       return;
     }
     window.speechSynthesis.cancel();
-    narrationQueue = splitNarrationText(collectNarrationText());
+    narrationQueue = splitNarrationText(getPageNarrationText() || collectNarrationText());
     if (!narrationQueue.length) {
       finishNarration();
       return;
@@ -1308,31 +1367,58 @@
     return document.querySelector(".hero, .page-hero, .hero-simple");
   }
 
+  function shouldShowPageAudioControls() {
+    return getPageNarrationSlug() !== "ficha-docente";
+  }
+
+  function getHeroAudioTarget(hero) {
+    if (!hero) return null;
+    let target = hero.querySelector(".pm-hero-audio-controls");
+    if (target) {
+      if (target.parentElement !== hero) hero.appendChild(target);
+      target.querySelector(".pm-hero-audio-controls__label")?.remove();
+      return target;
+    }
+
+    target = document.createElement("div");
+    target.className = "pm-hero-audio-controls";
+    hero.appendChild(target);
+    return target;
+  }
+
   function relocateFab() {
     if (!fab && !narrationFab) return;
+
+    if (!shouldShowPageAudioControls()) {
+      stopNarration();
+      if (playing) stopAmbient();
+      document.querySelectorAll(".pm-hero-audio-controls").forEach((node) => node.remove());
+      [fab, narrationFab].forEach((button) => {
+        if (!button) return;
+        button.hidden = true;
+        button.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+        document.body.appendChild(button);
+      });
+      return;
+    }
 
     document.querySelectorAll(".pm-audio-fab-host").forEach((host) => {
       host.classList.remove("pm-audio-fab-host");
     });
     [fab, narrationFab].forEach((button) => {
+      if (button) button.hidden = false;
       button?.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
     });
 
     const hero = findPageHero();
-    if (hero) {
-      hero.classList.add("pm-audio-fab-host");
-      [fab, narrationFab].forEach((button) => {
-        if (!button) return;
-        button.classList.add("pm-audio-fab--in-hero");
-        hero.appendChild(button);
-      });
-    } else {
-      [fab, narrationFab].forEach((button) => {
-        if (!button) return;
-        button.classList.add("pm-audio-fab--fallback");
-        document.body.appendChild(button);
-      });
-    }
+    const target = getHeroAudioTarget(hero) || document.body;
+    if (hero) hero.classList.add("pm-audio-fab-host");
+
+    [fab, narrationFab].forEach((button) => {
+      if (!button) return;
+      button.classList.add(hero ? "pm-audio-fab--in-hero" : "pm-audio-fab--fallback");
+      target.appendChild(button);
+    });
 
     fab?.classList.add("pm-audio-fab--mounted");
     narrationFab?.classList.add("pm-audio-fab--mounted");
@@ -1407,6 +1493,7 @@
   }
 
   async function restoreAmbientFromStorage() {
+    if (!shouldShowPageAudioControls()) return;
     if (!isAudioEnabledInStorage()) return;
     fab?.classList.add("pm-audio-fab--remembered");
     if (playing) {
@@ -1474,6 +1561,10 @@
     window.PaleomaginaText?.refresh?.();
     window.PaleomaginaSections?.refresh?.();
     window.PaleomaginaParallax?.refresh?.();
+    relocateFab();
+    updateFab();
+    updateNarrationFab();
+    if (!REDUCED) restoreAmbientFromStorage();
   }
 
   function initCinema() {

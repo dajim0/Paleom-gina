@@ -26,7 +26,7 @@
     href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=81" />
+  <link rel="stylesheet" href="../styles.css?v=100" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
@@ -41,14 +41,22 @@
         Tu navegador no admite la reproducción de video.
       </video>
       <div class="index-video-intro-copy" aria-hidden="true">
-        <span data-i18n="intro_overlay_deep_time">Tiempo profundo</span>
-        <strong data-i18n="intro_overlay_awakens">Paleomágina despierta</strong>
+        <span data-i18n="intro_welcome">Bienvenido a Paleomágina</span>
+        <strong data-i18n="intro_title">Comienza el viaje al tiempo profundo</strong>
+        <p class="index-video-intro-sub" data-i18n="intro_subtitle">Un recorrido por fósiles, paisaje y memoria de Sierra Mágina.</p>
       </div>
       <div class="index-video-intro-actions">
-        <button type="button" class="index-video-intro-sound" id="indexIntroSound"
-          data-i18n="intro_overlay_sound_label">Sonido dinosaurio</button>
-        <button type="button" class="index-video-intro-skip" id="indexIntroSkip"
-          data-i18n="intro_overlay_skip_label">Entrar al museo</button>
+        <button type="button" class="index-video-intro-sound" id="indexIntroSound" data-i18n="intro_sound">Sonido dinosaurio</button>
+        <button type="button" class="index-video-intro-skip" id="indexIntroSkip" data-i18n="intro_enter">Entrar al museo</button>
+        <label class="index-video-intro-remember">
+          <input type="checkbox" id="indexIntroDoNotShow" />
+          <span data-i18n="intro_remember">No volver a mostrar intro</span>
+        </label>
+      </div>
+      <div class="index-video-intro-progress" aria-hidden="true">
+        <div class="index-video-intro-progress__track">
+          <div class="index-video-intro-progress__fill" id="indexIntroProgress"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -98,7 +106,7 @@
           Recorre millones de años de historia geologica y humana con una experiencia conectada por QR, recursos
           interactivos y ciencia basada en evidencias.
         </p>
-        <a class="btn btn-primary" href="ambitos.html" data-i18n="hero_cta">Comenzar recorrido</a>
+        <a class="btn btn-primary" href="sobre.html" data-i18n="hero_cta">Comenzar recorrido</a>
       </div>
     </section>
 
@@ -132,43 +140,54 @@
             class="pm-inline-icon" />
           <h2 id="time-showcase-title" data-i18n="time_showcase_title">Viaje visual por eras</h2>
         </div>
-        <p class="section-intro mb-4" data-i18n="time_showcase_intro">Siente cómo el paisaje cambia a cada hora y
-          descubre escenas de tiempo profundo
+        <p class="section-intro mb-4" data-i18n="time_showcase_intro">Siente cómo el paisaje cambia a cada hora y descubre escenas de tiempo profundo
           que emergen en movimiento.</p>
         <div class="time-stage-grid">
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
-              <img src="../images/site/FOSILES.png" alt="Fósiles como rastro del tiempo profundo" width="1200"
-                height="800" loading="lazy" decoding="async" data-i18n-alt="img_time_stage_1_alt" />
+              <img src="../images/site/FOSILES.png" alt="Fósiles como rastro del tiempo profundo" data-i18n-alt="img_time_fossils_alt" width="1200"
+                height="800" loading="lazy" decoding="async" />
             </figure>
-            <h3 data-i18n="time_stage_1_title">Tierra primitiva</h3>
-            <p data-i18n="time_stage_1_text">Desde mares tibios hasta rocas en formación: un viaje que cobra vida con
-              texturas y brillo suave.</p>
+            <h3 data-i18n="time_stage_earth_title">Tierra primitiva</h3>
+            <p data-i18n="time_stage_earth_text">Desde mares tibios hasta rocas en formación: un viaje que cobra vida con texturas y brillo suave.</p>
           </article>
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
               <img src="../images/site/HERRAMIENTAS PREHISTORICAS.png"
-                alt="Herramientas prehistóricas vinculadas al poblamiento humano" width="1200" height="800"
-                loading="lazy" decoding="async" data-i18n-alt="img_time_stage_2_alt" />
+                alt="Herramientas prehistóricas vinculadas al poblamiento humano" data-i18n-alt="img_time_tools_alt" width="1200" height="800"
+                loading="lazy" decoding="async" />
             </figure>
-            <h3 data-i18n="time_stage_2_title">Hombres y fósiles</h3>
-            <p data-i18n="time_stage_2_text">Ritmos humanos y reliquias en movimiento, con efectos de luz que acompañan
-              cada etapa.</p>
+            <h3 data-i18n="time_stage_humans_title">Hombres y fósiles</h3>
+            <p data-i18n="time_stage_humans_text">Ritmos humanos y reliquias en movimiento, con efectos de luz que acompañan cada etapa.</p>
           </article>
           <article class="time-stage-card animate-on-scroll">
             <figure class="time-stage-media">
               <img src="../images/site/ciencia-tecnologia.png"
-                alt="Ciencia y tecnología aplicadas a la interpretación del patrimonio" width="1200" height="800"
-                loading="lazy" decoding="async" data-i18n-alt="img_time_stage_3_alt" />
+                alt="Ciencia y tecnología aplicadas a la interpretación del patrimonio" data-i18n-alt="img_time_science_alt" width="1200" height="800"
+                loading="lazy" decoding="async" />
             </figure>
-            <h3 data-i18n="time_stage_3_title">Presente y futuro</h3>
-            <p data-i18n="time_stage_3_text">Un vistazo al Antropoceno en el que la naturaleza y la tecnología se cruzan
-              en una escena dinámica.</p>
+            <h3 data-i18n="time_stage_future_title">Presente y futuro</h3>
+            <p data-i18n="time_stage_future_text">Un vistazo al Antropoceno en el que la naturaleza y la tecnología se cruzan en una escena dinámica.</p>
           </article>
         </div>
         <div class="time-showcase-cta text-center mt-4">
           <a class="btn btn-primary" href="ambitos.html" data-i18n="time_showcase_cta">Explorar ámbitos</a>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="visit-journey-home" aria-labelledby="visit-journey-home-title">
+      <div class="container">
+        <h2 id="visit-journey-home-title" class="pm-heading-with-icon">
+          <img src="../images/site/icono-arqueologo.png" alt="" width="56" height="56" loading="lazy" decoding="async"
+            class="pm-inline-icon" />
+          <span data-i18n="visit_journey_title">Antes, durante y después de la visita</span>
+        </h2>
+        <p class="section-intro mb-4" data-i18n="visit_journey_lead"></p>
+        <div id="visit-journey-grid" class="visit-journey-grid row g-3"></div>
+        <p class="text-center mt-4 mb-0">
+          <a href="recursos.html" class="btn btn-outline-primary" data-i18n="home_visit_journey_cta">Planificar la visita</a>
+        </p>
       </div>
     </section>
 
@@ -181,13 +200,10 @@
           <p class="section-intro mb-3" data-i18n="contact_intro">Escríbenos para organizar visitas escolares,
             actividades en grupo y colaboraciones científicas.</p>
           <ul class="list-unstyled mb-0 contact-details">
-            <li class="mb-2"><strong data-i18n="contact_label_email">Email:</strong><br /><a
-                href="mailto:info@paleomagina.org">info@paleomagina.org</a>
+            <li class="mb-2"><strong data-i18n="contact_email_label">Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a>
             </li>
-            <li class="mb-2"><strong data-i18n="contact_label_phone">Teléfono:</strong><br /><a
-                href="tel:+34000000000">+34 000 000 000</a></li>
-            <li class="mb-0"><strong data-i18n="contact_label_location">Ubicación:</strong><br /><span
-                data-i18n="contact_location_address">Sierra Mágina, Jaén</span></li>
+            <li class="mb-2"><strong data-i18n="contact_phone_label">Teléfono:</strong><br /><a href="tel:+34000000000">+34 000 000 000</a></li>
+            <li class="mb-0"><strong data-i18n="contact_location_label">Ubicación:</strong><br /><span>Sierra Mágina, Jaén</span></li>
           </ul>
         </div>
         <div class="card qr-card">
@@ -218,11 +234,9 @@
       </div>
       <div>
         <h3 data-i18n="footer_contact">Contacto</h3>
-        <p><strong data-i18n="contact_label_email">Email:</strong><br><a
-            href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
-        <p><strong data-i18n="contact_label_phone">Teléfono:</strong><br>+34 000 000 000</p>
-        <p><strong data-i18n="contact_label_location">Ubicación:</strong><br><span
-            data-i18n="contact_location_address">Sierra Mágina, Jaén</span></p>
+        <p><strong data-i18n="contact_email_label">Email:</strong><br><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+        <p><strong data-i18n="contact_phone_label">Teléfono:</strong><br>+34 000 000 000</p>
+        <p><strong data-i18n="contact_location_label">Ubicación:</strong><br><span>Sierra Mágina, Jaén</span></p>
       </div>
       <div>
         <h3 data-i18n="footer_legal_heading">Información legal</h3>
@@ -235,14 +249,13 @@
       </div>
     </div>
     <div class="container footer-copy">
-      <p class="mb-0" data-i18n="footer_copy">© 2026 Centro de Interpretación Paleomágina. Todos los derechos
-        reservados.</p>
+      <p class="mb-0" data-i18n="footer_copyright">© 2026 Centro de Interpretación Paleomágina. Todos los derechos reservados.</p>
     </div>
   </footer>
 
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="../data.js?v=21"></script>
-  <script defer src="../script.js?v=22"></script>
+  <script defer src="../data.js?v=32"></script>
+  <script defer src="../script.js?v=41"></script>
 </body>
 
 

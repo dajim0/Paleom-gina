@@ -28,6 +28,10 @@
     });
   }
 
+  function hasActiveFilter() {
+    return Boolean(state.theme || state.playlist || state.scope);
+  }
+
   function renderRoutes(lang) {
     const el = document.getElementById("av-routes-grid");
     if (!el) return;
@@ -124,7 +128,7 @@
       <div class="av-card-glossary">
         <strong class="av-card-label">${escapeHtml(t("av_glossary_label"))}</strong>
         <div class="av-glossary-tags">
-          ${terms.map((term) => `<a class="av-glossary-tag" href="glosario.html">${escapeHtml(term)}</a>`).join("")}
+          ${terms.map((term) => `<a class="av-glossary-tag" href="glosario.html?term=${encodeURIComponent(term)}">${escapeHtml(term)}</a>`).join("")}
         </div>
       </div>
     `;
@@ -180,7 +184,7 @@
     const footer = item.planned
       ? `<a class="btn btn-sm btn-outline-primary mt-auto" href="${escapeHtml(item.ambitoLink || "ambitos.html")}">${escapeHtml(t("av_planned_cta"))}</a>`
       : item.scope
-        ? `<a class="btn btn-sm btn-link px-0 mt-auto" href="ambitos.html">${escapeHtml(t("av_scope_link"))} · ${escapeHtml(item.scope)}</a>`
+        ? `<a class="btn btn-sm btn-link px-0 mt-auto" href="ambitos.html?scope=${encodeURIComponent(item.scope)}">${escapeHtml(t("av_scope_link"))} · ${escapeHtml(item.scope)}</a>`
         : "";
 
     const details =
@@ -267,7 +271,7 @@
     const items = filterItems(getCatalog(lang).items || []);
     const visibleItems = state.libraryOpen ? items : items.slice(0, 2);
     grid.innerHTML = visibleItems.map(renderCard).join("");
-    if (empty) empty.classList.toggle("d-none", items.length > 0);
+    if (empty) empty.classList.toggle("d-none", items.length > 0 || !hasActiveFilter());
     renderActiveFilters(lang);
     ensureAudiovisualContentVisible();
     updateLibraryPanel();
@@ -340,9 +344,29 @@
     });
   }
 
+  function initFromUrl() {
+    state.theme = null;
+    state.playlist = null;
+    state.scope = null;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const scope = params.get("scope");
+      const playlist = params.get("playlist");
+      if (scope) {
+        state.scope = scope.trim().toUpperCase();
+        state.libraryOpen = true;
+      }
+      if (playlist) {
+        state.playlist = playlist.trim();
+        state.libraryOpen = true;
+      }
+    } catch (_) { /* ignore */ }
+  }
+
   function init() {
     if (!document.getElementById("audiovisuals-page")) return;
     if (typeof currentLang === "undefined" || typeof getAudiovisualCatalog !== "function") return;
+    initFromUrl();
     bindEvents();
     renderAll(currentLang);
     if (window._pmAvLangHook) return;

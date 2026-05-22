@@ -4,9 +4,22 @@
 
 // ── Estado global ────────────────────────────────────────────────────
 const defaultLang = "es";
+const langStorageKey = "paleomagina-lang";
 let currentLang = defaultLang;
 const themeStorageKey = "paleomagina-theme";
 let currentTheme = "light";
+
+function normalizeLang(lang) {
+  return lang === "en" ? "en" : "es";
+}
+
+function getInitialLang() {
+  try {
+    const saved = localStorage.getItem(langStorageKey);
+    if (saved === "es" || saved === "en") return saved;
+  } catch (_) { }
+  return defaultLang;
+}
 
 // ── Exponer helper de traducción (timeline.js y otros módulos) ───────
 function paleomaginaT(key, replacements) {
@@ -46,6 +59,313 @@ function renderScopes(lang) {
     })
     .join("");
 }
+
+// ── Deep links, mapa territorial y visita (QR ?scope=A4) ─────────────
+const PM_SCOPE_CODES = ["AAN", "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "ATZ"];
+
+function normalizeScopeCode(raw) {
+  if (!raw) return null;
+  const code = String(raw).trim().toUpperCase();
+  return PM_SCOPE_CODES.includes(code) ? code : null;
+}
+
+function getScopeCodeFromLocation() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    return normalizeScopeCode(params.get("scope"));
+  } catch {
+    return null;
+  }
+}
+
+function scopeKeyToCode(scopeKey) {
+  if (!scopeKey) return null;
+  const id = scopeKey.replace(/^scope_/, "");
+  if (id === "atz") return "ATZ";
+  if (id === "aan") return "AAN";
+  return id.toUpperCase();
+}
+
+function getMuseumFloorForScope(code) {
+  const lang = currentLang === "en" ? "en" : "es";
+  const info = typeof getQRInfo === "function" ? getQRInfo(code, lang) : qrIndex?.[lang]?.[code];
+  if (!info?.floor) return "P1";
+  const f = info.floor;
+  return f === "PB" || f === "GF" ? "PB" : "P1";
+}
+
+function getScopeVideos(code, lang, limit = 3) {
+  if (typeof getAudiovisualCatalog !== "function") return [];
+  const items = getAudiovisualCatalog(lang)?.items || [];
+  return items.filter((item) => item.scope === code && !item.planned).slice(0, limit);
+}
+
+function buildScopeCrossLinksEl(code, lang) {
+  const wrap = document.createElement("div");
+  wrap.className = "pm-scope-crosslinks small border-top pt-3 mt-3";
+
+  const videos = getScopeVideos(code, lang);
+  if (videos.length) {
+    const vTitle = document.createElement("p");
+    vTitle.className = "fw-semibold mb-1";
+    vTitle.textContent = paleomaginaT("scope_cross_videos") || "Vídeos relacionados";
+    wrap.appendChild(vTitle);
+    const vList = document.createElement("ul");
+    vList.className = "mb-2 ps-3";
+    videos.forEach((item) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = `audiovisuales.html?scope=${encodeURIComponent(code)}`;
+      a.textContent = item.title;
+      li.appendChild(a);
+      vList.appendChild(li);
+    });
+    wrap.appendChild(vList);
+  }
+
+  const terms = scopeGlossaryHints?.[code] || [];
+  if (terms.length) {
+    const gTitle = document.createElement("p");
+    gTitle.className = "fw-semibold mb-1";
+    gTitle.textContent = paleomaginaT("scope_cross_glossary") || "Glosario";
+    wrap.appendChild(gTitle);
+    const gDiv = document.createElement("div");
+    gDiv.className = "d-flex flex-wrap gap-1 mb-2";
+    terms.forEach((term) => {
+      const a = document.createElement("a");
+      a.className = "badge text-bg-light text-decoration-none";
+      a.href = `glosario.html?term=${encodeURIComponent(term)}`;
+      a.textContent = term;
+      gDiv.appendChild(a);
+    });
+    wrap.appendChild(gDiv);
+  }
+
+  const mapBtn = document.createElement("button");
+  mapBtn.type = "button";
+  mapBtn.className = "btn btn-sm btn-outline-primary";
+  mapBtn.textContent = paleomaginaT("scope_cross_map") || "Ver en el plano del museo";
+  mapBtn.addEventListener("click", () => {
+    const mapSection = document.getElementById("museum-interactive-map");
+    if (mapSection) mapSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.PaleomaginaMuseum?.highlightScope?.(code, { floor: getMuseumFloorForScope(code) });
+  });
+  wrap.appendChild(mapBtn);
+  return wrap;
+}
+
+function openPaleomaginaScope(code) {
+  const normalized = normalizeScopeCode(code);
+  if (!normalized) return;
+
+  const collapse = document.getElementById(`exhibit-collapse-${normalized}`);
+  if (collapse) {
+    const item = collapse.closest(".accordion-item");
+    if (item) {
+      document.querySelectorAll(".pm-exhibit-route-accordion .accordion-item").forEach((el) => {
+        el.classList.remove("pm-scope-highlight");
+      });
+      item.classList.add("pm-scope-highlight");
+    }
+    if (window.bootstrap?.Collapse) {
+      const instance = bootstrap.Collapse.getOrCreateInstance(collapse, { toggle: false });
+      instance.show();
+    } else {
+      collapse.classList.add("show");
+    }
+    const heading = document.getElementById(`exhibit-heading-${normalized}`);
+    const btn = heading?.querySelector(".accordion-button");
+    if (btn) {
+      btn.classList.remove("collapsed");
+      btn.setAttribute("aria-expanded", "true");
+    }
+    collapse.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  if (window.PaleomaginaMuseum?.highlightScope) {
+    window.PaleomaginaMuseum.highlightScope(normalized, { floor: getMuseumFloorForScope(normalized) });
+  }
+}
+
+window.openPaleomaginaScope = openPaleomaginaScope;
+
+function initTerritoryMap() {
+  const root = document.getElementById("territory-map-root");
+  if (!root || typeof territoryPoints === "undefined") return;
+
+  const lang = currentLang === "en" ? "en" : "es";
+  const panel = document.getElementById("territory-map-panel");
+  const panelTitle = document.getElementById("territory-map-panel-title");
+  const panelDesc = document.getElementById("territory-map-panel-desc");
+  const panelEvidence = document.getElementById("territory-map-panel-evidence");
+  const panelBtn = document.getElementById("territory-map-panel-btn");
+
+  const selectPoint = (point) => {
+    root.querySelectorAll(".territory-map-marker").forEach((m) => {
+      m.classList.toggle("is-active", m.dataset.pointId === point.id);
+    });
+    root.querySelectorAll(".territory-map-card").forEach((b) => {
+      b.classList.toggle("active", b.dataset.pointId === point.id);
+    });
+    if (panelTitle) panelTitle.textContent = point.title[lang] || point.title.es;
+    if (panelDesc) panelDesc.textContent = point.desc[lang] || point.desc.es;
+    if (panelEvidence) panelEvidence.textContent = point.evidence?.[lang] || point.evidence?.es || "";
+    if (panelBtn) {
+      panelBtn.classList.remove("d-none");
+      const scopeLabel = paleomaginaT("territory_map_scope_label") || "Ámbito relacionado";
+      const openLabel = paleomaginaT("territory_map_open_scope") || "Abrir ámbito en el recorrido";
+      panelBtn.textContent = `${openLabel} · ${scopeLabel} ${point.scope}`;
+      panelBtn.onclick = () => openPaleomaginaScope(point.scope);
+    }
+  };
+
+  const markersWrap = document.createElement("div");
+  markersWrap.className = "territory-map-markers";
+
+  territoryPoints.forEach((point) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "territory-map-marker";
+    btn.dataset.pointId = point.id;
+    btn.style.left = `${point.x}%`;
+    btn.style.top = `${point.y}%`;
+    if (point.size) btn.style.setProperty("--marker-size", `${point.size}%`);
+    btn.title = point.title[lang] || point.title.es;
+    btn.innerHTML = `<span aria-hidden="true"></span><span class="visually-hidden">${btn.title}</span>`;
+    btn.addEventListener("click", () => selectPoint(point));
+    markersWrap.appendChild(btn);
+  });
+
+  const mapShell = document.createElement("div");
+  mapShell.className = "territory-map-canvas position-relative";
+  const mapImg = document.createElement("img");
+  mapImg.className = "territory-map-image";
+  mapImg.src = "../images/site/mapa interpretativo.png";
+  mapImg.alt = paleomaginaT("territory_map_aria") || "Mapa interpretativo de Sierra Mágina";
+  mapImg.loading = "lazy";
+  mapImg.decoding = "async";
+  mapShell.appendChild(mapImg);
+  mapShell.appendChild(markersWrap);
+
+  const list = document.createElement("div");
+  list.className = "territory-map-list";
+  territoryPoints.forEach((point) => {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "territory-map-card";
+    item.dataset.pointId = point.id;
+    item.innerHTML = `
+      <span class="territory-map-card__icon" aria-hidden="true">${point.icon || "📍"}</span>
+      <span class="territory-map-card__body">
+        <strong>${point.title[lang] || point.title.es}</strong>
+        <small>${point.kind?.[lang] || point.kind?.es || ""} · ${point.scope}</small>
+      </span>
+    `;
+    item.addEventListener("click", () => selectPoint(point));
+    list.appendChild(item);
+  });
+
+  root.innerHTML = "";
+  const grid = document.createElement("div");
+  grid.className = "row g-4 align-items-stretch";
+  const colMap = document.createElement("div");
+  colMap.className = "col-lg-7";
+  colMap.appendChild(mapShell);
+  const colSide = document.createElement("div");
+  colSide.className = "col-lg-5 d-flex flex-column gap-3";
+  colSide.appendChild(list);
+  if (panel) colSide.appendChild(panel);
+  grid.appendChild(colMap);
+  grid.appendChild(colSide);
+  root.appendChild(grid);
+
+  if (territoryPoints[0]) selectPoint(territoryPoints[0]);
+}
+
+function initVisitJourney() {
+  const root = document.getElementById("visit-journey-grid");
+  if (!root) return;
+
+  const steps = [
+    {
+      key: "before",
+      href: "audiovisuales.html?playlist=before",
+      icon: "🎒",
+    },
+    {
+      key: "during",
+      href: "ambitos.html",
+      icon: "🗺️",
+    },
+    {
+      key: "after",
+      href: "audiovisuales.html?playlist=after",
+      icon: "📚",
+    },
+  ];
+
+  root.innerHTML = steps
+    .map(
+      (step) => `
+      <article class="col-md-4 visit-journey-card card h-100">
+        <div class="card-body d-flex flex-column">
+          <span class="visit-journey-card__icon" aria-hidden="true">${step.icon}</span>
+          <h3 class="h5" data-i18n="visit_journey_${step.key}_title"></h3>
+          <p class="small flex-grow-1" data-i18n="visit_journey_${step.key}_text"></p>
+          <a class="btn btn-sm btn-primary mt-2" href="${step.href}" data-i18n="visit_journey_${step.key}_cta"></a>
+        </div>
+      </article>
+    `
+    )
+    .join("");
+
+  const lang = currentLang === "en" ? "en" : "es";
+  root.querySelectorAll("[data-i18n]").forEach((node) => {
+    const val = translations[lang]?.[node.dataset.i18n];
+    if (val !== undefined) node.textContent = val;
+  });
+}
+
+function applyGlossaryTermFromUrl() {
+  if (!document.getElementById("glossary-list")) return;
+  let term = null;
+  try {
+    term = new URLSearchParams(window.location.search).get("term");
+  } catch {
+    return;
+  }
+  if (!term) return;
+
+  const decoded = decodeURIComponent(term).trim();
+  const searchInput = document.getElementById("glossary-input");
+  if (searchInput) {
+    searchInput.value = decoded;
+    searchInput.dispatchEvent(new Event("input"));
+  }
+
+  window.setTimeout(() => {
+    const entries = [...document.querySelectorAll(".glossary-entry")];
+    const match = entries.find((el) => {
+      const summary = el.querySelector(".glossary-term");
+      return summary && summary.textContent.toLowerCase().includes(decoded.toLowerCase());
+    });
+    if (match) {
+      match.open = true;
+      match.scrollIntoView({ behavior: "smooth", block: "center" });
+      match.classList.add("pm-glossary-term-highlight");
+    }
+  }, 80);
+}
+
+document.addEventListener("pm:navigation", () => {
+  initTerritoryMap();
+  initVisitJourney();
+  const scope = getScopeCodeFromLocation();
+  if (scope && document.getElementById("exhibit-route-accordion")) {
+    window.setTimeout(() => openPaleomaginaScope(scope), 200);
+  }
+  applyGlossaryTermFromUrl();
+});
 
 // ── Acordeón de recorrido AAN–ATZ (ambitos.html) ─────────────────────
 function initAmbitosExhibitRoute() {
@@ -127,6 +447,10 @@ function initAmbitosExhibitRoute() {
       body.appendChild(ul);
     }
 
+    const cross = buildScopeCrossLinksEl(code, lang);
+    if (cross) body.appendChild(cross);
+
+    item.dataset.pmScope = code;
     region.appendChild(body);
     hEl.appendChild(btn);
     item.appendChild(hEl);
@@ -137,6 +461,11 @@ function initAmbitosExhibitRoute() {
   root.appendChild(acc);
   const aria = paleomaginaT("expo_route_accordion_aria");
   if (aria) acc.setAttribute("aria-label", aria);
+
+  const fromUrl = getScopeCodeFromLocation();
+  if (fromUrl) {
+    window.setTimeout(() => openPaleomaginaScope(fromUrl), 180);
+  }
 }
 
 // ── Carrito de entradas (recursos.html) ───────────────────────────────
@@ -315,6 +644,7 @@ function initTicketCart() {
 
 // ── Aplica idioma ────────────────────────────────────────────────────
 function applyLanguage(lang) {
+  lang = normalizeLang(lang);
   currentLang = lang;
   document.documentElement.lang = lang;
 
@@ -344,6 +674,8 @@ function applyLanguage(lang) {
   renderScopes(lang);
   updateThemeButtonLabel();
   initAmbitosExhibitRoute();
+  initTerritoryMap();
+  initVisitJourney();
   initTicketCart();
 }
 
@@ -700,7 +1032,57 @@ function initIndexIntroVideo() {
   const video = document.getElementById("indexIntroVideo");
   const skipButton = document.getElementById("indexIntroSkip");
   const soundButton = document.getElementById("indexIntroSound");
+  const doNotShowInput = document.getElementById("indexIntroDoNotShow");
+  const progressFill = document.getElementById("indexIntroProgress");
   if (!overlay || !video) return;
+  const introShell = overlay.querySelector(".index-video-intro-shell");
+
+  const INTRO_SKIP_STORAGE_KEY = "paleomagina-skip-index-intro-current-visit";
+  const INTRO_LEAVE_MS = 760;
+
+  const getNavigationType = () => {
+    const navEntry = performance.getEntriesByType?.("navigation")?.[0];
+    if (navEntry?.type) return navEntry.type;
+    return performance.navigation?.type === 1 ? "reload" : "navigate";
+  };
+
+  const shouldResetIntroSkip = () => {
+    if (getNavigationType() === "reload") return true;
+    if (!document.referrer) return true;
+    try {
+      return new URL(document.referrer).origin !== window.location.origin;
+    } catch {
+      return true;
+    }
+  };
+
+  const shouldSkipIntro = () => {
+    try {
+      return sessionStorage.getItem(INTRO_SKIP_STORAGE_KEY) === "1";
+    } catch {
+      return false;
+    }
+  };
+
+  const setSkipIntroPreference = (enabled) => {
+    try {
+      sessionStorage.setItem(INTRO_SKIP_STORAGE_KEY, enabled ? "1" : "0");
+    } catch (_) { }
+  };
+
+  try {
+    localStorage.removeItem("paleomagina-skip-index-intro");
+    if (shouldResetIntroSkip()) sessionStorage.removeItem(INTRO_SKIP_STORAGE_KEY);
+  } catch (_) { }
+
+  if (shouldSkipIntro()) {
+    overlay.classList.add("d-none");
+    overlay.setAttribute("aria-hidden", "true");
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+    return;
+  }
 
   let hidden = false;
   let fallbackTimer = null;
@@ -834,109 +1216,53 @@ function initIndexIntroVideo() {
     document.addEventListener("keydown", resumeIntroAudio, { once: true });
   };
 
-  // Hint element shown when autoplay is blocked: creates a large tappable area
-  let soundHintElement = null;
-  const createSoundHintElement = () => {
-    if (soundHintElement) return soundHintElement;
-    const hint = document.createElement('div');
-    hint.className = 'index-video-intro-sound-hint';
-    hint.setAttribute('role', 'button');
-    hint.setAttribute('tabindex', '0');
-    const label = (typeof paleomaginaT === 'function') ? paleomaginaT('intro_sound_hint') || 'Toca para activar sonido' : 'Toca para activar sonido';
-    hint.innerHTML = `
-      <div class="index-video-intro-sound-hint__inner">
-        <strong>${label}</strong>
-        <div class="index-video-intro-sound-hint__sub">${(typeof paleomaginaT === 'function') ? paleomaginaT('intro_sound_hint_sub') || 'Pulsa aquí para activar audio y continuar' : 'Pulsa aquí para activar audio y continuar'}</div>
-      </div>`;
-
-    const activate = (ev) => {
-      ev?.preventDefault();
-      try { enableIntroSound(); } catch (_) {}
-      video.play().catch(() => {});
-      hideSoundHint();
-    };
-
-    hint.addEventListener('pointerdown', activate);
-    hint.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') activate(e); });
-    soundHintElement = hint;
-    return soundHintElement;
-  };
-
-  const showSoundHint = () => {
-    if (!overlay) return;
-    const el = createSoundHintElement();
-    if (!overlay.contains(el)) overlay.appendChild(el);
-    overlay.classList.add('index-video-intro-overlay--show-hint');
-    el.classList.remove('d-none');
-  };
-
-  const hideSoundHint = () => {
-    if (!overlay || !soundHintElement) return;
-    try { overlay.classList.remove('index-video-intro-overlay--show-hint'); } catch (_) {}
-    try { soundHintElement.classList.add('d-none'); } catch (_) {}
+  const updateIntroProgress = () => {
+    if (!progressFill) return;
+    const duration = video.duration;
+    if (!Number.isFinite(duration) || duration <= 0) {
+      progressFill.style.width = "0%";
+      return;
+    }
+    const pct = Math.min(100, Math.max(0, (video.currentTime / duration) * 100));
+    progressFill.style.width = `${pct}%`;
   };
 
   const enableIntroSound = () => {
-    if (hidden) return;
+    if (hidden || introSoundEnabled) return;
     introSoundEnabled = true;
     soundButton?.classList.add("index-video-intro-sound--active");
     soundButton?.setAttribute("aria-pressed", "true");
-    // Ensure any previous timers/audio are stopped before scheduling
-    stopIntroAudio();
-    // proceed to schedule audio playback
-
-    // Calculate cues and play immediately as this is a user gesture
-    const cues = getIntroAudioCues();
-    const currentMs = (video.currentTime || 0) * 1000;
-
-    // Start steps if we're before the end cue
-    if (currentMs < cues.stepsEndMs) {
-      playIntroAudio("steps");
-      // schedule stopping steps at the end cue
-      const stopDelay = Math.max(0, cues.stepsEndMs - currentMs);
-      introAudioTimers.push(window.setTimeout(stopSteps, stopDelay));
-    }
-
-    // Schedule or play the roar depending on timing
-    const roarDelay = cues.roarMs - currentMs;
-    if (roarDelay <= 0) {
-      playIntroAudio("roar");
-    } else {
-      introAudioTimers.push(window.setTimeout(() => playIntroAudio("roar"), roarDelay));
-    }
-  };
-
-  const disableIntroSound = () => {
-    introSoundEnabled = false;
-    soundButton?.classList.remove("index-video-intro-sound--active");
-    soundButton?.setAttribute("aria-pressed", "false");
-    stopIntroAudio();
+    if (soundButton) soundButton.textContent = paleomaginaT("intro_sound_active") || "Sonido activado";
+    scheduleIntroAudio();
   };
 
   const hideIntro = () => {
     if (hidden) return;
     hidden = true;
+    if (doNotShowInput?.checked) setSkipIntroPreference(true);
     window.clearTimeout(fallbackTimer);
     overlay.classList.add("index-video-intro-overlay--leaving");
+    introShell?.classList.add("index-video-intro-shell--leaving");
+    document.body.classList.remove("index-video-intro-visible");
+    document.body.classList.add("index-video-page-entering");
     window.setTimeout(() => {
       overlay.classList.add("d-none");
       overlay.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("index-video-intro-visible");
       video.pause();
       stopIntroAudio();
-      // remove timeupdate listener
-      video.removeEventListener('timeupdate', syncIntroAudio);
-    }, 520);
+      if (progressFill) progressFill.style.width = "0%";
+    }, INTRO_LEAVE_MS);
+    window.setTimeout(() => {
+      document.body.classList.remove("index-video-page-entering");
+    }, 1200);
   };
 
   video.addEventListener("canplay", () => overlay.classList.add("index-video-intro-overlay--ready"), { once: true });
   video.addEventListener("loadedmetadata", () => {
-    // Preload/create audio elements and attempt initial sync
     scheduleIntroAudio();
-    syncIntroAudio();
-    // attach timeupdate for continuous sync
-    video.addEventListener('timeupdate', syncIntroAudio);
+    updateIntroProgress();
   }, { once: true });
+  video.addEventListener("timeupdate", updateIntroProgress);
   video.addEventListener("ended", hideIntro, { once: true });
   video.addEventListener("error", hideIntro, { once: true });
   // Set initial visual state
@@ -948,6 +1274,9 @@ function initIndexIntroVideo() {
     else enableIntroSound();
   });
   skipButton?.addEventListener("click", hideIntro);
+  doNotShowInput?.addEventListener("change", () => {
+    if (!doNotShowInput.checked) setSkipIntroPreference(false);
+  });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !hidden) hideIntro();
   });
@@ -971,7 +1300,11 @@ function initIndexIntroVideo() {
 
 // ── Listeners globales ───────────────────────────────────────────────
 document.querySelectorAll(".lang-btn").forEach((btn) => {
-  btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+  btn.addEventListener("click", () => {
+    const lang = normalizeLang(btn.dataset.lang);
+    try { localStorage.setItem(langStorageKey, lang); } catch (_) { }
+    applyLanguage(lang);
+  });
 });
 
 document.querySelectorAll(".theme-toggle").forEach((btn) => {
@@ -989,7 +1322,8 @@ try {
 }
 
 applyTheme(initialTheme);
-applyLanguage(defaultLang);
+applyLanguage(getInitialLang());
+applyGlossaryTermFromUrl();
 enablePageTransitions();
 initMainNavActiveState();
 keepTopNavFixed();
@@ -1025,7 +1359,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=14");
+  loadPaleomaginaModule("cinematic.js?v=24");
 }
 
 /* ============================================
@@ -1064,6 +1398,20 @@ function initPaleomaginaMuseumMap() {
 
   let currentFloor = 'PB';
   let renderTaskId = 0;
+  let pendingScopeHighlight = null;
+
+  function highlightScopeOnMap(code, options = {}) {
+    const normalized = normalizeScopeCode(code);
+    if (!normalized) return;
+    pendingScopeHighlight = {
+      code: normalized,
+      floor: options.floor || getMuseumFloorForScope(normalized),
+    };
+    document.querySelectorAll("[data-floor]").forEach((b) => {
+      b.classList.toggle("active", b.dataset.floor === pendingScopeHighlight.floor);
+    });
+    renderMuseumMap(pendingScopeHighlight.floor);
+  }
 
   function positionMuseumMapTooltip(event, tooltip, container) {
     if (!tooltip || !container) return;
@@ -1144,6 +1492,9 @@ function initPaleomaginaMuseumMap() {
         polygon.setAttribute('data-zone-id', zone.zoneId);
         polygon.setAttribute('data-zone-color', zone.color);
         polygon.setAttribute('data-scope-key', zone.scopeKey);
+        const scopeCode =
+          /^(AAN|A\d|ATZ)$/.test(zone.zoneId) ? zone.zoneId : scopeKeyToCode(zone.scopeKey);
+        if (scopeCode) polygon.setAttribute("data-scope-code", scopeCode);
         polygon.style.fill = zone.color;
 
         const showTooltip = (e) => {
@@ -1194,6 +1545,27 @@ function initPaleomaginaMuseumMap() {
 
         svgContainer.appendChild(polygon);
       });
+
+      if (pendingScopeHighlight) {
+        const target = pendingScopeHighlight.code;
+        const pendingFloor = pendingScopeHighlight.floor;
+        pendingScopeHighlight = null;
+        const poly = [...svgContainer.querySelectorAll(".museum-zone")].find((p) => {
+          const zid = p.getAttribute("data-zone-id") || "";
+          const sk = scopeKeyToCode(p.getAttribute("data-scope-key"));
+          const sc = p.getAttribute("data-scope-code");
+          return sc === target || zid === target || zid.replace("PB_", "") === target || sk === target;
+        });
+        if (poly) {
+          poly.click();
+          poly.classList.add("pm-scope-map-pulse");
+          document.querySelectorAll(".museum-legend-item").forEach((b) => {
+            b.classList.toggle("active", b.dataset.zoneId === poly.getAttribute("data-zone-id"));
+          });
+        } else if (pendingFloor !== currentFloor) {
+          /* floor already switched via renderMuseumMap */
+        }
+      }
 
       if (legendContainer) {
         legendContainer.innerHTML = floorData.zones.map(zone => {
@@ -1266,6 +1638,16 @@ function initPaleomaginaMuseumMap() {
 
   bindMuseumMapControls();
   renderMuseumMap(currentFloor);
+
+  window.PaleomaginaMuseum = {
+    highlightScope: highlightScopeOnMap,
+    renderFloor: renderMuseumMap,
+  };
+
+  const scopeFromUrl = getScopeCodeFromLocation();
+  if (scopeFromUrl) {
+    window.setTimeout(() => highlightScopeOnMap(scopeFromUrl), 400);
+  }
 }
 
 initPaleomaginaMuseumMap();
