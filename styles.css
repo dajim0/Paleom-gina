@@ -2974,13 +2974,19 @@ button:focus-visible {
 }
 
 .glossary-group__summary::after {
-  content: "?";
+  content: "";
+  display: inline-block;
+  width: 0.58rem;
+  height: 0.58rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   color: var(--primary);
+  transform: rotate(45deg);
   transition: transform 0.2s ease;
 }
 
 .glossary-group[open] .glossary-group__summary::after {
-  transform: rotate(-180deg);
+  transform: rotate(225deg);
 }
 
 .glossary-group__summary strong {
@@ -3027,13 +3033,20 @@ button:focus-visible {
 }
 
 .glossary-entry summary::after {
-  content: "?";
+  content: "";
+  display: inline-block;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   float: right;
+  margin-top: 0.35rem;
+  transform: rotate(45deg);
   transition: transform 0.2s ease;
 }
 
 .glossary-entry[open] summary::after {
-  transform: rotate(-180deg);
+  transform: rotate(225deg);
 }
 
 .glossary-entry .glossary-definition {
@@ -3175,14 +3188,21 @@ button:focus-visible {
 }
 
 .glossary-guide-card summary::after {
-  content: "?";
+  content: "";
+  display: inline-block;
+  width: 0.54rem;
+  height: 0.54rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   float: right;
   color: var(--primary);
+  margin-top: 0.35rem;
+  transform: rotate(45deg);
   transition: transform 0.2s ease;
 }
 
 .glossary-guide-card[open] summary::after {
-  transform: rotate(-180deg);
+  transform: rotate(225deg);
 }
 
 .glossary-guide-body {
