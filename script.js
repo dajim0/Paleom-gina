@@ -698,7 +698,7 @@ function initIndexIntroVideo() {
   const introShell = overlay.querySelector(".index-video-intro-shell");
   if (!overlay || !video) return;
 
-  const INTRO_LEAVE_MS = 920;
+  const INTRO_LEAVE_MS = 760;
 
   let hidden = false;
   let fallbackTimer = null;
@@ -822,14 +822,18 @@ function initIndexIntroVideo() {
     window.clearTimeout(fallbackTimer);
     overlay.classList.add("index-video-intro-overlay--leaving");
     introShell?.classList.add("index-video-intro-shell--leaving");
+    document.body.classList.remove("index-video-intro-visible");
+    document.body.classList.add("index-video-page-entering");
     window.setTimeout(() => {
       overlay.classList.add("d-none");
       overlay.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("index-video-intro-visible");
       video.pause();
       stopIntroAudio();
       if (progressFill) progressFill.style.width = "0%";
     }, INTRO_LEAVE_MS);
+    window.setTimeout(() => {
+      document.body.classList.remove("index-video-page-entering");
+    }, 1200);
   };
 
   video.addEventListener("canplay", () => overlay.classList.add("index-video-intro-overlay--ready"), { once: true });
@@ -911,7 +915,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=14");
+  loadPaleomaginaModule("cinematic.js?v=15");
 }
 
 /* ============================================

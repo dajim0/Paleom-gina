@@ -753,6 +753,7 @@
   const FADE_RESUME_SEC = 2;
   const FADE_OUT_SEC = 3;
   const TARGET_VOLUME = 0.038;
+  const NARRATION_DUCKED_AMBIENT_VOLUME = 0.018;
   const ICON_SOUND_OFF =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
   const ICON_SOUND_ON =
@@ -1175,7 +1176,7 @@
   function duckAmbientForNarration() {
     if (!playing || !ctx || !master) return;
     ambientDuckedForNarration = true;
-    fadeTo(0.004, 0.8);
+    fadeTo(NARRATION_DUCKED_AMBIENT_VOLUME, 0.8);
   }
 
   function restoreAmbientAfterNarration() {

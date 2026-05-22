@@ -1715,7 +1715,7 @@ body.time-night {
   backdrop-filter: blur(10px);
   padding: 0;
   opacity: 1;
-  transition: opacity 0.92s ease, visibility 0.92s ease;
+  transition: opacity 0.76s ease, visibility 0.76s ease;
 }
 
 .index-video-intro-overlay.d-none {
@@ -1727,6 +1727,45 @@ body.time-night {
   visibility: hidden;
 }
 
+body.index-video-intro-visible :is(.pm-topnav, .hero, .page-hero, main, .site-footer) {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(28px) scale(0.985);
+}
+
+body.index-video-page-entering :is(.pm-topnav, .hero, .page-hero, main, .site-footer) {
+  animation: pmIntroPageEnter 0.82s cubic-bezier(0.2, 0.72, 0.18, 1) both;
+}
+
+body.index-video-page-entering .pm-topnav {
+  animation-delay: 0s;
+}
+
+body.index-video-page-entering :is(.hero, .page-hero) {
+  animation-delay: 0.03s;
+}
+
+body.index-video-page-entering main {
+  animation-delay: 0.08s;
+}
+
+body.index-video-page-entering .site-footer {
+  animation-delay: 0.12s;
+}
+
+body.index-video-page-entering::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10030;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(228, 200, 140, 0.28), transparent 34%),
+    linear-gradient(180deg, rgba(255, 248, 238, 0.14), transparent 58%);
+  mix-blend-mode: screen;
+  animation: pmIntroPageGlow 0.95s ease-out both;
+}
+
 .index-video-intro-shell {
   position: relative;
   width: 100vw;
@@ -1736,12 +1775,12 @@ body.time-night {
   place-items: center;
   background: #030504;
   isolation: isolate;
-  transition: filter 0.85s ease, transform 0.85s ease;
+  transition: filter 0.72s ease, transform 0.72s ease;
 }
 
 .index-video-intro-shell--leaving {
-  filter: blur(6px) brightness(0.72);
-  transform: scale(1.015);
+  filter: blur(6px) brightness(0.7) saturate(0.88);
+  transform: scale(1.018);
 }
 
 .index-video-intro-shell--leaving .index-video-intro-player,
@@ -1749,8 +1788,8 @@ body.time-night {
 .index-video-intro-shell--leaving .index-video-intro-actions,
 .index-video-intro-shell--leaving .index-video-intro-progress {
   opacity: 0;
-  transform: translateY(14px) scale(0.97);
-  transition: opacity 0.72s ease, transform 0.72s ease;
+  transform: translateY(22px) scale(0.95);
+  transition: opacity 0.82s ease, transform 0.82s ease;
 }
 
 .index-video-intro-shell::before,
@@ -1766,6 +1805,13 @@ body.time-night {
   background:
     radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(0, 0, 0, 0.46) 78%),
     linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent 35%, rgba(0, 0, 0, 0.64));
+  transition: opacity 0.8s ease, background 0.8s ease;
+}
+
+.index-video-intro-shell--leaving::before {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(228, 200, 140, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 35%, rgba(0, 0, 0, 0.72));
 }
 
 .index-video-intro-shell::after {
@@ -1915,6 +1961,34 @@ body.time-night {
   color: #ffffff;
   background: rgba(92, 45, 14, 0.76);
   border-color: rgba(240, 217, 168, 0.82);
+}
+
+@keyframes pmIntroPageEnter {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(34px) scale(0.982);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pmIntroPageGlow {
+  0% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 @media (max-width: 767px) {
