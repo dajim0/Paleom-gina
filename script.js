@@ -694,7 +694,11 @@ function initIndexIntroVideo() {
   const video = document.getElementById("indexIntroVideo");
   const skipButton = document.getElementById("indexIntroSkip");
   const soundButton = document.getElementById("indexIntroSound");
+  const progressFill = document.getElementById("indexIntroProgress");
+  const introShell = overlay.querySelector(".index-video-intro-shell");
   if (!overlay || !video) return;
+
+  const INTRO_LEAVE_MS = 920;
 
   let hidden = false;
   let fallbackTimer = null;
@@ -792,11 +796,23 @@ function initIndexIntroVideo() {
     document.addEventListener("keydown", resumeIntroAudio, { once: true });
   };
 
+  const updateIntroProgress = () => {
+    if (!progressFill) return;
+    const duration = video.duration;
+    if (!Number.isFinite(duration) || duration <= 0) {
+      progressFill.style.width = "0%";
+      return;
+    }
+    const pct = Math.min(100, Math.max(0, (video.currentTime / duration) * 100));
+    progressFill.style.width = `${pct}%`;
+  };
+
   const enableIntroSound = () => {
-    if (hidden) return;
+    if (hidden || introSoundEnabled) return;
     introSoundEnabled = true;
     soundButton?.classList.add("index-video-intro-sound--active");
     soundButton?.setAttribute("aria-pressed", "true");
+    if (soundButton) soundButton.textContent = "Sonido activado";
     scheduleIntroAudio();
   };
 
@@ -805,17 +821,23 @@ function initIndexIntroVideo() {
     hidden = true;
     window.clearTimeout(fallbackTimer);
     overlay.classList.add("index-video-intro-overlay--leaving");
+    introShell?.classList.add("index-video-intro-shell--leaving");
     window.setTimeout(() => {
       overlay.classList.add("d-none");
       overlay.setAttribute("aria-hidden", "true");
       document.body.classList.remove("index-video-intro-visible");
       video.pause();
       stopIntroAudio();
-    }, 520);
+      if (progressFill) progressFill.style.width = "0%";
+    }, INTRO_LEAVE_MS);
   };
 
   video.addEventListener("canplay", () => overlay.classList.add("index-video-intro-overlay--ready"), { once: true });
-  video.addEventListener("loadedmetadata", scheduleIntroAudio, { once: true });
+  video.addEventListener("loadedmetadata", () => {
+    scheduleIntroAudio();
+    updateIntroProgress();
+  }, { once: true });
+  video.addEventListener("timeupdate", updateIntroProgress);
   video.addEventListener("ended", hideIntro, { once: true });
   video.addEventListener("error", hideIntro, { once: true });
   soundButton?.setAttribute("aria-pressed", "false");

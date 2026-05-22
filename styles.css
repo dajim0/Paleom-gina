@@ -1715,7 +1715,7 @@ body.time-night {
   backdrop-filter: blur(10px);
   padding: 0;
   opacity: 1;
-  transition: opacity 0.52s ease, visibility 0.52s ease;
+  transition: opacity 0.92s ease, visibility 0.92s ease;
 }
 
 .index-video-intro-overlay.d-none {
@@ -1736,6 +1736,21 @@ body.time-night {
   place-items: center;
   background: #030504;
   isolation: isolate;
+  transition: filter 0.85s ease, transform 0.85s ease;
+}
+
+.index-video-intro-shell--leaving {
+  filter: blur(6px) brightness(0.72);
+  transform: scale(1.015);
+}
+
+.index-video-intro-shell--leaving .index-video-intro-player,
+.index-video-intro-shell--leaving .index-video-intro-copy,
+.index-video-intro-shell--leaving .index-video-intro-actions,
+.index-video-intro-shell--leaving .index-video-intro-progress {
+  opacity: 0;
+  transform: translateY(14px) scale(0.97);
+  transition: opacity 0.72s ease, transform 0.72s ease;
 }
 
 .index-video-intro-shell::before,
@@ -1762,21 +1777,21 @@ body.time-night {
 }
 
 .index-video-intro-player {
-  width: min(88vw, 1120px);
-  height: min(78vh, 760px);
+  width: min(78vw, 980px);
+  height: min(66vh, 620px);
   border: 0;
   background: transparent !important;
   object-fit: contain;
   filter: drop-shadow(0 30px 55px rgba(0, 0, 0, 0.5)) contrast(1.05) saturate(1.06);
   opacity: 0;
-  transform: scale(0.94);
+  transform: scale(0.9);
   transition: opacity 0.8s ease, transform 3.8s ease;
 }
 
 .index-video-intro-overlay--ready .index-video-intro-player,
 .index-video-intro-overlay--paused .index-video-intro-player {
   opacity: 1;
-  transform: scale(0.98);
+  transform: scale(0.94);
 }
 
 .index-video-intro-copy {
@@ -1800,11 +1815,57 @@ body.time-night {
 
 .index-video-intro-copy strong {
   display: block;
-  max-width: 12ch;
+  max-width: 15ch;
   font-family: "Caveat Brush", cursive;
-  font-size: clamp(3rem, 9vw, 7.5rem);
-  line-height: 0.88;
+  font-size: clamp(2.5rem, 7vw, 5.9rem);
+  line-height: 0.92;
   color: #fff8ee;
+}
+
+.index-video-intro-sub {
+  margin: 0.85rem 0 0;
+  max-width: 28rem;
+  font-size: clamp(0.92rem, 1.35vw, 1.05rem);
+  line-height: 1.45;
+  font-weight: 500;
+  color: rgba(245, 230, 200, 0.88);
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.index-video-intro-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  padding: 0 clamp(1rem, 4vw, 3rem) clamp(0.65rem, 2vw, 1rem);
+  pointer-events: none;
+}
+
+.index-video-intro-progress__track {
+  height: 4px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.index-video-intro-progress__fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a67c3d, #e4c88c);
+  box-shadow: 0 0 14px rgba(228, 200, 140, 0.45);
+  transition: width 0.12s linear;
+}
+
+.index-video-intro-player,
+.index-video-intro-copy,
+.index-video-intro-actions,
+.index-video-intro-progress {
+  transition: opacity 0.72s ease, transform 0.72s ease;
 }
 
 .index-video-intro-actions {
@@ -1858,18 +1919,24 @@ body.time-night {
 
 @media (max-width: 767px) {
   .index-video-intro-player {
-    width: min(92vw, 680px);
-    height: min(62vh, 520px);
+    width: min(86vw, 560px);
+    height: min(48vh, 410px);
   }
 
   .index-video-intro-copy {
     left: 1rem;
     right: 1rem;
-    bottom: 5.75rem;
+    bottom: 7.25rem;
   }
 
   .index-video-intro-copy strong {
-    max-width: 9ch;
+    max-width: 12ch;
+    font-size: clamp(2.2rem, 13vw, 4rem);
+  }
+
+  .index-video-intro-sub {
+    max-width: none;
+    font-size: 0.9rem;
   }
 
   .index-video-intro-actions {
