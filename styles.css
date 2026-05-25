@@ -7348,6 +7348,10 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   text-decoration: underline;
 }
 
+.pm-easy-read-card__cta {
+  width: fit-content;
+}
+
 .pm-qr-table-wrap {
   font-size: 0.9rem;
 }

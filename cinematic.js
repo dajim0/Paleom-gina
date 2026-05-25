@@ -1380,6 +1380,11 @@
     return getPageNarrationSlug() !== "ficha-docente";
   }
 
+  function shouldShowNarrationControl() {
+    const pagesWithoutNarration = ["lectura-facil", "qr-recursos"];
+    return shouldShowPageAudioControls() && !pagesWithoutNarration.includes(getPageNarrationSlug());
+  }
+
   function getHeroAudioTarget(hero) {
     if (!hero) return null;
     let target = hero.querySelector(".pm-hero-audio-controls");
@@ -1414,25 +1419,33 @@
     document.querySelectorAll(".pm-audio-fab-host").forEach((host) => {
       host.classList.remove("pm-audio-fab-host");
     });
-    [fab, narrationFab].forEach((button) => {
-      if (button) button.hidden = false;
-      button?.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
-    });
+    const showNarration = shouldShowNarrationControl();
+    if (!showNarration) stopNarration();
+
+    if (fab) {
+      fab.hidden = false;
+      fab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+    }
+    if (narrationFab) {
+      narrationFab.hidden = !showNarration;
+      narrationFab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+    }
 
     const hero = findPageHero();
     const target = getHeroAudioTarget(hero) || document.body;
     if (hero) hero.classList.add("pm-audio-fab-host");
 
-    [fab, narrationFab].forEach((button) => {
+    [fab, showNarration ? narrationFab : null].forEach((button) => {
       if (!button) return;
       button.classList.add(hero ? "pm-audio-fab--in-hero" : "pm-audio-fab--fallback");
       target.appendChild(button);
     });
+    if (narrationFab && !showNarration) document.body.appendChild(narrationFab);
 
     fab?.classList.add("pm-audio-fab--mounted");
-    narrationFab?.classList.add("pm-audio-fab--mounted");
+    if (showNarration) narrationFab?.classList.add("pm-audio-fab--mounted");
     updateFab();
-    updateNarrationFab();
+    if (showNarration) updateNarrationFab();
   }
 
   function mountFab() {

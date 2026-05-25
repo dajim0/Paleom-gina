@@ -413,7 +413,8 @@ function initEasyReadPage() {
     const h = document.createElement("h3");
     h.className = "h5 card-title";
     const link = document.createElement("a");
-    link.href = `ambitos.html?scope=${encodeURIComponent(code)}`;
+    const scopeUrl = `ambitos.html?scope=${encodeURIComponent(code)}`;
+    link.href = scopeUrl;
     link.textContent = sc.title || code;
     h.appendChild(link);
     const p = document.createElement("p");
@@ -425,9 +426,14 @@ function initEasyReadPage() {
     if (sc.duration) parts.push((paleomaginaT("scope_extras_duration") || "Duración") + ": " + sc.duration);
     if (sc.audience) parts.push((paleomaginaT("scope_extras_audience") || "Público") + ": " + sc.audience);
     if (parts.length) meta.textContent = parts.join(" · ");
+    const cta = document.createElement("a");
+    cta.className = "btn btn-primary btn-sm pm-easy-read-card__cta mt-3";
+    cta.href = scopeUrl;
+    cta.textContent = paleomaginaT("page_easy_read_open_scope") || "Ver este ámbito";
     body.appendChild(h);
     body.appendChild(p);
     if (parts.length) body.appendChild(meta);
+    body.appendChild(cta);
     card.appendChild(body);
     root.appendChild(card);
   });
