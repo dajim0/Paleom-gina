@@ -1237,7 +1237,7 @@ function initIndexIntroVideo() {
   document.body.classList.add("index-video-intro-visible");
   overlay.setAttribute("aria-hidden", "false");
 
-  const getIntroAudioUrl = (fileName) => new URL(`../audio/${fileName}`, window.location.href).href;
+  const getIntroAudioUrl = (fileName) => `/audio/${fileName}`;
 
   const cleanupIntroAudio = (audio) => {
     if (!audio) return;
