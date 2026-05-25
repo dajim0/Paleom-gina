@@ -132,7 +132,7 @@ const scopeContents = {
     es: {
       title: "Paleolítico superior",
       description: "Innovaciones humanas del Paleolítico superior. Arte, símbolos y consolidación de Homo sapiens.",
-      content: "Hace 40.000 años, los Homo sapiens llegaron a Europa y con ellos nuevas tecnologías y capacidades. El Paleolítico superior vio la explosión del arte: grabados en piedra, esculturas en marfil y hueso, posiblemente música. Las herramientas se hicieron más sofisticadas, con puntas de flecha especializadas para diferentes presas. Las redes sociales se ampliaron, el comercio a larga distancia se intensificó y aparecen los primeros santuarios compartidos.",
+      content: "Hace 40.000 años, los Homo sapiens llegaron a Europa y con ellos nuevas tecnologías y capacidades. El Paleolítico superior vio la explosión del arte: grabados en piedra, esculturas en marfil y hueso, posiblemente música. Las herramientas se hicieron más sofisticadas, con puntas de flecha especializadas para diferentes presas. Las redes sociales se ampliaron, el comercio a larga distancia se intensificó y aparecen los primeros santuarios compartidos. En la comarca de Sierra Mágina, cuevas y abrigos del entorno (Portillo, Graja, Cambil y otros parajes kársticos) ayudan a relacionar el simbolismo rupestre con el paisaje que aún se recorre hoy.",
       timeline: "Paleolítico Superior (40.000-10.000 a.C.)",
       related: "En esta página, vídeos y recursos didácticos amplían el arte y la tecnología lítica de este ámbito.",
       facts: ["Introduce simbolismo, arte y redes sociales más amplias", "Explica herramientas especializadas y nuevas estrategias de caza", "Permite trabajar talleres de grabado, pigmentos y lectura de huellas"]
@@ -140,7 +140,7 @@ const scopeContents = {
     en: {
       title: "Upper Paleolithic",
       description: "Human innovations in the Upper Paleolithic. Art, symbols, and consolidation of Homo sapiens.",
-      content: "Forty thousand years ago, Homo sapiens arrived in Europe bringing new technologies and abilities. The Upper Paleolithic saw an explosion of art: stone engravings, ivory and bone sculptures, possibly music. Tools became more sophisticated, with specialized arrowheads for different prey. Social networks expanded, long-distance trade intensified, and the first shared sanctuaries appeared.",
+      content: "Forty thousand years ago, Homo sapiens arrived in Europe bringing new technologies and abilities. The Upper Paleolithic saw an explosion of art: stone engravings, ivory and bone sculptures, possibly music. Tools became more sophisticated, with specialized arrowheads for different prey. Social networks expanded, long-distance trade intensified, and the first shared sanctuaries appeared. In the Sierra Mágina area, caves and rock shelters (Portillo, Graja, Cambil, and other karst settings) connect rock art symbolism with the landscape still walked today.",
       timeline: "Upper Paleolithic (40,000-10,000 BC)",
       related: "On this page, audiovisuals and educational resources expand the art and stone technology in this scope.",
       facts: ["Introduces symbolism, art, and wider social networks", "Explains specialised tools and new hunting strategies", "Supports workshops on engraving, pigments, and trace reading"]
@@ -150,7 +150,7 @@ const scopeContents = {
     es: {
       title: "Neolítico",
       description: "Primeras comunidades agricultoras y ganaderas. La transformación más importante de la humanidad.",
-      content: "Hace 10.000 años comenzó la revolución neolítica. Las sociedades de cazadores-recolectores se transformaron en agricultoras y ganaderas. En Sierra Mágina encontramos evidencias de cereales cultivados, domesticación de cabras y ovejas, y asentamientos más permanentes. Esta transición permitió el crecimiento de la población, la especialización del trabajo y la acumulación de bienes. Aparecen las primeras cerámicas decoradas y los primeros templos colectivos.",
+      content: "Hace 10.000 años comenzó la revolución neolítica. Las sociedades de cazadores-recolectores se transformaron en agricultoras y ganaderas. En Sierra Mágina encontramos evidencias de cereales cultivados, domesticación de cabras y ovejas, y asentamientos más permanentes. Esta transición permitió el crecimiento de la población, la especialización del trabajo y la acumulación de bienes. Aparecen las primeras cerámicas decoradas y los primeros templos colectivos. Valles como el de Río Cuadros y laderas cultivables muestran cómo el territorio condiciona dónde se asienta la población y cómo se organizan talleres de cerámica y molienda en el centro.",
       timeline: "Neolítico (10.000-4.500 a.C.)",
       related: "Conecta con talleres educativos sobre cerámica, agricultura temprana y arqueología experimental.",
       facts: ["Explica el paso hacia agricultura, ganadería y asentamientos estables", "Introduce cerámica, molienda, almacenamiento y domesticación", "Ayuda a comprender cambios sociales y nuevos ritmos de vida"]
@@ -158,7 +158,7 @@ const scopeContents = {
     en: {
       title: "Neolithic",
       description: "First farming and herding communities. The most important transformation in humanity.",
-      content: "Ten thousand years ago, the Neolithic Revolution began. Hunter-gatherer societies transformed into farming and pastoral communities. In Sierra Mágina, we find evidence of cultivated cereals, domestication of goats and sheep, and more permanent settlements. This transition enabled population growth, labor specialization, and accumulation of goods. Decorated pottery and the first collective temples appear.",
+      content: "Ten thousand years ago, the Neolithic Revolution began. Hunter-gatherer societies transformed into farming and pastoral communities. In Sierra Mágina, we find evidence of cultivated cereals, domestication of goats and sheep, and more permanent settlements. This transition enabled population growth, labor specialization, and accumulation of goods. Decorated pottery and the first collective temples appear. Valleys such as Río Cuadros and farmable slopes show how the territory shapes settlement and how pottery and grinding workshops are organised at the centre.",
       timeline: "Neolithic (10,000-4,500 BC)",
       related: "Connects with educational workshops on pottery, early farming, and experimental archaeology.",
       facts: ["Explains the shift to farming, herding, and stable settlements", "Introduces pottery, grinding, storage, and domestication", "Helps understand social change and new rhythms of life"]
@@ -168,7 +168,7 @@ const scopeContents = {
     es: {
       title: "Calcolítico",
       description: "Metalurgia temprana y transformaciones sociales. El cobre, la riqueza y la diferenciación social.",
-      content: "Hace 5.000 años, llegó la metalurgia del cobre. Este metal podía ser trabajado en frío y, mediante calor, forjado en herramientas más eficientes. La minería del cobre generó riqueza concentrada. Aparecen las primeras élites, fortificaciones y conflictos organizados. Los enterramientos calcolíticos muestran diferenciación social clara: algunos individuos reciben elaborados ajuares mientras otros tienen entierros sencillos. Se desarrollan sistemas complejos de intercambio comercial.",
+      content: "Hace 5.000 años, llegó la metalurgia del cobre. Este metal podía ser trabajado en frío y, mediante calor, forjado en herramientas más eficientes. La minería del cobre generó riqueza concentrada. Aparecen las primeras élites, fortificaciones y conflictos organizados. Los enterramientos calcolíticos muestran diferenciación social clara: algunos individuos reciben elaborados ajuares mientras otros tienen entierros sencillos. Se desarrollan sistemas complejos de intercambio comercial. La lectura del paisaje habitado —caminos, collados y rutas hacia la vega— complementa los objetos de cobre y los ajuares explicados en sala.",
       timeline: "Calcolítico (5.000-3.500 a.C.)",
       related: "Conecta con recursos sobre metalurgia, intercambio, desigualdad social y paisaje habitado.",
       facts: ["Introduce el cobre como cambio tecnológico y social", "Relaciona minería, intercambio y prestigio", "Permite explicar fortificaciones, ajuares y desigualdad arqueológica"]
@@ -176,7 +176,7 @@ const scopeContents = {
     en: {
       title: "Chalcolithic",
       description: "Early metallurgy and social transformations. Copper, wealth, and social differentiation.",
-      content: "Five thousand years ago, copper metallurgy arrived. This metal could be worked cold and, through heat, forged into more efficient tools. Copper mining generated concentrated wealth. The first elites, fortifications, and organized conflicts appear. Chalcolithic burials show clear social differentiation: some individuals receive elaborate grave goods while others have simple burials. Complex systems of commercial exchange develop.",
+      content: "Five thousand years ago, copper metallurgy arrived. This metal could be worked cold and, through heat, forged into more efficient tools. Copper mining generated concentrated wealth. The first elites, fortifications, and organized conflicts appear. Chalcolithic burials show clear social differentiation: some individuals receive elaborate grave goods while others have simple burials. Complex systems of commercial exchange develop. Reading the inhabited landscape —paths, passes, routes to the lowlands— complements copper objects and grave goods explained in the gallery.",
       timeline: "Chalcolithic (5,000-3,500 BC)",
       related: "Connects with resources on metallurgy, exchange, social inequality, and inhabited landscapes.",
       facts: ["Introduces copper as a technological and social shift", "Links mining, exchange, and prestige", "Explains fortifications, grave goods, and archaeological inequality"]
@@ -186,7 +186,7 @@ const scopeContents = {
     es: {
       title: "Ciencia y ciudadanía",
       description: "Método científico, participación ciudadana y patrimonio. Cómo la arqueología se abre a la sociedad.",
-      content: "La investigación arqueológica en Sierra Mágina sigue un método científico riguroso: observación, hipótesis, experimentación y conclusiones basadas en evidencias. Excavamos, registramos en 3D, analizamos en laboratorio, datamos con carbono-14 y comparamos con otras regiones. Además, abrimos las investigaciones a la ciudadanía: participan en excavaciones, aprenden a identificar artefactos y comprenden cómo reconstruimos la historia. El patrimonio de Sierra Mágina es de todos y para todos.",
+      content: "La investigación arqueológica en Sierra Mágina sigue un método científico riguroso: observación, hipótesis, experimentación y conclusiones basadas en evidencias. Excavamos, registramos en 3D, analizamos en laboratorio, datamos con carbono-14 y comparamos con otras regiones. Además, abrimos las investigaciones a la ciudadanía: participan en excavaciones, aprenden a identificar artefactos y comprenden cómo reconstruimos la historia. El patrimonio de Sierra Mágina es de todos y para todos. Este ámbito enlaza con el programa vivo del centro (conferencias, talleres, visitas guiadas y divulgación) y con la ficha docente del micrositio para preparar grupos escolares.",
       timeline: "Presente y futuro",
       related: "Conecta con recursos, vídeos y glosario para mostrar cómo se construye el conocimiento.",
       facts: ["Explica excavación, registro, laboratorio, datación y comparación", "Muestra que el patrimonio se protege mejor cuando se entiende", "Abre la puerta a participación, talleres y divulgación"]
@@ -194,7 +194,7 @@ const scopeContents = {
     en: {
       title: "Science and citizenship",
       description: "Scientific method, citizen engagement, and heritage. How archaeology opens to society.",
-      content: "Archaeological research in Sierra Mágina follows a rigorous scientific method: observation, hypothesis, experimentation, and evidence-based conclusions. We excavate, record in 3D, analyze in the lab, date with carbon-14, and compare with other regions. We also open research to citizens: they participate in digs, learn to identify artifacts, and understand how we reconstruct history. Sierra Mágina's heritage belongs to everyone and is for everyone.",
+      content: "Archaeological research in Sierra Mágina follows a rigorous scientific method: observation, hypothesis, experimentation, and evidence-based conclusions. We excavate, record in 3D, analyze in the lab, date with carbon-14, and compare with other regions. We also open research to citizens: they participate in digs, learn to identify artifacts, and understand how we reconstruct history. Sierra Mágina's heritage belongs to everyone and is for everyone. This scope links to the centre's live programme (talks, workshops, guided visits, outreach) and to the microsite teacher sheet for school groups.",
       timeline: "Present and future",
       related: "Connects with resources, audiovisuals, and the glossary to show how knowledge is built.",
       facts: ["Explains excavation, recording, laboratory work, dating, and comparison", "Shows that heritage is better protected when understood", "Opens the door to participation, workshops, and outreach"]
@@ -204,7 +204,7 @@ const scopeContents = {
     es: {
       title: "Testimonios y voces",
       description: "Espacio audiovisual con investigadores, habitantes locales, experiencias personales y memoria territorial. Humaniza el discurso y relaciona ciencia y ciudadanía.",
-      content: "Cierra el circuito interior con voces reales: cómo se investiga, qué significa el patrimonio para quien vive en el entorno y cómo la memoria colectiva dialoga con la evidencia científica.",
+      content: "Cierra el circuito interior con voces reales: cómo se investiga, qué significa el patrimonio para quien vive en el entorno y cómo la memoria colectiva dialoga con la evidencia científica. Incluye testimonios de investigadores y de ciudadanía (vecinos, visitantes, educadores) tal como prevé el proyecto museográfico: humanizar el método sin sustituir la evidencia.",
       timeline: "Memoria y ciudadanía",
       related: "Los vídeos de esta página recogen voces de investigación y memoria territorial enlazadas con este cierre del recorrido.",
       facts: ["Humaniza el relato científico con voces reales", "Recoge memoria territorial y experiencias de visita", "Funciona como puente entre investigación, emoción y comunidad"]
@@ -212,7 +212,7 @@ const scopeContents = {
     en: {
       title: "Testimonies and voices",
       description: "Audiovisual space with researchers, local residents, personal stories, and territorial memory. It humanises the narrative and connects science and citizenship.",
-      content: "It closes the indoor circuit with real voices: how research happens, what heritage means for people who live nearby, and how collective memory dialogues with scientific evidence.",
+      content: "It closes the indoor circuit with real voices: how research happens, what heritage means for people who live nearby, and how collective memory dialogues with scientific evidence. It gathers researchers and community voices (neighbours, visitors, educators) as planned in the exhibition project: humanising method without replacing evidence.",
       timeline: "Memory and citizenship",
       related: "Audiovisuals on this page gather research voices and territorial memory linked to this closing section of the route.",
       facts: ["Humanises the scientific narrative through real voices", "Collects territorial memory and visitor experiences", "Acts as a bridge between research, emotion, and community"]
@@ -235,6 +235,58 @@ const scopeContents = {
       related: "Connects with the archaeological map, aerial view, and final landscape reading.",
       facts: ["Turns the real horizon into the final museum piece", "Links geology, settlement, routes, and territorial memory", "Invites visitors to continue beyond the building"]
     }
+  }
+};
+
+// Campos opcionales alineados al PDF (lectura fácil, QR, visita). No alteran la UI si no se usan.
+const scopePdfExtras = {
+  AAN: {
+    es: { easySummary: "Antes de empezar el recorrido numerado, conectas emoción, paisaje y tiempo profundo.", keyQuestion: "¿Por qué empezamos mirando la montaña y no una vitrina?", duration: "5–8 min", audience: "Todos los públicos" },
+    en: { easySummary: "Before the numbered route, you connect emotion, landscape, and deep time.", keyQuestion: "Why do we start by looking at the mountain and not a display case?", duration: "5–8 min", audience: "All audiences" }
+  },
+  A0: {
+    es: { easySummary: "Aquí entiendes qué es Paleomágina y cómo usar paneles, QR y vídeos.", keyQuestion: "¿Qué historia cuenta esta montaña en una sola frase?", duration: "8–12 min", audience: "Familias y escolares" },
+    en: { easySummary: "Here you learn what Paleomágina is and how to use panels, QR codes, and videos.", keyQuestion: "What story does this mountain tell in a single sentence?", duration: "8–12 min", audience: "Families and school groups" }
+  },
+  A1: {
+    es: { easySummary: "Hace millones de años aquí había un mar tropical con fósiles marinos.", keyQuestion: "¿Cómo puede haber conchas en una sierra interior?", duration: "10–15 min", audience: "General / profundización" },
+    en: { easySummary: "Millions of years ago this was a tropical sea with marine fossils.", keyQuestion: "How can there be seashells in an inland mountain range?", duration: "10–15 min", audience: "General / in-depth" }
+  },
+  A2: {
+    es: { easySummary: "El fondo marino se elevó y el relieve actual se formó por erosión y roca kárstica.", keyQuestion: "¿Qué leemos en una ladera o en una cueva?", duration: "10–15 min", audience: "General" },
+    en: { easySummary: "The seabed rose and today's relief was shaped by erosion and karst rock.", keyQuestion: "What can we read on a slope or in a cave?", duration: "10–15 min", audience: "General" }
+  },
+  A3: {
+    es: { easySummary: "Hace poco en escala geológica hubo frío intenso, fauna extinta y primeros humanos.", keyQuestion: "¿Cómo cambia el clima la vida en la montaña?", duration: "10–12 min", audience: "General" },
+    en: { easySummary: "Recently in geological terms: intense cold, extinct fauna, and early humans.", keyQuestion: "How does climate change life in the mountain?", duration: "10–12 min", audience: "General" }
+  },
+  A4: {
+    es: { easySummary: "Los neandertales cazaban, usaban fuego y dejaron herramientas en Sierra Mágina.", keyQuestion: "¿Qué nos dice una herramienta de piedra sobre quien la hizo?", duration: "12–15 min", audience: "Familias y ESO" },
+    en: { easySummary: "Neanderthals hunted, used fire, and left tools in Sierra Mágina.", keyQuestion: "What does a stone tool tell us about who made it?", duration: "12–15 min", audience: "Families and secondary school" }
+  },
+  A5: {
+    es: { easySummary: "Con Homo sapiens aparecen arte, símbolos y herramientas más especializadas.", keyQuestion: "¿Por qué pintamos y grabamos en la roca?", duration: "12–15 min", audience: "General / talleres de arte rupestre" },
+    en: { easySummary: "With Homo sapiens come art, symbols, and more specialised tools.", keyQuestion: "Why do we paint and engrave on rock?", duration: "12–15 min", audience: "General / rock-art workshops" }
+  },
+  A6: {
+    es: { easySummary: "La gente empieza a cultivar, criar animales y vivir más tiempo en el mismo lugar.", keyQuestion: "¿Qué cambia en el día a día cuando aparece la agricultura?", duration: "12–15 min", audience: "Familias y primaria (6–12)" },
+    en: { easySummary: "People begin farming, herding, and staying longer in the same place.", keyQuestion: "What changes in daily life when farming appears?", duration: "12–15 min", audience: "Families and primary (6–12)" }
+  },
+  A7: {
+    es: { easySummary: "El cobre trae nuevas herramientas y también más desigualdad social.", keyQuestion: "¿Cambia más la sociedad que la tecnología?", duration: "10–12 min", audience: "Profundización / Bachillerato" },
+    en: { easySummary: "Copper brings new tools and also greater social inequality.", keyQuestion: "Does society change more than technology?", duration: "10–12 min", audience: "In-depth / upper secondary" }
+  },
+  A8: {
+    es: { easySummary: "La arqueología usa evidencias y puedes participar en proteger el patrimonio.", keyQuestion: "¿Cómo pasamos de un hueso en el suelo a una historia comprobada?", duration: "12–18 min", audience: "Ciudadanía y divulgación" },
+    en: { easySummary: "Archaeology uses evidence and you can help protect heritage.", keyQuestion: "How do we go from a bone in the ground to a tested story?", duration: "12–18 min", audience: "Citizens and outreach" }
+  },
+  A9: {
+    es: { easySummary: "Investigadores y vecinos explican por qué importa conservar la memoria del territorio.", keyQuestion: "¿Qué aporta una voz local a la ciencia?", duration: "8–15 min (audiovisual)", audience: "Todos los públicos" },
+    en: { easySummary: "Researchers and neighbours explain why territorial memory matters.", keyQuestion: "What does a local voice add to science?", duration: "8–15 min (audiovisual)", audience: "All audiences" }
+  },
+  ATZ: {
+    es: { easySummary: "Desde la terraza el museo sigue: el paisaje real resume todo el recorrido.", keyQuestion: "¿Qué ves en el horizonte que conecta con lo aprendido?", duration: "10–20 min", audience: "Cierre de visita" },
+    en: { easySummary: "From the terrace the museum continues: the real landscape sums up the route.", keyQuestion: "What do you see on the horizon that connects with what you learned?", duration: "10–20 min", audience: "Visit closure" }
   }
 };
 
@@ -543,33 +595,49 @@ const scopeGlossaryHints = {
 // ── Índice QR ────────────────────────────────────────────────────────
 const qrIndex = {
   es: {
-    A0: { url: "/ambitos/bienvenida", label: "Bienvenida", floor: "PB" },
-    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1" },
-    A2: { url: "/ambitos/geologia", label: "Geología y orografía", floor: "P1" },
-    A3: { url: "/ambitos/cuaternario", label: "Cuaternario", floor: "P1" },
-    A4: { url: "/ambitos/neandertales", label: "Mundo neandertal", floor: "P1" },
-    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1" },
-    A6: { url: "/ambitos/neolitico", label: "Neolítico", floor: "P1" },
-    A7: { url: "/ambitos/calcolitico", label: "Calcolítico", floor: "P1" },
-    A8: { url: "/ambitos/ciencia", label: "Ciencia y ciudadanía", floor: "P1" },
-    ATZ: { url: "/ambitos/terraza", label: "Terraza y paisaje", floor: "P1" }
+    AAN: { url: "/ambitos/antesala", label: "Antesala", floor: "PB", microUrl: "ambitos.html?scope=AAN", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
+    A0: { url: "/ambitos/bienvenida", label: "Bienvenida", floor: "PB", microUrl: "ambitos.html?scope=A0", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
+    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1", microUrl: "ambitos.html?scope=A1", siteLang: "ES/EN", resource: "Ámbito + vídeos" },
+    A2: { url: "/ambitos/geologia", label: "Geología y orografía", floor: "P1", microUrl: "ambitos.html?scope=A2", siteLang: "ES/EN", resource: "Ámbito + mapa" },
+    A3: { url: "/ambitos/cuaternario", label: "Cuaternario", floor: "P1", microUrl: "ambitos.html?scope=A3", siteLang: "ES/EN", resource: "Ámbito + línea temporal" },
+    A4: { url: "/ambitos/neandertales", label: "Mundo neandertal", floor: "P1", microUrl: "ambitos.html?scope=A4", siteLang: "ES/EN", resource: "Ámbito + glosario" },
+    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1", microUrl: "ambitos.html?scope=A5", siteLang: "ES/EN", resource: "Ámbito + talleres" },
+    A6: { url: "/ambitos/neolitico", label: "Neolítico", floor: "P1", microUrl: "ambitos.html?scope=A6", siteLang: "ES/EN", resource: "Ámbito + educación" },
+    A7: { url: "/ambitos/calcolitico", label: "Calcolítico", floor: "P1", microUrl: "ambitos.html?scope=A7", siteLang: "ES/EN", resource: "Ámbito" },
+    A8: { url: "/ambitos/ciencia", label: "Ciencia y ciudadanía", floor: "P1", microUrl: "ambitos.html?scope=A8", siteLang: "ES/EN", resource: "Ámbito + participación" },
+    A9: { url: "/ambitos/testimonios", label: "Testimonios y voces", floor: "P1", microUrl: "ambitos.html?scope=A9", siteLang: "ES/EN", resource: "Audiovisual + ámbito" },
+    ATZ: { url: "/ambitos/terraza", label: "Terraza y paisaje", floor: "P1", microUrl: "ambitos.html?scope=ATZ", siteLang: "ES/EN", resource: "Ámbito + mapa territorial" }
   },
   en: {
-    A0: { url: "/exhibits/welcome", label: "Welcome", floor: "GF" },
-    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1" },
-    A2: { url: "/exhibits/geology", label: "Geology and orography", floor: "F1" },
-    A3: { url: "/exhibits/quaternary", label: "Quaternary", floor: "F1" },
-    A4: { url: "/exhibits/neanderthals", label: "Neanderthal world", floor: "F1" },
-    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1" },
-    A6: { url: "/exhibits/neolithic", label: "Neolithic", floor: "F1" },
-    A7: { url: "/exhibits/chalcolithic", label: "Chalcolithic", floor: "F1" },
-    A8: { url: "/exhibits/science", label: "Science and citizenship", floor: "F1" },
-    ATZ: { url: "/exhibits/terrace", label: "Terrace and landscape", floor: "F1" }
+    AAN: { url: "/exhibits/ante-room", label: "Ante-room", floor: "GF", microUrl: "ambitos.html?scope=AAN", siteLang: "ES/EN", resource: "Scope + microsite" },
+    A0: { url: "/exhibits/welcome", label: "Welcome", floor: "GF", microUrl: "ambitos.html?scope=A0", siteLang: "ES/EN", resource: "Scope + microsite" },
+    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1", microUrl: "ambitos.html?scope=A1", siteLang: "ES/EN", resource: "Scope + videos" },
+    A2: { url: "/exhibits/geology", label: "Geology and orography", floor: "F1", microUrl: "ambitos.html?scope=A2", siteLang: "ES/EN", resource: "Scope + map" },
+    A3: { url: "/exhibits/quaternary", label: "Quaternary", floor: "F1", microUrl: "ambitos.html?scope=A3", siteLang: "ES/EN", resource: "Scope + timeline" },
+    A4: { url: "/exhibits/neanderthals", label: "Neanderthal world", floor: "F1", microUrl: "ambitos.html?scope=A4", siteLang: "ES/EN", resource: "Scope + glossary" },
+    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1", microUrl: "ambitos.html?scope=A5", siteLang: "ES/EN", resource: "Scope + workshops" },
+    A6: { url: "/exhibits/neolithic", label: "Neolithic", floor: "F1", microUrl: "ambitos.html?scope=A6", siteLang: "ES/EN", resource: "Scope + education" },
+    A7: { url: "/exhibits/chalcolithic", label: "Chalcolithic", floor: "F1", microUrl: "ambitos.html?scope=A7", siteLang: "ES/EN", resource: "Scope" },
+    A8: { url: "/exhibits/science", label: "Science and citizenship", floor: "F1", microUrl: "ambitos.html?scope=A8", siteLang: "ES/EN", resource: "Scope + participation" },
+    A9: { url: "/exhibits/testimonies", label: "Testimonies and voices", floor: "F1", microUrl: "ambitos.html?scope=A9", siteLang: "ES/EN", resource: "Audiovisual + scope" },
+    ATZ: { url: "/exhibits/terrace", label: "Terrace and landscape", floor: "F1", microUrl: "ambitos.html?scope=ATZ", siteLang: "ES/EN", resource: "Scope + territory map" }
   }
 };
 
 // ── Funciones de acceso ──────────────────────────────────────────────
-function getScopeContent(code, lang) { return scopeContents[code]?.[lang || "es"] || null; }
+function getScopeContent(code, lang) {
+  const l = lang || "es";
+  const base = scopeContents[code]?.[l] || null;
+  if (!base) return null;
+  const extra = scopePdfExtras[code]?.[l];
+  return extra ? { ...base, ...extra } : base;
+}
+function getQrInventory(lang) {
+  const l = lang || "es";
+  const dict = qrIndex[l] || qrIndex.es;
+  const order = ["AAN", "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "ATZ"];
+  return order.filter((code) => dict[code]).map((code) => ({ code, ...dict[code] }));
+}
 function getGlossary(lang) { return glossary[lang || "es"] || []; }
 function getAudiovisuals(lang) {
   return typeof getAudiovisualCatalog === "function" ? getAudiovisualCatalog(lang).items || [] : [];
@@ -924,6 +992,28 @@ const translations = {
     expo_route_detail_title: "Recorrido expositivo por ámbitos",
     expo_route_detail_lead: "Despliega cada bloque para ver objetivos, contenidos, recursos y conexiones con otras partes de la web.",
     expo_route_accordion_aria: "Detalle del recorrido por ámbitos",
+    scope_extras_toggle: "Lectura ampliada (proyecto museográfico)",
+    scope_extras_easy: "En pocas palabras",
+    scope_extras_question: "Pregunta clave",
+    scope_extras_duration: "Tiempo en sala",
+    scope_extras_audience: "Público recomendado",
+    nav_easy_read: "Lectura fácil",
+    nav_qr_inventory: "Inventario QR",
+    page_easy_read_title: "Paleomágina | Lectura fácil",
+    page_easy_read_kicker: "Accesibilidad",
+    page_easy_read_heading: "Lectura fácil por ámbitos",
+    page_easy_read_lead: "Resúmenes breves para preparar la visita o repasar después. Cada tarjeta enlaza al ámbito completo.",
+    page_qr_title: "Paleomágina | Inventario QR",
+    page_qr_kicker: "Recursos digitales",
+    page_qr_heading: "Inventario de códigos QR",
+    page_qr_lead: "Referencia de ubicación en sala, URL canónica del proyecto y enlace al micrositio. Tabla informativa; los QR físicos pueden actualizarse sin cambiar esta página.",
+    qr_col_code: "Código",
+    qr_col_label: "Ámbito",
+    qr_col_floor: "Planta",
+    qr_col_url: "URL proyecto",
+    qr_col_micro: "Micrositio",
+    qr_col_lang: "Idioma",
+    qr_col_resource: "Recurso enlazado",
     expo_permanent_title: "Exposición permanente y recorrido",
     expo_permanent_intro: "Resumen del circuito interior: acogida, transición temporal, antesala emocional, secuencia cronológica, voces y terraza final frente a Sierra Mágina.",
     route_rec_title: "Recepción y planta baja", route_rec_p: "Bienvenida, orientación, introducción conceptual y preparación narrativa con mapas, cronologías, paneles, objetos y vídeos.",
@@ -1360,6 +1450,28 @@ const translations = {
     expo_route_detail_title: "Exhibition route by scope",
     expo_route_detail_lead: "Expand each block for aims, contents, resources, and links with other parts of the website.",
     expo_route_accordion_aria: "Detailed route by exhibition scope",
+    scope_extras_toggle: "Extended reading (exhibition project)",
+    scope_extras_easy: "In brief",
+    scope_extras_question: "Key question",
+    scope_extras_duration: "Time in gallery",
+    scope_extras_audience: "Recommended audience",
+    nav_easy_read: "Easy read",
+    nav_qr_inventory: "QR inventory",
+    page_easy_read_title: "Paleomágina | Easy read",
+    page_easy_read_kicker: "Accessibility",
+    page_easy_read_heading: "Easy read by scope",
+    page_easy_read_lead: "Short summaries to prepare your visit or review afterwards. Each card links to the full scope.",
+    page_qr_title: "Paleomágina | QR inventory",
+    page_qr_kicker: "Digital resources",
+    page_qr_heading: "QR code inventory",
+    page_qr_lead: "Gallery location, canonical project URL, and microsite link. Informational table; physical QR codes may be updated without changing this page.",
+    qr_col_code: "Code",
+    qr_col_label: "Scope",
+    qr_col_floor: "Floor",
+    qr_col_url: "Project URL",
+    qr_col_micro: "Microsite",
+    qr_col_lang: "Language",
+    qr_col_resource: "Linked resource",
     expo_permanent_title: "Permanent exhibition and route",
     expo_permanent_intro: "Summary of the indoor circuit: welcome, temporal transition, emotional ante-room, chronological sequence, voices, and final terrace facing Sierra Mágina.",
     route_rec_title: "Reception and ground floor", route_rec_p: "Welcome, orientation, conceptual introduction, and narrative preparation with maps, chronologies, panels, objects, and audiovisuals.",
