@@ -4,6 +4,8 @@
 
   const REDUCED =
     window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+  const MOBILE =
+    window.matchMedia?.("(max-width: 767px), (pointer: coarse)")?.matches ?? false;
 
   function mountBreathLayer() {
     const atmosphereEl = document.querySelector(".pm-atmosphere");
@@ -17,7 +19,7 @@
   }
 
   function initBreathing() {
-    if (REDUCED) return;
+    if (REDUCED || MOBILE) return;
     mountBreathLayer();
     document.addEventListener("visibilitychange", () => {
       document.documentElement.classList.toggle(
@@ -60,7 +62,7 @@
   }
 
   function initScrollDepth() {
-    if (REDUCED || window.PaleomaginaScroll) return;
+    if (REDUCED || MOBILE || window.PaleomaginaScroll) return;
 
     let scheduled = false;
     const root = document.documentElement;
@@ -383,6 +385,10 @@
   function getScrollY() {
     return window.PaleomaginaScroll?.getY?.() ?? window.scrollY ?? 0;
   }
+
+  let parallaxBlocks = [];
+  let floatingEls = [];
+
   function tagBlocks() {
     document
       .querySelectorAll("main section:not(.hero):not(.hero-simple):not(.page-hero)")
@@ -400,6 +406,9 @@
         if (el.closest(".pm-section-layer")) return;
         el.setAttribute("data-pm-float", String(0.06 + (index % 4) * 0.03));
       });
+
+    parallaxBlocks = [...document.querySelectorAll(".pm-parallax-block")];
+    floatingEls = [...document.querySelectorAll("[data-pm-float]")];
   }
 
   function update() {
@@ -409,7 +418,7 @@
 
     root.style.setProperty("--pm-scroll", `${scrollY}px`);
 
-    document.querySelectorAll(".pm-parallax-block").forEach((block) => {
+    parallaxBlocks.forEach((block) => {
       const rect = block.getBoundingClientRect();
       if (rect.bottom < -40 || rect.top > vh + 40) {
         block.style.setProperty("--pm-block-shift", "0px");
@@ -421,7 +430,7 @@
       block.style.setProperty("--pm-block-shift", `${shift}px`);
     });
 
-    document.querySelectorAll("[data-pm-float]").forEach((el) => {
+    floatingEls.forEach((el) => {
       const depth = parseFloat(el.getAttribute("data-pm-float")) || 0.08;
       const rect = el.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > vh) {
@@ -440,7 +449,7 @@
   }
 
   function initParallax() {
-    if (REDUCED) return;
+    if (REDUCED || MOBILE) return;
 
     document.documentElement.classList.add("pm-parallax");
     tagBlocks();
@@ -1371,6 +1380,11 @@
     return getPageNarrationSlug() !== "ficha-docente";
   }
 
+  function shouldShowNarrationControl() {
+    const pagesWithoutNarration = ["lectura-facil", "qr-recursos"];
+    return shouldShowPageAudioControls() && !pagesWithoutNarration.includes(getPageNarrationSlug());
+  }
+
   function getHeroAudioTarget(hero) {
     if (!hero) return null;
     let target = hero.querySelector(".pm-hero-audio-controls");
@@ -1405,25 +1419,33 @@
     document.querySelectorAll(".pm-audio-fab-host").forEach((host) => {
       host.classList.remove("pm-audio-fab-host");
     });
-    [fab, narrationFab].forEach((button) => {
-      if (button) button.hidden = false;
-      button?.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
-    });
+    const showNarration = shouldShowNarrationControl();
+    if (!showNarration) stopNarration();
+
+    if (fab) {
+      fab.hidden = false;
+      fab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+    }
+    if (narrationFab) {
+      narrationFab.hidden = !showNarration;
+      narrationFab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+    }
 
     const hero = findPageHero();
     const target = getHeroAudioTarget(hero) || document.body;
     if (hero) hero.classList.add("pm-audio-fab-host");
 
-    [fab, narrationFab].forEach((button) => {
+    [fab, showNarration ? narrationFab : null].forEach((button) => {
       if (!button) return;
       button.classList.add(hero ? "pm-audio-fab--in-hero" : "pm-audio-fab--fallback");
       target.appendChild(button);
     });
+    if (narrationFab && !showNarration) document.body.appendChild(narrationFab);
 
     fab?.classList.add("pm-audio-fab--mounted");
-    narrationFab?.classList.add("pm-audio-fab--mounted");
+    if (showNarration) narrationFab?.classList.add("pm-audio-fab--mounted");
     updateFab();
-    updateNarrationFab();
+    if (showNarration) updateNarrationFab();
   }
 
   function mountFab() {

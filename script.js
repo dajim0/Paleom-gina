@@ -7,6 +7,7 @@ const defaultLang = "es";
 const langStorageKey = "paleomagina-lang";
 let currentLang = defaultLang;
 const themeStorageKey = "paleomagina-theme";
+const themeSourceStorageKey = "paleomagina-theme-source";
 let currentTheme = "light";
 
 function normalizeLang(lang) {
@@ -22,14 +23,8 @@ function getInitialLang() {
 }
 
 // ── Exponer helper de traducción (timeline.js y otros módulos) ───────
-function paleomaginaT(key, replacements) {
-  let text = translations[currentLang]?.[key] ?? translations.es[key] ?? "";
-  if (replacements && typeof replacements === "object") {
-    Object.entries(replacements).forEach(([name, value]) => {
-      text = text.replace(new RegExp(`\\{${name}\\}`, "g"), value);
-    });
-  }
-  return text;
+function paleomaginaT(key) {
+  return translations[currentLang]?.[key] ?? translations.es[key] ?? "";
 }
 window.paleomaginaT = paleomaginaT;
 
@@ -368,6 +363,116 @@ document.addEventListener("pm:navigation", () => {
 });
 
 // ── Acordeón de recorrido AAN–ATZ (ambitos.html) ─────────────────────
+function buildScopePdfExtrasEl(sc) {
+  if (!sc) return null;
+  const fields = [
+    ["scope_extras_easy", sc.easySummary],
+    ["scope_extras_question", sc.keyQuestion],
+    ["scope_extras_duration", sc.duration],
+    ["scope_extras_audience", sc.audience],
+  ].filter(([, val]) => Boolean(val));
+  if (!fields.length) return null;
+
+  const wrap = document.createElement("details");
+  wrap.className = "pm-scope-extras mt-3";
+  const sum = document.createElement("summary");
+  sum.className = "pm-scope-extras__summary";
+  sum.textContent = paleomaginaT("scope_extras_toggle") || "Lectura ampliada";
+  const inner = document.createElement("div");
+  inner.className = "pm-scope-extras__body";
+
+  fields.forEach(([labelKey, val]) => {
+    const row = document.createElement("p");
+    row.className = "small mb-2";
+    const strong = document.createElement("strong");
+    strong.textContent = (paleomaginaT(labelKey) || labelKey) + ": ";
+    row.appendChild(strong);
+    row.append(document.createTextNode(val));
+    inner.appendChild(row);
+  });
+
+  wrap.appendChild(sum);
+  wrap.appendChild(inner);
+  return wrap;
+}
+
+function initEasyReadPage() {
+  const root = document.getElementById("easy-read-list");
+  if (!root || typeof getScopeContent !== "function") return;
+  const lang = currentLang === "en" ? "en" : "es";
+  const order = ["AAN", "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "ATZ"];
+  root.innerHTML = "";
+
+  order.forEach((code) => {
+    const sc = getScopeContent(code, lang);
+    if (!sc?.easySummary) return;
+    const card = document.createElement("article");
+    card.className = "pm-easy-read-card card border-0 shadow-sm mb-3";
+    const body = document.createElement("div");
+    body.className = "card-body";
+    const h = document.createElement("h3");
+    h.className = "h5 card-title";
+    const link = document.createElement("a");
+    const scopeUrl = `ambitos.html?scope=${encodeURIComponent(code)}`;
+    link.href = scopeUrl;
+    link.textContent = sc.title || code;
+    h.appendChild(link);
+    const p = document.createElement("p");
+    p.className = "card-text mb-2";
+    p.textContent = sc.easySummary;
+    const meta = document.createElement("p");
+    meta.className = "small text-muted mb-0";
+    const parts = [];
+    if (sc.duration) parts.push((paleomaginaT("scope_extras_duration") || "Duración") + ": " + sc.duration);
+    if (sc.audience) parts.push((paleomaginaT("scope_extras_audience") || "Público") + ": " + sc.audience);
+    if (parts.length) meta.textContent = parts.join(" · ");
+    const cta = document.createElement("a");
+    cta.className = "btn btn-primary btn-sm pm-easy-read-card__cta mt-3";
+    cta.href = scopeUrl;
+    cta.textContent = paleomaginaT("page_easy_read_open_scope") || "Ver este ámbito";
+    body.appendChild(h);
+    body.appendChild(p);
+    if (parts.length) body.appendChild(meta);
+    body.appendChild(cta);
+    card.appendChild(body);
+    root.appendChild(card);
+  });
+}
+
+function initQrInventoryPage() {
+  const tbody = document.getElementById("qr-inventory-body");
+  if (!tbody || typeof getQrInventory !== "function") return;
+  const lang = currentLang === "en" ? "en" : "es";
+  const rows = getQrInventory(lang);
+  tbody.innerHTML = "";
+
+  rows.forEach((row) => {
+    const tr = document.createElement("tr");
+    const cells = [
+      row.code,
+      row.label,
+      row.floor,
+      row.url,
+      row.microUrl ? row.microUrl : "—",
+      row.siteLang || "—",
+      row.resource || "—",
+    ];
+    cells.forEach((text, idx) => {
+      const td = document.createElement("td");
+      if (idx === 4 && row.microUrl) {
+        const a = document.createElement("a");
+        a.href = row.microUrl;
+        a.textContent = row.microUrl;
+        td.appendChild(a);
+      } else {
+        td.textContent = text;
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+
 function initAmbitosExhibitRoute() {
   const root = document.getElementById("exhibit-route-accordion");
   if (!root || typeof scopeContents === "undefined") return;
@@ -381,7 +486,7 @@ function initAmbitosExhibitRoute() {
   acc.id = accDomId;
 
   order.forEach((code, idx) => {
-    const sc = scopeContents[code]?.[lang];
+    const sc = typeof getScopeContent === "function" ? getScopeContent(code, lang) : scopeContents[code]?.[lang];
     if (!sc) return;
 
     const collapseId = `exhibit-collapse-${code}`;
@@ -449,6 +554,9 @@ function initAmbitosExhibitRoute() {
 
     const cross = buildScopeCrossLinksEl(code, lang);
     if (cross) body.appendChild(cross);
+
+    const pdfExtras = buildScopePdfExtrasEl(sc);
+    if (pdfExtras) body.appendChild(pdfExtras);
 
     item.dataset.pmScope = code;
     region.appendChild(body);
@@ -674,6 +782,8 @@ function applyLanguage(lang) {
   renderScopes(lang);
   updateThemeButtonLabel();
   initAmbitosExhibitRoute();
+  initEasyReadPage();
+  initQrInventoryPage();
   initTerritoryMap();
   initVisitJourney();
   initTicketCart();
@@ -691,10 +801,15 @@ function updateThemeButtonLabel() {
   });
 }
 
-function applyTheme(theme) {
+function applyTheme(theme, { persist = true } = {}) {
   currentTheme = theme;
   document.documentElement.setAttribute("data-theme", theme);
-  try { localStorage.setItem(themeStorageKey, theme); } catch (_) { }
+  if (persist) {
+    try {
+      localStorage.setItem(themeStorageKey, theme);
+      localStorage.setItem(themeSourceStorageKey, "manual");
+    } catch (_) { }
+  }
   updateThemeButtonLabel();
 }
 
@@ -867,6 +982,7 @@ function enablePageTransitions() {
     const link = e.target.closest("a[href]");
     if (!isNavigableInternalLink(link)) return;
     e.preventDefault();
+    closeTopNavMenu();
     document.body.classList.add("page-leaving");
 
     if (shouldUseSoftNavigation()) {
@@ -909,6 +1025,34 @@ function initMainNavActiveState() {
       if (match) link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     } catch { }
+  });
+}
+
+function closeTopNavMenu() {
+  const nav = document.querySelector(".pm-topnav");
+  const menu = document.getElementById("pmMainNav");
+  const toggler = nav?.querySelector(".navbar-toggler");
+  if (!menu || !menu.classList.contains("show")) return;
+
+  try {
+    const collapse = window.bootstrap?.Collapse?.getOrCreateInstance(menu, { toggle: false });
+    collapse?.hide();
+  } catch (_) {
+    menu.classList.remove("show");
+  }
+
+  toggler?.classList.add("collapsed");
+  toggler?.setAttribute("aria-expanded", "false");
+}
+
+function initMobileMenuAutoClose() {
+  if (document.documentElement.dataset.pmMenuAutoClose === "1") return;
+  document.documentElement.dataset.pmMenuAutoClose = "1";
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest(".pm-topnav .nav-link, .pm-topnav .navbar-brand");
+    if (!link) return;
+    closeTopNavMenu();
   });
 }
 
@@ -1089,10 +1233,7 @@ function initIndexIntroVideo() {
   let stepsAudio = null;
   let roarAudio = null;
   let introAudioTimers = [];
-  let introSoundEnabled = true;
-  let stepsStarted = false;
-  let roarPlayed = false;
-  let audioCtx = null, pasosBuffer = null, rugidoBuffer = null, pasosSource = null, rugidoSource = null, pasosGain = null, rugidoGain = null, lastSync = 0;
+  let introSoundEnabled = false;
   document.body.classList.add("index-video-intro-visible");
   overlay.setAttribute("aria-hidden", "false");
 
@@ -1114,30 +1255,23 @@ function initIndexIntroVideo() {
     roarAudio = null;
   };
 
-  
-
   const playIntroAudio = (kind) => {
     if (hidden) return;
     const isSteps = kind === "steps";
     if (isSteps && stepsAudio) return;
     if (!isSteps && roarAudio) return;
-    
 
-    // Fallback to HTMLAudio when WebAudio API isn't available
-    const src = getIntroAudioUrl(isSteps ? "PASOS.mp3" : "RUGIDO.mp3");
-    const audio = new Audio();
-    audio.src = src;
+    const audio = new Audio(getIntroAudioUrl(isSteps ? "PASOS.mp3" : "RUGIDO.mp3"));
     audio.volume = isSteps ? 0.16 : 0.18;
     audio.preload = "auto";
     audio.loop = isSteps;
-    try {
-      if (isSteps) stepsAudio = audio;
-      else roarAudio = audio;
-      audio.play().catch(() => {});
-    } catch (e) {
+    if (isSteps) stepsAudio = audio;
+    else roarAudio = audio;
+    audio.play().catch(() => {
+      cleanupIntroAudio(audio);
       if (isSteps && stepsAudio === audio) stepsAudio = null;
       if (!isSteps && roarAudio === audio) roarAudio = null;
-    }
+    });
   };
 
   const stopSteps = () => {
@@ -1161,56 +1295,30 @@ function initIndexIntroVideo() {
   };
 
   const scheduleIntroAudio = () => {
-    // Deprecated: scheduling via timeouts can drift and be blocked; we rely
-    // on the `timeupdate` handler and `syncIntroAudio` to keep audio aligned.
-    if (hidden || !introSoundEnabled) return;
-    // Ensure audio elements are created and preloaded so they can start
-    if (!stepsAudio) playIntroAudio("steps");
-    if (!roarAudio) playIntroAudio("roar");
-  };
-
-  const syncIntroAudio = () => {
-    if (hidden || !introSoundEnabled) return;
+    if (hidden || !introSoundEnabled || introAudioTimers.length) return;
     const cues = getIntroAudioCues();
     const currentMs = (video.currentTime || 0) * 1000;
+    const addCue = (callback, targetMs) => {
+      if (targetMs <= currentMs) return;
+      introAudioTimers.push(window.setTimeout(callback, targetMs - currentMs));
+    };
 
-    // Steps: should play between stepsStartMs and stepsEndMs
-    if (currentMs >= cues.stepsStartMs && currentMs < cues.stepsEndMs) {
-      if (!stepsAudio) playIntroAudio("steps");
-      if (stepsAudio) {
-        const desiredSec = Math.max(0, (currentMs - cues.stepsStartMs) / 1000);
-        if (Math.abs((stepsAudio.currentTime || 0) - desiredSec) > 0.12) {
-          try { stepsAudio.currentTime = desiredSec; } catch (e) {}
-        }
-        if (stepsAudio.paused) stepsAudio.play().catch(() => {});
-        stepsStarted = true;
-      }
-    } else {
-      if (stepsStarted) stopSteps();
-      stepsStarted = false;
+    if (currentMs < cues.stepsEndMs) {
+      if (currentMs >= cues.stepsStartMs) playIntroAudio("steps");
+      else addCue(() => playIntroAudio("steps"), cues.stepsStartMs);
+      addCue(stopSteps, cues.stepsEndMs);
     }
 
-    // Roar: play once when we pass the cue
-    if (currentMs >= cues.roarMs && !roarPlayed) {
-      if (!roarAudio) playIntroAudio("roar");
-      if (roarAudio) {
-        const desiredSec = Math.max(0, (currentMs - cues.roarMs) / 1000);
-        try { roarAudio.currentTime = desiredSec; } catch (e) {}
-        roarAudio.play().catch(() => {});
-        roarPlayed = true;
-      }
+    if (currentMs >= cues.roarMs - 800 && currentMs <= cues.roarMs + 2200) {
+      playIntroAudio("roar");
+    } else {
+      addCue(() => playIntroAudio("roar"), cues.roarMs);
     }
   };
 
   const bindIntroAudioAfterGesture = () => {
     const resumeIntroAudio = () => {
-      if (!hidden && introSoundEnabled) {
-        // resume AudioContext if present and attempt to play/sync immediately
-        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
-        syncIntroAudio();
-        // hide the hint UI when the user gestures
-        try { hideSoundHint(); } catch (_) {}
-      }
+      if (!hidden && introSoundEnabled) scheduleIntroAudio();
     };
     overlay.addEventListener("pointerdown", resumeIntroAudio, { once: true });
     document.addEventListener("keydown", resumeIntroAudio, { once: true });
@@ -1230,13 +1338,18 @@ function initIndexIntroVideo() {
   const enableIntroSound = () => {
     if (hidden || introSoundEnabled) return;
     introSoundEnabled = true;
+    video.muted = true;
     soundButton?.classList.add("index-video-intro-sound--active");
     soundButton?.setAttribute("aria-pressed", "true");
     if (soundButton) soundButton.textContent = paleomaginaT("intro_sound_active") || "Sonido activado";
+    video.play().catch(() => {
+      overlay.classList.add("index-video-intro-overlay--paused");
+    });
     scheduleIntroAudio();
   };
 
-  const hideIntro = () => {
+  const hideIntro = (event) => {
+    event?.preventDefault?.();
     if (hidden) return;
     hidden = true;
     if (doNotShowInput?.checked) setSkipIntroPreference(true);
@@ -1265,15 +1378,11 @@ function initIndexIntroVideo() {
   video.addEventListener("timeupdate", updateIntroProgress);
   video.addEventListener("ended", hideIntro, { once: true });
   video.addEventListener("error", hideIntro, { once: true });
-  // Set initial visual state
-  soundButton?.setAttribute("aria-pressed", "true");
-  soundButton?.classList.add("index-video-intro-sound--active");
-  // Toggle behavior: click disables if enabled, enables if disabled
-  soundButton?.addEventListener("click", () => {
-    if (introSoundEnabled) disableIntroSound();
-    else enableIntroSound();
-  });
+  soundButton?.setAttribute("aria-pressed", "false");
+  soundButton?.addEventListener("click", enableIntroSound);
+  soundButton?.addEventListener("pointerup", enableIntroSound);
   skipButton?.addEventListener("click", hideIntro);
+  skipButton?.addEventListener("pointerup", hideIntro);
   doNotShowInput?.addEventListener("change", () => {
     if (!doNotShowInput.checked) setSkipIntroPreference(false);
   });
@@ -1282,19 +1391,10 @@ function initIndexIntroVideo() {
   });
 
   fallbackTimer = window.setTimeout(hideIntro, 14000);
-  // Try to enable and play intro sound by default. Browsers may block this
-  // if there's no prior user gesture; bindIntroAudioAfterGesture will
-  // resume scheduling when the user interacts.
-  try {
-    enableIntroSound();
-  } catch (e) {
-    // ignore; playback may be blocked
-  }
+  scheduleIntroAudio();
   bindIntroAudioAfterGesture();
   video.play().catch(() => {
     overlay.classList.add("index-video-intro-overlay--paused");
-    // Show prominent hint so user can tap to enable audio (gesture-backed)
-    try { showSoundHint(); } catch (_) {}
   });
 }
 
@@ -1308,24 +1408,26 @@ document.querySelectorAll(".lang-btn").forEach((btn) => {
 });
 
 document.querySelectorAll(".theme-toggle").forEach((btn) => {
-  btn.addEventListener("click", () => applyTheme(currentTheme === "dark" ? "light" : "dark"));
+  btn.addEventListener("click", () => applyTheme(currentTheme === "dark" ? "light" : "dark", { persist: true }));
 });
 
 // ── Init tema ────────────────────────────────────────────────────────
 let initialTheme = "light";
 try {
   const saved = localStorage.getItem(themeStorageKey);
-  if (saved === "light" || saved === "dark") { initialTheme = saved; }
+  const savedSource = localStorage.getItem(themeSourceStorageKey);
+  if (savedSource === "manual" && (saved === "light" || saved === "dark")) { initialTheme = saved; }
   else if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) { initialTheme = "dark"; }
 } catch {
   if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) initialTheme = "dark";
 }
 
-applyTheme(initialTheme);
+applyTheme(initialTheme, { persist: false });
 applyLanguage(getInitialLang());
 applyGlossaryTermFromUrl();
 enablePageTransitions();
 initMainNavActiveState();
+initMobileMenuAutoClose();
 keepTopNavFixed();
 initTimeOfDayEffects();
 initScrollReveal();
@@ -1359,7 +1461,12 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  loadPaleomaginaModule("cinematic.js?v=24");
+  const load = () => loadPaleomaginaModule("cinematic.js?v=26");
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(load, { timeout: 900 });
+  } else {
+    window.setTimeout(load, 120);
+  }
 }
 
 /* ============================================

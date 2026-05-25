@@ -4,15 +4,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, follow" />
-  <title data-i18n="page_legal_notice_title">Paleomágina | Aviso legal</title>
+  <meta name="description"
+    content="Inventario de códigos QR del recorrido expositivo Paleomágina: ubicación, URL y enlaces al micrositio." />
+  <title data-i18n="page_qr_title">Paleomágina | Códigos QR del recorrido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css?v=113" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
-  <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
 
 <body>
+  <a class="skip-link visually-hidden-focusable" href="#main-content" data-i18n="skip_to_content">Saltar al contenido
+    principal</a>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm pm-topnav"
     data-i18n-aria-label="nav_main_aria" aria-label="Navegación principal">
@@ -34,8 +41,7 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="recursos.html" data-i18n="nav_resources">Visita</a></li>
           <li class="nav-item"><a class="nav-link" href="glosario.html" data-i18n="nav_glossary">Glosario</a></li>
-          <li class="nav-item"><a class="nav-link" href="audiovisuales.html" data-i18n="nav_audiovisuals">Vídeos</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="audiovisuales.html" data-i18n="nav_audiovisuals">Vídeos</a></li>
         </ul>
         <div class="d-flex flex-nowrap align-items-center gap-2 ms-lg-2 pm-nav-controls">
           <div class="language-switcher" role="group" data-i18n-aria-label="language_selector_aria"
@@ -49,36 +55,43 @@
     </div>
   </nav>
 
-  <section class="hero-simple" aria-labelledby="legal-notice-hero-title">
-    <div class="container">
-      <p class="kicker" data-i18n="footer_legal_heading">Información legal</p>
-      <h1 id="legal-notice-hero-title" data-i18n="legal_h1_notice">Aviso legal</h1>
-      <p class="hero-text" data-i18n="legal_notice_hero_text">Condiciones generales de uso e información básica del
-        sitio web de Paleomágina.</p>
+  <section class="page-hero" style="--hero-bg-image: url('../images/site/inventario de codigos qr.png')"
+    aria-labelledby="page-hero-qr-title">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <img class="page-hero__media" src="../images/site/inventario de codigos qr.png" alt="" width="1920" height="640"
+      loading="eager" decoding="async" data-i18n-alt="img_qr_inventory_alt" />
+    <div class="container hero-content">
+      <p class="kicker" data-i18n="page_qr_kicker">Recursos digitales</p>
+      <h1 id="page-hero-qr-title" data-i18n="page_qr_heading">Códigos QR del recorrido</h1>
+      <p class="hero-text" data-i18n="page_qr_lead">Consulta los enlaces digitales de cada ámbito para preparar la visita o seguir el recorrido en sala.</p>
     </div>
   </section>
 
-  <main id="main-content" class="py-5">
-    <div class="container content-prose" style="max-width: 48rem">
-      <h1 class="h2 mb-4 pm-heading-with-icon"><img src="../images/site/icono-laboratorio.png" alt="" width="56"
-          height="56" loading="lazy" decoding="async" class="pm-inline-icon" /><span data-i18n="legal_h1_notice">Aviso
-          legal</span></h1>
-      <p data-i18n="legal_notice_body_1">
-        Este sitio web es un entorno de divulgación del Centro de Interpretación Paleomágina. Los textos, imágenes y
-        datos tienen carácter informativo y pueden actualizarse sin previo aviso.
-      </p>
-      <p data-i18n="legal_notice_body_2">
-        Los contenidos no sustituyen la información oficial publicada por las administraciones competentes ni las
-        condiciones contractuales de servicios de visita cuando existan.
-      </p>
-      <p class="mb-0" data-i18n="legal_notice_body_3">
-        Para consultas sobre titularidad del sitio, responsabilidad de la información o procedimientos administrativos,
-        utiliza los datos de contacto publicados en la sección de contacto del proyecto.
-      </p>
-    </div>
+  <main id="main-content">
+    <section class="section pt-4" aria-labelledby="qr-table-caption">
+      <div class="container">
+        <div class="table-responsive pm-qr-table-wrap">
+          <table class="table table-striped table-hover pm-qr-table align-middle">
+            <caption id="qr-table-caption" class="visually-hidden" data-i18n="page_qr_heading">Inventario QR</caption>
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="qr_col_code">Código</th>
+                <th scope="col" data-i18n="qr_col_label">Ámbito</th>
+                <th scope="col" data-i18n="qr_col_floor">Planta</th>
+                <th scope="col" data-i18n="qr_col_url">URL proyecto</th>
+                <th scope="col" data-i18n="qr_col_micro">Micrositio</th>
+                <th scope="col" data-i18n="qr_col_lang">Idioma</th>
+                <th scope="col" data-i18n="qr_col_resource">Recurso</th>
+              </tr>
+            </thead>
+            <tbody id="qr-inventory-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer mt-5">
+  <footer class="site-footer">
     <div class="container footer-content">
       <div>
         <h2 data-i18n="footer_title">Paleomágina</h2>
@@ -97,8 +110,7 @@
       </div>
       <div>
         <h3 data-i18n="footer_contact">Contacto</h3>
-        <p><strong data-i18n="contact_email_label">Email:</strong><br /><a
-            href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
+        <p><strong data-i18n="contact_email_label">Email:</strong><br /><a href="mailto:info@paleomagina.org">info@paleomagina.org</a></p>
       </div>
       <div>
         <h3 data-i18n="footer_legal_heading">Información legal</h3>
@@ -111,8 +123,7 @@
       </div>
     </div>
     <div class="container footer-copy">
-      <p class="mb-0" data-i18n="footer_copyright">© 2026 Centro de Interpretación Paleomágina. Todos los derechos
-        reservados.</p>
+      <p class="mb-0" data-i18n="footer_copyright">© 2026 Centro de Interpretación Paleomágina.</p>
     </div>
   </footer>
 
