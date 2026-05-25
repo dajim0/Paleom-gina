@@ -7352,6 +7352,48 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   width: fit-content;
 }
 
+.pm-scope-layers__summary,
+.pm-scope-participation__ethics {
+  color: var(--pm-accent, #8b5a2b);
+}
+
+.pm-scope-layers__summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.pm-scope-participation {
+  border-left: 3px solid var(--pm-accent, #8b5a2b);
+  padding: 0.75rem 0 0.75rem 1rem;
+  background: rgba(139, 90, 43, 0.06);
+  border-radius: 0 0.35rem 0.35rem 0;
+}
+
+.pm-scope-participation--preparing {
+  border-left-color: #b8860b;
+  background: rgba(184, 134, 11, 0.08);
+}
+
+.pm-workshop-card .card-title {
+  font-size: 1rem;
+}
+
+.pm-live-program-item {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--pm-border-subtle, rgba(0, 0, 0, 0.08));
+}
+
+.pm-live-program-item:last-child {
+  border-bottom: 0;
+}
+
+.av-a11y-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
 .pm-qr-table-wrap {
   font-size: 0.9rem;
 }
