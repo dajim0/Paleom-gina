@@ -203,19 +203,19 @@ const scopeContents = {
   A9: {
     es: {
       title: "Testimonios y voces",
-      description: "Espacio audiovisual con investigadores, habitantes locales, experiencias personales y memoria territorial. Humaniza el discurso y relaciona ciencia y ciudadanía.",
-      content: "Cierra el circuito interior con voces reales: cómo se investiga, qué significa el patrimonio para quien vive en el entorno y cómo la memoria colectiva dialoga con la evidencia científica. Incluye testimonios de investigadores y de ciudadanía (vecinos, visitantes, educadores) tal como prevé el proyecto museográfico: humanizar el método sin sustituir la evidencia.",
+      description: "Espacio para investigadores, habitantes locales y memoria territorial. Humaniza el discurso y relaciona ciencia y ciudadanía.",
+      content: "Cierra el circuito interior como espacio de voces del territorio. El proyecto museográfico prevé testimonios reales de investigación y ciudadanía; mientras se incorporan piezas audiovisuales definitivas, aquí puedes conocer las preguntas guía y cómo participar con respeto y evidencia.",
       timeline: "Memoria y ciudadanía",
-      related: "Los vídeos de esta página recogen voces de investigación y memoria territorial enlazadas con este cierre del recorrido.",
-      facts: ["Humaniza el relato científico con voces reales", "Recoge memoria territorial y experiencias de visita", "Funciona como puente entre investigación, emoción y comunidad"]
+      related: "Consulta la sección de participación en esta página y los talleres educativos en Visita. Cuando haya vídeos autorizados, aparecerán también en la biblioteca audiovisual.",
+      facts: ["Espacio en preparación para voces reales autorizadas", "Preguntas guía para entrevistas y memoria local", "Puente entre investigación, emoción y comunidad"]
     },
     en: {
       title: "Testimonies and voices",
-      description: "Audiovisual space with researchers, local residents, personal stories, and territorial memory. It humanises the narrative and connects science and citizenship.",
-      content: "It closes the indoor circuit with real voices: how research happens, what heritage means for people who live nearby, and how collective memory dialogues with scientific evidence. It gathers researchers and community voices (neighbours, visitors, educators) as planned in the exhibition project: humanising method without replacing evidence.",
+      description: "Space for researchers, local residents, and territorial memory. It humanises the narrative and connects science and citizenship.",
+      content: "It closes the indoor circuit as a space for voices of the territory. The exhibition project plans real testimonies from research and the community; while definitive audiovisual pieces are added, you can read the guide questions and how to take part with respect and evidence.",
       timeline: "Memory and citizenship",
-      related: "Audiovisuals on this page gather research voices and territorial memory linked to this closing section of the route.",
-      facts: ["Humanises the scientific narrative through real voices", "Collects territorial memory and visitor experiences", "Acts as a bridge between research, emotion, and community"]
+      related: "See the participation section on this page and educational workshops under Visit. Authorised videos will also appear in the audiovisual library when available.",
+      facts: ["Space being prepared for authorised real voices", "Guide questions for interviews and local memory", "Bridge between research, emotion, and community"]
     }
   },
   ATZ: {
@@ -288,6 +288,142 @@ const scopePdfExtras = {
     es: { easySummary: "Desde la terraza el museo sigue: el paisaje real resume todo el recorrido.", keyQuestion: "¿Qué ves en el horizonte que conecta con lo aprendido?", duration: "10–20 min", audience: "Cierre de visita" },
     en: { easySummary: "From the terrace the museum continues: the real landscape sums up the route.", keyQuestion: "What do you see on the horizon that connects with what you learned?", duration: "10–20 min", audience: "Visit closure" }
   }
+};
+
+// Capas de lectura por ámbito (infantil → profundización)
+const scopeReadingLayers = {
+  AAN: {
+    es: { infant: "Miramos la montaña y a las personas del pasado.", family: "Emoción y paisaje antes del recorrido numerado.", general: "Umbral afectivo que introduce el territorio.", deep: "Antesala como dispositivo museográfico de encuadre narrativo." },
+    en: { infant: "We look at the mountain and people from the past.", family: "Emotion and landscape before the numbered route.", general: "Affective threshold introducing the territory.", deep: "Ante-room as a museographic framing device." }
+  },
+  A0: {
+    es: { infant: "Aprendemos qué es el museo y cómo visitarlo.", family: "Orientación, QR y normas de visita.", general: "Introducción al archivo geológico y humano.", deep: "Marco interpretativo del centro y del micrositio." },
+    en: { infant: "We learn what the museum is and how to visit.", family: "Orientation, QR codes, and visit rules.", general: "Introduction to the geological and human archive.", deep: "Interpretive framework of the centre and microsite." }
+  },
+  A1: {
+    es: { infant: "Aquí hubo un mar con conchas y peces.", family: "Fósiles marinos en una sierra.", general: "Origen del Tetis y sedimentos.", deep: "Paleogeografía del Mesozoico en Sierra Mágina." },
+    en: { infant: "There was once a sea with shells and fish.", family: "Marine fossils in a mountain.", general: "Tethys origin and sediments.", deep: "Mesozoic palaeogeography in Sierra Mágina." }
+  },
+  A2: {
+    es: { infant: "El mar se levantó y formó montañas.", family: "Rocas, cuevas y relieve.", general: "Tectónica, erosión y kárst.", deep: "Lectura estructural del relieve bético." },
+    en: { infant: "The sea rose and made mountains.", family: "Rocks, caves, and relief.", general: "Tectonics, erosion, and karst.", deep: "Structural reading of Betic relief." }
+  },
+  A3: {
+    es: { infant: "Hacía mucho frío y había animales grandes.", family: "Hielo, mamuts y primeros humanos.", general: "Cuaternario, clima y fauna.", deep: "Ciclos glaciares y refugios en la península." },
+    en: { infant: "It was very cold and big animals lived here.", family: "Ice, mammoths, and early humans.", general: "Quaternary, climate, and fauna.", deep: "Glacial cycles and refuges in the peninsula." }
+  },
+  A4: {
+    es: { infant: "Los neandertales cazaban y hacían fuego.", family: "Vida en grupo y herramientas.", general: "Evidencias neandertales en el territorio.", deep: "Debate sobre extinción y convivencia." },
+    en: { infant: "Neanderthals hunted and made fire.", family: "Group life and tools.", general: "Neanderthal evidence in the territory.", deep: "Debate on extinction and coexistence." }
+  },
+  A5: {
+    es: { infant: "Pintaban y tallaban la piedra.", family: "Arte, caza y símbolos.", general: "Paleolítico superior y redes sociales.", deep: "Arte rupestre y territorio kárstico local." },
+    en: { infant: "They painted and carved stone.", family: "Art, hunting, and symbols.", general: "Upper Palaeolithic and social networks.", deep: "Rock art and local karst territory." }
+  },
+  A6: {
+    es: { infant: "Empiezan a plantar y a cuidar animales.", family: "Agricultura, ollas y asentamientos.", general: "Revolución neolítica en la comarca.", deep: "Paisaje agrícola y cambio social." },
+    en: { infant: "People start farming and herding.", family: "Farming, pots, and settlements.", general: "Neolithic revolution in the area.", deep: "Farming landscape and social change." }
+  },
+  A7: {
+    es: { infant: "Aparece el cobre y nuevas herramientas.", family: "Metales, intercambio y enterramientos.", general: "Calcolítico y desigualdad.", deep: "Metalurgia, rutas y élite social." },
+    en: { infant: "Copper and new tools appear.", family: "Metals, exchange, and burials.", general: "Chalcolithic and inequality.", deep: "Metallurgy, routes, and social elites." }
+  },
+  A8: {
+    es: { infant: "Los científicos estudian restos con cuidado.", family: "Excavar, datar y proteger.", general: "Método y participación ciudadana.", deep: "Arqueología pública y gestión del patrimonio." },
+    en: { infant: "Scientists study remains carefully.", family: "Digging, dating, and protecting.", general: "Method and citizen participation.", deep: "Public archaeology and heritage management." }
+  },
+  A9: {
+    es: { infant: "Pronto escucharemos voces del lugar.", family: "Memoria de vecinos e investigadores.", general: "Testimonios en preparación.", deep: "Ética y autorización de voces reales." },
+    en: { infant: "Soon we will hear local voices.", family: "Memory from neighbours and researchers.", general: "Testimonies in preparation.", deep: "Ethics and consent for real voices." }
+  },
+  ATZ: {
+    es: { infant: "El museo sigue mirando la montaña.", family: "Horizonte, valles y crestas.", general: "Paisaje como última sala.", deep: "Territorio como archivo vivo." },
+    en: { infant: "The museum continues outdoors.", family: "Horizon, valleys, and ridges.", general: "Landscape as the final gallery.", deep: "Territory as a living archive." }
+  }
+};
+
+// Participación y voces (sin inventar testimonios)
+const scopeParticipation = {
+  A8: {
+    es: {
+      status: "open",
+      title: "Ciencia abierta y programa vivo",
+      intro: "Este ámbito explica el método científico y cómo participar en talleres, visitas guiadas o actividades de divulgación. No sustituye a los testimonios audiovisuales del cierre (A9), pero conecta con el programa educativo del centro.",
+      ethics: null
+    },
+    en: {
+      status: "open",
+      title: "Open science and live programme",
+      intro: "This scope explains scientific method and how to join workshops, guided visits, or outreach activities. It does not replace the audiovisual testimonies at the close (A9), but links to the centre's educational programme.",
+      ethics: null
+    }
+  },
+  A9: {
+    es: {
+      status: "preparing",
+      title: "Voces del territorio (en preparación)",
+      intro: "Paleomágina recogerá testimonios reales de investigadores, docentes, vecinos y visitantes. Mientras se autorizan y editan las piezas, puedes usar estas preguntas guía en el aula o en visitas comentadas.",
+      questions: [
+        "¿Qué recuerdo o historia personal conectas con Sierra Mágina?",
+        "¿Qué significa para ti conservar un yacimiento o un paisaje?",
+        "¿Qué pregunta científica te gustaría hacerle a un arqueólogo?",
+        "¿Cómo cambia tu mirada del territorio después de la visita?"
+      ],
+      ethics: "Solo se publicarán voces con autorización expresa, contexto claro y respeto a la privacidad. La evidencia científica sigue siendo la base del relato."
+    },
+    en: {
+      status: "preparing",
+      title: "Voices of the territory (in preparation)",
+      intro: "Paleomágina will gather real testimonies from researchers, teachers, neighbours, and visitors. While pieces are authorised and edited, you can use these guide questions in class or on guided visits.",
+      questions: [
+        "What personal memory or story connects you with Sierra Mágina?",
+        "What does protecting a site or landscape mean to you?",
+        "What scientific question would you ask an archaeologist?",
+        "How does your view of the territory change after the visit?"
+      ],
+      ethics: "Only voices with explicit consent, clear context, and respect for privacy will be published. Scientific evidence remains the basis of the narrative."
+    }
+  }
+};
+
+const educationalWorkshops = {
+  es: [
+    { id: "w-fam-fosiles", age: "Infantil y familias (6+)", title: "Detectives de fósiles", scope: "A1", duration: "45 min", text: "Reconocer formas marinas y relacionarlas con el paisaje actual." },
+    { id: "w-pri-ceramica", age: "Primaria (8–12)", title: "Taller de cerámica neolítica", scope: "A6", duration: "60 min", text: "Modelado, decoración y lectura de usos domésticos." },
+    { id: "w-pri-paisaje", age: "Primaria (10–12)", title: "Lectura del paisaje", scope: "A2", duration: "50 min", text: "Caliza, cuevas y relieve desde miradores y maquetas." },
+    { id: "w-eso-lito", age: "ESO (12–16)", title: "Talla lítica guiada", scope: "A4", duration: "75 min", text: "Industria lítica, función de herramientas y arqueología experimental." },
+    { id: "w-eso-arte", age: "ESO (12–16)", title: "Arte rupestre y territorio", scope: "A5", duration: "70 min", text: "Símbolos, pigmentos y relación con abrigos de la comarca." },
+    { id: "w-bach-met", age: "Bachillerato", title: "Metalurgia y sociedad", scope: "A7", duration: "80 min", text: "Cobre, intercambio y desigualdad en el Calcolítico." },
+    { id: "w-bach-metodo", age: "Bachillerato", title: "Del yacimiento al dato", scope: "A8", duration: "90 min", text: "Excavación, registro, datación y divulgación responsable." },
+    { id: "w-fam-qr", age: "Familias", title: "Recorrido con QR", scope: "A0", duration: "Variable", text: "Uso del micrositio en sala: ámbitos, glosario y vídeos enlazados." }
+  ],
+  en: [
+    { id: "w-fam-fosiles", age: "Families (6+)", title: "Fossil detectives", scope: "A1", duration: "45 min", text: "Recognise marine forms and link them to today's landscape." },
+    { id: "w-pri-ceramica", age: "Primary (8–12)", title: "Neolithic pottery workshop", scope: "A6", duration: "60 min", text: "Modelling, decoration, and reading domestic uses." },
+    { id: "w-pri-paisaje", age: "Primary (10–12)", title: "Reading the landscape", scope: "A2", duration: "50 min", text: "Limestone, caves, and relief from viewpoints and models." },
+    { id: "w-eso-lito", age: "Lower secondary (12–16)", title: "Guided stone knapping", scope: "A4", duration: "75 min", text: "Stone tools, function, and experimental archaeology." },
+    { id: "w-eso-arte", age: "Lower secondary (12–16)", title: "Rock art and territory", scope: "A5", duration: "70 min", text: "Symbols, pigments, and links to local rock shelters." },
+    { id: "w-bach-met", age: "Upper secondary", title: "Metallurgy and society", scope: "A7", duration: "80 min", text: "Copper, exchange, and inequality in the Chalcolithic." },
+    { id: "w-bach-metodo", age: "Upper secondary", title: "From site to data", scope: "A8", duration: "90 min", text: "Excavation, recording, dating, and responsible outreach." },
+    { id: "w-fam-qr", age: "Families", title: "QR route", scope: "A0", duration: "Flexible", text: "Using the microsite in-gallery: scopes, glossary, and linked videos." }
+  ]
+};
+
+const liveProgramItems = {
+  es: [
+    { type: "Conferencia", title: "Divulgación y patrimonio", status: "Consultar en recepción", note: "Ciclo de charlas con equipos de investigación y educación." },
+    { type: "Taller", title: "Arqueología experimental", status: "Reserva previa", note: "Sesiones para centros educativos vinculadas a A4–A6." },
+    { type: "Visita guiada", title: "Recorrido comentado", status: "Martes a domingo", note: "Pases según calendario del centro." },
+    { type: "Temporal", title: "Exposiciones y actividades puntuales", status: "Próximamente", note: "Se anunciarán en recepción y en esta web." },
+    { type: "Laboratorio", title: "Divulgación de análisis", status: "Bajo demanda", note: "Muestras de trabajo en registro y datación (A8)." }
+  ],
+  en: [
+    { type: "Talk", title: "Outreach and heritage", status: "Ask at reception", note: "Talk series with research and education teams." },
+    { type: "Workshop", title: "Experimental archaeology", status: "Advance booking", note: "Sessions for schools linked to A4–A6." },
+    { type: "Guided visit", title: "Commented route", status: "Tuesday to Sunday", note: "Sessions according to the centre calendar." },
+    { type: "Temporary", title: "Exhibitions and one-off events", status: "Coming soon", note: "Announced at reception and on this website." },
+    { type: "Lab", title: "Analysis outreach", status: "On request", note: "Samples of recording and dating work (A8)." }
+  ]
 };
 
 // ── Glosario ─────────────────────────────────────────────────────────
@@ -539,6 +675,79 @@ const territoryPoints = [
     },
   },
   {
+    id: "rio-cuadros",
+    x: 70.0,
+    y: 58.0,
+    size: 9.5,
+    scope: "A6",
+    icon: "🌾",
+    kind: { es: "Valle y poblamiento", en: "Valley and settlement" },
+    title: { es: "Valle de Río Cuadros", en: "Río Cuadros valley" },
+    desc: {
+      es: "Laderas y vegas que explican asentamientos neolíticos y lectura del paisaje habitado.",
+      en: "Slopes and lowlands explaining Neolithic settlement and inhabited landscape reading.",
+    },
+    evidence: {
+      es: "Conecta agricultura temprana, caminos y uso del territorio con el ámbito A6.",
+      en: "Links early farming, routes, and land use with scope A6.",
+    },
+  },
+  {
+    id: "portillo",
+    x: 58.0,
+    y: 28.0,
+    size: 10.5,
+    scope: "A5",
+    icon: "A5",
+    iconPath: "../images/site/icono-abrigos.svg",
+    kind: { es: "Karst y arte", en: "Karst and art" },
+    title: { es: "Portillo y abrigos", en: "Portillo and rock shelters" },
+    desc: {
+      es: "Entorno kárstico de la comarca asociado a arte rupestre y simbolismo paleolítico.",
+      en: "Karst setting in the area linked to rock art and Palaeolithic symbolism.",
+    },
+    evidence: {
+      es: "Relaciona cuevas y abrigos del entorno con el ámbito A5 sin señalar yacimientos exactos.",
+      en: "Links local caves and shelters with scope A5 without marking exact sites.",
+    },
+  },
+  {
+    id: "graja",
+    x: 44.0,
+    y: 55.0,
+    size: 9.5,
+    scope: "A5",
+    icon: "🏞️",
+    kind: { es: "Paisaje cultural", en: "Cultural landscape" },
+    title: { es: "Graja y entorno", en: "Graja and surroundings" },
+    desc: {
+      es: "Lectura del relieve y del poblamiento en un paisaje de transición entre sierra y vega.",
+      en: "Reading relief and settlement in a landscape between range and lowlands.",
+    },
+    evidence: {
+      es: "Ayuda a situar movilidad humana y memoria territorial en el Paleolítico superior.",
+      en: "Helps place human mobility and territorial memory in the Upper Palaeolithic.",
+    },
+  },
+  {
+    id: "cambil",
+    x: 22.0,
+    y: 72.0,
+    size: 10.0,
+    scope: "A7",
+    icon: "⛏️",
+    kind: { es: "Rutas y metales", en: "Routes and metals" },
+    title: { es: "Cambil y collados", en: "Cambil and passes" },
+    desc: {
+      es: "Pasos naturales y rutas que ilustran intercambio y metalurgia temprana en la sierra.",
+      en: "Natural passes and routes illustrating exchange and early metallurgy in the range.",
+    },
+    evidence: {
+      es: "Conecta paisaje habitado y Calcolítico (A7) con circulación por la comarca.",
+      en: "Connects inhabited landscape and Chalcolithic (A7) with movement across the area.",
+    },
+  },
+  {
     id: "neandertal",
     x: 35.2,
     y: 67.9,
@@ -630,7 +839,17 @@ function getScopeContent(code, lang) {
   const base = scopeContents[code]?.[l] || null;
   if (!base) return null;
   const extra = scopePdfExtras[code]?.[l];
-  return extra ? { ...base, ...extra } : base;
+  const layers = scopeReadingLayers[code]?.[l];
+  return { ...base, ...(extra || {}), ...(layers ? { readingLayers: layers } : {}) };
+}
+function getScopeParticipation(code, lang) {
+  return scopeParticipation[code]?.[lang || "es"] || null;
+}
+function getEducationalWorkshops(lang) {
+  return educationalWorkshops[lang || "es"] || educationalWorkshops.es || [];
+}
+function getLiveProgramItems(lang) {
+  return liveProgramItems[lang || "es"] || liveProgramItems.es || [];
 }
 function getQrInventory(lang) {
   const l = lang || "es";
@@ -788,7 +1007,7 @@ const translations = {
     resources_more_after_cta: "Ver vídeos",
     resources_more_groups_title: "Centros educativos",
     resources_more_groups_text: "Propuesta de visita por edades, talleres vinculados a los ámbitos y apoyo para actividades escolares.",
-    resources_more_groups_cta: "Solicitar información",
+    resources_more_groups_cta: "Ver talleres y programa",
     res_audiovisual: "Vídeos", res_audiovisual_p: "Documentales, piezas breves y explicaciones por ámbito con subtítulos.",
     res_datasheets: "Fichas", res_datasheets_p: "Fichas técnicas de fósiles, hallazgos y materiales de excavación.",
     res_maps: "Mapas", res_maps_p: "Mapa interactivo de cuevas, yacimientos y puntos de interés de Sierra Mágina.",
@@ -907,6 +1126,13 @@ const translations = {
     av_planned_badge: "Serie Paleomágina",
     av_planned_cta: "Explorar ámbitos",
     av_subtitle_badge: "Subtítulos EN",
+    av_a11y_subtitles_ok: "Subtítulos",
+    av_a11y_subtitles_pending: "Subtítulos: revisión",
+    av_a11y_transcript_ok: "Transcripción",
+    av_a11y_transcript_summary: "Resumen textual",
+    av_a11y_transcript_pending: "Transcripción: pendiente",
+    av_a11y_audiodesc_ok: "Audiodescripción",
+    av_a11y_audiodesc_pending: "Audiodescripción: pendiente",
     av_external_badge: "Selección educativa",
     av_overlay_hint: "Subtítulos en inglés activados al reproducir. Todos los vídeos duran menos de 20 minutos.",
     av_accessibility_title: "Accesibilidad audiovisual",
@@ -919,9 +1145,25 @@ const translations = {
     av_library_hide: "Ver menos vídeos",
     img_audiovisuals_banner_alt: "Ciencia, tecnología y divulgación audiovisual en Paleomágina",
     audiovisuals_accessibility: "Accesibilidad",
-    audiovisuals_subtitles: "Subtítulos", audiovisuals_subtitles_p: "Todos los vídeos cuentan con subtítulos en español e inglés para garantizar accesibilidad auditiva.",
-    audiovisuals_descriptions: "Audiodescripciones", audiovisuals_descriptions_p: "Disponibles descripciones de audio para personas con discapacidad visual en contenido seleccionado.",
-    audiovisuals_transcripts: "Transcripciones", audiovisuals_transcripts_p: "Acceso a texto completo de cada audiovisual para consulta académica e inclusión digital.",
+    audiovisuals_subtitles: "Subtítulos", audiovisuals_subtitles_p: "Los vídeos externos suelen incluir subtítulos; las piezas propias del centro se revisan en español e inglés. Cada ficha indica el estado.",
+    audiovisuals_descriptions: "Audiodescripciones", audiovisuals_descriptions_p: "Se irán incorporando audiodescripciones en piezas seleccionadas. Las que aún no las tienen aparecen marcadas como pendientes.",
+    audiovisuals_transcripts: "Transcripciones", audiovisuals_transcripts_p: "Hay resúmenes ampliados en varias fichas; las transcripciones literales completas se publicarán cuando estén revisadas.",
+    scope_layers_toggle: "Niveles de lectura",
+    scope_layers_infant: "Infantil",
+    scope_layers_family: "Familiar",
+    scope_layers_general: "General",
+    scope_layers_deep: "Profundización",
+    scope_participation_preparing: "En preparación",
+    scope_participation_questions: "Preguntas guía",
+    scope_participation_ethics: "Compromiso ético",
+    edu_workshops_title: "Talleres educativos por edad",
+    edu_workshops_lead: "Propuestas vinculadas a ámbitos del recorrido. Duración orientativa; confirma disponibilidad y reserva con el centro.",
+    edu_live_title: "Programa vivo del centro",
+    edu_live_lead: "Conferencias, talleres, visitas guiadas y actividades puntuales. El calendario detallado se consulta en recepción.",
+    edu_workshop_age: "Edad",
+    edu_workshop_scope: "Ámbito",
+    edu_program_type: "Tipo",
+    edu_program_status: "Estado",
     filter_all: "Todos", filter_geology: "Geología", filter_paleontology: "Paleontología", filter_archaeology: "Arqueología",
     que_es_title: "Qué es Paleomágina",
     que_es_intro: "Paleomágina es un centro científico, arqueológico y museográfico centrado en la interpretación de Sierra Mágina desde la geología, la paleontología, la arqueología y la evolución humana. El proyecto plantea el territorio como un gran archivo natural donde el paisaje conserva millones de años de historia.",
@@ -1250,7 +1492,7 @@ const translations = {
     resources_more_after_cta: "View videos",
     resources_more_groups_title: "Education groups",
     resources_more_groups_text: "Visit proposal by age, workshops linked to the scopes, and support for school activities.",
-    resources_more_groups_cta: "Request information",
+    resources_more_groups_cta: "View workshops and programme",
     res_audiovisual: "Videos", res_audiovisual_p: "Documentaries, short pieces, and area-specific explainers with subtitles.",
     res_datasheets: "Data sheets", res_datasheets_p: "Technical sheets for fossils, findings, and excavation materials.",
     res_maps: "Maps", res_maps_p: "Interactive map of caves, archaeological sites, and key points in Sierra Mágina.",
@@ -1368,6 +1610,13 @@ const translations = {
     av_planned_badge: "Paleomágina series",
     av_planned_cta: "Explore scopes",
     av_subtitle_badge: "EN subtitles",
+    av_a11y_subtitles_ok: "Subtitles",
+    av_a11y_subtitles_pending: "Subtitles: review",
+    av_a11y_transcript_ok: "Transcript",
+    av_a11y_transcript_summary: "Text summary",
+    av_a11y_transcript_pending: "Transcript: pending",
+    av_a11y_audiodesc_ok: "Audio description",
+    av_a11y_audiodesc_pending: "Audio description: pending",
     av_external_badge: "Educational selection",
     av_overlay_hint: "English subtitles enabled on playback. All videos are under 20 minutes.",
     av_accessibility_title: "Audiovisual accessibility",
@@ -1380,9 +1629,25 @@ const translations = {
     av_library_hide: "Show fewer videos",
     img_audiovisuals_banner_alt: "Science, technology and audiovisual outreach at Paleomágina",
     audiovisuals_accessibility: "Accessibility",
-    audiovisuals_subtitles: "Subtitles", audiovisuals_subtitles_p: "All audiovisuals include subtitles in Spanish and English to ensure hearing accessibility.",
-    audiovisuals_descriptions: "Audio descriptions", audiovisuals_descriptions_p: "Audio descriptions available for visually impaired users in selected content.",
-    audiovisuals_transcripts: "Transcripts", audiovisuals_transcripts_p: "Access to full text of each audiovisual for academic consultation and digital inclusion.",
+    audiovisuals_subtitles: "Subtitles", audiovisuals_subtitles_p: "External videos often include subtitles; the centre's own pieces are reviewed in Spanish and English. Each card shows the status.",
+    audiovisuals_descriptions: "Audio descriptions", audiovisuals_descriptions_p: "Audio descriptions will be added to selected pieces. Those not yet available are marked as pending.",
+    audiovisuals_transcripts: "Transcripts", audiovisuals_transcripts_p: "Extended summaries appear on several cards; full verbatim transcripts will be published once reviewed.",
+    scope_layers_toggle: "Reading levels",
+    scope_layers_infant: "Children",
+    scope_layers_family: "Families",
+    scope_layers_general: "General",
+    scope_layers_deep: "In-depth",
+    scope_participation_preparing: "In preparation",
+    scope_participation_questions: "Guide questions",
+    scope_participation_ethics: "Ethical commitment",
+    edu_workshops_title: "Educational workshops by age",
+    edu_workshops_lead: "Activities linked to exhibition scopes. Approximate duration; confirm availability and booking with the centre.",
+    edu_live_title: "Live centre programme",
+    edu_live_lead: "Talks, workshops, guided visits, and one-off events. See reception for the detailed calendar.",
+    edu_workshop_age: "Age",
+    edu_workshop_scope: "Scope",
+    edu_program_type: "Type",
+    edu_program_status: "Status",
     filter_all: "All", filter_geology: "Geology", filter_paleontology: "Paleontology", filter_archaeology: "Archaeology",
     que_es_title: "What is Paleomágina",
     que_es_intro: "Paleomágina is a scientific, archaeological, and museographic centre focused on interpreting Sierra Mágina through geology, palaeontology, archaeology, and human evolution. The project treats the territory as a vast natural archive where the landscape preserves millions of years of history.",

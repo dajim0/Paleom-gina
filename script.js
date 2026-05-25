@@ -195,6 +195,14 @@ function initTerritoryMap() {
   const panelEvidence = document.getElementById("territory-map-panel-evidence");
   const panelBtn = document.getElementById("territory-map-panel-btn");
 
+  const renderTerritoryPointIcon = (point) => {
+    if (point.iconPath) {
+      const label = point.title?.[lang] || point.title?.es || "";
+      return `<img class="territory-map-card__icon-img" src="${point.iconPath}" alt="" loading="lazy" decoding="async" title="${label}" />`;
+    }
+    return point.icon || "📍";
+  };
+
   const selectPoint = (point) => {
     root.querySelectorAll(".territory-map-marker").forEach((m) => {
       m.classList.toggle("is-active", m.dataset.pointId === point.id);
@@ -217,7 +225,9 @@ function initTerritoryMap() {
   const markersWrap = document.createElement("div");
   markersWrap.className = "territory-map-markers";
 
-  territoryPoints.forEach((point) => {
+  [...territoryPoints]
+    .sort((a, b) => (b.size || 10) - (a.size || 10))
+    .forEach((point) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "territory-map-marker";
@@ -250,7 +260,7 @@ function initTerritoryMap() {
     item.className = "territory-map-card";
     item.dataset.pointId = point.id;
     item.innerHTML = `
-      <span class="territory-map-card__icon" aria-hidden="true">${point.icon || "📍"}</span>
+      <span class="territory-map-card__icon" aria-hidden="true">${renderTerritoryPointIcon(point)}</span>
       <span class="territory-map-card__body">
         <strong>${point.title[lang] || point.title.es}</strong>
         <small>${point.kind?.[lang] || point.kind?.es || ""} · ${point.scope}</small>
@@ -264,12 +274,12 @@ function initTerritoryMap() {
   const grid = document.createElement("div");
   grid.className = "row g-4 align-items-stretch";
   const colMap = document.createElement("div");
-  colMap.className = "col-lg-7";
+  colMap.className = "col-lg-7 d-flex flex-column gap-3";
   colMap.appendChild(mapShell);
+  if (panel) colMap.appendChild(panel);
   const colSide = document.createElement("div");
-  colSide.className = "col-lg-5 d-flex flex-column gap-3";
+  colSide.className = "col-lg-5";
   colSide.appendChild(list);
-  if (panel) colSide.appendChild(panel);
   grid.appendChild(colMap);
   grid.appendChild(colSide);
   root.appendChild(grid);
@@ -363,6 +373,151 @@ document.addEventListener("pm:navigation", () => {
 });
 
 // ── Acordeón de recorrido AAN–ATZ (ambitos.html) ─────────────────────
+function buildScopeReadingLayersEl(sc) {
+  const layers = sc?.readingLayers;
+  if (!layers) return null;
+  const rows = [
+    ["scope_layers_infant", layers.infant],
+    ["scope_layers_family", layers.family],
+    ["scope_layers_general", layers.general],
+    ["scope_layers_deep", layers.deep],
+  ].filter(([, val]) => Boolean(val));
+  if (!rows.length) return null;
+
+  const wrap = document.createElement("details");
+  wrap.className = "pm-scope-layers mt-3";
+  const sum = document.createElement("summary");
+  sum.className = "pm-scope-layers__summary";
+  sum.textContent = paleomaginaT("scope_layers_toggle") || "Niveles de lectura";
+  const inner = document.createElement("div");
+  inner.className = "pm-scope-layers__body";
+
+  rows.forEach(([labelKey, val]) => {
+    const row = document.createElement("p");
+    row.className = "small mb-2";
+    const strong = document.createElement("strong");
+    strong.textContent = (paleomaginaT(labelKey) || labelKey) + ": ";
+    row.appendChild(strong);
+    row.append(document.createTextNode(val));
+    inner.appendChild(row);
+  });
+
+  wrap.appendChild(sum);
+  wrap.appendChild(inner);
+  return wrap;
+}
+
+function buildScopeParticipationEl(code, lang) {
+  if (typeof getScopeParticipation !== "function") return null;
+  const part = getScopeParticipation(code, lang);
+  if (!part) return null;
+
+  const box = document.createElement("aside");
+  box.className = `pm-scope-participation mt-3${part.status === "preparing" ? " pm-scope-participation--preparing" : ""}`;
+  const h = document.createElement("h4");
+  h.className = "h6 mb-2";
+  h.textContent = part.title;
+  box.appendChild(h);
+
+  if (part.status === "preparing") {
+    const badge = document.createElement("p");
+    badge.className = "small text-muted mb-2";
+    badge.textContent = paleomaginaT("scope_participation_preparing") || "En preparación";
+    box.appendChild(badge);
+  }
+
+  const intro = document.createElement("p");
+  intro.className = "small mb-2";
+  intro.textContent = part.intro;
+  box.appendChild(intro);
+
+  if (Array.isArray(part.questions) && part.questions.length) {
+    const qTitle = document.createElement("p");
+    qTitle.className = "small fw-semibold mb-1";
+    qTitle.textContent = paleomaginaT("scope_participation_questions") || "Preguntas guía";
+    box.appendChild(qTitle);
+    const ul = document.createElement("ul");
+    ul.className = "small mb-2";
+    part.questions.forEach((q) => {
+      const li = document.createElement("li");
+      li.textContent = q;
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+
+  if (part.ethics) {
+    const ethics = document.createElement("p");
+    ethics.className = "small mb-0 pm-scope-participation__ethics";
+    const strong = document.createElement("strong");
+    strong.textContent = (paleomaginaT("scope_participation_ethics") || "Compromiso ético") + ": ";
+    ethics.appendChild(strong);
+    ethics.append(document.createTextNode(part.ethics));
+    box.appendChild(ethics);
+  }
+
+  return box;
+}
+
+function initVisitEducationSections() {
+  const workshopsRoot = document.getElementById("pm-workshops-list");
+  const programRoot = document.getElementById("pm-live-program-list");
+  if (!workshopsRoot && !programRoot) return;
+  const lang = currentLang === "en" ? "en" : "es";
+
+  if (workshopsRoot && typeof getEducationalWorkshops === "function") {
+    workshopsRoot.innerHTML = "";
+    getEducationalWorkshops(lang).forEach((w) => {
+      const col = document.createElement("div");
+      col.className = "col-12 col-md-6 col-lg-4";
+      const card = document.createElement("article");
+      card.className = "card border-0 shadow-sm pm-workshop-card h-100";
+      const body = document.createElement("div");
+      body.className = "card-body";
+      const h = document.createElement("h3");
+      h.className = "h6 card-title";
+      h.textContent = w.title;
+      const meta = document.createElement("p");
+      meta.className = "small text-muted mb-2";
+      meta.textContent = `${paleomaginaT("edu_workshop_age") || "Edad"}: ${w.age} · ${w.duration}`;
+      const scope = document.createElement("p");
+      scope.className = "small mb-2";
+      scope.innerHTML = `<strong>${paleomaginaT("edu_workshop_scope") || "Ámbito"}:</strong> <a href="ambitos.html?scope=${encodeURIComponent(w.scope)}">${w.scope}</a>`;
+      const p = document.createElement("p");
+      p.className = "small mb-0";
+      p.textContent = w.text;
+      body.appendChild(h);
+      body.appendChild(meta);
+      body.appendChild(scope);
+      body.appendChild(p);
+      card.appendChild(body);
+      col.appendChild(card);
+      workshopsRoot.appendChild(col);
+    });
+  }
+
+  if (programRoot && typeof getLiveProgramItems === "function") {
+    programRoot.innerHTML = "";
+    getLiveProgramItems(lang).forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "pm-live-program-item mb-3";
+      const head = document.createElement("p");
+      head.className = "small fw-semibold mb-1";
+      head.textContent = `${item.type} · ${item.title}`;
+      const status = document.createElement("p");
+      status.className = "small text-muted mb-1";
+      status.textContent = `${paleomaginaT("edu_program_status") || "Estado"}: ${item.status}`;
+      const note = document.createElement("p");
+      note.className = "small mb-0";
+      note.textContent = item.note;
+      card.appendChild(head);
+      card.appendChild(status);
+      card.appendChild(note);
+      programRoot.appendChild(card);
+    });
+  }
+}
+
 function buildScopePdfExtrasEl(sc) {
   if (!sc) return null;
   const fields = [
@@ -555,8 +710,14 @@ function initAmbitosExhibitRoute() {
     const cross = buildScopeCrossLinksEl(code, lang);
     if (cross) body.appendChild(cross);
 
+    const layersEl = buildScopeReadingLayersEl(sc);
+    if (layersEl) body.appendChild(layersEl);
+
     const pdfExtras = buildScopePdfExtrasEl(sc);
     if (pdfExtras) body.appendChild(pdfExtras);
+
+    const participation = buildScopeParticipationEl(code, lang);
+    if (participation) body.appendChild(participation);
 
     item.dataset.pmScope = code;
     region.appendChild(body);
@@ -784,6 +945,7 @@ function applyLanguage(lang) {
   initAmbitosExhibitRoute();
   initEasyReadPage();
   initQrInventoryPage();
+  initVisitEducationSections();
   initTerritoryMap();
   initVisitJourney();
   initTicketCart();

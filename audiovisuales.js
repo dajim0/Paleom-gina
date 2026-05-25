@@ -161,6 +161,36 @@
     `;
   }
 
+  function getA11yStatus(item) {
+    const subtitles = item.a11ySubtitles || (item.subtitle ? "ok" : "pending");
+    const transcript = item.a11yTranscript || (item.transcriptFull ? "ok" : item.transcript ? "summary" : "pending");
+    const audioDesc = item.a11yAudioDesc || (item.audioDescription ? "ok" : "pending");
+    return { subtitles, transcript, audioDesc };
+  }
+
+  function renderA11yBadges(item) {
+    const { subtitles, transcript, audioDesc } = getA11yStatus(item);
+    const badgeClass = (state) =>
+      state === "ok" ? "text-bg-success" : state === "summary" ? "text-bg-info" : "text-bg-light text-dark border";
+    const labels = {
+      subtitles:
+        subtitles === "ok" ? t("av_a11y_subtitles_ok") : t("av_a11y_subtitles_pending"),
+      transcript:
+        transcript === "ok"
+          ? t("av_a11y_transcript_ok")
+          : transcript === "summary"
+            ? t("av_a11y_transcript_summary")
+            : t("av_a11y_transcript_pending"),
+      audioDesc:
+        audioDesc === "ok" ? t("av_a11y_audiodesc_ok") : t("av_a11y_audiodesc_pending"),
+    };
+    return `<div class="av-a11y-badges mt-2">
+      <span class="badge rounded-pill ${badgeClass(subtitles)}">${escapeHtml(labels.subtitles)}</span>
+      <span class="badge rounded-pill ${badgeClass(transcript)}">${escapeHtml(labels.transcript)}</span>
+      <span class="badge rounded-pill ${badgeClass(audioDesc)}">${escapeHtml(labels.audioDesc)}</span>
+    </div>`;
+  }
+
   function renderBadges(item) {
     const badges = [];
     if (item.scope) {
@@ -209,6 +239,7 @@
           ${renderThumb(item)}
           <div class="card-body d-flex flex-column">
             ${renderBadges(item)}
+            ${renderA11yBadges(item)}
             <p class="av-video-title">${escapeHtml(title)}</p>
             <p class="card-text text-muted small mb-2">${escapeHtml(item.duration || "")}</p>
             <p class="card-text flex-grow-1">${escapeHtml(item.summary || "")}</p>
