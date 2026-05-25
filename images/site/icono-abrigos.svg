@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Abrigo rocoso">
+  <defs>
+    <linearGradient id="rock" x1="12" x2="54" y1="14" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c99b62"/>
+      <stop offset="1" stop-color="#7a5230"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#rock)" d="M8 44c4-17 15-29 30-34 10 5 16 14 18 28l-8 13H14L8 44Z"/>
+  <path fill="#f3d39b" d="M18 45c2-10 9-17 19-20 7 4 11 10 12 20H18Z"/>
+  <path fill="#5b3722" d="M25 45c1-7 6-12 12-14 5 3 8 8 9 14H25Z"/>
+  <path fill="none" stroke="#5b3722" stroke-linecap="round" stroke-width="3" d="M18 45h31M19 35c5-4 11-7 18-8M16 40c5-9 12-16 22-20"/>
+  <circle cx="22" cy="23" r="2.3" fill="#5b3722"/>
+  <circle cx="44" cy="18" r="2" fill="#5b3722" opacity=".75"/>
+</svg>

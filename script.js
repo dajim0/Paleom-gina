@@ -195,6 +195,14 @@ function initTerritoryMap() {
   const panelEvidence = document.getElementById("territory-map-panel-evidence");
   const panelBtn = document.getElementById("territory-map-panel-btn");
 
+  const renderTerritoryPointIcon = (point) => {
+    if (point.iconPath) {
+      const label = point.title?.[lang] || point.title?.es || "";
+      return `<img class="territory-map-card__icon-img" src="${point.iconPath}" alt="" loading="lazy" decoding="async" title="${label}" />`;
+    }
+    return point.icon || "📍";
+  };
+
   const selectPoint = (point) => {
     root.querySelectorAll(".territory-map-marker").forEach((m) => {
       m.classList.toggle("is-active", m.dataset.pointId === point.id);
@@ -217,7 +225,9 @@ function initTerritoryMap() {
   const markersWrap = document.createElement("div");
   markersWrap.className = "territory-map-markers";
 
-  territoryPoints.forEach((point) => {
+  [...territoryPoints]
+    .sort((a, b) => (b.size || 10) - (a.size || 10))
+    .forEach((point) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "territory-map-marker";
@@ -250,7 +260,7 @@ function initTerritoryMap() {
     item.className = "territory-map-card";
     item.dataset.pointId = point.id;
     item.innerHTML = `
-      <span class="territory-map-card__icon" aria-hidden="true">${point.icon || "📍"}</span>
+      <span class="territory-map-card__icon" aria-hidden="true">${renderTerritoryPointIcon(point)}</span>
       <span class="territory-map-card__body">
         <strong>${point.title[lang] || point.title.es}</strong>
         <small>${point.kind?.[lang] || point.kind?.es || ""} · ${point.scope}</small>
@@ -264,12 +274,12 @@ function initTerritoryMap() {
   const grid = document.createElement("div");
   grid.className = "row g-4 align-items-stretch";
   const colMap = document.createElement("div");
-  colMap.className = "col-lg-7";
+  colMap.className = "col-lg-7 d-flex flex-column gap-3";
   colMap.appendChild(mapShell);
+  if (panel) colMap.appendChild(panel);
   const colSide = document.createElement("div");
-  colSide.className = "col-lg-5 d-flex flex-column gap-3";
+  colSide.className = "col-lg-5";
   colSide.appendChild(list);
-  if (panel) colSide.appendChild(panel);
   grid.appendChild(colMap);
   grid.appendChild(colSide);
   root.appendChild(grid);
