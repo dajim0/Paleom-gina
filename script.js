@@ -363,6 +363,110 @@ document.addEventListener("pm:navigation", () => {
 });
 
 // ── Acordeón de recorrido AAN–ATZ (ambitos.html) ─────────────────────
+function buildScopePdfExtrasEl(sc) {
+  if (!sc) return null;
+  const fields = [
+    ["scope_extras_easy", sc.easySummary],
+    ["scope_extras_question", sc.keyQuestion],
+    ["scope_extras_duration", sc.duration],
+    ["scope_extras_audience", sc.audience],
+  ].filter(([, val]) => Boolean(val));
+  if (!fields.length) return null;
+
+  const wrap = document.createElement("details");
+  wrap.className = "pm-scope-extras mt-3";
+  const sum = document.createElement("summary");
+  sum.className = "pm-scope-extras__summary";
+  sum.textContent = paleomaginaT("scope_extras_toggle") || "Lectura ampliada";
+  const inner = document.createElement("div");
+  inner.className = "pm-scope-extras__body";
+
+  fields.forEach(([labelKey, val]) => {
+    const row = document.createElement("p");
+    row.className = "small mb-2";
+    const strong = document.createElement("strong");
+    strong.textContent = (paleomaginaT(labelKey) || labelKey) + ": ";
+    row.appendChild(strong);
+    row.append(document.createTextNode(val));
+    inner.appendChild(row);
+  });
+
+  wrap.appendChild(sum);
+  wrap.appendChild(inner);
+  return wrap;
+}
+
+function initEasyReadPage() {
+  const root = document.getElementById("easy-read-list");
+  if (!root || typeof getScopeContent !== "function") return;
+  const lang = currentLang === "en" ? "en" : "es";
+  const order = ["AAN", "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "ATZ"];
+  root.innerHTML = "";
+
+  order.forEach((code) => {
+    const sc = getScopeContent(code, lang);
+    if (!sc?.easySummary) return;
+    const card = document.createElement("article");
+    card.className = "pm-easy-read-card card border-0 shadow-sm mb-3";
+    const body = document.createElement("div");
+    body.className = "card-body";
+    const h = document.createElement("h3");
+    h.className = "h5 card-title";
+    const link = document.createElement("a");
+    link.href = `ambitos.html?scope=${encodeURIComponent(code)}`;
+    link.textContent = sc.title || code;
+    h.appendChild(link);
+    const p = document.createElement("p");
+    p.className = "card-text mb-2";
+    p.textContent = sc.easySummary;
+    const meta = document.createElement("p");
+    meta.className = "small text-muted mb-0";
+    const parts = [];
+    if (sc.duration) parts.push((paleomaginaT("scope_extras_duration") || "Duración") + ": " + sc.duration);
+    if (sc.audience) parts.push((paleomaginaT("scope_extras_audience") || "Público") + ": " + sc.audience);
+    if (parts.length) meta.textContent = parts.join(" · ");
+    body.appendChild(h);
+    body.appendChild(p);
+    if (parts.length) body.appendChild(meta);
+    card.appendChild(body);
+    root.appendChild(card);
+  });
+}
+
+function initQrInventoryPage() {
+  const tbody = document.getElementById("qr-inventory-body");
+  if (!tbody || typeof getQrInventory !== "function") return;
+  const lang = currentLang === "en" ? "en" : "es";
+  const rows = getQrInventory(lang);
+  tbody.innerHTML = "";
+
+  rows.forEach((row) => {
+    const tr = document.createElement("tr");
+    const cells = [
+      row.code,
+      row.label,
+      row.floor,
+      row.url,
+      row.microUrl ? row.microUrl : "—",
+      row.siteLang || "—",
+      row.resource || "—",
+    ];
+    cells.forEach((text, idx) => {
+      const td = document.createElement("td");
+      if (idx === 4 && row.microUrl) {
+        const a = document.createElement("a");
+        a.href = row.microUrl;
+        a.textContent = row.microUrl;
+        td.appendChild(a);
+      } else {
+        td.textContent = text;
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+
 function initAmbitosExhibitRoute() {
   const root = document.getElementById("exhibit-route-accordion");
   if (!root || typeof scopeContents === "undefined") return;
@@ -376,7 +480,7 @@ function initAmbitosExhibitRoute() {
   acc.id = accDomId;
 
   order.forEach((code, idx) => {
-    const sc = scopeContents[code]?.[lang];
+    const sc = typeof getScopeContent === "function" ? getScopeContent(code, lang) : scopeContents[code]?.[lang];
     if (!sc) return;
 
     const collapseId = `exhibit-collapse-${code}`;
@@ -444,6 +548,9 @@ function initAmbitosExhibitRoute() {
 
     const cross = buildScopeCrossLinksEl(code, lang);
     if (cross) body.appendChild(cross);
+
+    const pdfExtras = buildScopePdfExtrasEl(sc);
+    if (pdfExtras) body.appendChild(pdfExtras);
 
     item.dataset.pmScope = code;
     region.appendChild(body);
@@ -669,6 +776,8 @@ function applyLanguage(lang) {
   renderScopes(lang);
   updateThemeButtonLabel();
   initAmbitosExhibitRoute();
+  initEasyReadPage();
+  initQrInventoryPage();
   initTerritoryMap();
   initVisitJourney();
   initTicketCart();

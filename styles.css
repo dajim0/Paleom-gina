@@ -7315,3 +7315,52 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     will-change: transform, opacity;
   }
 }
+
+/* Plan PDF: lectura ampliada, lectura fácil, inventario QR */
+.pm-scope-extras {
+  border-top: 1px solid var(--pm-border-subtle, rgba(0, 0, 0, 0.08));
+  padding-top: 0.75rem;
+}
+
+.pm-scope-extras__summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--pm-accent, #8b5a2b);
+  list-style-position: outside;
+}
+
+.pm-scope-extras__body {
+  padding-top: 0.35rem;
+}
+
+.pm-easy-read-list {
+  max-width: 42rem;
+}
+
+.pm-easy-read-card .card-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.pm-easy-read-card .card-title a:hover {
+  color: var(--pm-accent, #8b5a2b);
+  text-decoration: underline;
+}
+
+.pm-qr-table-wrap {
+  font-size: 0.9rem;
+}
+
+.pm-qr-table thead th {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 767.98px) {
+  .pm-qr-table-wrap {
+    font-size: 0.8rem;
+  }
+}
