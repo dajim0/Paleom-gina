@@ -25,7 +25,7 @@
   --footer-link: #f5e6c8;
   --footer-link-hover: #ffffff;
   color-scheme: light;
-  --pm-page-texture: url("images/site/fondo-general.png");
+  --pm-page-texture: url("../images/site/fondo-general.png");
   /* Velo con color de tema (crema): más % = textura más discreta */
   --pm-html-veil-top: 30%;
   --pm-html-veil-bottom: 24%;
@@ -43,11 +43,11 @@
   --pm-read-panel-radius: 0.75rem;
   --pm-read-panel-padding-block: 1.35rem;
   --pm-read-panel-padding-inline: 1.5rem;
-  --pm-panel-fondo-image: url("images/site/timeline-fondo.png");
+  --pm-panel-fondo-image: url("../images/site/timeline-fondo.png");
   --pm-panel-fondo-opacity: 0.26;
   --pm-panel-fondo-opacity-dark: 0.18;
-  --pm-cursor-default: url("images/site/cursor-pointer-light.svg") 4 2, auto;
-  --pm-cursor-action: url("images/site/cursor-pointer-light.svg") 4 2, pointer;
+  --pm-cursor-default: url("../images/site/cursor-pointer-light.svg") 4 2, auto;
+  --pm-cursor-action: url("../images/site/cursor-pointer-light.svg") 4 2, pointer;
 }
 
 [data-theme="dark"] {
@@ -88,8 +88,8 @@
   --pm-read-panel-radius: 0.75rem;
   --pm-read-panel-padding-block: 1.35rem;
   --pm-read-panel-padding-inline: 1.5rem;
-  --pm-cursor-default: url("images/site/cursor-pointer.svg") 4 2, auto;
-  --pm-cursor-action: url("images/site/cursor-pointer.svg") 4 2, pointer;
+  --pm-cursor-default: url("../images/site/cursor-pointer.svg") 4 2, auto;
+  --pm-cursor-action: url("../images/site/cursor-pointer.svg") 4 2, pointer;
 }
 
 /* Modo oscuro: contraste uniforme en todo el contenido (Bootstrap + utilidades) */
@@ -892,7 +892,7 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
 }
 
 .hero::before {
-  background-image: url("images/site/hero-portada.png");
+  background-image: url("../images/site/hero-portada.png");
 }
 
 .page-hero::before {
@@ -2223,7 +2223,7 @@ iframe {
   border-radius: 1.35rem;
   background:
     linear-gradient(120deg, color-mix(in srgb, var(--card) 90%, transparent), color-mix(in srgb, var(--primary) 12%, var(--card))),
-    url("images/site/timeline-fondo.png");
+    url("../images/site/timeline-fondo.png");
   background-position: center;
   background-size: cover;
 }
@@ -2372,7 +2372,7 @@ iframe {
   border-radius: 1.35rem;
   background:
     linear-gradient(145deg, color-mix(in srgb, var(--card) 88%, transparent), color-mix(in srgb, var(--primary) 14%, var(--card))),
-    url("images/site/timeline-fondo.png");
+    url("../images/site/timeline-fondo.png");
   background-position: center;
   background-size: cover;
 }
@@ -2764,7 +2764,7 @@ figcaption {
   background-color: var(--footer-surface);
   background-image:
     linear-gradient(180deg, rgba(32, 26, 20, 0.72), rgba(18, 14, 11, 0.8)),
-    url("images/site/footer-illustration.png");
+    url("../images/site/footer-illustration.png");
   background-size: cover, cover;
   background-position: center center, center bottom;
   background-repeat: no-repeat;
@@ -2774,7 +2774,7 @@ figcaption {
 [data-theme="dark"] .site-footer {
   background-image:
     linear-gradient(180deg, rgba(8, 6, 5, 0.78), rgba(4, 3, 2, 0.86)),
-    url("images/site/footer-illustration.png");
+    url("../images/site/footer-illustration.png");
 }
 
 .site-footer .container {
@@ -5959,7 +5959,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   inset: 0 !important;
   z-index: 0 !important;
   display: block !important;
-  background: url("images/site/timeline-fondo.png") center / cover no-repeat !important;
+  background: url("../images/site/timeline-fondo.png") center / cover no-repeat !important;
   opacity: 0 !important;
   pointer-events: none !important;
   transition: opacity 0.35s ease !important;
@@ -6035,7 +6035,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
         rgba(166, 124, 61, 0.12) 0%,
         color-mix(in srgb, #fffdf8 28%, transparent) 52%,
         color-mix(in srgb, #f4eee4 18%, transparent) 100%),
-      url("images/site/timeline-fondo.png") !important;
+      url("../images/site/timeline-fondo.png") !important;
     background-position: center !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
@@ -6060,7 +6060,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
         rgba(228, 200, 140, 0.1) 0%,
         color-mix(in srgb, var(--bg-alt) 24%, transparent) 55%,
         color-mix(in srgb, var(--bg-alt) 16%, transparent) 100%),
-      url("images/site/timeline-fondo.png") !important;
+      url("../images/site/timeline-fondo.png") !important;
   }
 }
 
