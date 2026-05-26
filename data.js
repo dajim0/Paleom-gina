@@ -238,7 +238,7 @@ const scopeContents = {
   }
 };
 
-// Campos opcionales alineados al PDF (lectura fácil, QR, visita). No alteran la UI si no se usan.
+// Datos de apoyo para lectura, QR y visita. No alteran la UI si no se usan.
 const scopePdfExtras = {
   AAN: {
     es: { easySummary: "Antes de empezar el recorrido numerado, conectas emoción, paisaje y tiempo profundo.", keyQuestion: "¿Por qué empezamos mirando la montaña y no una vitrina?", duration: "5–8 min", audience: "Todos los públicos" },
@@ -804,32 +804,32 @@ const scopeGlossaryHints = {
 // ── Índice QR ────────────────────────────────────────────────────────
 const qrIndex = {
   es: {
-    AAN: { url: "/ambitos/antesala", label: "Antesala", floor: "PB", microUrl: "ambitos.html?scope=AAN", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
-    A0: { url: "/ambitos/bienvenida", label: "Bienvenida", floor: "PB", microUrl: "ambitos.html?scope=A0", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
-    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1", microUrl: "ambitos.html?scope=A1", siteLang: "ES/EN", resource: "Ámbito + vídeos" },
-    A2: { url: "/ambitos/geologia", label: "Geología y orografía", floor: "P1", microUrl: "ambitos.html?scope=A2", siteLang: "ES/EN", resource: "Ámbito + mapa" },
-    A3: { url: "/ambitos/cuaternario", label: "Cuaternario", floor: "P1", microUrl: "ambitos.html?scope=A3", siteLang: "ES/EN", resource: "Ámbito + línea temporal" },
-    A4: { url: "/ambitos/neandertales", label: "Mundo neandertal", floor: "P1", microUrl: "ambitos.html?scope=A4", siteLang: "ES/EN", resource: "Ámbito + glosario" },
-    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1", microUrl: "ambitos.html?scope=A5", siteLang: "ES/EN", resource: "Ámbito + talleres" },
-    A6: { url: "/ambitos/neolitico", label: "Neolítico", floor: "P1", microUrl: "ambitos.html?scope=A6", siteLang: "ES/EN", resource: "Ámbito + educación" },
-    A7: { url: "/ambitos/calcolitico", label: "Calcolítico", floor: "P1", microUrl: "ambitos.html?scope=A7", siteLang: "ES/EN", resource: "Ámbito" },
-    A8: { url: "/ambitos/ciencia", label: "Ciencia y ciudadanía", floor: "P1", microUrl: "ambitos.html?scope=A8", siteLang: "ES/EN", resource: "Ámbito + participación" },
-    A9: { url: "/ambitos/testimonios", label: "Testimonios y voces", floor: "P1", microUrl: "ambitos.html?scope=A9", siteLang: "ES/EN", resource: "Audiovisual + ámbito" },
-    ATZ: { url: "/ambitos/terraza", label: "Terraza y paisaje", floor: "P1", microUrl: "ambitos.html?scope=ATZ", siteLang: "ES/EN", resource: "Ámbito + mapa territorial" }
+    AAN: { url: "/ambitos/antesala", label: "Antesala", floor: "PB", microUrl: "recorrido-expositivo.html?scope=AAN", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
+    A0: { url: "/ambitos/bienvenida", label: "Bienvenida", floor: "PB", microUrl: "recorrido-expositivo.html?scope=A0", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
+    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A1", siteLang: "ES/EN", resource: "Ámbito + vídeos" },
+    A2: { url: "/ambitos/geologia", label: "Geología y orografía", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A2", siteLang: "ES/EN", resource: "Ámbito + mapa" },
+    A3: { url: "/ambitos/cuaternario", label: "Cuaternario", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A3", siteLang: "ES/EN", resource: "Ámbito + línea temporal" },
+    A4: { url: "/ambitos/neandertales", label: "Mundo neandertal", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A4", siteLang: "ES/EN", resource: "Ámbito + glosario" },
+    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A5", siteLang: "ES/EN", resource: "Ámbito + talleres" },
+    A6: { url: "/ambitos/neolitico", label: "Neolítico", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A6", siteLang: "ES/EN", resource: "Ámbito + educación" },
+    A7: { url: "/ambitos/calcolitico", label: "Calcolítico", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A7", siteLang: "ES/EN", resource: "Ámbito" },
+    A8: { url: "/ambitos/ciencia", label: "Ciencia y ciudadanía", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A8", siteLang: "ES/EN", resource: "Ámbito + participación" },
+    A9: { url: "/ambitos/testimonios", label: "Testimonios y voces", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A9", siteLang: "ES/EN", resource: "Audiovisual + ámbito" },
+    ATZ: { url: "/ambitos/terraza", label: "Terraza y paisaje", floor: "P1", microUrl: "recorrido-expositivo.html?scope=ATZ", siteLang: "ES/EN", resource: "Ámbito + mapa territorial" }
   },
   en: {
-    AAN: { url: "/exhibits/ante-room", label: "Ante-room", floor: "GF", microUrl: "ambitos.html?scope=AAN", siteLang: "ES/EN", resource: "Scope + microsite" },
-    A0: { url: "/exhibits/welcome", label: "Welcome", floor: "GF", microUrl: "ambitos.html?scope=A0", siteLang: "ES/EN", resource: "Scope + microsite" },
-    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1", microUrl: "ambitos.html?scope=A1", siteLang: "ES/EN", resource: "Scope + videos" },
-    A2: { url: "/exhibits/geology", label: "Geology and orography", floor: "F1", microUrl: "ambitos.html?scope=A2", siteLang: "ES/EN", resource: "Scope + map" },
-    A3: { url: "/exhibits/quaternary", label: "Quaternary", floor: "F1", microUrl: "ambitos.html?scope=A3", siteLang: "ES/EN", resource: "Scope + timeline" },
-    A4: { url: "/exhibits/neanderthals", label: "Neanderthal world", floor: "F1", microUrl: "ambitos.html?scope=A4", siteLang: "ES/EN", resource: "Scope + glossary" },
-    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1", microUrl: "ambitos.html?scope=A5", siteLang: "ES/EN", resource: "Scope + workshops" },
-    A6: { url: "/exhibits/neolithic", label: "Neolithic", floor: "F1", microUrl: "ambitos.html?scope=A6", siteLang: "ES/EN", resource: "Scope + education" },
-    A7: { url: "/exhibits/chalcolithic", label: "Chalcolithic", floor: "F1", microUrl: "ambitos.html?scope=A7", siteLang: "ES/EN", resource: "Scope" },
-    A8: { url: "/exhibits/science", label: "Science and citizenship", floor: "F1", microUrl: "ambitos.html?scope=A8", siteLang: "ES/EN", resource: "Scope + participation" },
-    A9: { url: "/exhibits/testimonies", label: "Testimonies and voices", floor: "F1", microUrl: "ambitos.html?scope=A9", siteLang: "ES/EN", resource: "Audiovisual + scope" },
-    ATZ: { url: "/exhibits/terrace", label: "Terrace and landscape", floor: "F1", microUrl: "ambitos.html?scope=ATZ", siteLang: "ES/EN", resource: "Scope + territory map" }
+    AAN: { url: "/exhibits/ante-room", label: "Ante-room", floor: "GF", microUrl: "recorrido-expositivo.html?scope=AAN", siteLang: "ES/EN", resource: "Scope + microsite" },
+    A0: { url: "/exhibits/welcome", label: "Welcome", floor: "GF", microUrl: "recorrido-expositivo.html?scope=A0", siteLang: "ES/EN", resource: "Scope + microsite" },
+    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A1", siteLang: "ES/EN", resource: "Scope + videos" },
+    A2: { url: "/exhibits/geology", label: "Geology and orography", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A2", siteLang: "ES/EN", resource: "Scope + map" },
+    A3: { url: "/exhibits/quaternary", label: "Quaternary", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A3", siteLang: "ES/EN", resource: "Scope + timeline" },
+    A4: { url: "/exhibits/neanderthals", label: "Neanderthal world", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A4", siteLang: "ES/EN", resource: "Scope + glossary" },
+    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A5", siteLang: "ES/EN", resource: "Scope + workshops" },
+    A6: { url: "/exhibits/neolithic", label: "Neolithic", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A6", siteLang: "ES/EN", resource: "Scope + education" },
+    A7: { url: "/exhibits/chalcolithic", label: "Chalcolithic", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A7", siteLang: "ES/EN", resource: "Scope" },
+    A8: { url: "/exhibits/science", label: "Science and citizenship", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A8", siteLang: "ES/EN", resource: "Scope + participation" },
+    A9: { url: "/exhibits/testimonies", label: "Testimonies and voices", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A9", siteLang: "ES/EN", resource: "Audiovisual + scope" },
+    ATZ: { url: "/exhibits/terrace", label: "Terrace and landscape", floor: "F1", microUrl: "recorrido-expositivo.html?scope=ATZ", siteLang: "ES/EN", resource: "Scope + territory map" }
   }
 };
 

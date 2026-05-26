@@ -7321,7 +7321,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 }
 
-/* Plan PDF: lectura ampliada, lectura fácil, inventario QR */
+/* Lectura ampliada, lectura facil, inventario QR */
 .pm-scope-extras {
   border-top: 1px solid var(--pm-border-subtle, rgba(0, 0, 0, 0.08));
   padding-top: 0.75rem;
