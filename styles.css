@@ -46,6 +46,8 @@
   --pm-panel-fondo-image: url("images/site/timeline-fondo.png");
   --pm-panel-fondo-opacity: 0.26;
   --pm-panel-fondo-opacity-dark: 0.18;
+  --pm-cursor-default: url("images/site/cursor-pointer-light.svg") 4 2, auto;
+  --pm-cursor-action: url("images/site/cursor-pointer-light.svg") 4 2, pointer;
 }
 
 [data-theme="dark"] {
@@ -86,6 +88,8 @@
   --pm-read-panel-radius: 0.75rem;
   --pm-read-panel-padding-block: 1.35rem;
   --pm-read-panel-padding-inline: 1.5rem;
+  --pm-cursor-default: url("images/site/cursor-pointer.svg") 4 2, auto;
+  --pm-cursor-action: url("images/site/cursor-pointer.svg") 4 2, pointer;
 }
 
 /* Modo oscuro: contraste uniforme en todo el contenido (Bootstrap + utilidades) */
@@ -7438,6 +7442,51 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+}
+
+/* Puntero Paleomagina: solo escritorio/raton, sin interferir con tactil. */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body {
+    cursor: var(--pm-cursor-default);
+  }
+
+  a,
+  button,
+  summary,
+  label,
+  [role="button"],
+  [data-bs-toggle],
+  [data-video-id],
+  .btn,
+  .nav-link,
+  .navbar-brand,
+  .dropdown-item,
+  .accordion-button,
+  .filter-btn,
+  .video-launch-button,
+  .av-filter-chip,
+  .museum-legend-item,
+  .territory-map-card,
+  .timeline-era,
+  .lang-btn,
+  .theme-toggle,
+  .pm-scope-extras__summary,
+  .pm-scope-layers__summary {
+    cursor: var(--pm-cursor-action) !important;
+  }
+
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    cursor: auto;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed !important;
+  }
 }
 
 @media (max-width: 767.98px) {
