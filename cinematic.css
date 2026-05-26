@@ -852,6 +852,57 @@ html.pm-cinema .animate-on-scroll.is-visible {
   }
 }
 
+/* Móvil: mantener atmósfera, pero sin capas pesadas ni entradas que tapen contenido. */
+@media (max-width: 767px), (pointer: coarse) {
+  html.pm-cinema {
+    --pm-reveal-depth: 0;
+    --pm-cinema-scroll-glow: 0;
+  }
+
+  html.pm-cinema body {
+    background:
+      radial-gradient(ellipse 110% 56% at 50% 0%,
+        color-mix(in srgb, var(--pm-cinema-amber) 24%, transparent),
+        transparent 56%),
+      var(--bg);
+  }
+
+  html.pm-cinema .pm-atmosphere__light,
+  html.pm-cinema .pm-atmosphere__mist,
+  html.pm-cinema .pm-atmosphere__fog,
+  html.pm-cinema .pm-atmosphere__breath {
+    display: none !important;
+  }
+
+  html.pm-cinema .pm-atmosphere__grade,
+  html.pm-cinema .pm-atmosphere__ambient,
+  html.pm-cinema .pm-atmosphere__vignette {
+    animation: none !important;
+    filter: none !important;
+    opacity: 0.28;
+  }
+
+  html.pm-cinema .pm-atmosphere__vignette {
+    box-shadow: inset 0 -16vh 20vh rgba(0, 0, 0, 0.08);
+  }
+
+  html.pm-cinema main section.pm-section-cinema,
+  html.pm-cinema .pm-section-layer,
+  html.pm-cinema .pm-cinema-reveal,
+  html.pm-cinema .animate-on-scroll,
+  html.pm-cinema :is(.pm-text-reveal--title, .pm-text-reveal--body, .pm-text-reveal--kicker, img.pm-text-reveal--icon) {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  html.pm-cinema main section.pm-section-cinema::after {
+    display: none !important;
+  }
+}
+
 
 .pm-audio-fab {
   position: relative;

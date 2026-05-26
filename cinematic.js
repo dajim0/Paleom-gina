@@ -32,6 +32,7 @@
   function mountLayers() {
     if (document.querySelector(".pm-atmosphere")) {
       document.documentElement.classList.add("pm-cinema");
+      document.documentElement.classList.toggle("pm-cinema-mobile", MOBILE);
       return;
     }
 
@@ -50,6 +51,7 @@
 
     document.body.prepend(wrap);
     document.documentElement.classList.add("pm-cinema");
+    document.documentElement.classList.toggle("pm-cinema-mobile", MOBILE);
     if (REDUCED) document.documentElement.classList.add("pm-cinema-reduced");
   }
 
@@ -591,6 +593,8 @@
   }
 
   function initText() {
+    if (MOBILE) return;
+
     if (REDUCED) {
       document.querySelectorAll(".pm-text-reveal").forEach(revealVisible);
       return;
@@ -746,6 +750,8 @@
   }
 
   function initSectionsEntry() {
+    if (MOBILE) return;
+
     if (!document.documentElement.classList.contains("pm-cinema")) {
       window.setTimeout(initSectionsEntry, 60);
       return;
@@ -1515,6 +1521,7 @@
   }
 
   async function restoreAmbientFromStorage() {
+    if (MOBILE) return;
     if (!shouldShowPageAudioControls()) return;
     if (!isAudioEnabledInStorage()) return;
     fab?.classList.add("pm-audio-fab--remembered");
@@ -1538,9 +1545,9 @@
 
   function initAudio() {
     mountFab();
-    if (!REDUCED) restoreAmbientFromStorage();
+    if (!REDUCED && !MOBILE) restoreAmbientFromStorage();
     window.addEventListener("pageshow", (event) => {
-      if (event.persisted && isAudioEnabledInStorage() && !playing) {
+      if (!MOBILE && event.persisted && isAudioEnabledInStorage() && !playing) {
         restoreAmbientFromStorage();
       }
     });
@@ -1586,7 +1593,7 @@
     relocateFab();
     updateFab();
     updateNarrationFab();
-    if (!REDUCED) restoreAmbientFromStorage();
+    if (!REDUCED && !MOBILE) restoreAmbientFromStorage();
   }
 
   function initCinema() {

@@ -1,4 +1,4 @@
-@import url("cinematic.css?v=5");
+@import url("cinematic.css?v=6");
 
 :root,
 [data-theme="light"] {
@@ -7172,6 +7172,10 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .index-video-intro-overlay {
     align-items: stretch;
     justify-items: stretch;
+    background:
+      radial-gradient(circle at 50% 28%, rgba(188, 141, 84, 0.12), transparent 34%),
+      linear-gradient(180deg, rgba(3, 7, 8, 0.86), rgba(2, 3, 4, 0.94));
+    backdrop-filter: none;
   }
 
   .index-video-intro-shell {
@@ -7180,13 +7184,18 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     min-height: 100svh;
   }
 
+  .index-video-intro-shell::after {
+    opacity: 0.12;
+  }
+
   .index-video-intro-player {
     position: absolute;
-    top: 7dvh;
+    top: 7.5dvh;
     left: 50%;
-    width: min(92vw, 430px);
-    height: min(38dvh, 340px);
+    width: min(78vw, 360px);
+    height: min(30dvh, 270px);
     transform: translateX(-50%) scale(0.94);
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.42)) contrast(1.02) saturate(1.02);
   }
 
   .index-video-intro-overlay--ready .index-video-intro-player,
@@ -7195,17 +7204,17 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .index-video-intro-copy {
-    top: 45dvh;
+    top: 38dvh;
     bottom: auto;
     left: 1rem;
     right: 1rem;
     max-width: none;
-    padding: 0.9rem 0.95rem;
+    padding: 0.78rem 0.85rem;
     border: 1px solid rgba(228, 200, 140, 0.2);
     border-radius: 1.15rem;
-    background: rgba(8, 10, 9, 0.54);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(8, 10, 9, 0.46);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .index-video-intro-copy span {
@@ -7215,7 +7224,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
   .index-video-intro-copy strong {
     max-width: 13ch;
-    font-size: clamp(1.9rem, 10vw, 3.2rem);
+    font-size: clamp(1.7rem, 8.8vw, 2.85rem);
     line-height: 0.98;
   }
 
@@ -7240,7 +7249,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .index-video-intro-sound {
     width: 100%;
     min-height: 2.75rem;
-    padding: 0.62rem 0.72rem;
+    padding: 0.58rem 0.68rem;
     font-size: 0.86rem;
     line-height: 1.15;
   }
@@ -7249,10 +7258,10 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     grid-column: 1 / -1;
     width: 100%;
     justify-content: center;
-    padding: 0.58rem 0.75rem;
+    padding: 0.5rem 0.7rem;
     border-radius: 999px;
-    background: rgba(8, 10, 9, 0.42);
-    font-size: 0.82rem;
+    background: rgba(8, 10, 9, 0.32);
+    font-size: 0.78rem;
   }
 
   .index-video-intro-progress {
@@ -7275,24 +7284,25 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
 @media (max-width: 420px) {
   .index-video-intro-player {
-    top: 5.5dvh;
-    height: 34dvh;
+    top: 6dvh;
+    width: min(74vw, 320px);
+    height: 27dvh;
   }
 
   .index-video-intro-copy {
-    top: 41.5dvh;
+    top: 35.5dvh;
   }
 }
 
 @media (max-height: 640px) and (max-width: 767.98px) {
   .index-video-intro-player {
     top: 4dvh;
-    height: 30dvh;
+    height: 24dvh;
   }
 
   .index-video-intro-copy {
-    top: 34.5dvh;
-    padding: 0.72rem 0.82rem;
+    top: 29.5dvh;
+    padding: 0.64rem 0.76rem;
   }
 
   .index-video-intro-copy strong {
