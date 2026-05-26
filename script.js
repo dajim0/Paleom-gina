@@ -1,4 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════
+﻿// ═══════════════════════════════════════════════════════════════════
 // script.js — Paleomagina · Lógica compartida en todas las páginas
 // ═══════════════════════════════════════════════════════════════════
 
@@ -36,7 +36,7 @@ const THEME_ICON_SUN =
 
 const pageTransitionDuration = 520;
 
-// ── Render grid de ámbitos (página ambitos.html) ─────────────────────
+// ── Render grid de ámbitos (página recorrido-expositivo.html) ─────────────────────
 function renderScopes(lang) {
   const container = document.getElementById("ambitos-grid");
   if (!container) return;
@@ -110,7 +110,7 @@ function buildScopeCrossLinksEl(code, lang) {
     videos.forEach((item) => {
       const li = document.createElement("li");
       const a = document.createElement("a");
-      a.href = `audiovisuales.html?scope=${encodeURIComponent(code)}`;
+      a.href = `videos.html?scope=${encodeURIComponent(code)}`;
       a.textContent = item.title;
       li.appendChild(a);
       vList.appendChild(li);
@@ -294,17 +294,17 @@ function initVisitJourney() {
   const steps = [
     {
       key: "before",
-      href: "audiovisuales.html?playlist=before",
+      href: "videos.html?playlist=before",
       icon: "🎒",
     },
     {
       key: "during",
-      href: "ambitos.html",
+      href: "recorrido-expositivo.html",
       icon: "🗺️",
     },
     {
       key: "after",
-      href: "audiovisuales.html?playlist=after",
+      href: "videos.html?playlist=after",
       icon: "📚",
     },
   ];
@@ -372,7 +372,7 @@ document.addEventListener("pm:navigation", () => {
   applyGlossaryTermFromUrl();
 });
 
-// ── Acordeón de recorrido AAN–ATZ (ambitos.html) ─────────────────────
+// ── Acordeón de recorrido AAN–ATZ (recorrido-expositivo.html) ─────────────────────
 function buildScopeReadingLayersEl(sc) {
   const layers = sc?.readingLayers;
   if (!layers) return null;
@@ -482,7 +482,7 @@ function initVisitEducationSections() {
       meta.textContent = `${paleomaginaT("edu_workshop_age") || "Edad"}: ${w.age} · ${w.duration}`;
       const scope = document.createElement("p");
       scope.className = "small mb-2";
-      scope.innerHTML = `<strong>${paleomaginaT("edu_workshop_scope") || "Ámbito"}:</strong> <a href="ambitos.html?scope=${encodeURIComponent(w.scope)}">${w.scope}</a>`;
+      scope.innerHTML = `<strong>${paleomaginaT("edu_workshop_scope") || "Ámbito"}:</strong> <a href="recorrido-expositivo.html?scope=${encodeURIComponent(w.scope)}">${w.scope}</a>`;
       const p = document.createElement("p");
       p.className = "small mb-0";
       p.textContent = w.text;
@@ -568,7 +568,7 @@ function initEasyReadPage() {
     const h = document.createElement("h3");
     h.className = "h5 card-title";
     const link = document.createElement("a");
-    const scopeUrl = `ambitos.html?scope=${encodeURIComponent(code)}`;
+    const scopeUrl = `recorrido-expositivo.html?scope=${encodeURIComponent(code)}`;
     link.href = scopeUrl;
     link.textContent = sc.title || code;
     h.appendChild(link);
@@ -737,7 +737,7 @@ function initAmbitosExhibitRoute() {
   }
 }
 
-// ── Carrito de entradas (recursos.html) ───────────────────────────────
+// ── Carrito de entradas (visita.html) ───────────────────────────────
 const ticketCartStorageKey = "paleomagina-ticket-cart";
 let ticketCart = {};
 
@@ -1623,7 +1623,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  const load = () => loadPaleomaginaModule("cinematic.js?v=26");
+  const load = () => loadPaleomaginaModule("cinematic.js?v=27");
   if ("requestIdleCallback" in window) {
     window.requestIdleCallback(load, { timeout: 900 });
   } else {
@@ -1632,7 +1632,7 @@ function loadCinematicAtmosphere() {
 }
 
 /* ============================================
-   MAPA INTERACTIVO - LÓGICA CON PLANTAS (VERSIÓN ESTABLE)
+   MAPA INTERACTIVO - LOGICA CON PLANTAS
    ============================================ */
 
 function initPaleomaginaMuseumMap() {

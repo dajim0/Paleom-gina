@@ -1,4 +1,4 @@
-@import url("cinematic.css?v=5");
+@import url("cinematic.css?v=6");
 
 :root,
 [data-theme="light"] {
@@ -46,6 +46,8 @@
   --pm-panel-fondo-image: url("images/site/timeline-fondo.png");
   --pm-panel-fondo-opacity: 0.26;
   --pm-panel-fondo-opacity-dark: 0.18;
+  --pm-cursor-default: url("images/site/cursor-pointer-light.svg") 4 2, auto;
+  --pm-cursor-action: url("images/site/cursor-pointer-light.svg") 4 2, pointer;
 }
 
 [data-theme="dark"] {
@@ -86,6 +88,8 @@
   --pm-read-panel-radius: 0.75rem;
   --pm-read-panel-padding-block: 1.35rem;
   --pm-read-panel-padding-inline: 1.5rem;
+  --pm-cursor-default: url("images/site/cursor-pointer.svg") 4 2, auto;
+  --pm-cursor-action: url("images/site/cursor-pointer.svg") 4 2, pointer;
 }
 
 /* Modo oscuro: contraste uniforme en todo el contenido (Bootstrap + utilidades) */
@@ -2580,6 +2584,17 @@ iframe {
     grid-template-columns: 1fr;
   }
 
+  .schedule-grid,
+  .schedule-grid--premium {
+    grid-template-columns: 1fr !important;
+  }
+
+  .schedule-card {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
   .ticket-layout,
   .ticket-tier-grid,
   .purchase-strip {
@@ -2593,6 +2608,7 @@ iframe {
   .schedule-list li strong {
     display: block;
     margin-bottom: 0.2rem;
+    white-space: normal;
   }
 }
 
@@ -6570,11 +6586,19 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .schedule-hero,
+  .schedule-grid,
+  .schedule-grid--premium,
   .ticket-layout,
   .ticket-main-card,
   .content-split,
   .two-col {
     grid-template-columns: 1fr !important;
+  }
+
+  .schedule-card {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
   }
 }
 
@@ -7152,6 +7176,10 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .index-video-intro-overlay {
     align-items: stretch;
     justify-items: stretch;
+    background:
+      radial-gradient(circle at 50% 28%, rgba(188, 141, 84, 0.12), transparent 34%),
+      linear-gradient(180deg, rgba(3, 7, 8, 0.86), rgba(2, 3, 4, 0.94));
+    backdrop-filter: none;
   }
 
   .index-video-intro-shell {
@@ -7160,13 +7188,18 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     min-height: 100svh;
   }
 
+  .index-video-intro-shell::after {
+    opacity: 0.12;
+  }
+
   .index-video-intro-player {
     position: absolute;
-    top: 7dvh;
+    top: 7.5dvh;
     left: 50%;
-    width: min(92vw, 430px);
-    height: min(38dvh, 340px);
+    width: min(78vw, 360px);
+    height: min(30dvh, 270px);
     transform: translateX(-50%) scale(0.94);
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.42)) contrast(1.02) saturate(1.02);
   }
 
   .index-video-intro-overlay--ready .index-video-intro-player,
@@ -7175,17 +7208,17 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .index-video-intro-copy {
-    top: 45dvh;
+    top: 38dvh;
     bottom: auto;
     left: 1rem;
     right: 1rem;
     max-width: none;
-    padding: 0.9rem 0.95rem;
+    padding: 0.78rem 0.85rem;
     border: 1px solid rgba(228, 200, 140, 0.2);
     border-radius: 1.15rem;
-    background: rgba(8, 10, 9, 0.54);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(8, 10, 9, 0.46);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .index-video-intro-copy span {
@@ -7195,7 +7228,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
   .index-video-intro-copy strong {
     max-width: 13ch;
-    font-size: clamp(1.9rem, 10vw, 3.2rem);
+    font-size: clamp(1.7rem, 8.8vw, 2.85rem);
     line-height: 0.98;
   }
 
@@ -7220,7 +7253,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .index-video-intro-sound {
     width: 100%;
     min-height: 2.75rem;
-    padding: 0.62rem 0.72rem;
+    padding: 0.58rem 0.68rem;
     font-size: 0.86rem;
     line-height: 1.15;
   }
@@ -7229,10 +7262,10 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     grid-column: 1 / -1;
     width: 100%;
     justify-content: center;
-    padding: 0.58rem 0.75rem;
+    padding: 0.5rem 0.7rem;
     border-radius: 999px;
-    background: rgba(8, 10, 9, 0.42);
-    font-size: 0.82rem;
+    background: rgba(8, 10, 9, 0.32);
+    font-size: 0.78rem;
   }
 
   .index-video-intro-progress {
@@ -7255,24 +7288,25 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
 @media (max-width: 420px) {
   .index-video-intro-player {
-    top: 5.5dvh;
-    height: 34dvh;
+    top: 6dvh;
+    width: min(74vw, 320px);
+    height: 27dvh;
   }
 
   .index-video-intro-copy {
-    top: 41.5dvh;
+    top: 35.5dvh;
   }
 }
 
 @media (max-height: 640px) and (max-width: 767.98px) {
   .index-video-intro-player {
     top: 4dvh;
-    height: 30dvh;
+    height: 24dvh;
   }
 
   .index-video-intro-copy {
-    top: 34.5dvh;
-    padding: 0.72rem 0.82rem;
+    top: 29.5dvh;
+    padding: 0.64rem 0.76rem;
   }
 
   .index-video-intro-copy strong {
@@ -7321,7 +7355,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 }
 
-/* Plan PDF: lectura ampliada, lectura fácil, inventario QR */
+/* Lectura ampliada, lectura facil, inventario QR */
 .pm-scope-extras {
   border-top: 1px solid var(--pm-border-subtle, rgba(0, 0, 0, 0.08));
   padding-top: 0.75rem;
@@ -7408,6 +7442,51 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+}
+
+/* Puntero Paleomagina: solo escritorio/raton, sin interferir con tactil. */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body {
+    cursor: var(--pm-cursor-default);
+  }
+
+  a,
+  button,
+  summary,
+  label,
+  [role="button"],
+  [data-bs-toggle],
+  [data-video-id],
+  .btn,
+  .nav-link,
+  .navbar-brand,
+  .dropdown-item,
+  .accordion-button,
+  .filter-btn,
+  .video-launch-button,
+  .av-filter-chip,
+  .museum-legend-item,
+  .territory-map-card,
+  .timeline-era,
+  .lang-btn,
+  .theme-toggle,
+  .pm-scope-extras__summary,
+  .pm-scope-layers__summary {
+    cursor: var(--pm-cursor-action) !important;
+  }
+
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    cursor: auto;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed !important;
+  }
 }
 
 @media (max-width: 767.98px) {

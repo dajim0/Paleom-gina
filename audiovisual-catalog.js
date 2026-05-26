@@ -193,7 +193,7 @@ const audiovisualCatalog = {
         teacher: "¿Qué evidencias del vídeo reconocerías en sala? · Dibuja la secuencia mar → sedimento → montaña.",
         duration: "13:17",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-fosiles",
@@ -211,7 +211,7 @@ const audiovisualCatalog = {
         teacher: "Identifica en el vídeo tres procesos: sedimentación, elevación y erosión.",
         duration: "8:45",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-neanderthal",
@@ -229,7 +229,7 @@ const audiovisualCatalog = {
         teacher: "Lista tres adaptaciones al frío mencionadas en el vídeo.",
         duration: "25:56",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-excavacion",
@@ -247,7 +247,7 @@ const audiovisualCatalog = {
         teacher: "Ordena las fases del vídeo y explica por qué el contexto es tan importante.",
         duration: "7:14",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-terraza",
@@ -265,7 +265,7 @@ const audiovisualCatalog = {
         teacher: "Desde la terraza, señala tres elementos del paisaje mencionados en el vídeo.",
         duration: "11:58",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
     ],
   },
@@ -462,7 +462,7 @@ const audiovisualCatalog = {
         teacher: "Which evidence from the video would you recognise in the gallery? · Draw the sequence sea → sediment → mountain.",
         duration: "13:17",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-fosiles",
@@ -480,7 +480,7 @@ const audiovisualCatalog = {
         teacher: "Identify three processes in the video: sedimentation, uplift, and erosion.",
         duration: "8:45",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-neanderthal",
@@ -498,7 +498,7 @@ const audiovisualCatalog = {
         teacher: "List three cold-climate adaptations mentioned in the video.",
         duration: "25:56",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-excavacion",
@@ -516,7 +516,7 @@ const audiovisualCatalog = {
         teacher: "Order the video's phases and explain why context matters so much.",
         duration: "7:14",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
       {
         id: "pm-terraza",
@@ -534,7 +534,7 @@ const audiovisualCatalog = {
         teacher: "From the terrace, point out three landscape elements mentioned in the video.",
         duration: "11:58",
         source: "youtube",
-        ambitoLink: "ambitos.html",
+        ambitoLink: "recorrido-expositivo.html",
       },
     ],
   },
