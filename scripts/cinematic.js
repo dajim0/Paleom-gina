@@ -795,14 +795,22 @@
     es: {
       index:
         "Bienvenido a Paleomágina. Esta página abre el viaje por Sierra Mágina como archivo del tiempo: mares antiguos, montañas, fósiles, evolución humana y patrimonio. Antes de entrar en detalle puedes orientarte con el viaje visual por eras y preparar la visita con recursos para antes, durante y después del recorrido.",
+      paleomagina:
+        "Paleomágina es un centro de interpretación para leer Sierra Mágina a través de evidencias. La visita conecta paisaje, ciencia y patrimonio, explica los objetivos del museo y muestra cómo el edificio organiza el relato desde la bienvenida hasta la terraza final.",
       sobre:
         "Paleomágina es un centro de interpretación para leer Sierra Mágina a través de evidencias. La visita conecta paisaje, ciencia y patrimonio, explica los objetivos del museo y muestra cómo el edificio organiza el relato desde la bienvenida hasta la terraza final.",
+      "recorrido-expositivo":
+        "El recorrido expositivo avanza por ámbitos. Cada sección enlaza tiempo geológico, fósiles, sociedades prehistóricas, método científico y paisaje. Puedes abrir un ámbito con su QR, consultar vídeos relacionados, saltar al glosario y localizarlo en el plano del museo.",
       ambitos:
         "El recorrido expositivo avanza por ámbitos. Cada sección enlaza tiempo geológico, fósiles, sociedades prehistóricas, método científico y paisaje. Puedes abrir un ámbito con su QR, consultar vídeos relacionados, saltar al glosario y localizarlo en el plano del museo.",
+      visita:
+        "La página de visita reúne la información práctica: horarios, accesibilidad, reservas, entradas, recursos digitales y ficha docente. Está pensada para preparar la llegada al centro y organizar grupos escolares o visitas guiadas.",
       recursos:
         "La página de visita reúne la información práctica: horarios, accesibilidad, reservas, entradas, recursos digitales y ficha docente. Está pensada para preparar la llegada al centro y organizar grupos escolares o visitas guiadas.",
       glosario:
         "El glosario reúne términos clave para comprender Paleomágina: geología, paleontología, arqueología, evolución humana, museografía y patrimonio. Puedes buscar un concepto y relacionarlo con vídeos y ámbitos del recorrido.",
+      videos:
+        "La biblioteca audiovisual completa la visita con vídeos antes, durante y después del recorrido. Cada pieza se vincula a un ámbito del museo y a términos del glosario para seguir aprendiendo desde casa o desde el aula.",
       audiovisuales:
         "La biblioteca audiovisual completa la visita con vídeos antes, durante y después del recorrido. Cada pieza se vincula a un ámbito del museo y a términos del glosario para seguir aprendiendo desde casa o desde el aula.",
       "ficha-docente":
@@ -819,14 +827,22 @@
     en: {
       index:
         "Welcome to Paleomágina. This page opens the journey through Sierra Mágina as an archive of time: ancient seas, mountains, fossils, human evolution, and heritage. You can begin with the visual journey through eras and prepare your visit with resources for before, during, and after the route.",
+      paleomagina:
+        "Paleomágina is an interpretation centre for reading Sierra Mágina through evidence. The visit connects landscape, science, and heritage, explains the museum goals, and shows how the building organises the story from welcome to final terrace.",
       sobre:
         "Paleomágina is an interpretation centre for reading Sierra Mágina through evidence. The visit connects landscape, science, and heritage, explains the museum goals, and shows how the building organises the story from welcome to final terrace.",
+      "recorrido-expositivo":
+        "The exhibition route moves through scopes. Each section links geological time, fossils, prehistoric societies, scientific method, and landscape. You can open a scope by QR, consult related videos, jump to glossary terms, and locate it on the museum plan.",
       ambitos:
         "The exhibition route moves through scopes. Each section links geological time, fossils, prehistoric societies, scientific method, and landscape. You can open a scope by QR, consult related videos, jump to glossary terms, and locate it on the museum plan.",
+      visita:
+        "The visit page gathers practical information: schedules, accessibility, bookings, tickets, digital resources, and the teacher sheet. It helps prepare arrival at the centre and organise school groups or guided visits.",
       recursos:
         "The visit page gathers practical information: schedules, accessibility, bookings, tickets, digital resources, and the teacher sheet. It helps prepare arrival at the centre and organise school groups or guided visits.",
       glosario:
         "The glossary gathers key terms for understanding Paleomágina: geology, palaeontology, archaeology, human evolution, museography, and heritage. You can search a concept and connect it with videos and exhibition scopes.",
+      videos:
+        "The audiovisual library extends the visit with videos for before, during, and after the route. Each item links to a museum scope and glossary terms for continued learning at home or in class.",
       audiovisuales:
         "The audiovisual library extends the visit with videos for before, during, and after the route. Each item links to a museum scope and glossary terms for continued learning at home or in class.",
       "ficha-docente":
@@ -1098,10 +1114,14 @@
   function getRecordedNarrationFileName() {
     const pageAudio = {
       index: "INICIO.mp3",
+      paleomagina: "PALEOMAGINA.mp3",
       sobre: "PALEOMAGINA.mp3",
+      "recorrido-expositivo": "RECORRIDO EXPOSITIVO.mp3",
       ambitos: "RECORRIDO EXPOSITIVO.mp3",
+      visita: "VISITA.mp3",
       recursos: "VISITA.mp3",
       glosario: "GLOSARIO.mp3",
+      videos: "VIDEOS.mp3",
       audiovisuales: "VIDEOS.mp3",
     };
     const pageSlug = getPageNarrationSlug();
@@ -1387,7 +1407,7 @@
   }
 
   function shouldShowNarrationControl() {
-    const pagesWithoutNarration = ["lectura-facil", "qr-recursos"];
+    const pagesWithoutNarration = ["lectura-facil", "inventario-qr", "qr-recursos"];
     return shouldShowPageAudioControls() && !pagesWithoutNarration.includes(getPageNarrationSlug());
   }
 

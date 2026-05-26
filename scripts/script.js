@@ -1623,7 +1623,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  const load = () => loadPaleomaginaModule("cinematic.js?v=27");
+  const load = () => loadPaleomaginaModule("cinematic.js?v=28");
   if ("requestIdleCallback" in window) {
     window.requestIdleCallback(load, { timeout: 900 });
   } else {
