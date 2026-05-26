@@ -2580,6 +2580,17 @@ iframe {
     grid-template-columns: 1fr;
   }
 
+  .schedule-grid,
+  .schedule-grid--premium {
+    grid-template-columns: 1fr !important;
+  }
+
+  .schedule-card {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
   .ticket-layout,
   .ticket-tier-grid,
   .purchase-strip {
@@ -2593,6 +2604,7 @@ iframe {
   .schedule-list li strong {
     display: block;
     margin-bottom: 0.2rem;
+    white-space: normal;
   }
 }
 
@@ -6570,11 +6582,19 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .schedule-hero,
+  .schedule-grid,
+  .schedule-grid--premium,
   .ticket-layout,
   .ticket-main-card,
   .content-split,
   .two-col {
     grid-template-columns: 1fr !important;
+  }
+
+  .schedule-card {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
   }
 }
 
