@@ -317,12 +317,12 @@ nav.pm-topnav,
 }
 
 .navbar.pm-topnav {
-  padding-top: 0.65rem;
-  padding-bottom: 0.65rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .navbar.pm-topnav .nav-link {
-  padding: 0.45rem 0.65rem;
+  padding: 0.65rem 0.85rem;
 }
 
 /* Página actual en la barra superior (junto a idioma / modo oscuro) */
