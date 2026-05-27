@@ -6,6 +6,7 @@
     window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
   const MOBILE =
     window.matchMedia?.("(max-width: 767px), (pointer: coarse)")?.matches ?? false;
+  const ENABLE_SCROLL_EFFECTS = false;
 
   function mountBreathLayer() {
     const atmosphereEl = document.querySelector(".pm-atmosphere");
@@ -64,7 +65,7 @@
   }
 
   function initScrollDepth() {
-    if (REDUCED || MOBILE || window.PaleomaginaScroll) return;
+    if (!ENABLE_SCROLL_EFFECTS || REDUCED || MOBILE || window.PaleomaginaScroll) return;
 
     let scheduled = false;
     const root = document.documentElement;
@@ -99,6 +100,11 @@
   }
 
   function initAtmosphere() {
+    if (MOBILE) {
+      document.documentElement.classList.add("pm-cinema", "pm-cinema-mobile");
+      return;
+    }
+
     mountLayers();
     initBreathing();
     initSectionReveal();
@@ -357,6 +363,24 @@
   }
 
   function initScroll() {
+    if (!ENABLE_SCROLL_EFFECTS) {
+      window.PaleomaginaScroll = {
+        scrollTo,
+        scrollToElement,
+        getY: () => window.scrollY,
+        getTarget: () => window.scrollY,
+        pause() {
+          state.paused = true;
+        },
+        resume() {
+          state.paused = false;
+        },
+        sync() { },
+        isSmooth: false,
+      };
+      return;
+    }
+
     if (USE_NATIVE) {
       initNativeEnhanced();
     } else {
@@ -451,7 +475,7 @@
   }
 
   function initParallax() {
-    if (REDUCED || MOBILE) return;
+    if (!ENABLE_SCROLL_EFFECTS || REDUCED || MOBILE) return;
 
     document.documentElement.classList.add("pm-parallax");
     tagBlocks();
@@ -475,7 +499,7 @@
       btn.addEventListener("click", () => window.setTimeout(schedule, 50));
     });
   }
-  window.PaleomaginaParallax = { refresh: update };
+  window.PaleomaginaParallax = { refresh: ENABLE_SCROLL_EFFECTS ? update : () => { } };
 
 
   const TITLE_SEL =
@@ -767,8 +791,8 @@
   const FADE_IN_SEC = 6;
   const FADE_RESUME_SEC = 2;
   const FADE_OUT_SEC = 3;
-  const TARGET_VOLUME = 0.085;
-  const NARRATION_DUCKED_AMBIENT_VOLUME = 0.035;
+  const TARGET_VOLUME = 0.14;
+  const NARRATION_DUCKED_AMBIENT_VOLUME = 0.05;
   const ICON_SOUND_OFF =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
   const ICON_SOUND_ON =
@@ -1541,7 +1565,6 @@
   }
 
   async function restoreAmbientFromStorage() {
-    if (MOBILE) return;
     if (!shouldShowPageAudioControls()) return;
     if (!isAudioEnabledInStorage()) return;
     fab?.classList.add("pm-audio-fab--remembered");
@@ -1565,9 +1588,10 @@
 
   function initAudio() {
     mountFab();
-    if (!REDUCED && !MOBILE) restoreAmbientFromStorage();
+    if (!REDUCED) restoreAmbientFromStorage();
+    document.addEventListener("pm:ambient-requested", () => startAmbient({ resume: true }));
     window.addEventListener("pageshow", (event) => {
-      if (!MOBILE && event.persisted && isAudioEnabledInStorage() && !playing) {
+      if (event.persisted && isAudioEnabledInStorage() && !playing) {
         restoreAmbientFromStorage();
       }
     });
@@ -1613,7 +1637,7 @@
     relocateFab();
     updateFab();
     updateNarrationFab();
-    if (!REDUCED && !MOBILE) restoreAmbientFromStorage();
+    if (!REDUCED) restoreAmbientFromStorage();
   }
 
   function initCinema() {
