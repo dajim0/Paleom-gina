@@ -212,9 +212,22 @@ html:not([data-theme="dark"]) .list-group-item {
   border-radius: 1rem;
 }
 
+.dinosaur-model-fallback {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  text-align: center;
+}
+
 @media (max-width: 767px) {
   .dinosaur-model-card model-viewer {
     min-height: 320px;
+  }
+
+  .dinosaur-model-card {
+    box-shadow: none;
   }
 }
 
@@ -889,6 +902,12 @@ main a:not(.btn):not(.lang-btn):not(.theme-toggle):not(.nav-link):not(.navbar-br
   transform: scale(1.08);
   animation: hero-pan-zoom 18s ease-in-out infinite alternate;
   z-index: 0;
+}
+
+html.pm-performance-mode .hero::before,
+html.pm-performance-mode .page-hero::before {
+  animation: none;
+  transform: none;
 }
 
 .hero::before {
@@ -6609,6 +6628,11 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     overflow-x: hidden;
   }
 
+  html {
+    scroll-behavior: auto;
+    background-attachment: scroll, scroll, scroll;
+  }
+
   body::before,
   .pm-atmosphere,
   .hero::before,
@@ -6665,6 +6689,72 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .time-stage-card,
   .territory-map-panel {
     border-radius: 1rem;
+  }
+
+  body::before,
+  .pm-atmosphere,
+  .hero::before,
+  .page-hero::before,
+  .card::before,
+  .card::after,
+  .time-stage-card::before,
+  .museum-section-panel::before,
+  .museum-section-panel::after,
+  .timeline-section-panel::before,
+  .timeline-section-panel::after,
+  .pm-read-panel::before,
+  .pm-read-panel::after {
+    display: none !important;
+  }
+
+  main :is(.card, .pm-read-panel, .museum-section-panel, .timeline-section-panel, .time-stage-card, .visit-highlight-card, .visit-resource-card, .av-route-card, .av-library-card, .glossary-entry, .territory-map-panel) {
+    box-shadow: 0 4px 14px rgba(40, 30, 20, 0.08) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  main :is(.card, .pm-read-panel, .museum-section-panel, .timeline-section-panel, .time-stage-card, .visit-highlight-card, .visit-resource-card, .av-route-card, .av-library-card, .glossary-entry) {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .hero,
+  .page-hero,
+  .hero-simple,
+  .schedule-hero,
+  .time-stage-grid {
+    background-attachment: scroll !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .time-stage-grid {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .time-stage-card {
+    min-height: 0;
+  }
+
+  .time-stage-media img,
+  .time-stage-card:hover .time-stage-media img,
+  .time-stage-card.active .time-stage-media img {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  main *,
+  main *::before,
+  main *::after,
+  .site-footer *,
+  .site-footer *::before,
+  .site-footer *::after {
+    animation: none !important;
+    transition: none !important;
   }
 
   .table-responsive,
@@ -7199,7 +7289,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     width: min(78vw, 360px);
     height: min(30dvh, 270px);
     transform: translateX(-50%) scale(0.94);
-    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.42)) contrast(1.02) saturate(1.02);
+    filter: none;
   }
 
   .index-video-intro-overlay--ready .index-video-intro-player,
@@ -7217,8 +7307,20 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     border: 1px solid rgba(228, 200, 140, 0.2);
     border-radius: 1.15rem;
     background: rgba(8, 10, 9, 0.46);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .index-video-intro-overlay--compact .index-video-intro-shell::before,
+  .index-video-intro-overlay--compact .index-video-intro-shell::after {
+    display: none;
+  }
+
+  .index-video-intro-overlay--compact .index-video-intro-player,
+  .index-video-intro-overlay--compact.index-video-intro-overlay--ready .index-video-intro-player,
+  .index-video-intro-overlay--compact.index-video-intro-overlay--paused .index-video-intro-player {
+    transform: translateX(-50%) scale(0.9);
+    transition: opacity 0.28s ease;
   }
 
   .index-video-intro-copy span {
@@ -7322,19 +7424,8 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 }
 
-/* Fluidez escritorio: menos repintado y menos reflow en hover */
+/* Fluidez escritorio: evita reflows por cambios de peso en hover. */
 @media (min-width: 992px) {
-  @supports (content-visibility: auto) {
-    main :is(.section, .hero-simple, .content-prose, .pm-read-panel, .museum-section-panel, .timeline-section-panel) {
-      content-visibility: auto;
-      contain-intrinsic-size: 1px 720px;
-    }
-
-    main :is(.card, .time-stage-card, .ticket-feature-card, .ticket-tier-card, .av-library-card, .av-route-card, .glossary-entry) {
-      contain: layout paint;
-    }
-  }
-
   @media (hover: hover) {
     .sobre-page-main .section:hover :is(.section-lead, .section-intro, .content-prose, .museum-section-lead, .lead),
     main#main-content>.container>section:hover :is(.section-lead, .section-intro, .museum-section-lead, .lead),
@@ -7344,14 +7435,6 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     .timeline-section-panel:hover .lead {
       font-weight: inherit;
     }
-  }
-
-  html.pm-parallax .pm-parallax-block,
-  html.pm-parallax [data-pm-float],
-  .pm-cinema-reveal,
-  .pm-section-layer,
-  .pm-text-reveal {
-    will-change: transform, opacity;
   }
 }
 
