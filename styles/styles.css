@@ -212,6 +212,35 @@ html:not([data-theme="dark"]) .list-group-item {
   border-radius: 1rem;
 }
 
+/* Overlay para modelo 3D en móvil */
+.dino-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.9);
+  z-index: 2200;
+  padding: 1rem;
+}
+.dino-overlay-inner {
+  width: 100%;
+  max-width: 980px;
+  position: relative;
+}
+.dino-overlay model-viewer {
+  width: 100%;
+  height: 80vh;
+  border-radius: 0.5rem;
+  background: #000;
+}
+.dino-overlay-close {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  z-index: 10;
+}
+
 .dinosaur-model-fallback {
   padding: 1rem;
   border: 1px solid var(--border);
