@@ -38,8 +38,6 @@ const THEME_ICON_MOON =
 const THEME_ICON_SUN =
   '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
 
-const pageTransitionDuration = 520;
-
 // ── Render grid de ámbitos (página recorrido-expositivo.html) ─────────────────────
 function renderScopes(lang) {
   const container = document.getElementById("ambitos-grid");
@@ -1144,40 +1142,27 @@ function isNavigableInternalLink(link) {
 }
 
 function enablePageTransitions() {
-  if (PM_LOW_POWER) {
-    document.body.classList.add("page-ready");
-    return;
-  }
-
-  document.body.classList.add("page-transition");
-  requestAnimationFrame(() => document.body.classList.add("page-ready"));
+  document.body.classList.add("page-ready");
   window.addEventListener("pageshow", () => {
     document.body.classList.remove("page-leaving");
     document.body.classList.add("page-ready");
   });
+
+  if (PM_LOW_POWER) return;
+
   document.addEventListener("click", (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const link = e.target.closest("a[href]");
     if (!isNavigableInternalLink(link)) return;
+    if (!shouldUseSoftNavigation()) return;
+
     e.preventDefault();
     closeTopNavMenu();
-    document.body.classList.add("page-leaving");
-
-    if (shouldUseSoftNavigation()) {
-      window.setTimeout(() => {
-        navigateSoft(link.href);
-      }, Math.round(pageTransitionDuration * 0.55));
-      return;
-    }
-
-    window.setTimeout(() => {
-      window.location.href = link.href;
-    }, pageTransitionDuration);
+    navigateSoft(link.href);
   });
 
   window.addEventListener("popstate", () => {
     if (!shouldUseSoftNavigation()) return;
-    document.body.classList.add("page-leaving");
     navigateSoft(window.location.href, { historyMode: "replace" });
   });
 }
@@ -1274,27 +1259,7 @@ function initTimeOfDayEffects() {
 function initScrollReveal() {
   const items = [...document.querySelectorAll(".animate-on-scroll")];
   if (!items.length) return;
-  if (PM_LOW_POWER) {
-    items.forEach((item) => item.classList.add("is-visible"));
-    return;
-  }
-  if (document.documentElement.classList.contains("pm-cinema")) return;
-
-  if (!window.IntersectionObserver) {
-    items.forEach((item) => item.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.01, rootMargin: "0px 0px 18% 0px" });
-
-  items.forEach((item) => observer.observe(item));
+  items.forEach((item) => item.classList.add("is-visible"));
 }
 
 function openVideoOverlay(videoId, videoTitle) {

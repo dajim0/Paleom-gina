@@ -4389,6 +4389,145 @@ img:hover {
   height: auto;
 }
 
+/* Rendimiento: recorta efectos caros que apenas cambian la experiencia visual. */
+html.pm-performance-mode .animate-on-scroll {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+html.pm-performance-mode body.page-transition main,
+html.pm-performance-mode body.page-transition footer,
+html.pm-performance-mode body.page-transition.page-ready main,
+html.pm-performance-mode body.page-transition.page-ready footer,
+html.pm-performance-mode body.page-transition.page-leaving main,
+html.pm-performance-mode body.page-transition.page-leaving footer {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+html.pm-performance-mode img {
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.pm-performance-mode img:hover {
+    transform: none;
+    filter: none;
+  }
+}
+
+html.pm-performance-mode :is(.form-control,
+  .form-select,
+  .time-chip,
+  .time-stage-grid,
+  .pm-exhibit-route-accordion .accordion-item,
+  .pm-read-panel,
+  .resource-card,
+  .ticket-feature-card,
+  .ticket-tier-card,
+  .ticket-cart__panel,
+  .glossary-group,
+  .glossary-entry,
+  .timeline-section-panel,
+  .timeline-section-panel .timeline-detail.card,
+  .content-media-figure,
+  .card,
+  .qr-card) {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+html.pm-performance-mode .time-chip {
+  animation: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+html.pm-performance-mode :is(.card,
+  .resource-card,
+  .ticket-feature-card,
+  .ticket-tier-card,
+  .ticket-cart__panel,
+  .glossary-group,
+  .glossary-entry,
+  .content-media-figure,
+  .dinosaur-model-card) {
+  box-shadow: 0 8px 22px rgba(63, 47, 30, 0.08);
+}
+
+html.pm-performance-mode .index-video-intro-overlay {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transition-duration: 0.42s;
+}
+
+html.pm-performance-mode body.index-video-intro-visible :is(.pm-topnav, .hero, .page-hero, main, .site-footer) {
+  filter: none;
+  transform: none;
+}
+
+html.pm-performance-mode .index-video-intro-shell {
+  transition: transform 0.42s ease;
+}
+
+html.pm-performance-mode .index-video-intro-shell--leaving {
+  filter: none;
+  transform: scale(1.006);
+}
+
+html.pm-performance-mode .index-video-intro-player {
+  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.34));
+  transition: opacity 0.42s ease, transform 1.6s ease;
+}
+
+html.pm-performance-mode .index-video-intro-player,
+html.pm-performance-mode .index-video-intro-copy,
+html.pm-performance-mode .index-video-intro-actions,
+html.pm-performance-mode .index-video-intro-progress {
+  transition-duration: 0.42s;
+}
+
+html.pm-performance-mode .index-video-intro-skip,
+html.pm-performance-mode .index-video-intro-sound {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 767px), (pointer: coarse) {
+  html.pm-performance-mode * {
+    scroll-behavior: auto !important;
+  }
+
+  html.pm-performance-mode .time-showcase::after,
+  html.pm-performance-mode body.index-video-page-entering::after,
+  html.pm-performance-mode .index-video-intro-shell::after {
+    display: none;
+  }
+
+  html.pm-performance-mode :is(.card,
+    .resource-card,
+    .ticket-feature-card,
+    .ticket-tier-card,
+    .ticket-cart__panel,
+    .glossary-group,
+    .glossary-entry,
+    .content-media-figure,
+    .timeline-section-panel,
+    .timeline-section-panel .timeline-detail.card) {
+    box-shadow: none;
+  }
+
+  html.pm-performance-mode .index-video-intro-player {
+    filter: none;
+  }
+
+  html.pm-performance-mode .index-video-intro-copy {
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  }
+}
+
 /* Sobre · Qué es: columna de imágenes apiladas */
 #que-es .two-col.content-split {
   align-items: stretch;
