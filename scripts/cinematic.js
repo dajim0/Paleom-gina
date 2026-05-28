@@ -801,6 +801,12 @@
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8"/><path d="M8 11h6"/></svg>';
   const ICON_NARRATION_ON =
     '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h5"/><path d="M16 8.5a3 3 0 0 1 0 5"/><path d="M18.4 6.2a6.5 6.5 0 0 1 0 9.6"/></svg>';
+  const ICON_READER_IDLE =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h6"/><path d="M8 11h8"/><path d="M8 15h5"/></svg>';
+  const ICON_READER_PLAYING =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  const ICON_READER_PAUSED =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h2v14H9z"/><path d="M13 5h2v14h-2z"/></svg>';
 
   let ctx = null;
   let master = null;
@@ -808,13 +814,27 @@
   let playing = false;
   let fab = null;
   let narrationFab = null;
+  let pageReaderFab = null;
   let narrationActive = false;
   let narrationQueue = [];
   let narrationIndex = 0;
   let narrationAudio = null;
-  let ambientDuckedForNarration = false;
+  let ambientDuckedForSpeech = false;
   let preferredNarrationVoice = null;
+  let pageReaderState = "idle";
+  let pageReaderBlocks = [];
+  let pageReaderBlockIndex = 0;
+  let pageReaderChunkIndex = 0;
+  let pageReaderHighlightEl = null;
+  let pageReaderPauseUsesCancel = false;
+  let pageReaderLongPressTimer = null;
+  let pageReaderSuppressClick = false;
   const NARRATION_VOLUME = 0.24;
+  const PAGE_READER_VOLUME = 1;
+  const SPEECH_PHONETIC_REPLACEMENTS = [
+    [/Brachychiroterium/gi, "Braquiquiroterium"],
+    [/Sierra Mágina/gi, "Sierra Magina"],
+  ];
   const PAGE_NARRATIONS = {
     es: {
       index:
@@ -1290,18 +1310,295 @@
     return chunks;
   }
 
-  function duckAmbientForNarration() {
+  function duckAmbientForSpeech() {
     if (!playing || !ctx || !master) return;
-    ambientDuckedForNarration = true;
+    ambientDuckedForSpeech = true;
     fadeTo(NARRATION_DUCKED_AMBIENT_VOLUME, 0.8);
   }
 
-  function restoreAmbientAfterNarration() {
-    if (!ambientDuckedForNarration) return;
-    ambientDuckedForNarration = false;
+  function restoreAmbientAfterSpeech() {
+    if (!ambientDuckedForSpeech) return;
+    ambientDuckedForSpeech = false;
     if (playing && ctx && master && !document.hidden) {
       fadeTo(TARGET_VOLUME, 1.2);
     }
+  }
+
+  function prepareSpeechText(text) {
+    let clean = normalizeNarrationText(text);
+    clean = clean.replace(/\([^)]*(?:aclarar|pronunciación|pronunciacion|vídeo|video|locutor|voz en off)[^)]*\)/gi, "");
+    SPEECH_PHONETIC_REPLACEMENTS.forEach(([pattern, replacement]) => {
+      clean = clean.replace(pattern, replacement);
+    });
+    return normalizeNarrationText(clean);
+  }
+
+  function isPageReaderTextNode(el) {
+    if (!el || el.closest("[aria-hidden='true'], [hidden], script, style, noscript")) return false;
+    if (el.closest("nav, footer, .pm-topnav, .pm-hero-audio-controls, .pm-audio-fab, .video-overlay, .ticket-cart, .av-active-filters, .index-video-intro-overlay")) {
+      return false;
+    }
+    if (el.closest("details:not([open])")) return false;
+    const style = window.getComputedStyle(el);
+    if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity || 1) === 0) {
+      return false;
+    }
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0;
+  }
+
+  function getPageReaderRoots() {
+    const roots = [];
+    const hero = document.querySelector(".hero, .page-hero, .hero-simple");
+    const main = document.getElementById("main-content") || document.querySelector("main");
+    if (hero) roots.push(hero);
+    if (main && (!hero || !hero.contains(main))) roots.push(main);
+    return roots.length ? roots : [document.body];
+  }
+
+  function collectPageReaderBlocks() {
+    const selector = [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "p",
+      "li",
+      "dt",
+      "dd",
+      "figcaption",
+      "blockquote",
+      "summary",
+      ".section-lead",
+      ".hero-text",
+      ".kicker",
+      ".card-title",
+      ".av-video-title",
+      ".scope-title",
+      ".timeline-period",
+      ".glossary-entry h3",
+      ".ticket-feature-card h3",
+    ].join(",");
+
+    const seen = new Set();
+    const blocks = [];
+    getPageReaderRoots().forEach((root) => {
+      root.querySelectorAll(selector).forEach((el) => {
+        if (!isPageReaderTextNode(el)) return;
+        if (el.closest("button, .btn, label, .visually-hidden, .pm-page-reader-skip")) return;
+        const text = prepareSpeechText(el.textContent);
+        if (!text || text.length < 2 || seen.has(text)) return;
+        seen.add(text);
+        blocks.push({ el, text });
+      });
+    });
+    return blocks;
+  }
+
+  function buildPageReaderQueue(blocks) {
+    const queue = [];
+    blocks.forEach((block) => {
+      const chunks = splitNarrationText(block.text);
+      if (!chunks.length) return;
+      queue.push({ el: block.el, chunks });
+    });
+    return queue;
+  }
+
+  function clearPageReaderHighlight() {
+    if (pageReaderHighlightEl) {
+      pageReaderHighlightEl.classList.remove("pm-page-reader-highlight");
+      pageReaderHighlightEl = null;
+    }
+  }
+
+  function setPageReaderHighlight(el) {
+    clearPageReaderHighlight();
+    if (!el || !isPageReaderTextNode(el)) return;
+    pageReaderHighlightEl = el;
+    pageReaderHighlightEl.classList.add("pm-page-reader-highlight");
+    pageReaderHighlightEl.scrollIntoView({ behavior: PM_MOBILE ? "auto" : "smooth", block: "nearest" });
+  }
+
+  function updatePageReaderFab() {
+    if (!pageReaderFab) return;
+    const available = supportsNarration();
+    const ariaLabel = !available
+      ? t("page_reader_unavailable", "La lectura en voz alta no está disponible en este navegador")
+      : pageReaderState === "playing"
+        ? t("page_reader_pause", "Pausar lectura de la página")
+        : pageReaderState === "paused"
+          ? t("page_reader_resume", "Reanudar lectura de la página")
+          : t("page_reader_toggle_on", "Leer página en voz alta");
+    const shortLabel = pageReaderState === "playing"
+      ? t("page_reader_fab_pause", "Pausar")
+      : pageReaderState === "paused"
+        ? t("page_reader_fab_resume", "Reanudar")
+        : t("page_reader_fab_label", "Lectura completa");
+    const icon = pageReaderState === "playing"
+      ? ICON_READER_PAUSED
+      : pageReaderState === "paused"
+        ? ICON_READER_PLAYING
+        : ICON_READER_IDLE;
+    pageReaderFab.innerHTML = `
+      <span class="pm-audio-fab__inner">
+        <span class="pm-audio-fab__icon">${icon}</span>
+        <span class="pm-audio-fab__label">${shortLabel}</span>
+      </span>
+      <span class="visually-hidden">${ariaLabel}</span>
+    `;
+    pageReaderFab.disabled = !available;
+    pageReaderFab.setAttribute("aria-label", ariaLabel);
+    pageReaderFab.title = `${ariaLabel}. ${t("page_reader_hold_to_stop", "Mantén pulsado para detener")}`;
+    pageReaderFab.setAttribute("aria-pressed", pageReaderState === "idle" ? "false" : "true");
+    pageReaderFab.classList.toggle("pm-audio-fab--active", pageReaderState !== "idle");
+  }
+
+  function finishPageReader() {
+    if (supportsNarration()) window.speechSynthesis.cancel();
+    pageReaderState = "idle";
+    pageReaderBlocks = [];
+    pageReaderBlockIndex = 0;
+    pageReaderChunkIndex = 0;
+    pageReaderPauseUsesCancel = false;
+    clearPageReaderHighlight();
+    restoreAmbientAfterSpeech();
+    updatePageReaderFab();
+  }
+
+  function speakPageReaderChunk() {
+    if (pageReaderState !== "playing" || !pageReaderBlocks.length) {
+      finishPageReader();
+      return;
+    }
+
+    const currentBlock = pageReaderBlocks[pageReaderBlockIndex];
+    if (!currentBlock) {
+      finishPageReader();
+      return;
+    }
+
+    const chunk = currentBlock.chunks[pageReaderChunkIndex];
+    if (!chunk) {
+      pageReaderBlockIndex += 1;
+      pageReaderChunkIndex = 0;
+      speakPageReaderChunk();
+      return;
+    }
+
+    setPageReaderHighlight(currentBlock.el);
+    const utterance = new SpeechSynthesisUtterance(chunk);
+    utterance.lang = getNarrationLanguage();
+    utterance.voice = getPreferredNarrationVoice();
+    utterance.rate = 0.92;
+    utterance.pitch = 0.98;
+    utterance.volume = PAGE_READER_VOLUME;
+    utterance.onend = () => {
+      if (pageReaderState !== "playing") return;
+      pageReaderChunkIndex += 1;
+      if (pageReaderChunkIndex >= currentBlock.chunks.length) {
+        pageReaderBlockIndex += 1;
+        pageReaderChunkIndex = 0;
+      }
+      speakPageReaderChunk();
+    };
+    utterance.onerror = finishPageReader;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function startPageReader() {
+    if (!supportsNarration()) return;
+    stopNarration();
+    window.speechSynthesis.cancel();
+    pageReaderBlocks = buildPageReaderQueue(collectPageReaderBlocks());
+    if (!pageReaderBlocks.length) return;
+    choosePreferredNarrationVoice();
+    pageReaderBlockIndex = 0;
+    pageReaderChunkIndex = 0;
+    pageReaderPauseUsesCancel = false;
+    pageReaderState = "playing";
+    duckAmbientForSpeech();
+    updatePageReaderFab();
+    speakPageReaderChunk();
+  }
+
+  function pausePageReader() {
+    if (pageReaderState !== "playing") return;
+    pageReaderState = "paused";
+    pageReaderPauseUsesCancel = false;
+    try {
+      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+      }
+      if (!window.speechSynthesis.paused) {
+        window.speechSynthesis.cancel();
+        pageReaderPauseUsesCancel = true;
+      }
+    } catch (_) {
+      window.speechSynthesis.cancel();
+      pageReaderPauseUsesCancel = true;
+    }
+    updatePageReaderFab();
+  }
+
+  function resumePageReader() {
+    if (pageReaderState !== "paused") return;
+    pageReaderState = "playing";
+    updatePageReaderFab();
+    if (pageReaderPauseUsesCancel) {
+      pageReaderPauseUsesCancel = false;
+      speakPageReaderChunk();
+      return;
+    }
+    try {
+      window.speechSynthesis.resume();
+      if (window.speechSynthesis.paused) {
+        pageReaderPauseUsesCancel = true;
+        speakPageReaderChunk();
+      }
+    } catch (_) {
+      pageReaderPauseUsesCancel = true;
+      speakPageReaderChunk();
+    }
+  }
+
+  function stopPageReader() {
+    finishPageReader();
+  }
+
+  function togglePageReader() {
+    if (pageReaderSuppressClick) {
+      pageReaderSuppressClick = false;
+      return;
+    }
+    if (pageReaderState === "idle") startPageReader();
+    else if (pageReaderState === "playing") pausePageReader();
+    else if (pageReaderState === "paused") resumePageReader();
+  }
+
+  function bindPageReaderLongPress(button) {
+    if (!button || button.dataset.pmReaderPressBound === "1") return;
+    button.dataset.pmReaderPressBound = "1";
+    const clearPress = () => {
+      if (pageReaderLongPressTimer) {
+        window.clearTimeout(pageReaderLongPressTimer);
+        pageReaderLongPressTimer = null;
+      }
+    };
+    button.addEventListener("pointerdown", () => {
+      pageReaderSuppressClick = false;
+      clearPress();
+      pageReaderLongPressTimer = window.setTimeout(() => {
+        pageReaderLongPressTimer = null;
+        if (pageReaderState !== "idle") {
+          pageReaderSuppressClick = true;
+          stopPageReader();
+        }
+      }, 550);
+    });
+    button.addEventListener("pointerup", clearPress);
+    button.addEventListener("pointerleave", clearPress);
+    button.addEventListener("pointercancel", clearPress);
   }
 
   function updateNarrationFab() {
@@ -1312,7 +1609,7 @@
       : narrationActive
         ? t("narration_toggle_off", "Detener relato de esta página")
         : t("narration_toggle_on", "Escuchar relato de esta página");
-    const shortLabel = t("narration_fab_label", "Relato");
+    const shortLabel = t("narration_fab_label", "Relato resumen");
     narrationFab.innerHTML = `
       <span class="pm-audio-fab__inner">
         <span class="pm-audio-fab__icon">${narrationActive ? ICON_NARRATION_ON : ICON_NARRATION_OFF}</span>
@@ -1332,7 +1629,7 @@
     narrationQueue = [];
     narrationIndex = 0;
     cleanupRecordedNarration();
-    restoreAmbientAfterNarration();
+    restoreAmbientAfterSpeech();
     updateNarrationFab();
   }
 
@@ -1409,10 +1706,11 @@
 
   function startNarration() {
     if (!hasNarrationPlayback()) return;
+    stopPageReader();
     if (supportsNarration()) window.speechSynthesis.cancel();
     cleanupRecordedNarration();
     narrationActive = true;
-    duckAmbientForNarration();
+    duckAmbientForSpeech();
     updateNarrationFab();
     playRecordedNarration();
   }
@@ -1427,12 +1725,16 @@
   }
 
   function shouldShowPageAudioControls() {
-    return getPageNarrationSlug() !== "ficha-docente";
+    return Boolean(document.querySelector("main, #main-content"));
   }
 
   function shouldShowNarrationControl() {
-    const pagesWithoutNarration = ["lectura-facil", "inventario-qr", "qr-recursos"];
-    return shouldShowPageAudioControls() && !pagesWithoutNarration.includes(getPageNarrationSlug());
+    if (["lectura-facil", "inventario-qr"].includes(getPageNarrationSlug())) return false;
+    return hasNarrationPlayback() && Boolean(document.querySelector("main, #main-content"));
+  }
+
+  function shouldShowPageReaderControl() {
+    return supportsNarration() && Boolean(document.querySelector("main, #main-content"));
   }
 
   function getHeroAudioTarget(hero) {
@@ -1451,57 +1753,65 @@
   }
 
   function relocateFab() {
-    if (!fab && !narrationFab) return;
+    if (!fab && !narrationFab && !pageReaderFab) return;
 
-    if (!shouldShowPageAudioControls()) {
-      stopNarration();
-      if (playing) stopAmbient();
-      document.querySelectorAll(".pm-hero-audio-controls").forEach((node) => node.remove());
-      [fab, narrationFab].forEach((button) => {
-        if (!button) return;
-        button.hidden = true;
-        button.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
-        document.body.appendChild(button);
-      });
-      return;
-    }
+    const showAmbient = shouldShowPageAudioControls();
+    const showNarration = shouldShowNarrationControl();
+    const showReader = shouldShowPageReaderControl();
+
+    if (!showAmbient && playing) stopAmbient();
+    if (!showNarration) stopNarration();
+    if (!showReader) stopPageReader();
 
     document.querySelectorAll(".pm-audio-fab-host").forEach((host) => {
       host.classList.remove("pm-audio-fab-host");
     });
-    const showNarration = shouldShowNarrationControl();
-    if (!showNarration) stopNarration();
 
     if (fab) {
-      fab.hidden = false;
+      fab.hidden = !showAmbient;
       fab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
     }
     if (narrationFab) {
       narrationFab.hidden = !showNarration;
       narrationFab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
     }
+    if (pageReaderFab) {
+      pageReaderFab.hidden = !showReader;
+      pageReaderFab.classList.remove("pm-audio-fab--in-hero", "pm-audio-fab--fallback");
+    }
 
     const hero = findPageHero();
     const target = getHeroAudioTarget(hero) || document.body;
-    if (hero) hero.classList.add("pm-audio-fab-host");
+    const visibleButtons = [showAmbient ? fab : null, showNarration ? narrationFab : null, showReader ? pageReaderFab : null].filter(Boolean);
+    if (hero && visibleButtons.length) hero.classList.add("pm-audio-fab-host");
+    if (target.classList?.contains("pm-hero-audio-controls")) {
+      target.style.setProperty("--pm-audio-control-count", String(Math.max(visibleButtons.length, 1)));
+      target.dataset.pmAudioControlCount = String(visibleButtons.length);
+    }
 
-    [fab, showNarration ? narrationFab : null].forEach((button) => {
+    visibleButtons.forEach((button) => {
       if (!button) return;
       button.classList.add(hero ? "pm-audio-fab--in-hero" : "pm-audio-fab--fallback");
       target.appendChild(button);
     });
+
+    if (fab && !showAmbient) document.body.appendChild(fab);
     if (narrationFab && !showNarration) document.body.appendChild(narrationFab);
+    if (pageReaderFab && !showReader) document.body.appendChild(pageReaderFab);
 
     fab?.classList.add("pm-audio-fab--mounted");
     if (showNarration) narrationFab?.classList.add("pm-audio-fab--mounted");
+    if (showReader) pageReaderFab?.classList.add("pm-audio-fab--mounted");
     updateFab();
     if (showNarration) updateNarrationFab();
+    if (showReader) updatePageReaderFab();
   }
 
   function mountFab() {
-    if (document.querySelector(".pm-audio-fab:not(.pm-narration-fab)")) {
-      fab = document.querySelector(".pm-audio-fab:not(.pm-narration-fab)");
+    if (document.querySelector(".pm-audio-fab:not(.pm-narration-fab):not(.pm-page-reader-fab)")) {
+      fab = document.querySelector(".pm-audio-fab:not(.pm-narration-fab):not(.pm-page-reader-fab)");
       narrationFab = document.querySelector(".pm-narration-fab");
+      pageReaderFab = document.querySelector(".pm-page-reader-fab");
       if (!narrationFab) {
         narrationFab = document.createElement("button");
         narrationFab.type = "button";
@@ -1510,6 +1820,13 @@
           if (narrationActive) stopNarration();
           else startNarration();
         });
+      }
+      if (!pageReaderFab) {
+        pageReaderFab = document.createElement("button");
+        pageReaderFab.type = "button";
+        pageReaderFab.className = "pm-audio-fab pm-page-reader-fab";
+        pageReaderFab.addEventListener("click", togglePageReader);
+        bindPageReaderLongPress(pageReaderFab);
       }
       relocateFab();
       return;
@@ -1531,13 +1848,21 @@
       else startNarration();
     });
 
+    pageReaderFab = document.createElement("button");
+    pageReaderFab.type = "button";
+    pageReaderFab.className = "pm-audio-fab pm-page-reader-fab";
+    pageReaderFab.addEventListener("click", togglePageReader);
+    bindPageReaderLongPress(pageReaderFab);
+
     relocateFab();
 
     updateFab();
     updateNarrationFab();
+    updatePageReaderFab();
     window.requestAnimationFrame(() => {
       fab?.classList.add("pm-audio-fab--mounted");
       narrationFab?.classList.add("pm-audio-fab--mounted");
+      pageReaderFab?.classList.add("pm-audio-fab--mounted");
     });
   }
 
@@ -1598,20 +1923,25 @@
     document.addEventListener("visibilitychange", onVisibility);
     document.addEventListener("pm:navigation", relocateFab);
     document.addEventListener("pm:navigation", stopNarration);
+    document.addEventListener("pm:navigation", stopPageReader);
     window.addEventListener("beforeunload", stopNarration);
+    window.addEventListener("beforeunload", stopPageReader);
     if (supportsNarration()) {
       choosePreferredNarrationVoice();
       window.speechSynthesis.onvoiceschanged = () => {
         choosePreferredNarrationVoice();
         updateNarrationFab();
+        updatePageReaderFab();
       };
     }
     document.querySelectorAll(".lang-btn").forEach((btn) => {
       btn.addEventListener("click", () => window.setTimeout(() => {
         stopNarration();
+        stopPageReader();
         choosePreferredNarrationVoice();
         updateFab();
         updateNarrationFab();
+        updatePageReaderFab();
       }, 50));
     });
   }
@@ -1628,6 +1958,15 @@
     isPlaying: () => narrationActive,
     relocateFab,
   };
+  window.PaleomaginaPageReader = {
+    start: startPageReader,
+    pause: pausePageReader,
+    resume: resumePageReader,
+    stop: stopPageReader,
+    isActive: () => pageReaderState !== "idle",
+    isPaused: () => pageReaderState === "paused",
+    relocateFab,
+  };
 
 
   function refreshAfterNav() {
@@ -1637,6 +1976,7 @@
     relocateFab();
     updateFab();
     updateNarrationFab();
+    updatePageReaderFab();
     if (!REDUCED) restoreAmbientFromStorage();
   }
 

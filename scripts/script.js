@@ -1711,7 +1711,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  const load = () => loadPaleomaginaModule("cinematic.js?v=32");
+  const load = () => loadPaleomaginaModule("cinematic.js?v=37");
   if ("requestIdleCallback" in window) {
     window.requestIdleCallback(load, { timeout: 900 });
   } else {
@@ -1725,6 +1725,14 @@ function loadCinematicAtmosphere() {
 
 function initPaleomaginaMuseumMap() {
   if (!document.getElementById("museumMapSVG")) return;
+
+  function isMuseumMapMobileUI() {
+    return window.matchMedia("(max-width: 768px)").matches;
+  }
+
+  function isMuseumMapFinePointer() {
+    return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  }
 
   const floorsData = {
     'P1': {
@@ -1803,7 +1811,7 @@ function initPaleomaginaMuseumMap() {
     currentFloor = floorKey;
 
     const svgContainer = document.getElementById('museumMapSVG');
-    const mapWrapper = document.querySelector('.museum-map-wrapper');
+    const mapWrapper = document.querySelector('.museum-map-stage') || document.querySelector('.museum-map-wrapper');
     const tooltip = document.getElementById('museumMapTooltip');
     const tooltipTitle = document.getElementById('tooltipTitle');
     const tooltipDesc = document.getElementById('tooltipDesc');
@@ -1855,28 +1863,35 @@ function initPaleomaginaMuseumMap() {
         polygon.style.fill = zone.color;
 
         const showTooltip = (e) => {
-          if (taskId !== renderTaskId || !tooltip || !mapWrapper) return;
+          if (taskId !== renderTaskId || !tooltip || !mapWrapper || isMuseumMapMobileUI()) return;
+          if (!isMuseumMapFinePointer()) return;
           const lang = currentLang || 'es';
           if (tooltipTitle) tooltipTitle.textContent = zone.name[lang] || zone.name.es;
           if (tooltipDesc) tooltipDesc.textContent = scopeDescriptions?.[lang]?.[zone.scopeKey] || '';
           positionMuseumMapTooltip(e, tooltip, mapWrapper);
         };
 
-        polygon.addEventListener('mouseenter', showTooltip);
-        polygon.addEventListener('mousemove', showTooltip);
-
-        polygon.addEventListener('mouseleave', () => {
-          if (tooltip) tooltip.classList.add('d-none');
-        });
+        if (isMuseumMapFinePointer() && !isMuseumMapMobileUI()) {
+          polygon.addEventListener('mouseenter', showTooltip);
+          polygon.addEventListener('mousemove', showTooltip);
+          polygon.addEventListener('mouseleave', () => {
+            if (tooltip) tooltip.classList.add('d-none');
+          });
+        }
 
         polygon.addEventListener('click', () => {
           if (taskId !== renderTaskId) return;
+          if (tooltip) tooltip.classList.add('d-none');
           document.querySelectorAll('.museum-zone').forEach(z => z.classList.remove('active'));
           polygon.classList.add('active');
 
           const lang = currentLang || 'es';
           const cleanId = zone.zoneId.replace('PB_', '');
-          const scopeData = scopeContents?.[cleanId]?.[lang] || scopeContents?.[zone.zoneId]?.[lang];
+          const scopeCode = scopeKeyToCode(zone.scopeKey);
+          const scopeData =
+            scopeContents?.[cleanId]?.[lang] ||
+            scopeContents?.[zone.zoneId]?.[lang] ||
+            (scopeCode ? scopeContents?.[scopeCode]?.[lang] : null);
 
           if (scopeData && panelTitle && panelContent && infoPanel) {
             panelTitle.textContent = scopeData.title;
@@ -1893,11 +1908,19 @@ function initPaleomaginaMuseumMap() {
               }
             }
             infoPanel.classList.remove('d-none');
+            const panelBody = infoPanel.querySelector('.museum-map-panel__body');
+            if (panelBody) panelBody.scrollTop = 0;
 
-            if (window.innerWidth < 768 && infoPanel.scrollIntoView) {
-              infoPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (isMuseumMapMobileUI() && infoPanel.scrollIntoView) {
+              requestAnimationFrame(() => {
+                infoPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              });
             }
           }
+
+          document.querySelectorAll('.museum-legend-item').forEach((b) => {
+            b.classList.toggle('active', b.dataset.zoneId === zone.zoneId);
+          });
         });
 
         svgContainer.appendChild(polygon);
