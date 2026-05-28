@@ -11,6 +11,7 @@ const themeSourceStorageKey = "paleomagina-theme-source";
 let currentTheme = "light";
 const PM_MOBILE = window.matchMedia?.("(max-width: 767px), (pointer: coarse)")?.matches ?? false;
 const PM_SAVE_DATA = navigator.connection?.saveData === true;
+const PM_REDUCED_MOTION = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
 const PM_LOW_POWER = PM_MOBILE || PM_SAVE_DATA;
 document.documentElement.classList.add("pm-performance-mode");
 
@@ -1262,17 +1263,59 @@ function initScrollReveal() {
   items.forEach((item) => item.classList.add("is-visible"));
 }
 
+const PM_FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])",
+].join(",");
+
+function focusFirstControl(root, preferred) {
+  const target = preferred || root?.querySelector(PM_FOCUSABLE_SELECTOR);
+  if (!target) return;
+  window.setTimeout(() => target.focus({ preventScroll: true }), 0);
+}
+
+function trapDialogFocus(event, root) {
+  if (event.key !== "Tab" || !root || root.getAttribute("aria-hidden") === "true") return;
+  const focusable = [...root.querySelectorAll(PM_FOCUSABLE_SELECTOR)].filter((el) => {
+    const style = window.getComputedStyle(el);
+    return style.display !== "none" && style.visibility !== "hidden";
+  });
+  if (!focusable.length) {
+    event.preventDefault();
+    return;
+  }
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+let videoOverlayLastFocus = null;
+
 function openVideoOverlay(videoId, videoTitle) {
   const overlay = document.getElementById("videoOverlay");
   const frame = document.getElementById("videoOverlayFrame");
+  const closeButton = document.getElementById("videoOverlayClose");
   if (!overlay || !frame || !videoId) return;
+  videoOverlayLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   overlay.classList.remove("d-none");
   overlay.setAttribute("aria-hidden", "false");
   document.body.classList.add("pm-scroll-locked");
   document.body.style.overflow = "hidden";
   window.PaleomaginaScroll?.pause?.();
-  frame.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&cc_load_policy=1&cc_lang_pref=en&hl=en`;
+  const subtitleLang = normalizeLang(currentLang);
+  frame.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&cc_load_policy=1&cc_lang_pref=${subtitleLang}&hl=${subtitleLang}`;
   frame.title = videoTitle || "Video en pantalla grande";
+  focusFirstControl(overlay, closeButton);
 }
 
 function closeVideoOverlay() {
@@ -1285,6 +1328,8 @@ function closeVideoOverlay() {
   document.body.classList.remove("pm-scroll-locked");
   document.body.style.overflow = "";
   window.PaleomaginaScroll?.resume?.();
+  videoOverlayLastFocus?.focus?.({ preventScroll: true });
+  videoOverlayLastFocus = null;
 }
 
 function initVideoOverlay() {
@@ -1309,9 +1354,10 @@ function initVideoOverlay() {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      const overlay = document.getElementById("videoOverlay");
-      if (overlay && !overlay.classList.contains("d-none")) {
+    const overlay = document.getElementById("videoOverlay");
+    if (overlay && !overlay.classList.contains("d-none")) {
+      trapDialogFocus(event, overlay);
+      if (event.key === "Escape") {
         closeVideoOverlay();
       }
     }
@@ -1373,6 +1419,7 @@ function initIndexIntroVideo() {
   const lightIntroDevice = navigator.connection?.saveData === true;
   const compactIntroDevice = PM_MOBILE || lightIntroDevice;
   const introSignal = (indexIntroAbort = new AbortController()).signal;
+  const introLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
   overlay.classList.remove(
     "d-none",
@@ -1395,6 +1442,13 @@ function initIndexIntroVideo() {
     video.preload = "none";
     video.querySelectorAll("source").forEach((source) => source.remove());
     video.load();
+  };
+
+  const dismissIntroImmediately = () => {
+    overlay.classList.add("d-none");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("index-video-intro-visible");
+    unloadIntroVideo();
   };
 
   const getNavigationType = () => {
@@ -1433,17 +1487,12 @@ function initIndexIntroVideo() {
   } catch (_) { }
 
   if (shouldSkipIntro()) {
-    overlay.classList.add("d-none");
-    overlay.setAttribute("aria-hidden", "true");
-    unloadIntroVideo();
+    dismissIntroImmediately();
     return;
   }
 
-  if (lightIntroDevice) {
-    overlay.classList.add("d-none");
-    overlay.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("index-video-intro-visible");
-    unloadIntroVideo();
+  if (PM_REDUCED_MOTION || lightIntroDevice) {
+    dismissIntroImmediately();
     return;
   }
 
@@ -1595,6 +1644,7 @@ function initIndexIntroVideo() {
       unloadIntroVideo();
       if (progressFill) progressFill.style.width = "0%";
       if (indexIntroRuntime) indexIntroRuntime = null;
+      introLastFocus?.focus?.({ preventScroll: true });
     }, INTRO_LEAVE_MS);
     window.setTimeout(() => {
       document.body.classList.remove("index-video-page-entering");
@@ -1635,6 +1685,7 @@ function initIndexIntroVideo() {
   document.addEventListener(
     "keydown",
     (event) => {
+      trapDialogFocus(event, overlay);
       if (event.key === "Escape" && !hidden) hideIntro();
     },
     listenerOpts
@@ -1642,6 +1693,7 @@ function initIndexIntroVideo() {
 
   fallbackTimer = window.setTimeout(hideIntro, compactIntroDevice ? 9500 : 14000);
   indexIntroRuntime = { fallbackTimer, stopIntroAudio };
+  focusFirstControl(overlay, skipButton || soundButton);
   scheduleIntroAudio();
   bindIntroAudioAfterGesture();
   video.play().catch(() => {
