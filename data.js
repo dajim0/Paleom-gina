@@ -7,12 +7,12 @@ const scopes = [
   { code: "AAN", key: "scope_aan", title_es: "Antesala", title_en: "Ante-room" },
   { code: "A0", key: "scope_a0", title_es: "Bienvenida", title_en: "Welcome" },
   { code: "A1", key: "scope_a1", title_es: "El mar de Tetis", title_en: "The Tethys Sea" },
-  { code: "A2", key: "scope_a2", title_es: "Geologia y orografia", title_en: "Geology and orography" },
+  { code: "A2", key: "scope_a2", title_es: "Geología y orografía", title_en: "Geology and orography" },
   { code: "A3", key: "scope_a3", title_es: "Cuaternario", title_en: "Quaternary" },
   { code: "A4", key: "scope_a4", title_es: "Mundo neandertal", title_en: "Neanderthal world" },
-  { code: "A5", key: "scope_a5", title_es: "Paleolitico superior", title_en: "Upper Paleolithic" },
-  { code: "A6", key: "scope_a6", title_es: "Neolitico", title_en: "Neolithic" },
-  { code: "A7", key: "scope_a7", title_es: "Calcolitico", title_en: "Chalcolithic" },
+  { code: "A5", key: "scope_a5", title_es: "Paleolítico superior", title_en: "Upper Paleolithic" },
+  { code: "A6", key: "scope_a6", title_es: "Neolítico", title_en: "Neolithic" },
+  { code: "A7", key: "scope_a7", title_es: "Calcolítico", title_en: "Chalcolithic" },
   { code: "A8", key: "scope_a8", title_es: "Ciencia y ciudadanía", title_en: "Science and citizenship" },
   { code: "A9", key: "scope_a9", title_es: "Testimonios y voces", title_en: "Testimonies and voices" },
   { code: "ATZ", key: "scope_atz", title_es: "Terraza final", title_en: "Final terrace" }
@@ -282,7 +282,7 @@ const scopePdfExtras = {
   },
   A5: {
     es: { easySummary: "Conocemos a Mágina: una joven de hace 13.000 años que vivía la sierra con su familia.", keyQuestion: "¿Qué nos dice su ajuar sobre cuidado y simbolismo?", duration: "12–15 min", audience: "General / talleres de arte rupestre" },
-    en: { easySummary: "Meet Mágina: a young woman from 13,000 years ago who lived in the range with her family.", keyQuestion: "What does her grave goods tell us about care and symbolism?", duration: "12–15 min", audience: "General / rock-art workshops" }
+    en: { easySummary: "Meet Mágina: a young woman from 13,000 years ago who lived in the range with her family.", keyQuestion: "What do her grave goods tell us about care and symbolism?", duration: "12–15 min", audience: "General / rock-art workshops" }
   },
   A6: {
     es: { easySummary: "La gente empieza a cultivar, criar animales y vivir más tiempo en el mismo lugar.", keyQuestion: "¿Qué cambia en el día a día cuando aparece la agricultura?", duration: "12–15 min", audience: "Familias y primaria (6–12)" },
@@ -1207,7 +1207,7 @@ const translations = {
     que_es_title: "Qué es Paleomágina",
     que_es_intro: "Paleomágina es un centro científico, arqueológico y museográfico centrado en la interpretación de Sierra Mágina desde la geología, la paleontología, la arqueología y la evolución humana. El proyecto plantea el territorio como un gran archivo natural donde el paisaje conserva millones de años de historia.",
     que_es_li_rocks: "Las rocas contienen información legible en estratos y fósiles.",
-    que_es_li_landscape: "El paisaje conserva huellas del pasado visible y oculta.",
+    que_es_li_landscape: "El paisaje conserva huellas visibles y ocultas del pasado.",
     que_es_li_science: "La ciencia permite interpretar esas huellas con método y evidencias.",
     que_es_li_history: "La historia se reconstruye a partir de restos, contextos y comparación.",
     que_es_combine: "La idea del museo se apoya en cuatro ideas y se despliega en siete líneas de trabajo:",
@@ -1243,7 +1243,7 @@ const translations = {
     phil_process_t: "La ciencia como proceso vivo",
     phil_process_lead: "El museo no solo muestra resultados: explica cómo se produce el conocimiento.",
     phil_process_li1: "Excavaciones y trabajo de campo.", phil_process_li2: "Trabajo de laboratorio y análisis.",
-    phil_process_li3: "Interpretación de evidencias y debate.", phil_process_li4: "Actualización del relato con nuevas datos.",
+    phil_process_li3: "Interpretación de evidencias y debate.", phil_process_li4: "Actualización del relato con nuevos datos.",
     phil_emotion_t: "Ciencia y emoción",
     phil_emotion_lead: "La exposición busca un equilibrio entre rigor y experiencia.",
     phil_emotion_li1: "Impacto visual y comprensión sencilla.", phil_emotion_li2: "Experiencia inmersiva y ritmos de visita variados.",
