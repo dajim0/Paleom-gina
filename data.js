@@ -59,19 +59,35 @@ const scopeContents = {
   A1: {
     es: {
       title: "El mar de Tetis",
-      description: "Origen marino del territorio y fósiles del Tetis. Entre 200 y 100 millones de años, Sierra Mágina fue el fondo de un océano tropical.",
-      content: "Durante el Mesozoico, Sierra Mágina estuvo completamente sumergida bajo el Mar de Tetis, un vasto océano tropical. Los sedimentos depositados durante millones de años formaron capas que hoy contienen abundantes fósiles: ammonites, belemnites, bivalvos y otros organismos marinos. La lenta evaporación del mar dejó depósitos de sal y yeso que son visibles en las canteras actuales.",
-      timeline: "Mesozoico (200-65 M.a.)",
-      related: "Conecta con el glosario de Tetis, fósil y sedimento, y con las imágenes de fósiles del inicio.",
-      facts: ["Explica por qué aparecen fósiles marinos en una sierra interior", "Introduce ammonites, belemnites y sedimentos carbonatados", "Sirve como base para entender la geología posterior"]
+      description: "Origen marino del territorio: del Tetis tropical (250 Ma) a los remanentes del Mediterráneo. Fósiles y fauna documentados en Jaén y en la Península Ibérica.",
+      content: "Hace unos 250 millones de años el mar de Tetis se extendió entre Gondwana y Laurasia: un océano mesozoico y cenozoico, somero, cálido y rico en arrecifes, amonites, bivalvos, lirios de mar y grandes reptiles marinos. El ámbito recorre su evolución en cuatro hitos: Triásico (250 Ma), Jurásico (199 Ma), Cretácico (145 Ma) y Mioceno (23 Ma). En el Triásico, Pangea se fractura y Tetis crece como golfo ecuatorial; en Jaén aparecen Nothosaurus, Henodus, Tanystropheus, Hybodus y Saurichthys. En el Jurásico, Tetis separa Laurasia y Gondwana; destaca Hispaniachelys en Cazorla, plesiosaurios e ictiosaurios. En el Cretácico alcanza su máxima extensión: ammonites, belemnites y Steneosaurus (Bedmar). En el Mioceno se reduce hasta dejar el Mediterráneo, el Mar Negro y el Caspio; la provincia documenta Megalodon (Porcuna), ballenas, Metaxytherium y otáridos (Villanueva de la Reina). Las huellas del arcosaurio de Cambil añaden fauna terrestre junto al litoral triásico.",
+      timeline: "Triásico (250 Ma) · Jurásico (199 Ma) · Cretácico (145 Ma) · Mioceno (23 Ma)",
+      related: "Conecta con el guion del vídeo n.º 2 del ámbito, el vídeo del Arcosaurio de Cambil, el clip de ammonites cretácicos, el glosario (Tetis, Pangea, Belemnite) y los modelos 3D de huellas.",
+      facts: [
+        "Explica por qué aparecen fósiles marinos en una sierra interior",
+        "Recorre cuatro periodos con mapas y fauna de Jaén",
+        "Triásico: Nothosaurus, Henodus, Tanystropheus, Hybodus, Saurichthys",
+        "Jurásico: Hispaniachelys, plesiosaurios, ictiosaurios y ammonites",
+        "Cretácico: ammonites, belemnites y Steneosaurus en Bedmar",
+        "Mioceno: Megalodon, ballenas, sirénidos y otáridos",
+        "Cambil: icnitas de arcosaurio junto al litoral triásico"
+      ]
     },
     en: {
       title: "The Tethys Sea",
-      description: "Marine origin of the territory and Tethys fossils. Between 200 and 100 million years ago, Sierra Mágina was the floor of a tropical ocean.",
-      content: "During the Mesozoic Era, Sierra Mágina was completely submerged under the Tethys Sea, a vast tropical ocean. Sediments deposited over millions of years formed layers that today contain abundant fossils: ammonites, belemnites, bivalves, and other marine organisms. The slow evaporation of the sea left deposits of salt and gypsum visible in current quarries.",
-      timeline: "Mesozoic (200-65 Ma)",
-      related: "Connects with the glossary entries for Tethys, fossil, and sediment, and with fossil imagery on the home page.",
-      facts: ["Explains why marine fossils appear in an inland mountain range", "Introduces ammonites, belemnites, and carbonate sediments", "Provides the basis for understanding later geology"]
+      description: "Marine origin of the territory: from the tropical Tethys (250 Ma) to Mediterranean remnants. Fossils and fauna documented in Jaén and the Iberian Peninsula.",
+      content: "About 250 million years ago the Tethys Ocean spread between Gondwana and Laurasia: a Mesozoic and Cenozoic sea, shallow, warm, and rich in reefs, ammonites, bivalves, sea lilies, and large marine reptiles. This scope follows four milestones: Triassic (250 Ma), Jurassic (199 Ma), Cretaceous (145 Ma), and Miocene (23 Ma). In the Triassic, Pangea breaks apart and the Tethys grows as an equatorial gulf; Jaén yields Nothosaurus, Henodus, Tanystropheus, Hybodus, and Saurichthys. In the Jurassic the Tethys separates Laurasia and Gondwana; Hispaniachelys in Cazorla, plesiosaurs, and ichthyosaurs stand out. In the Cretaceous it reaches maximum extent: ammonites, belemnites, and Steneosaurus (Bedmar). In the Miocene it shrinks until only the Mediterranean, Black Sea, and Caspian remain; the province records Megalodon (Porcuna), whales, Metaxytherium, and pinnipeds (Villanueva de la Reina). Cambil's archosaur footprints add terrestrial fauna near the Triassic shoreline.",
+      timeline: "Triassic (250 Ma) · Jurassic (199 Ma) · Cretaceous (145 Ma) · Miocene (23 Ma)",
+      related: "Connects with scope video script no. 2, the Cambil archosaur video, the Cretaceous ammonite clip, glossary entries (Tethys, Pangea, Belemnite), and 3D footprint models.",
+      facts: [
+        "Explains why marine fossils appear in an inland mountain range",
+        "Covers four periods with maps and Jaén fauna",
+        "Triassic: Nothosaurus, Henodus, Tanystropheus, Hybodus, Saurichthys",
+        "Jurassic: Hispaniachelys, plesiosaurs, ichthyosaurs, and ammonites",
+        "Cretaceous: ammonites, belemnites, and Steneosaurus in Bedmar",
+        "Miocene: Megalodon, whales, sirenians, and pinnipeds",
+        "Cambil: archosaur ichnites near the Triassic shoreline"
+      ]
     }
   },
   A2: {
@@ -131,19 +147,19 @@ const scopeContents = {
   A5: {
     es: {
       title: "Paleolítico superior",
-      description: "Innovaciones humanas del Paleolítico superior. Arte, símbolos y consolidación de Homo sapiens.",
-      content: "Hace 40.000 años, los Homo sapiens llegaron a Europa y con ellos nuevas tecnologías y capacidades. El Paleolítico superior vio la explosión del arte: grabados en piedra, esculturas en marfil y hueso, posiblemente música. Las herramientas se hicieron más sofisticadas, con puntas de flecha especializadas para diferentes presas. Las redes sociales se ampliaron, el comercio a larga distancia se intensificó y aparecen los primeros santuarios compartidos. En la comarca de Sierra Mágina, cuevas y abrigos del entorno (Portillo, Graja, Cambil y otros parajes kársticos) ayudan a relacionar el simbolismo rupestre con el paisaje que aún se recorre hoy.",
-      timeline: "Paleolítico Superior (40.000-10.000 a.C.)",
-      related: "En esta página, vídeos y recursos didácticos amplían el arte y la tecnología lítica de este ámbito.",
-      facts: ["Introduce simbolismo, arte y redes sociales más amplias", "Explica herramientas especializadas y nuevas estrategias de caza", "Permite trabajar talleres de grabado, pigmentos y lectura de huellas"]
+      description: "Innovaciones humanas del Paleolítico superior y relato de Mágina, una joven de hace unos 13.000 años vinculada a Sierra Mágina por la ciencia y el territorio.",
+      content: "Hace 40.000 años, los Homo sapiens llegaron a Europa y con ellos nuevas tecnologías y capacidades. El Paleolítico superior vio la explosión del arte: grabados en piedra, esculturas en marfil y hueso, posiblemente música. En Sierra Mágina, la reconstrucción de una persona de hace unos 13.000 años —Mágina— combina antropología física, paleobotánica y materialidad real: adornos de conchas perforadas, ajuar con agujas de hueso y la presencia de otro individuo menor. No solo sobrevivía: cuidaba, simbolizaba y habitaba un paisaje estacional con refugios como la Cueva del Portillo, en Bedmar.",
+      timeline: "Paleolítico Superior (40.000-10.000 a.C.) · relato ~13.000 años",
+      related: "Conecta con el vídeo de Mágina, arte rupestre, abrigos del territorio y talleres de grabado y pigmentos.",
+      facts: ["Humaniza el Paleolítico superior sin idealizarlo ni infantilizarlo", "Relaciona evidencias materiales con empatía, cuidado y simbolismo", "Sitúa Portillo, tejos y estacionalidad en la lectura del paisaje"]
     },
     en: {
       title: "Upper Paleolithic",
-      description: "Human innovations in the Upper Paleolithic. Art, symbols, and consolidation of Homo sapiens.",
-      content: "Forty thousand years ago, Homo sapiens arrived in Europe bringing new technologies and abilities. The Upper Paleolithic saw an explosion of art: stone engravings, ivory and bone sculptures, possibly music. Tools became more sophisticated, with specialized arrowheads for different prey. Social networks expanded, long-distance trade intensified, and the first shared sanctuaries appeared. In the Sierra Mágina area, caves and rock shelters (Portillo, Graja, Cambil, and other karst settings) connect rock art symbolism with the landscape still walked today.",
-      timeline: "Upper Paleolithic (40,000-10,000 BC)",
-      related: "On this page, audiovisuals and educational resources expand the art and stone technology in this scope.",
-      facts: ["Introduces symbolism, art, and wider social networks", "Explains specialised tools and new hunting strategies", "Supports workshops on engraving, pigments, and trace reading"]
+      description: "Human innovations in the Upper Paleolithic and the story of Mágina, a young woman from about 13,000 years ago linked to Sierra Mágina through science and place.",
+      content: "Forty thousand years ago, Homo sapiens arrived in Europe bringing new technologies and abilities. The Upper Paleolithic saw an explosion of art: stone engravings, ivory and bone sculptures, possibly music. In Sierra Mágina, reconstructing a person from about 13,000 years ago —Mágina— combines physical anthropology, palaeobotany, and real material culture: perforated shell ornaments, grave goods with bone needles, and the presence of a younger individual. She was not only surviving: she cared, symbolised, and lived in a seasonal landscape with shelters such as Cueva del Portillo, in Bedmar.",
+      timeline: "Upper Paleolithic (40,000-10,000 BC) · narrative ~13,000 years ago",
+      related: "Connects with the Mágina video, rock art, local rock shelters, and engraving and pigment workshops.",
+      facts: ["Humanises the Upper Palaeolithic without idealising or infantilising it", "Links material evidence with empathy, care, and symbolism", "Places Portillo, yew trees, and seasonality in landscape reading"]
     }
   },
   A6: {
@@ -249,8 +265,8 @@ const scopePdfExtras = {
     en: { easySummary: "Here you learn what Paleomágina is and how to use panels, QR codes, and videos.", keyQuestion: "What story does this mountain tell in a single sentence?", duration: "8–12 min", audience: "Families and school groups" }
   },
   A1: {
-    es: { easySummary: "Hace millones de años aquí había un mar tropical con fósiles marinos.", keyQuestion: "¿Cómo puede haber conchas en una sierra interior?", duration: "10–15 min", audience: "General / profundización" },
-    en: { easySummary: "Millions of years ago this was a tropical sea with marine fossils.", keyQuestion: "How can there be seashells in an inland mountain range?", duration: "10–15 min", audience: "General / in-depth" }
+    es: { easySummary: "Un mar tropical cambió con el tiempo: Triásico, Jurásico, Cretácico y Mioceno, con fósiles de Jaén y huellas en Cambil.", keyQuestion: "¿Cómo puede haber conchas de hace millones de años y huellas de reptiles en una sierra?", duration: "12–18 min", audience: "General / vídeo ámbito + ammonites" },
+    en: { easySummary: "A tropical sea changed over time: Triassic, Jurassic, Cretaceous, and Miocene, with Jaén fossils and Cambil footprints.", keyQuestion: "How can million-year-old shells and reptile footprints appear in a mountain range?", duration: "12–18 min", audience: "General / scope video + ammonites" }
   },
   A2: {
     es: { easySummary: "El fondo marino se elevó y el relieve actual se formó por erosión y roca kárstica.", keyQuestion: "¿Qué leemos en una ladera o en una cueva?", duration: "10–15 min", audience: "General" },
@@ -265,8 +281,8 @@ const scopePdfExtras = {
     en: { easySummary: "Neanderthals hunted, used fire, and left tools in Sierra Mágina.", keyQuestion: "What does a stone tool tell us about who made it?", duration: "12–15 min", audience: "Families and secondary school" }
   },
   A5: {
-    es: { easySummary: "Con Homo sapiens aparecen arte, símbolos y herramientas más especializadas.", keyQuestion: "¿Por qué pintamos y grabamos en la roca?", duration: "12–15 min", audience: "General / talleres de arte rupestre" },
-    en: { easySummary: "With Homo sapiens come art, symbols, and more specialised tools.", keyQuestion: "Why do we paint and engrave on rock?", duration: "12–15 min", audience: "General / rock-art workshops" }
+    es: { easySummary: "Conocemos a Mágina: una joven de hace 13.000 años que vivía la sierra con su familia.", keyQuestion: "¿Qué nos dice su ajuar sobre cuidado y simbolismo?", duration: "12–15 min", audience: "General / talleres de arte rupestre" },
+    en: { easySummary: "Meet Mágina: a young woman from 13,000 years ago who lived in the range with her family.", keyQuestion: "What does her grave goods tell us about care and symbolism?", duration: "12–15 min", audience: "General / rock-art workshops" }
   },
   A6: {
     es: { easySummary: "La gente empieza a cultivar, criar animales y vivir más tiempo en el mismo lugar.", keyQuestion: "¿Qué cambia en el día a día cuando aparece la agricultura?", duration: "12–15 min", audience: "Familias y primaria (6–12)" },
@@ -301,8 +317,8 @@ const scopeReadingLayers = {
     en: { infant: "We learn what the museum is and how to visit.", family: "Orientation, QR codes, and visit rules.", general: "Introduction to the geological and human archive.", deep: "Interpretive framework of the centre and microsite." }
   },
   A1: {
-    es: { infant: "Aquí hubo un mar con conchas y peces.", family: "Fósiles marinos en una sierra.", general: "Origen del Tetis y sedimentos.", deep: "Paleogeografía del Mesozoico en Sierra Mágina." },
-    en: { infant: "There was once a sea with shells and fish.", family: "Marine fossils in a mountain.", general: "Tethys origin and sediments.", deep: "Mesozoic palaeogeography in Sierra Mágina." }
+    es: { infant: "Hubo un mar con conchas, peces grandes y huellas de reptil.", family: "Cuatro épocas del mar de Tetis y fósiles de Jaén.", general: "Pangea, Tetis por periodos, ammonites y arcosaurio de Cambil.", deep: "Paleogeografía Tetis–Iberia; fauna triásica a miocena y remanentes mediterráneos." },
+    en: { infant: "There was a sea with shells, big fish, and reptile footprints.", family: "Four Tethys Sea periods and Jaén fossils.", general: "Pangea, Tethys by period, ammonites, and Cambil archosaur.", deep: "Tethys–Iberia palaeogeography; Triassic to Miocene fauna and Mediterranean remnants." }
   },
   A2: {
     es: { infant: "El mar se levantó y formó montañas.", family: "Rocas, cuevas y relieve.", general: "Tectónica, erosión y kárst.", deep: "Lectura estructural del relieve bético." },
@@ -317,8 +333,8 @@ const scopeReadingLayers = {
     en: { infant: "Neanderthals hunted and made fire.", family: "Group life and tools.", general: "Neanderthal evidence in the territory.", deep: "Debate on extinction and coexistence." }
   },
   A5: {
-    es: { infant: "Pintaban y tallaban la piedra.", family: "Arte, caza y símbolos.", general: "Paleolítico superior y redes sociales.", deep: "Arte rupestre y territorio kárstico local." },
-    en: { infant: "They painted and carved stone.", family: "Art, hunting, and symbols.", general: "Upper Palaeolithic and social networks.", deep: "Rock art and local karst territory." }
+    es: { infant: "Mágina vivía aquí hace muchísimo tiempo.", family: "Arte, refugios y vida en familia.", general: "Paleolítico superior y relato de Mágina.", deep: "Reconstrucción científica, ajuar y territorio kárstico." },
+    en: { infant: "Mágina lived here a very long time ago.", family: "Art, shelters, and family life.", general: "Upper Palaeolithic and Mágina's story.", deep: "Scientific reconstruction, grave goods, and karst territory." }
   },
   A6: {
     es: { infant: "Empiezan a plantar y a cuidar animales.", family: "Agricultura, ollas y asentamientos.", general: "Revolución neolítica en la comarca.", deep: "Paisaje agrícola y cambio social." },
@@ -430,17 +446,21 @@ const liveProgramItems = {
 const glossary = {
   es: [
     { term: "Ammonite", category: "Paleontología", def: "Molusco marino extinto con concha en espiral. En Paleomágina ayuda a explicar que Sierra Mágina formó parte de antiguos ambientes marinos." },
+    { term: "Arcosaurio", category: "Paleontología", def: "Grupo de reptiles que incluye cocodrilos, pterosaurios, dinosaurios y aves. En Cambil se interpreta a partir de huellas fósiles del Triásico superior." },
     { term: "Arqueología", category: "Metodología", def: "Ciencia que estudia las sociedades humanas del pasado a través de objetos, estructuras, sedimentos y contextos." },
     { term: "Arqueología experimental", category: "Educación", def: "Recreación controlada de técnicas antiguas, como talla lítica, cerámica o molienda, para comprender cómo se fabricaban y usaban los objetos." },
     { term: "Arte rupestre", category: "Evolución humana", def: "Conjunto de pinturas, grabados o signos realizados sobre roca. Expresa pensamiento simbólico, memoria y relación con el territorio." },
     { term: "Ámbito expositivo", category: "Museografía", def: "Unidad temática del recorrido. En Paleomágina cada ámbito organiza una etapa del relato geológico, paleontológico o arqueológico." },
+    { term: "Belemnite", category: "Paleontología", def: "Molusco marino extinto emparentado con calamar, con un esqueleto interno alargado. En el ámbito del Tetis ayuda a imaginar ecosistemas cretácicos." },
     { term: "Bivalvo", category: "Paleontología", def: "Molusco con dos valvas, como almejas u ostras. Sus fósiles indican ambientes acuáticos y condiciones de sedimentación." },
+    { term: "Brachychiroterium", category: "Paleontología", def: "Icnogénero asignado a huellas de arcosaurios triásicos. En Cambil permite explicar cómo un rastro fósil conserva información sobre postura, marcha y ambiente." },
     { term: "Calcolítico", category: "Arqueología", def: "Edad del Cobre. Periodo en el que aparecen la metalurgia, redes de intercambio más complejas y cambios sociales visibles en los enterramientos." },
     { term: "Caliza", category: "Geología", def: "Roca sedimentaria formada en gran parte por carbonato cálcico. Es clave para entender relieves, fósiles y paisajes kársticos." },
     { term: "Carbono 14", category: "Metodología", def: "Método de datación aplicado a restos orgánicos que permite estimar su antigüedad hasta unos 50.000 años." },
     { term: "Cenozoico", category: "Geología", def: "Era geológica que comienza hace 66 millones de años y llega hasta la actualidad. Incluye la formación de muchos relieves actuales." },
     { term: "Cerámica neolítica", category: "Arqueología", def: "Recipientes de barro cocido asociados a comunidades agrícolas y ganaderas. Informan sobre dieta, almacenamiento y vida cotidiana." },
     { term: "Contexto arqueológico", category: "Metodología", def: "Relación entre un objeto, el lugar donde aparece, la capa de sedimento y otros restos asociados. Sin contexto, una pieza pierde gran parte de su información." },
+    { term: "Contramolde", category: "Paleontología", def: "Relieve fósil formado cuando una huella se rellena con sedimento y ese relleno se conserva. Las icnitas de Cambil aparecen como contramoldes de arenisca." },
     { term: "Cuaternario", category: "Geología", def: "Periodo geológico de los últimos 2,58 millones de años, marcado por cambios climáticos, glaciaciones y evolución humana." },
     { term: "Datación", category: "Metodología", def: "Conjunto de técnicas para determinar la antigüedad de un resto, una capa o un proceso natural o humano." },
     { term: "Dolomía", category: "Geología", def: "Roca carbonatada similar a la caliza. Participa en la formación de relieves abruptos, cuevas y paisajes de montaña." },
@@ -454,6 +474,7 @@ const glossary = {
     { term: "Glaciación", category: "Geología", def: "Periodo frío en el que se expanden masas de hielo y cambian ecosistemas, costas, fauna y formas de vida humana." },
     { term: "Homo neanderthalensis", category: "Evolución humana", def: "Especie humana extinta que vivió en Europa y Asia occidental entre hace unos 400.000 y 40.000 años." },
     { term: "Homo sapiens", category: "Evolución humana", def: "Especie humana actual. Su expansión se asocia a nuevas tecnologías, redes sociales amplias y lenguaje simbólico complejo." },
+    { term: "Icnita", category: "Paleontología", def: "Huella, rastro o señal fosilizada dejada por un organismo. Permite estudiar comportamiento, movimiento y ambiente aunque no se conserve el cuerpo del animal." },
     { term: "Industria lítica", category: "Arqueología", def: "Conjunto de herramientas de piedra tallada. Informa sobre tecnología, actividades, movilidad y adaptación al entorno." },
     { term: "Interpretación del patrimonio", category: "Museografía", def: "Forma de explicar el patrimonio conectando datos científicos con relatos comprensibles, experiencia emocional y lectura del lugar." },
     { term: "Kárstico", category: "Paisaje", def: "Paisaje formado por la disolución de rocas solubles como caliza y dolomía. Produce cuevas, simas, dolinas y relieves singulares." },
@@ -469,6 +490,7 @@ const glossary = {
     { term: "Paleontología", category: "Paleontología", def: "Ciencia que estudia los fósiles y la vida pasada para reconstruir ecosistemas, ambientes y cambios evolutivos." },
     { term: "Panel interpretativo", category: "Museografía", def: "Soporte expositivo que explica una idea clave mediante texto, imagen, mapa o esquema sin sustituir la observación directa." },
     { term: "Patrimonio arqueológico", category: "Patrimonio", def: "Conjunto de restos materiales, yacimientos y contextos que conservan información sobre sociedades humanas del pasado." },
+    { term: "Pangea", category: "Geología", def: "Supercontinente que agrupó casi toda la Tierra hace unos 300–200 millones de años. Su fragmentación abrió el mar de Tetis entre Laurasia y Gondwana." },
     { term: "Plegamiento", category: "Geología", def: "Deformación de capas rocosas por presión tectónica. Explica parte del levantamiento y estructura de las cordilleras." },
     { term: "Poblamiento", category: "Arqueología", def: "Forma en que grupos humanos ocupan un territorio: cuevas, asentamientos, rutas, recursos y relación con el paisaje." },
     { term: "Registro arqueológico", category: "Metodología", def: "Conjunto de evidencias conservadas de la actividad humana: objetos, estructuras, sedimentos, restos orgánicos y huellas." },
@@ -478,6 +500,7 @@ const glossary = {
     { term: "Taponomía", category: "Paleontología", def: "Estudio de los procesos que afectan a un resto desde la muerte del organismo hasta su conservación como fósil." },
     { term: "Terraza final", category: "Museografía", def: "Cierre del recorrido donde el paisaje real se convierte en parte de la exposición y conecta sala, horizonte y territorio." },
     { term: "Tetis", category: "Geología", def: "Antiguo océano tropical situado entre masas continentales de Europa, África y Asia. Su historia ayuda a explicar fósiles marinos en zonas montañosas." },
+    { term: "Triásico", category: "Geología", def: "Primer periodo del Mesozoico, iniciado hace unos 252 millones de años. En Paleomágina se relaciona con ambientes litorales y huellas de arcosaurios en Cambil." },
     { term: "Abrigo rocoso", category: "Arqueología", def: "Refugio natural abierto en una pared rocosa. Pudo servir como lugar de habitación, descanso, protección o actividad simbólica." },
     { term: "Ajuar funerario", category: "Arqueología", def: "Conjunto de objetos depositados junto a una persona enterrada. Informa sobre creencias, identidad, prestigio y organización social." },
     { term: "Análisis de polen", category: "Metodología", def: "Estudio de granos de polen conservados en sedimentos. Permite reconstruir vegetación, clima y cambios ambientales del pasado." },
@@ -515,15 +538,19 @@ const glossary = {
   ],
   en: [
     { term: "Ammonite", category: "Paleontology", def: "Extinct marine mollusk with a spiral shell. In Paleomágina it helps explain that Sierra Mágina was once linked to ancient marine environments." },
+    { term: "Archosaur", category: "Paleontology", def: "Group of reptiles that includes crocodiles, pterosaurs, dinosaurs, and birds. At Cambil it is interpreted through Late Triassic fossil footprints." },
     { term: "Archaeology", category: "Method", def: "Science that studies past human societies through objects, structures, sediments, and contexts." },
     { term: "Archaeological context", category: "Method", def: "Relationship between an object, where it appears, the sediment layer, and associated remains. Without context, a find loses much of its information." },
     { term: "Archaeological excavation", category: "Method", def: "Systematic process of documenting and removing sediments to recover evidence without losing context." },
     { term: "Archaeological heritage", category: "Heritage", def: "Material remains, sites, and contexts that preserve information about past human societies." },
     { term: "Archaeological record", category: "Method", def: "Set of preserved evidence for human activity: objects, structures, sediments, organic remains, and traces." },
+    { term: "Belemnite", category: "Paleontology", def: "Extinct marine mollusk related to squid, with an elongated internal skeleton. In the Tethys scope it helps picture Cretaceous ecosystems." },
     { term: "Bivalve", category: "Paleontology", def: "Mollusk with two valves, such as clams or oysters. Its fossils indicate aquatic environments and sedimentary conditions." },
+    { term: "Brachychiroterium", category: "Paleontology", def: "Ichnogenus assigned to Triassic archosaur footprints. At Cambil it helps explain how a fossil track preserves information about posture, gait, and environment." },
     { term: "Carbon-14", category: "Method", def: "Dating method applied to organic remains that can estimate their age up to about 50,000 years." },
     { term: "Cenozoic", category: "Geology", def: "Geological era beginning 66 million years ago and continuing today. It includes the formation of many present-day landscapes." },
     { term: "Chalcolithic", category: "Archaeology", def: "Copper Age. A period marked by metallurgy, more complex exchange networks, and social changes visible in burials." },
+    { term: "Counter-mould", category: "Paleontology", def: "Fossil relief formed when a footprint is filled with sediment and that fill is preserved. Cambil's ichnites appear as sandstone counter-moulds." },
     { term: "Dating", category: "Method", def: "Set of techniques used to determine the age of a remain, layer, or natural or human process." },
     { term: "Dolomite", category: "Geology", def: "Carbonate rock similar to limestone. It contributes to steep reliefs, caves, and mountain landscapes." },
     { term: "Erosion", category: "Landscape", def: "Wearing away and transport of material by water, wind, ice, or gravity. It shapes ravines, slopes, valleys, and caves." },
@@ -532,11 +559,13 @@ const glossary = {
     { term: "Fault", category: "Geology", def: "Fracture in the Earth's crust with displacement of blocks. It helps explain uplift, relief, and landscape change." },
     { term: "Folding", category: "Geology", def: "Deformation of rock layers by tectonic pressure. It explains part of the uplift and structure of mountain ranges." },
     { term: "Fossil", category: "Paleontology", def: "Remain, mould, or trace of an ancient organism preserved in rock. It is direct evidence of past life." },
+    { term: "Pangea", category: "Geology", def: "Supercontinent that grouped most of Earth's land about 300–200 million years ago. Its break-up opened the Tethys Sea between Laurasia and Gondwana." },
     { term: "Guide fossil", category: "Paleontology", def: "Fossil with wide distribution and a specific age that helps date geological layers and compare them with other places." },
     { term: "Geology", category: "Geology", def: "Science that studies the Earth's structure, composition, and evolution through rocks, processes, and landscapes." },
     { term: "Glaciation", category: "Geology", def: "Cold period when ice masses expand and ecosystems, coasts, fauna, and human lifeways change." },
     { term: "Homo neanderthalensis", category: "Human evolution", def: "Extinct human species that lived in Europe and western Asia between about 400,000 and 40,000 years ago." },
     { term: "Homo sapiens", category: "Human evolution", def: "Current human species. Its expansion is linked to new technologies, broad social networks, and complex symbolic language." },
+    { term: "Ichnite", category: "Paleontology", def: "Fossilised footprint, track, or trace left by an organism. It allows behaviour, movement, and environment to be studied even when the body is not preserved." },
     { term: "Heritage interpretation", category: "Museography", def: "A way of explaining heritage by connecting scientific data with understandable narratives, emotional experience, and reading of place." },
     { term: "Karst", category: "Landscape", def: "Landscape formed by the dissolution of soluble rocks such as limestone and dolomite. It creates caves, sinkholes, shafts, and distinctive reliefs." },
     { term: "Limestone", category: "Geology", def: "Sedimentary rock largely made of calcium carbonate. It is key to understanding reliefs, fossils, and karst landscapes." },
@@ -561,6 +590,7 @@ const glossary = {
     { term: "Stone knapping", category: "Archaeology", def: "Technique of striking stone to obtain flakes, points, or tools. It is one of the most common forms of Paleolithic evidence." },
     { term: "Taphonomy", category: "Paleontology", def: "Study of the processes affecting a remain from the organism's death to its preservation as a fossil." },
     { term: "Tethys", category: "Geology", def: "Ancient tropical ocean located between continental masses of Europe, Africa, and Asia. Its history helps explain marine fossils in mountain areas." },
+    { term: "Triassic", category: "Geology", def: "First period of the Mesozoic, beginning about 252 million years ago. In Paleomágina it relates to shore environments and Cambil archosaur footprints." },
     { term: "Timeline", category: "Museography", def: "Visual resource that orders events from geological time to human history to make very different scales understandable." },
     { term: "Final terrace", category: "Museography", def: "End of the route where the real landscape becomes part of the exhibition, linking gallery, horizon, and territory." },
     { term: "Rock shelter", category: "Archaeology", def: "Natural open refuge in a rock wall. It could serve as a place for habitation, rest, protection, or symbolic activity." },
@@ -652,8 +682,8 @@ const territoryPoints = [
       en: "Marine fossils and sediments documenting ancient seas in today's mountainous terrain.",
     },
     evidence: {
-      es: "Ammonites, sedimentos y rocas carbonatadas conectan el ámbito A1 con la historia del mar de Tetis.",
-      en: "Ammonites, sediments, and carbonate rocks connect scope A1 with the history of the Tethys Sea.",
+      es: "Ammonites, belemnites y carbonatos del Triásico al Cretácico; en el Mioceno, Megalodon y mamíferos marinos de Jaén narran el cierre del Tetis y el origen del Mediterráneo.",
+      en: "Ammonites, belemnites, and Triassic–Cretaceous carbonates; in the Miocene, Megalodon and Jaén marine mammals tell how the Tethys closed and the Mediterranean formed.",
     },
   },
   {
@@ -789,11 +819,11 @@ const territoryPoints = [
 const scopeGlossaryHints = {
   AAN: ["Patrimonio", "Museografía"],
   A0: ["Museografía", "Patrimonio"],
-  A1: ["Tetis", "Ammonite", "Fósil"],
+  A1: ["Tetis", "Pangea", "Mesozoico", "Ammonite", "Belemnite", "Fósil", "Brachychiroterium", "Icnita", "Arcosaurio"],
   A2: ["Geología", "Orografía", "Caliza", "Sierra Mágina"],
   A3: ["Cuaternario", "Megafauna", "Erosión"],
   A4: ["Homo neanderthalensis", "Paleolítico", "Industria lítica"],
-  A5: ["Paleolítico", "Arte rupestre"],
+  A5: ["Paleolítico", "Arte rupestre", "Homo sapiens", "Ajuar funerario", "Abrigo rocoso"],
   A6: ["Neolítico", "Agricultura"],
   A7: ["Calcolítico", "Metalurgia"],
   A8: ["Método científico", "Excavación arqueológica"],
@@ -806,11 +836,11 @@ const qrIndex = {
   es: {
     AAN: { url: "/ambitos/antesala", label: "Antesala", floor: "PB", microUrl: "recorrido-expositivo.html?scope=AAN", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
     A0: { url: "/ambitos/bienvenida", label: "Bienvenida", floor: "PB", microUrl: "recorrido-expositivo.html?scope=A0", siteLang: "ES/EN", resource: "Ámbito + micrositio" },
-    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A1", siteLang: "ES/EN", resource: "Ámbito + vídeos" },
+    A1: { url: "/ambitos/tetis", label: "El mar de Tetis", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A1", siteLang: "ES/EN", resource: "Ámbito + vídeos Tetis + 3D" },
     A2: { url: "/ambitos/geologia", label: "Geología y orografía", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A2", siteLang: "ES/EN", resource: "Ámbito + mapa" },
     A3: { url: "/ambitos/cuaternario", label: "Cuaternario", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A3", siteLang: "ES/EN", resource: "Ámbito + línea temporal" },
     A4: { url: "/ambitos/neandertales", label: "Mundo neandertal", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A4", siteLang: "ES/EN", resource: "Ámbito + glosario" },
-    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A5", siteLang: "ES/EN", resource: "Ámbito + talleres" },
+    A5: { url: "/ambitos/paleolitico-superior", label: "Paleolítico superior", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A5", siteLang: "ES/EN", resource: "Ámbito + vídeo Mágina + talleres" },
     A6: { url: "/ambitos/neolitico", label: "Neolítico", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A6", siteLang: "ES/EN", resource: "Ámbito + educación" },
     A7: { url: "/ambitos/calcolitico", label: "Calcolítico", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A7", siteLang: "ES/EN", resource: "Ámbito" },
     A8: { url: "/ambitos/ciencia", label: "Ciencia y ciudadanía", floor: "P1", microUrl: "recorrido-expositivo.html?scope=A8", siteLang: "ES/EN", resource: "Ámbito + participación" },
@@ -820,11 +850,11 @@ const qrIndex = {
   en: {
     AAN: { url: "/exhibits/ante-room", label: "Ante-room", floor: "GF", microUrl: "recorrido-expositivo.html?scope=AAN", siteLang: "ES/EN", resource: "Scope + microsite" },
     A0: { url: "/exhibits/welcome", label: "Welcome", floor: "GF", microUrl: "recorrido-expositivo.html?scope=A0", siteLang: "ES/EN", resource: "Scope + microsite" },
-    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A1", siteLang: "ES/EN", resource: "Scope + videos" },
+    A1: { url: "/exhibits/tethys", label: "The Tethys Sea", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A1", siteLang: "ES/EN", resource: "Scope + Tethys videos + 3D" },
     A2: { url: "/exhibits/geology", label: "Geology and orography", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A2", siteLang: "ES/EN", resource: "Scope + map" },
     A3: { url: "/exhibits/quaternary", label: "Quaternary", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A3", siteLang: "ES/EN", resource: "Scope + timeline" },
     A4: { url: "/exhibits/neanderthals", label: "Neanderthal world", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A4", siteLang: "ES/EN", resource: "Scope + glossary" },
-    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A5", siteLang: "ES/EN", resource: "Scope + workshops" },
+    A5: { url: "/exhibits/paleolithic", label: "Upper Paleolithic", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A5", siteLang: "ES/EN", resource: "Scope + Mágina video + workshops" },
     A6: { url: "/exhibits/neolithic", label: "Neolithic", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A6", siteLang: "ES/EN", resource: "Scope + education" },
     A7: { url: "/exhibits/chalcolithic", label: "Chalcolithic", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A7", siteLang: "ES/EN", resource: "Scope" },
     A8: { url: "/exhibits/science", label: "Science and citizenship", floor: "F1", microUrl: "recorrido-expositivo.html?scope=A8", siteLang: "ES/EN", resource: "Scope + participation" },
@@ -868,11 +898,11 @@ const scopeDescriptions = {
   es: {
     scope_aan: "Umbral emocional y primera lectura del territorio antes de la secuencia numerada.",
     scope_a0: "Introducción al museo y guía de visita.",
-    scope_a1: "Origen marino del territorio y fósiles del Tetis.",
+    scope_a1: "Mar de Tetis: Pangea, cuatro periodos, fósiles de Jaén y huellas de Cambil.",
     scope_a2: "Lectura del relieve, rocas y procesos geológicos.",
     scope_a3: "Clima, fauna y cambios ambientales del Cuaternario.",
     scope_a4: "Vida cotidiana, tecnología y evidencias neandertales.",
-    scope_a5: "Innovaciones humanas del Paleolítico superior.",
+    scope_a5: "Paleolítico superior y relato de Mágina.",
     scope_a6: "Primeras comunidades agricultoras y ganaderas.",
     scope_a7: "Metalurgia temprana y transformaciones sociales.",
     scope_a8: "Método científico, participación ciudadana y patrimonio.",
@@ -882,11 +912,11 @@ const scopeDescriptions = {
   en: {
     scope_aan: "Emotional threshold and first reading of the territory before numbered scopes.",
     scope_a0: "Museum introduction and visit guide.",
-    scope_a1: "Marine origin of the territory and Tethys fossils.",
+    scope_a1: "Tethys Sea: Pangea, four periods, Jaén fossils, and Cambil footprints.",
     scope_a2: "Reading relief, rocks, and geological processes.",
     scope_a3: "Climate, fauna, and environmental changes in the Quaternary.",
     scope_a4: "Daily life, technology, and Neanderthal evidence.",
-    scope_a5: "Human innovations in the Upper Paleolithic.",
+    scope_a5: "Upper Paleolithic and Mágina story.",
     scope_a6: "First farming and herding communities.",
     scope_a7: "Early metallurgy and social transformations.",
     scope_a8: "Scientific method, citizen engagement, and heritage.",
@@ -1359,7 +1389,7 @@ const translations = {
     visit_journey_after_cta: "Seguir explorando",
     home_visit_journey_cta: "Planificar la visita",
     dino_3d_title: "Exploración 3D (Mesozoico)",
-    dino_3d_lead: "Selecciona un dinosaurio o fósil.",
+    dino_3d_lead: "Selecciona un dinosaurio o fósil. Las huellas de arcosaurio conectan el Triásico de Cambil con el ámbito del mar de Tetis.",
     dino_3d_hint: "Elige un modelo para rotarlo y acercarte. Representación genérica con fines didácticos.",
     dino_3d_disclaimer: "Los ejemplares mostrados no corresponden a especies halladas en Sierra Mágina; complementan la comprensión del tiempo profundo y de los ecosistemas mesozoicos.",
     teacher_sheet_nav: "Ficha docente",
@@ -1851,7 +1881,7 @@ const translations = {
     visit_journey_after_cta: "Keep exploring",
     home_visit_journey_cta: "Plan your visit",
     dino_3d_title: "3D exploration (Mesozoic)",
-    dino_3d_lead: "Select a dinosaur or fossil.",
+    dino_3d_lead: "Select a dinosaur or fossil. Archosaur footprints connect Cambil's Triassic with the Tethys Sea scope.",
     dino_3d_hint: "Choose a model to rotate and zoom. Generic representation for educational purposes.",
     dino_3d_disclaimer: "The specimens shown are not species found in Sierra Mágina; they support understanding of deep time and Mesozoic ecosystems.",
     teacher_sheet_nav: "Teacher sheet",

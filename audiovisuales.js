@@ -217,12 +217,13 @@
         ? `<a class="btn btn-sm btn-link px-0 mt-auto" href="recorrido-expositivo.html?scope=${encodeURIComponent(item.scope)}">${escapeHtml(t("av_scope_link"))} · ${escapeHtml(item.scope)}</a>`
         : "";
 
+    const transcriptBody = item.transcriptFull || item.transcript;
     const details =
-      (item.transcript
+      (transcriptBody
         ? `
         <details class="av-card-details">
           <summary>${escapeHtml(t("av_transcript_toggle"))}</summary>
-          <p>${escapeHtml(item.transcript)}</p>
+          <p>${escapeHtml(transcriptBody)}</p>
         </details>`
         : "") +
       (item.teacher
