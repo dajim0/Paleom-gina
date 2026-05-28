@@ -212,6 +212,23 @@ html:not([data-theme="dark"]) .list-group-item {
   border-radius: 1rem;
 }
 
+.dinosaur-sketchfab-card {
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 28px 80px rgba(15, 12, 7, 0.14);
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+}
+
+.dinosaur-sketchfab-frame {
+  display: block;
+  width: 100%;
+  min-height: 500px;
+  border: 0;
+  border-radius: 1rem;
+}
+
 .dinosaur-model-fallback {
   padding: 1rem;
   border: 1px solid var(--border);
@@ -226,8 +243,13 @@ html:not([data-theme="dark"]) .list-group-item {
     min-height: 320px;
   }
 
-  .dinosaur-model-card {
+  .dinosaur-model-card,
+  .dinosaur-sketchfab-card {
     box-shadow: none;
+  }
+
+  .dinosaur-sketchfab-frame {
+    min-height: 360px;
   }
 }
 
@@ -5558,11 +5580,20 @@ main#main-content>.container>section:not(.hero-simple):not(.museum-section-wrap)
   width: 100%;
   background: var(--card);
   border: 1px solid var(--border);
-  overflow: visible;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.museum-map-stage {
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: inherit inherit 0 0;
+  overflow: hidden;
 }
 
 .museum-map-wrapper .museum-map-base {
-  border-radius: inherit;
+  border-radius: inherit inherit 0 0;
 }
 
 .museum-section-wrap {
@@ -5633,7 +5664,30 @@ main#main-content>.container>section:not(.hero-simple):not(.museum-section-wrap)
   background: var(--card);
   border-color: var(--border);
   color: var(--text);
-  animation: slideUp 0.3s ease;
+  flex: 0 1 auto;
+  min-height: 0;
+}
+
+.museum-map-panel__body {
+  max-height: min(42vh, 320px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding-right: 0.15rem;
+}
+
+.museum-map-panel__header {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.museum-map-wrapper:not(:has(.museum-map-panel:not(.d-none))) .museum-map-stage .museum-map-base {
+  border-radius: inherit;
+}
+
+.museum-map-wrapper:has(.museum-map-panel:not(.d-none)) .museum-map-stage .museum-map-base {
+  border-radius: inherit inherit 0 0;
 }
 
 @keyframes slideUp {
@@ -5695,14 +5749,43 @@ main#main-content>.container>section:not(.hero-simple):not(.museum-section-wrap)
   }
 
   .museum-map-tooltip {
-    max-width: 220px;
-    font-size: 0.8rem;
+    display: none !important;
   }
 
   .museum-map-panel {
-    position: static;
-    margin-top: 1rem;
-    border-radius: 0.5rem;
+    border-radius: 0 0 inherit inherit;
+    border-top-width: 1px;
+  }
+
+  .museum-map-panel__body {
+    max-height: min(38vh, 260px);
+  }
+
+  .museum-map-panel__header .btn-close {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.65rem;
+    margin: -0.35rem -0.35rem -0.35rem 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .museum-map-wrapper {
+    position: relative;
+  }
+
+  .museum-map-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    animation: slideUp 0.3s ease;
+    border-radius: 0 0 inherit inherit;
+  }
+
+  .museum-map-panel__body {
+    max-height: min(36vh, 280px);
   }
 }
 
