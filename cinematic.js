@@ -821,6 +821,7 @@
   let narrationAudio = null;
   let ambientDuckedForSpeech = false;
   let preferredNarrationVoice = null;
+  let preferredPageReaderVoice = null;
   let pageReaderState = "idle";
   let pageReaderBlocks = [];
   let pageReaderBlockIndex = 0;
@@ -1191,57 +1192,183 @@
     return voiceLang === wanted || voiceLang.startsWith(`${wantedBase}-`);
   }
 
-  function scoreNarrationVoice(voice, lang) {
-    const name = (voice?.name || "").toLowerCase();
+  function scoreSpeechVoice(voice, lang, purpose) {
+    const name = `${voice?.name || ""} ${voice?.voiceURI || ""}`.toLowerCase();
     const voiceLang = (voice?.lang || "").toLowerCase();
+    const wanted = lang.toLowerCase();
+    const wantedBase = wanted.split("-")[0];
     let score = 0;
 
-    if (voiceLang === lang.toLowerCase()) score += 80;
-    else if (voiceMatchesLanguage(voice, lang)) score += 55;
-    if (voice?.localService) score += 4;
+    if (voiceLang === wanted) score += 70;
+    else if (voiceMatchesLanguage(voice, lang)) score += 62;
+    else return -999;
+
+    if (name.includes("natural") && name.includes("online")) score += 140;
+    else if (name.includes("natural") || name.includes("neural")) score += 115;
+    else if (name.includes("online")) score += 88;
+    else if (name.includes("premium")) score += 58;
+    else if (name.includes("google")) score += 42;
+
+    if (!voice?.localService) {
+      score += 18;
+    }
+    if (!voice?.localService && (name.includes("online") || name.includes("natural") || name.includes("neural"))) {
+      score += 38;
+    }
+
+    const spanishVoices = [
+      ["elvira", 46],
+      ["helena", 44],
+      ["alvaro", 40],
+      ["pablo", 38],
+      ["raul", 34],
+      ["monica", 34],
+      ["lucia", 34],
+      ["jorge", 32],
+      ["laura", 30],
+      ["sabina", 30],
+      ["dalia", 28],
+      ["estrella", 28],
+      ["luna", 28],
+      ["paloma", 28],
+      ["ramon", 26],
+      ["paulina", 24],
+    ];
+    const englishVoices = [
+      ["libby", 46],
+      ["sonia", 44],
+      ["ryan", 42],
+      ["jenny", 40],
+      ["aria", 38],
+      ["guy", 34],
+      ["natasha", 34],
+      ["clara", 34],
+      ["roger", 32],
+      ["steffan", 32],
+      ["ava", 30],
+      ["andrew", 30],
+      ["emma", 30],
+      ["brian", 28],
+      ["george", 28],
+      ["hazel", 26],
+    ];
+    const boosts = wantedBase === "es" ? spanishVoices : englishVoices;
+
+    boosts.forEach(([needle, value]) => {
+      if (name.includes(needle)) score += value;
+    });
 
     [
-      ["natural", 45],
-      ["neural", 45],
-      ["online", 28],
-      ["premium", 24],
-      ["google", 22],
-      ["microsoft", 18],
-      ["helena", 16],
-      ["elvira", 16],
-      ["alvaro", 14],
-      ["pablo", 12],
-      ["sonia", 16],
-      ["libby", 14],
-      ["jenny", 14],
-      ["aria", 14],
-      ["guy", 10],
-      ["desktop", -8],
-      ["compact", -10],
+      ["microsoft", 28],
+      ["google", 26],
+      ["apple", 18],
+      ["siri", 16],
     ].forEach(([needle, value]) => {
       if (name.includes(needle)) score += value;
     });
 
+    if (purpose === "pageReader") score += 8;
+    if (voice?.default && score > 0) score += 2;
+
+    [
+      ["espeak", -220],
+      ["eloquence", -180],
+      ["festival", -150],
+      ["flite", -150],
+      ["compact", -90],
+      ["desktop", -80],
+      ["android", -45],
+      ["sapi5", -40],
+      ["sam ", -80],
+      ["zira", -70],
+      ["david", -65],
+      ["mark ", -55],
+    ].forEach(([needle, value]) => {
+      if (name.includes(needle)) score += value;
+    });
+
+    if (wantedBase === "es" && !/(es|spanish|castellano|helena|elvira|alvaro|pablo|raul|sabina|monica|lucia|jorge|laura)/.test(name)) {
+      score -= 6;
+    }
+
     return score;
+  }
+
+  function pickBestSpeechVoice(lang, purpose) {
+    const voices = window.speechSynthesis.getVoices?.() || [];
+    const candidates = voices.filter((voice) => voiceMatchesLanguage(voice, lang));
+    const qualityPattern = /natural|neural|online|premium|google|elvira|helena|alvaro|pablo|libby|sonia|ryan|jenny|aria|natasha/i;
+    const qualityCandidates = candidates.filter((voice) => {
+      const signature = `${voice?.name || ""} ${voice?.voiceURI || ""}`;
+      return qualityPattern.test(signature);
+    });
+    const pool = qualityCandidates.length ? qualityCandidates : candidates;
+    if (!pool.length) return null;
+    return pool.slice().sort((a, b) => scoreSpeechVoice(b, lang, purpose) - scoreSpeechVoice(a, lang, purpose))[0] || null;
+  }
+
+  function ensureVoicesReady(callback) {
+    if (!supportsNarration()) {
+      callback();
+      return;
+    }
+    const ready = () => {
+      if (window.speechSynthesis.getVoices?.().length) callback();
+    };
+    ready();
+    if (window.speechSynthesis.getVoices?.().length) return;
+    const onVoices = () => {
+      window.speechSynthesis.removeEventListener("voiceschanged", onVoices);
+      callback();
+    };
+    window.speechSynthesis.addEventListener("voiceschanged", onVoices);
+    window.setTimeout(() => {
+      window.speechSynthesis.removeEventListener("voiceschanged", onVoices);
+      callback();
+    }, 400);
   }
 
   function choosePreferredNarrationVoice() {
     if (!supportsNarration()) return null;
-    const lang = getNarrationLanguage();
-    const voices = window.speechSynthesis.getVoices?.() || [];
-    const candidates = voices.filter((voice) => voiceMatchesLanguage(voice, lang));
-    const pool = candidates.length ? candidates : voices;
-    preferredNarrationVoice = pool
-      .slice()
-      .sort((a, b) => scoreNarrationVoice(b, lang) - scoreNarrationVoice(a, lang))[0] || null;
+    preferredNarrationVoice = pickBestSpeechVoice(getNarrationLanguage(), "narration");
     return preferredNarrationVoice;
   }
 
+  function choosePreferredPageReaderVoice() {
+    if (!supportsNarration()) return null;
+    preferredPageReaderVoice = pickBestSpeechVoice(getNarrationLanguage(), "pageReader");
+    return preferredPageReaderVoice;
+  }
+
   function getPreferredNarrationVoice() {
-    if (!preferredNarrationVoice || !voiceMatchesLanguage(preferredNarrationVoice, getNarrationLanguage())) {
+    const lang = getNarrationLanguage();
+    if (!preferredNarrationVoice || !voiceMatchesLanguage(preferredNarrationVoice, lang)) {
       return choosePreferredNarrationVoice();
     }
     return preferredNarrationVoice;
+  }
+
+  function getPreferredPageReaderVoice() {
+    const lang = getNarrationLanguage();
+    if (!preferredPageReaderVoice || !voiceMatchesLanguage(preferredPageReaderVoice, lang)) {
+      return choosePreferredPageReaderVoice();
+    }
+    return preferredPageReaderVoice;
+  }
+
+  function applySpeechUtterance(utterance, purpose) {
+    const isPageReader = purpose === "pageReader";
+    utterance.lang = getNarrationLanguage();
+    utterance.voice = isPageReader ? getPreferredPageReaderVoice() : getPreferredNarrationVoice();
+    if (isPageReader) {
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      utterance.volume = PAGE_READER_VOLUME;
+    } else {
+      utterance.rate = 0.9;
+      utterance.pitch = 0.97;
+      utterance.volume = NARRATION_VOLUME;
+    }
   }
 
   function isVisibleTextNode(el) {
@@ -1488,11 +1615,7 @@
 
     setPageReaderHighlight(currentBlock.el);
     const utterance = new SpeechSynthesisUtterance(chunk);
-    utterance.lang = getNarrationLanguage();
-    utterance.voice = getPreferredNarrationVoice();
-    utterance.rate = 0.92;
-    utterance.pitch = 0.98;
-    utterance.volume = PAGE_READER_VOLUME;
+    applySpeechUtterance(utterance, "pageReader");
     utterance.onend = () => {
       if (pageReaderState !== "playing") return;
       pageReaderChunkIndex += 1;
@@ -1512,14 +1635,19 @@
     window.speechSynthesis.cancel();
     pageReaderBlocks = buildPageReaderQueue(collectPageReaderBlocks());
     if (!pageReaderBlocks.length) return;
-    choosePreferredNarrationVoice();
-    pageReaderBlockIndex = 0;
-    pageReaderChunkIndex = 0;
-    pageReaderPauseUsesCancel = false;
-    pageReaderState = "playing";
-    duckAmbientForSpeech();
-    updatePageReaderFab();
-    speakPageReaderChunk();
+
+    const beginReading = () => {
+      choosePreferredPageReaderVoice();
+      pageReaderBlockIndex = 0;
+      pageReaderChunkIndex = 0;
+      pageReaderPauseUsesCancel = false;
+      pageReaderState = "playing";
+      duckAmbientForSpeech();
+      updatePageReaderFab();
+      speakPageReaderChunk();
+    };
+
+    ensureVoicesReady(beginReading);
   }
 
   function pausePageReader() {
@@ -1648,11 +1776,7 @@
     }
 
     const utterance = new SpeechSynthesisUtterance(narrationQueue[narrationIndex]);
-    utterance.lang = getNarrationLanguage();
-    utterance.voice = getPreferredNarrationVoice();
-    utterance.rate = 0.9;
-    utterance.pitch = 0.96;
-    utterance.volume = NARRATION_VOLUME;
+    applySpeechUtterance(utterance, "narration");
     utterance.onend = () => {
       narrationIndex += 1;
       speakNarrationChunk();
@@ -1928,8 +2052,10 @@
     window.addEventListener("beforeunload", stopPageReader);
     if (supportsNarration()) {
       choosePreferredNarrationVoice();
+      choosePreferredPageReaderVoice();
       window.speechSynthesis.onvoiceschanged = () => {
         choosePreferredNarrationVoice();
+        choosePreferredPageReaderVoice();
         updateNarrationFab();
         updatePageReaderFab();
       };
@@ -1938,7 +2064,10 @@
       btn.addEventListener("click", () => window.setTimeout(() => {
         stopNarration();
         stopPageReader();
+        preferredNarrationVoice = null;
+        preferredPageReaderVoice = null;
         choosePreferredNarrationVoice();
+        choosePreferredPageReaderVoice();
         updateFab();
         updateNarrationFab();
         updatePageReaderFab();
