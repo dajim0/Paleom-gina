@@ -3096,7 +3096,6 @@ button:focus-visible {
   height: 0.52rem;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
-  float: right;
   margin-top: 0.35rem;
   transform: rotate(45deg);
   transition: transform 0.2s ease;
@@ -3251,8 +3250,7 @@ button:focus-visible {
   height: 0.54rem;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
-  float: right;
-  color: var(--primary);
+ color: var(--primary);
   margin-top: 0.35rem;
   transform: rotate(45deg);
   transition: transform 0.2s ease;
