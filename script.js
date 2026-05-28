@@ -1711,7 +1711,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  const load = () => loadPaleomaginaModule("cinematic.js?v=32");
+  const load = () => loadPaleomaginaModule("cinematic.js?v=36");
   if ("requestIdleCallback" in window) {
     window.requestIdleCallback(load, { timeout: 900 });
   } else {

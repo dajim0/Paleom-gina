@@ -6599,20 +6599,24 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
 .pm-hero-audio-controls {
   position: absolute;
-  left: clamp(1rem, 4vw, 3rem);
+  left: 0;
+  right: 0;
   bottom: clamp(1.25rem, 5vw, 3rem);
   z-index: 12;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
-  gap: 1.15rem;
-  justify-content: flex-start;
-  max-width: min(32rem, calc(100% - 2rem));
+  gap: clamp(0.65rem, 2vw, 1.15rem);
+  height: auto;
+  width: 100%;
+  max-width: none;
+  padding-left: clamp(1rem, 4vw, 3rem);
+  padding-right: 0;
   pointer-events: auto;
 }
 
 .hero .pm-hero-audio-controls {
-  justify-content: flex-start;
+  justify-content: stretch;
 }
 
 .pm-audio-fab {
@@ -6671,21 +6675,112 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 }
 
 .pm-narration-fab {
-  bottom: 4.65rem;
+  bottom: 1.15rem;
+}
+
+.pm-page-reader-fab {
+  bottom: 1.15rem;
+}
+
+.pm-page-reader-highlight {
+  outline: 2px solid color-mix(in srgb, var(--primary) 72%, #fff 28%);
+  outline-offset: 4px;
+  border-radius: 0.35rem;
+  scroll-margin: 5.5rem;
+  transition: outline-color 0.2s ease;
 }
 
 .pm-audio-fab--in-hero {
   position: static;
+  top: auto;
   right: auto;
   bottom: auto;
+  width: clamp(12rem, 18vw, 14.5rem);
+  min-width: clamp(12rem, 18vw, 14.5rem);
+  height: 3.15rem;
+  min-height: 3.15rem;
+  padding: 0;
+  margin-block: 0;
+  align-self: center;
+  transform: none !important;
+  transition: opacity 0.24s ease;
+}
+
+.pm-audio-fab:not(.pm-narration-fab):not(.pm-page-reader-fab).pm-audio-fab--in-hero {
+  grid-column: 1;
+  justify-self: start;
+  margin-top: 0.85rem;
 }
 
 .pm-narration-fab.pm-audio-fab--in-hero {
+  grid-column: 2;
+  justify-self: center;
+  transform: none !important;
+}
+
+.pm-page-reader-fab.pm-audio-fab--in-hero {
+  grid-column: 3;
+  justify-self: end;
+  margin-right: 0;
+}
+
+.pm-audio-fab--in-hero .pm-audio-fab__inner {
+  width: 100%;
+  height: 100%;
+  min-height: 3.15rem;
+  justify-content: center;
+  padding: 0.65rem 0.9rem;
+}
+
+.pm-audio-fab--in-hero .pm-audio-fab__label {
+  white-space: nowrap;
+}
+
+.pm-audio-fab.pm-audio-fab--in-hero:hover,
+.pm-audio-fab.pm-audio-fab--in-hero:active,
+.pm-audio-fab.pm-audio-fab--in-hero:focus {
+  transform: none !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28) !important;
+}
+
+.pm-narration-fab.pm-audio-fab--in-hero:hover,
+.pm-narration-fab.pm-audio-fab--in-hero:active,
+.pm-narration-fab.pm-audio-fab--in-hero:focus {
+  transform: none !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28) !important;
+}
+
+.pm-page-reader-fab.pm-audio-fab--in-hero:hover,
+.pm-page-reader-fab.pm-audio-fab--in-hero:active,
+.pm-page-reader-fab.pm-audio-fab--in-hero:focus {
+  transform: none !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28) !important;
+}
+
+.pm-narration-fab.pm-audio-fab--in-hero,
+.pm-page-reader-fab.pm-audio-fab--in-hero {
   bottom: auto;
 }
 
 .pm-audio-fab--fallback {
   position: fixed;
+  width: clamp(7.4rem, 15vw, 10rem);
+}
+
+.pm-audio-fab.pm-audio-fab--fallback {
+  left: 1.15rem;
+  right: auto;
+}
+
+.pm-narration-fab.pm-audio-fab--fallback {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+.pm-page-reader-fab.pm-audio-fab--fallback {
+  left: auto;
+  right: 1.15rem;
 }
 
 @media (max-width: 575.98px) {
@@ -6694,6 +6789,8 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     right: 0.75rem;
     bottom: 1rem;
     max-width: none;
+    width: auto;
+    padding-inline: 0;
   }
 
   .pm-audio-fab {
@@ -6704,15 +6801,21 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .pm-narration-fab {
-    bottom: 4.25rem;
+    bottom: 0.85rem;
+  }
+
+  .pm-page-reader-fab {
+    bottom: 0.85rem;
   }
 
   .pm-audio-fab--in-hero {
+    top: 50%;
     right: auto;
     bottom: auto;
   }
 
-  .pm-narration-fab.pm-audio-fab--in-hero {
+  .pm-narration-fab.pm-audio-fab--in-hero,
+  .pm-page-reader-fab.pm-audio-fab--in-hero {
     bottom: auto;
   }
 }
@@ -6935,7 +7038,7 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
   .pm-hero-audio-controls {
     gap: 0.55rem;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .pm-audio-fab {
@@ -7094,24 +7197,40 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
 
   .pm-hero-audio-controls {
     position: static;
+    display: grid;
     margin-top: 1.35rem;
     max-width: 100%;
     width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    height: auto;
+    padding-inline: 0;
   }
 
   .pm-hero-audio-controls .pm-audio-fab--in-hero {
-    flex: 1 1 100%;
-    width: 100%;
+    position: static;
+    transform: none;
+    width: auto;
   }
 
   .pm-audio-fab--fallback {
     left: 0.75rem;
-    right: 0.75rem;
-    width: auto;
+    right: auto;
+    width: calc(33.333vw - 0.9rem);
   }
 
   .pm-narration-fab.pm-audio-fab--fallback {
-    bottom: 4.1rem;
+    left: 50%;
+    right: auto;
+    bottom: 0.85rem;
+    transform: translateX(-50%);
+  }
+
+  .pm-page-reader-fab.pm-audio-fab--fallback {
+    left: auto;
+    right: 0.75rem;
+    bottom: 0.85rem;
+    transform: none;
+    width: calc(33.333vw - 0.9rem);
   }
 
   .page-hero,
@@ -7226,10 +7345,12 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .pm-hero-audio-controls {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.65rem;
-    width: auto;
+    width: 100%;
+    height: auto;
+    padding-inline: 0;
     margin-top: 1rem;
   }
 
@@ -7276,6 +7397,14 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .pm-narration-fab.pm-audio-fab--fallback {
     bottom: 4rem;
   }
+
+  .pm-page-reader-fab.pm-audio-fab--fallback {
+    bottom: 0.85rem;
+    left: auto !important;
+    right: 0.75rem !important;
+    transform: none !important;
+    width: calc(33.333vw - 1rem) !important;
+  }
 }
 
 /* Corrección móvil: botones visibles, separados y con etiqueta clara */
@@ -7315,18 +7444,21 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .pm-hero-audio-controls {
     position: static !important;
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.7rem;
     width: 100%;
-    max-width: 22rem;
+    height: auto;
+    padding-inline: 0;
+    max-width: 100%;
     margin-top: 1.1rem;
   }
 
   .pm-audio-fab.pm-audio-fab--in-hero,
-  .pm-narration-fab.pm-audio-fab--in-hero {
+  .pm-narration-fab.pm-audio-fab--in-hero,
+  .pm-page-reader-fab.pm-audio-fab--in-hero {
     position: static !important;
     inset: auto !important;
-    width: 100% !important;
+    width: auto !important;
     height: auto !important;
     min-width: 0 !important;
     min-height: 2.75rem !important;
@@ -7334,6 +7466,29 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
     transform: none !important;
     opacity: 1 !important;
     border-radius: 999px;
+    align-self: center !important;
+    margin-block: 0 !important;
+  }
+
+  .pm-audio-fab:not(.pm-narration-fab):not(.pm-page-reader-fab).pm-audio-fab--in-hero {
+    grid-column: 1 !important;
+    justify-self: start !important;
+    margin-right: auto !important;
+    left: auto !important;
+  }
+
+  .pm-narration-fab.pm-audio-fab--in-hero {
+    grid-column: 2 !important;
+    justify-self: center !important;
+    margin-inline: auto !important;
+    left: auto !important;
+  }
+
+  .pm-page-reader-fab.pm-audio-fab--in-hero {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    margin-left: auto !important;
+    right: auto !important;
   }
 
   .pm-audio-fab__inner {
@@ -7366,11 +7521,12 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .pm-audio-fab.pm-audio-fab--fallback,
-  .pm-narration-fab.pm-audio-fab--fallback {
+  .pm-narration-fab.pm-audio-fab--fallback,
+  .pm-page-reader-fab.pm-audio-fab--fallback {
     position: fixed !important;
     bottom: max(0.8rem, env(safe-area-inset-bottom, 0px) + 0.55rem) !important;
     top: auto !important;
-    width: calc(50vw - 1.1rem) !important;
+    width: calc(33.333vw - 0.9rem) !important;
     min-width: 0 !important;
     min-height: 2.75rem !important;
     padding: 0 !important;
@@ -7384,9 +7540,23 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   }
 
   .pm-narration-fab.pm-audio-fab--fallback {
+    left: 50% !important;
+    right: auto !important;
+    bottom: max(0.8rem, env(safe-area-inset-bottom, 0px) + 0.55rem) !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .pm-page-reader-fab.pm-audio-fab--fallback {
     left: auto !important;
     right: 0.75rem !important;
+    bottom: max(0.8rem, env(safe-area-inset-bottom, 0px) + 0.55rem) !important;
+    transform: none !important;
   }
+}
+
+html.pm-performance-mode .pm-page-reader-highlight {
+  outline-width: 1px;
+  transition: none;
 }
 
 @media (max-width: 390px) {
@@ -7715,4 +7885,25 @@ body>nav.navbar.pm-topnav .navbar-brand:focus-visible {
   .pm-qr-table-wrap {
     font-size: 0.8rem;
   }
+}
+
+/* Ajuste fino: solo el boton de sonido ambiental queda mas bajo en el hero. */
+.pm-hero-audio-controls > .pm-audio-fab:not(.pm-narration-fab):not(.pm-page-reader-fab).pm-audio-fab--in-hero {
+  position: relative !important;
+  top: 1rem !important;
+}
+
+.pm-hero-audio-controls > .pm-narration-fab.pm-audio-fab--in-hero {
+  position: relative !important;
+  top: 1rem !important;
+  justify-self: center !important;
+  margin-inline: auto !important;
+}
+
+.pm-hero-audio-controls > .pm-page-reader-fab.pm-audio-fab--in-hero {
+  position: relative !important;
+  top: 1rem !important;
+  justify-self: end !important;
+  margin-left: auto !important;
+  margin-right: clamp(1rem, 4vw, 3rem) !important;
 }
