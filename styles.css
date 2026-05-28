@@ -3231,6 +3231,10 @@ button:focus-visible {
 }
 
 .glossary-guide-card summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   padding: 1rem 1.1rem;
   cursor: pointer;
   color: var(--heading);
@@ -3245,13 +3249,14 @@ button:focus-visible {
 
 .glossary-guide-card summary::after {
   content: "";
-  display: inline-block;
+  display: block;
+  flex: 0 0 auto;
   width: 0.54rem;
   height: 0.54rem;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
- color: var(--primary);
-  margin-top: 0.35rem;
+  color: var(--primary);
+  margin-left: auto;
   transform: rotate(45deg);
   transition: transform 0.2s ease;
 }
