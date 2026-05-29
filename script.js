@@ -952,6 +952,7 @@ function applyLanguage(lang) {
   initTerritoryMap();
   initVisitJourney();
   initTicketCart();
+  window.dispatchEvent(new CustomEvent("pm:languagechange", { detail: { lang } }));
 }
 
 // ── Botón de tema ────────────────────────────────────────────────────
@@ -1763,7 +1764,7 @@ function loadPaleomaginaModule(fileName, onLoad) {
 }
 
 function loadCinematicAtmosphere() {
-  const load = () => loadPaleomaginaModule("cinematic.js?v=40");
+  const load = () => loadPaleomaginaModule("cinematic.js?v=41");
   if ("requestIdleCallback" in window) {
     window.requestIdleCallback(load, { timeout: 900 });
   } else {

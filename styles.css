@@ -4327,6 +4327,1520 @@ img:hover {
   filter: none;
 }
 
+/* Tras la pista — mini reto del Triásico */
+.track-page-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.track-page-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 12%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 24rem),
+    radial-gradient(circle at 92% 42%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 26rem);
+  opacity: 0.72;
+}
+
+.track-hero .hero-content {
+  max-width: 840px;
+}
+
+.track-phase-strip {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  padding: clamp(1.4rem, 3vw, 2rem) 0 0.75rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, transparent), transparent 78%),
+    color-mix(in srgb, var(--bg-alt) 34%, transparent);
+}
+
+.track-phase-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0.85rem;
+  list-style: none;
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--border));
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at 50% 0, color-mix(in srgb, var(--primary) 12%, transparent), transparent 55%),
+    linear-gradient(135deg, color-mix(in srgb, var(--card) 92%, transparent), color-mix(in srgb, var(--bg-alt) 72%, transparent)),
+    color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  box-shadow: 0 18px 45px rgba(63, 43, 28, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.track-phase-timeline::before {
+  content: "";
+  position: absolute;
+  left: calc(16.666% + 2.35rem);
+  right: calc(16.666% + 2.35rem);
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--primary) 28%, transparent), color-mix(in srgb, var(--accent) 35%, transparent));
+  transform: translateY(-50%);
+}
+
+.track-phase-step {
+  position: relative;
+  z-index: 1;
+}
+
+.track-phase-step a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 5.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.track-phase-step a:hover,
+.track-phase-step a:focus-visible {
+  background: color-mix(in srgb, var(--primary) 10%, var(--card));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.track-phase-step a:hover,
+.track-phase-step a:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.track-phase-step__number {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid color-mix(in srgb, var(--primary) 28%, var(--border));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  color: var(--primary);
+  font-weight: 900;
+  box-shadow: 0 8px 18px rgba(63, 43, 28, 0.12);
+}
+
+.track-phase-step__content {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.track-phase-step__content strong {
+  color: var(--heading);
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.track-phase-step__content small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.track-intro-panel {
+  align-items: stretch;
+}
+
+.track-field-notebook,
+.track-science-help,
+.track-scene-report {
+  margin-top: 1rem;
+  padding: clamp(1rem, 2vw, 1.25rem);
+  border: 1px solid color-mix(in srgb, var(--primary) 24%, var(--border));
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--primary) 10%, transparent), transparent 18rem),
+    color-mix(in srgb, var(--bg-alt) 52%, transparent);
+}
+
+.track-field-notebook h3,
+.track-science-help h3,
+.track-scene-report h3 {
+  margin-bottom: 0.85rem;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+
+.track-notebook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 0.7rem;
+}
+
+.track-notebook-item {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+  min-height: 100%;
+  padding: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  border-radius: 0.95rem;
+  background: color-mix(in srgb, var(--card) 58%, transparent);
+  overflow: hidden;
+}
+
+.track-notebook-item span {
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  font-family: "Caveat Brush", cursive;
+  font-size: 1.12rem;
+  line-height: 1;
+}
+
+.track-notebook-item strong {
+  display: block;
+  color: var(--heading);
+  font-size: 0.88rem;
+  line-height: 1.2;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.track-notebook-item p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.track-case-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  padding: clamp(1.2rem, 2.5vw, 1.7rem);
+  border-color: color-mix(in srgb, var(--primary) 32%, var(--border));
+  background:
+    radial-gradient(circle at 85% 5%, rgba(166, 124, 61, 0.22), transparent 32%),
+    linear-gradient(145deg, color-mix(in srgb, var(--card) 90%, transparent), color-mix(in srgb, var(--bg-alt) 72%, transparent)),
+    color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+}
+
+.track-case-illustration {
+  position: relative;
+  min-height: 10.25rem;
+  margin: 0.4rem 0 1rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, var(--border));
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(82, 56, 32, 0.18), transparent 48%),
+    linear-gradient(145deg, rgba(166, 124, 61, 0.16), rgba(190, 79, 46, 0.08));
+  overflow: hidden;
+}
+
+.track-case-illustration::before,
+.track-case-illustration::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(82, 56, 32, 0.18);
+  transform: rotate(-12deg);
+}
+
+.track-case-illustration::before {
+  width: 72%;
+  height: 1rem;
+  left: 14%;
+  bottom: 2.2rem;
+}
+
+.track-case-illustration::after {
+  width: 56%;
+  height: 0.65rem;
+  left: 22%;
+  bottom: 1.35rem;
+}
+
+.track-case-illustration img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 10.25rem;
+  object-fit: contain;
+  padding: 0.5rem;
+  filter: drop-shadow(0 14px 24px rgba(63, 43, 28, 0.2));
+}
+
+.track-case-egg {
+  position: absolute;
+  left: 50%;
+  bottom: 3.25rem;
+  width: 4.2rem;
+  height: 5.25rem;
+  border-radius: 52% 48% 46% 54% / 62% 58% 42% 38%;
+  background:
+    radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.7), transparent 18%),
+    linear-gradient(145deg, #f5dfb4, #c99a57);
+  box-shadow: 0 14px 25px rgba(63, 43, 28, 0.24);
+  transform: translateX(-50%) rotate(7deg);
+}
+
+.track-case-footprint {
+  position: absolute;
+  width: 2.1rem;
+  height: 2.6rem;
+  border-radius: 50% 50% 45% 45%;
+  background: rgba(74, 50, 31, 0.28);
+  clip-path: polygon(50% 0, 66% 34%, 98% 22%, 78% 58%, 92% 100%, 50% 78%, 8% 100%, 22% 58%, 2% 22%, 34% 34%);
+}
+
+.track-case-footprint--one {
+  right: 18%;
+  top: 1.1rem;
+  transform: rotate(24deg);
+}
+
+.track-case-footprint--two {
+  right: 33%;
+  top: 3rem;
+  transform: rotate(18deg) scale(0.84);
+}
+
+.track-case-footprint--three {
+  right: 11%;
+  bottom: 2.3rem;
+  transform: rotate(30deg) scale(0.74);
+}
+
+.track-case-clues {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.track-case-clues li {
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+  font-size: 0.92rem;
+}
+
+.track-case-card__label,
+.track-evidence-card small,
+.track-step-number {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  border-radius: 999px;
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.track-case-card__label,
+.track-step-number {
+  margin-bottom: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border));
+}
+
+.track-characters-panel {
+  border: 1px solid color-mix(in srgb, var(--primary) 20%, var(--border));
+}
+
+.track-characters-layout {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .track-characters-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: stretch;
+  }
+}
+
+.track-characters-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .track-characters-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.track-character-card {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  border: 2px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+@media (max-width: 639.98px) {
+  .track-character-card {
+    grid-template-columns: 5.8rem minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .track-character-card__media {
+    grid-row: span 2;
+  }
+}
+
+.track-character-card:hover,
+.track-character-card:focus-visible {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--primary) 12%, transparent);
+  transform: translateY(-2px);
+}
+
+.track-character-card.is-active {
+  border-color: color-mix(in srgb, var(--primary) 62%, var(--border));
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+.track-character-card__media {
+  aspect-ratio: 4 / 3;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--primary) 8%, var(--card));
+}
+
+.track-character-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.35rem;
+}
+
+.track-character-card strong {
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.track-character-card span {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--text) 72%, var(--muted) 28%);
+}
+
+.track-character-detail {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 24%, var(--border));
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--accent) 10%, transparent), transparent 14rem),
+    color-mix(in srgb, var(--card) 96%, transparent);
+}
+
+.track-character-detail__badge {
+  align-self: flex-start;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.track-character-detail h3 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.track-character-detail__traits {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: color-mix(in srgb, var(--text) 86%, var(--muted) 14%);
+}
+
+.track-character-bubble {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.95rem;
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--primary) 28%, var(--border));
+}
+
+.track-character-bubble p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.track-character-bubble__icon {
+  flex: 0 0 2.4rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card) 88%, white 12%);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+  position: relative;
+}
+
+.track-character-bubble__icon--meat::after,
+.track-character-bubble__icon--plant::after,
+.track-character-bubble__icon--claw::after {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--primary) 72%, var(--accent) 28%);
+}
+
+.track-character-bubble__icon--plant::after {
+  border-radius: 999px 999px 0.2rem 0.2rem;
+  inset: 0.7rem 0.55rem 0.45rem;
+}
+
+.track-character-bubble__icon--claw::after {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  border-radius: 0;
+  inset: 0.5rem 0.65rem 0.55rem;
+}
+
+.track-trace-path-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .track-trace-path-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.track-trace-step {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+  background: color-mix(in srgb, var(--card) 94%, transparent);
+}
+
+.track-trace-step h3 {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.track-trace-step p:last-child {
+  margin: 0;
+  font-size: 0.94rem;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted) 18%);
+}
+
+.track-trace-step__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.track-trace-step__action,
+.track-trace-step__fossil {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.track-trace-step__action img,
+.track-trace-step__fossil img {
+  width: 100%;
+  max-width: 7.5rem;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--primary) 7%, var(--card));
+  padding: 0.35rem;
+}
+
+.track-trace-step__action p,
+.track-trace-step__fossil p {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.track-trace-step__arrow {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--primary) 70%, var(--muted) 30%);
+}
+
+.track-museum-ready.is-hidden {
+  display: none;
+}
+
+.track-museum-ready {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 0.95rem;
+  border: 1px solid color-mix(in srgb, #2f8f4f 35%, var(--border));
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, #2f8f4f 18%, transparent), transparent 13rem),
+    color-mix(in srgb, #2f8f4f 10%, var(--card));
+  box-shadow: inset 4px 0 0 color-mix(in srgb, #2f8f4f 80%, var(--primary) 20%);
+}
+
+.track-museum-ready h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  color: color-mix(in srgb, #1f6b39 82%, var(--text) 18%);
+}
+
+.track-museum-ready p {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.track-training-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--primary) 13%, transparent), transparent 22rem),
+    radial-gradient(circle at 100% 16%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 20rem),
+    color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+}
+
+.track-training-panel::before {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  pointer-events: none;
+  border: 1px dashed color-mix(in srgb, var(--primary) 18%, transparent);
+  border-radius: 1.25rem;
+  opacity: 0.7;
+}
+
+.track-section-heading {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 0.85rem;
+  max-width: none;
+  margin-bottom: 1.4rem;
+}
+
+.track-section-heading .kicker,
+.track-section-heading h2,
+.track-section-heading .section-lead {
+  grid-column: 1;
+}
+
+.track-training-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  grid-column: 1;
+  grid-row: auto;
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
+.track-training-controls span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.track-training-controls .track-mistakes-counter {
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--accent);
+}
+
+.track-training-controls .track-score-counter {
+  border-color: color-mix(in srgb, #2f8f46 36%, var(--border));
+  background: color-mix(in srgb, #2f8f46 12%, var(--card));
+  color: #1f6d35;
+}
+
+.track-hint-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.track-hint-button span {
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: 0;
+  background: url("images/IMAGENES%20JUEGO/ICONO%20PISTA.png") center / contain no-repeat;
+}
+
+.track-hint-button b {
+  font: inherit;
+}
+
+.track-game-shell {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: clamp(1rem, 2.5vw, 1.4rem);
+  border-radius: 1.45rem;
+  background:
+    linear-gradient(rgba(255, 248, 235, 0.76), rgba(255, 248, 235, 0.84)),
+    url("images/IMAGENES%20JUEGO/FONDO_DE_BARRO_TRIASICO.png") center / cover,
+    radial-gradient(circle at 18% 0, color-mix(in srgb, var(--primary) 16%, transparent), transparent 24rem),
+    linear-gradient(135deg, color-mix(in srgb, var(--card) 88%, transparent), color-mix(in srgb, var(--bg-alt) 72%, transparent)),
+    color-mix(in srgb, var(--bg-alt) 56%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 24%, var(--border));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 20px 50px rgba(63, 43, 28, 0.14);
+}
+
+.track-game-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.track-game-hud {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--card) 72%, transparent);
+}
+
+.track-game-hud__badge,
+.track-locked-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.track-game-hud__hint {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.track-progress {
+  grid-column: 1 / -1;
+  height: 0.55rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+.track-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.35s ease;
+}
+
+.track-game-feedback {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  color: color-mix(in srgb, var(--text) 86%, var(--primary) 14%);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.track-game-rules {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.track-game-rules li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--card) 76%, transparent);
+}
+
+.track-game-rules span {
+  display: grid;
+  place-items: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.track-game-rules b {
+  color: var(--heading);
+  font-size: 0.86rem;
+  line-height: 1.25;
+}
+
+.track-game-board {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+.track-game-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.05rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 1.2rem;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    color-mix(in srgb, var(--bg-alt) 48%, transparent);
+  background-size: 30px 30px;
+}
+
+.track-game-panel h3 {
+  margin-bottom: 0.75rem;
+  color: var(--heading);
+  font-size: 1.05rem;
+}
+
+.track-game-panel--targets {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0.35rem;
+  border-color: color-mix(in srgb, var(--accent) 26%, var(--border));
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    color-mix(in srgb, var(--card) 88%, transparent);
+  box-shadow: 0 16px 34px rgba(63, 43, 28, 0.08);
+}
+
+.track-choice-stage {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.75fr) minmax(0, 1.65fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.track-selected-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 24%, var(--border));
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--bg-alt) 60%, var(--card));
+}
+
+.track-selected-card.has-selection {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.track-selected-card__label {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-bottom: 0.65rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.track-selected-card__body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  flex: 1;
+}
+
+.track-selected-card__image {
+  display: grid;
+  place-items: center;
+  width: 5.7rem;
+  height: 5.7rem;
+  overflow: hidden;
+  border: 2px dashed color-mix(in srgb, var(--primary) 45%, var(--border));
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, var(--card) 76%, transparent);
+  color: var(--primary);
+  font-family: "Caveat Brush", cursive;
+  font-size: 2.25rem;
+}
+
+.track-selected-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.25rem;
+}
+
+.track-selected-card strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--heading);
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.track-selected-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+
+.track-interpretation-dock {
+  min-width: 0;
+}
+
+.track-game-panel--targets .track-dropzone-grid {
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 0.7rem;
+}
+
+.track-evidence-grid,
+.track-dropzone-grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 0.9rem;
+  flex: 1;
+  align-items: stretch;
+}
+
+.track-evidence-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.track-dropzone-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-content: stretch;
+}
+
+.track-evidence-card,
+.track-dropzone-card {
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.track-evidence-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  height: auto;
+  min-height: 0;
+  padding: 0.75rem;
+  border-radius: 1.1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.track-evidence-card:hover,
+.track-evidence-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: 0 14px 34px rgba(90, 74, 55, 0.14);
+  outline: none;
+}
+
+.track-evidence-card.is-selected {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.track-evidence-card.is-solved {
+  border-style: solid;
+  border-color: color-mix(in srgb, #2f8f46 60%, var(--border));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, #2f8f46 10%, transparent), transparent 58%),
+    color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
+  box-shadow: 0 16px 34px color-mix(in srgb, #2f8f46 14%, transparent);
+  cursor: default;
+}
+
+.track-evidence-card.is-solved::after {
+  content: "";
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  min-width: 3.25rem;
+  height: 3.25rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  border: 3px solid #fff;
+  background:
+    #2f8f46
+    url("images/IMAGENES%20JUEGO/ICONO_DE_ACIERTO.png") center / 76% 76% no-repeat;
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow: 0 10px 24px rgba(47, 143, 70, 0.34);
+}
+
+.track-evidence-card.is-solved::before {
+  content: "Interpretada";
+  position: absolute;
+  top: 1.15rem;
+  left: 4.15rem;
+  z-index: 1;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid color-mix(in srgb, #2f8f46 42%, var(--border));
+  border-radius: 999px;
+  background: color-mix(in srgb, #2f8f46 12%, var(--card));
+  color: #2f8f46;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.track-evidence-card.is-correct,
+.track-dropzone-card.is-correct {
+  animation: trackCorrectPulse 0.7s ease;
+}
+
+.track-evidence-card.is-wrong,
+.track-dropzone-card.is-wrong {
+  animation: trackWrongShake 0.45s ease;
+}
+
+.track-evidence-card__placeholder {
+  width: 100%;
+  height: clamp(145px, 16vw, 185px);
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 0.9rem;
+  border: 2px dashed color-mix(in srgb, var(--primary) 55%, var(--border));
+  background:
+    radial-gradient(circle at 50% 35%, rgba(166, 124, 61, 0.16), transparent 42%),
+    color-mix(in srgb, var(--bg-alt) 55%, transparent);
+  color: var(--primary);
+  font-family: "Caveat Brush", cursive;
+  font-size: 2.65rem;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.track-evidence-card__placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 0.25rem;
+  filter: drop-shadow(0 12px 18px rgba(63, 43, 28, 0.16));
+}
+
+.track-evidence-card em {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 10%, var(--card));
+  color: var(--primary);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.track-evidence-family--body {
+  background: color-mix(in srgb, #8d5a32 14%, var(--card));
+  color: #744522;
+}
+
+.track-evidence-family--behavior {
+  background: color-mix(in srgb, var(--accent) 13%, var(--card));
+  color: color-mix(in srgb, var(--accent) 86%, var(--text) 14%);
+}
+
+.track-evidence-family--environment {
+  background: color-mix(in srgb, #2d7f83 13%, var(--card));
+  color: #1f6266;
+}
+
+.track-evidence-card span {
+  color: var(--heading);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  min-height: auto;
+  display: grid;
+  place-items: center;
+}
+
+.track-evidence-card small {
+  justify-self: center;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.9rem;
+  line-height: 1.25;
+  min-height: auto;
+}
+
+.track-dropzone-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  min-height: 150px;
+  padding: 1rem 1rem 1rem 3rem;
+  border-radius: 1.1rem;
+  border-style: dashed;
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.track-game-panel--targets .track-dropzone-card {
+  min-height: 132px;
+  padding: 0.9rem 0.85rem 0.9rem 2.85rem;
+}
+
+.track-dropzone-card:hover,
+.track-dropzone-card:focus-visible {
+  transform: translateX(3px);
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, var(--card));
+  outline: none;
+}
+
+.track-dropzone-card.is-ready {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+  background: color-mix(in srgb, var(--accent) 7%, var(--card));
+  cursor: pointer;
+}
+
+.track-game-shell.is-complete .track-game-feedback {
+  background: color-mix(in srgb, #2f8f46 13%, var(--card));
+  color: color-mix(in srgb, #1d6630 70%, var(--text));
+}
+
+.track-final-card.is-track-unlocked {
+  border-color: color-mix(in srgb, #2f8f46 44%, var(--border));
+  box-shadow: 0 22px 55px color-mix(in srgb, #2f8f46 14%, transparent);
+}
+
+.track-final-card.is-track-unlocked .track-locked-badge {
+  background: color-mix(in srgb, #2f8f46 14%, var(--card));
+  border-color: color-mix(in srgb, #2f8f46 34%, var(--border));
+  color: #2f8f46;
+}
+
+@keyframes trackCorrectPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.025);
+    box-shadow: 0 16px 36px color-mix(in srgb, #2f8f46 22%, transparent);
+  }
+}
+
+@keyframes trackWrongShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.track-dropzone-card__pin {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  font-weight: 900;
+  font-size: 0.78rem;
+}
+
+.track-dropzone-card strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--primary);
+  font-size: 1.12rem;
+  line-height: 1.2;
+}
+
+.track-dropzone-card p {
+  margin-bottom: 0;
+  color: color-mix(in srgb, var(--text) 80%, var(--muted) 20%);
+  font-size: 0.88rem;
+  line-height: 1.38;
+}
+
+.track-science-help {
+  position: relative;
+  z-index: 1;
+}
+
+.track-science-help h3 {
+  margin-bottom: 0.55rem;
+}
+
+.track-science-help__lead,
+.track-science-help__footer {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.track-science-help__lead {
+  margin-bottom: 0.85rem;
+  font-size: 0.92rem;
+}
+
+.track-science-tips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.track-science-tip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+  min-height: 100%;
+  padding: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  border-radius: 0.95rem;
+  background: color-mix(in srgb, var(--card) 62%, transparent);
+}
+
+.track-science-tip__number {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-contrast);
+  font-weight: 900;
+  font-size: 0.9rem;
+}
+
+.track-science-tip strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--heading);
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+.track-science-tip p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.track-science-help__footer {
+  padding-top: 0.15rem;
+  border-top: 1px solid color-mix(in srgb, var(--primary) 16%, var(--border));
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.track-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.track-steps-grid .card {
+  min-height: 100%;
+  padding-top: 1.25rem;
+}
+
+.track-steps-grid .card::after {
+  content: "";
+  position: absolute;
+  top: 2.15rem;
+  right: -0.5rem;
+  width: 1rem;
+  height: 1rem;
+  border-top: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  border-right: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  transform: rotate(45deg);
+}
+
+.track-steps-grid .card:last-child::after {
+  display: none;
+}
+
+.track-step-number {
+  color: var(--primary-contrast);
+  background: var(--primary);
+}
+
+.track-final-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
+  overflow: hidden;
+  padding: clamp(1.3rem, 3vw, 2rem);
+  border-color: color-mix(in srgb, var(--primary) 30%, var(--border));
+  background:
+    radial-gradient(circle at 96% 0, color-mix(in srgb, var(--accent) 16%, transparent), transparent 22rem),
+    linear-gradient(135deg, color-mix(in srgb, var(--card) 88%, transparent), color-mix(in srgb, var(--bg-alt) 74%, transparent));
+}
+
+.track-final-card::after {
+  content: "";
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1rem;
+  width: 9rem;
+  height: 6rem;
+  pointer-events: none;
+  opacity: 0.11;
+  background:
+    radial-gradient(ellipse at 25% 45%, currentColor 0 18%, transparent 19%),
+    radial-gradient(ellipse at 50% 18%, currentColor 0 15%, transparent 16%),
+    radial-gradient(ellipse at 75% 45%, currentColor 0 18%, transparent 19%);
+  color: var(--primary);
+}
+
+.track-final-card h2 {
+  margin-bottom: 0.75rem;
+}
+
+.track-final-card p:last-child {
+  margin-bottom: 0;
+}
+
+.track-locked-badge {
+  margin-bottom: 0.7rem;
+}
+
+.track-final-card h2,
+.track-final-card p,
+.track-scene-report,
+.track-final-card .btn {
+  position: relative;
+  z-index: 1;
+}
+
+.track-final-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 767.98px) {
+  .track-phase-strip {
+    margin-top: 0;
+    padding-top: 1.1rem;
+  }
+
+  .track-phase-timeline,
+  .track-notebook-grid,
+  .track-choice-stage,
+  .track-game-rules,
+  .track-game-board,
+  .track-science-tips,
+  .track-steps-grid,
+  .track-final-card {
+    grid-template-columns: 1fr;
+  }
+
+  .track-evidence-grid,
+  .track-dropzone-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .track-evidence-card,
+  .track-dropzone-card {
+    height: auto;
+    min-height: 190px;
+  }
+
+  .track-character-detail {
+    padding: 1rem;
+  }
+
+  .track-trace-step__stage {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .track-trace-step__arrow {
+    transform: rotate(90deg);
+  }
+
+  .track-game-panel--targets .track-dropzone-card {
+    min-height: 132px;
+  }
+
+  .track-phase-timeline {
+    padding: 0.6rem;
+  }
+
+  .track-phase-timeline::before {
+    left: 2.05rem;
+    right: auto;
+    top: 2.1rem;
+    bottom: 2.1rem;
+    width: 2px;
+    height: auto;
+    transform: none;
+  }
+
+  .track-phase-step a {
+    min-height: auto;
+    padding: 0.75rem;
+  }
+
+  .track-section-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .track-section-heading .kicker,
+  .track-section-heading h2,
+  .track-section-heading .section-lead,
+  .track-training-controls {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .track-training-controls {
+    justify-content: flex-start;
+  }
+
+  .track-steps-grid .card::after {
+    display: none;
+  }
+
+  .track-final-card__actions {
+    justify-content: stretch;
+  }
+
+  .track-final-card__actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .track-game-hud,
+  .track-evidence-grid,
+  .track-dropzone-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .track-evidence-card,
+  .track-dropzone-card {
+    height: auto;
+    min-height: 150px;
+  }
+
+  .track-evidence-card__placeholder {
+    height: clamp(118px, 38vw, 150px);
+  }
+
+  .track-evidence-card em {
+    top: 0.65rem;
+    right: 0.65rem;
+    max-width: calc(100% - 1.3rem);
+    font-size: 0.62rem;
+  }
+}
+
 [data-theme="dark"] .card {
   background: color-mix(in srgb, var(--card) var(--pm-surface-card-pct), transparent);
   border-color: var(--border);

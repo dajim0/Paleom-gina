@@ -1853,7 +1853,7 @@
   }
 
   function shouldShowNarrationControl() {
-    if (["lectura-facil", "inventario-qr", "aviso-legal", "privacidad", "cookies", "accesibilidad", "ficha-docente"].includes(getPageNarrationSlug())) return false;
+    if (["lectura-facil", "inventario-qr", "aviso-legal", "privacidad", "cookies", "accesibilidad", "ficha-docente", "tras-la-pista"].includes(getPageNarrationSlug())) return false;
     return hasNarrationPlayback() && Boolean(document.querySelector("main, #main-content"));
   }
 
