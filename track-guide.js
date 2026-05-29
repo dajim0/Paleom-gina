@@ -42,7 +42,8 @@
 
   function t(key, fallback) {
     const lang = document.documentElement.lang || "es";
-    return window.translations?.[lang]?.[key] ?? fallback;
+    const dict = typeof translations !== "undefined" ? translations : window.translations;
+    return dict?.[lang]?.[key] ?? fallback;
   }
 
   function setI18nText(node, key, fallback) {
@@ -55,7 +56,7 @@
     const config = characterConfig[id];
     if (!config) return;
 
-    section.querySelectorAll("[data-track-character]").forEach((card) => {
+    section.querySelectorAll(".track-character-card[data-track-character]").forEach((card) => {
       const active = card.dataset.trackCharacter === id;
       card.classList.toggle("is-active", active);
       card.setAttribute("aria-pressed", String(active));
@@ -88,12 +89,20 @@
     section.dataset.trackGuideBound = "true";
 
     section.addEventListener("click", (event) => {
-      const card = event.target.closest("[data-track-character]");
+      const card = event.target.closest(".track-character-card[data-track-character]");
       if (!card || !section.contains(card)) return;
       showCharacter(section, card.dataset.trackCharacter);
     });
 
-    const active = section.querySelector("[data-track-character].is-active");
+    section.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest(".track-character-card[data-track-character]");
+      if (!card || !section.contains(card)) return;
+      event.preventDefault();
+      showCharacter(section, card.dataset.trackCharacter);
+    });
+
+    const active = section.querySelector(".track-character-card.is-active[data-track-character]");
     if (active) showCharacter(section, active.dataset.trackCharacter);
   }
 
@@ -103,7 +112,7 @@
 
   function refreshLanguage() {
     document.querySelectorAll("#track-characters").forEach((section) => {
-      const active = section.querySelector("[data-track-character].is-active");
+      const active = section.querySelector(".track-character-card.is-active[data-track-character]");
       if (active) showCharacter(section, active.dataset.trackCharacter);
     });
   }
