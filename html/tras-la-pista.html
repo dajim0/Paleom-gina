@@ -23,7 +23,7 @@
     href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=176" />
+  <link rel="stylesheet" href="../styles.css?v=188" />
   <link rel="icon" type="image/png" href="../images/site/favicon.png" sizes="32x32" />
   <link rel="apple-touch-icon" href="../images/site/favicon.png" />
 </head>
@@ -174,7 +174,7 @@
         <div class="pm-read-panel track-characters-panel">
           <p class="kicker" data-i18n="track_characters_kicker">Conoce a los protagonistas</p>
           <h2 id="track-characters-title" data-i18n="track_characters_title">Personajes del Triásico</h2>
-          <p class="section-lead" data-i18n="track_characters_lead">Pulsa cada animal o fósil para ver qué pistas deja: dientes, dieta, huellas y restos fósiles.</p>
+          <p class="section-lead" data-i18n="track_characters_lead">Pulsa cada protagonista para entender qué representa, qué pistas deja y cómo esas señales ayudan a reconstruir su ambiente.</p>
           <div class="track-characters-layout">
             <div class="track-characters-grid" role="list">
               <button type="button" class="track-character-card is-active" data-track-character="archosaur"
@@ -182,37 +182,38 @@
                 <div class="track-character-card__media">
                   <img src="../images/IMAGENES%20JUEGO/ARCOSAURIO_DE_CAMBIL.png" alt="" loading="lazy" decoding="async" />
                 </div>
-                <strong data-i18n="track_char_archosaur_name">Arcosaurio de Cambil</strong>
-                <span data-i18n="track_char_archosaur_tag">Carnívoro</span>
+                <strong data-i18n="track_char_archosaur_name">Acrocaurio de Bedmar</strong>
+                <span data-i18n="track_char_archosaur_tag">Gran depredador terrestre</span>
               </button>
               <button type="button" class="track-character-card" data-track-character="raptor" aria-pressed="false">
                 <div class="track-character-card__media">
                   <img src="../images/IMAGENES%20JUEGO/TEROPODO-RAPTOR_DE_SANTISTEBAN.png" alt="" loading="lazy"
                     decoding="async" />
                 </div>
-                <strong data-i18n="track_char_raptor_name">Terópodo de Santisteban</strong>
-                <span data-i18n="track_char_raptor_tag">Cazador bípedo</span>
+                <strong data-i18n="track_char_raptor_name">Dinosaurio de Santisteban</strong>
+                <span data-i18n="track_char_raptor_tag">Rastreador de huellas</span>
               </button>
               <button type="button" class="track-character-card" data-track-character="herbivore"
                 aria-pressed="false">
                 <div class="track-character-card__media">
-                  <img src="../images/IMAGENES%20JUEGO/CRANEO_HERVIBORO.png" alt="" loading="lazy" decoding="async" />
+                  <img src="../images/IMAGENES%20JUEGO/AMMONITE.png" alt="" loading="lazy" decoding="async" />
                 </div>
-                <strong data-i18n="track_char_herbivore_name">Herbívoro robusto</strong>
-                <span data-i18n="track_char_herbivore_tag">Planta y pisada pesada</span>
+                <strong data-i18n="track_char_herbivore_name">Omanite</strong>
+                <span data-i18n="track_char_herbivore_tag">Fósil marino guía</span>
               </button>
             </div>
             <aside class="track-character-detail card" data-track-character-detail aria-live="polite">
-              <span class="track-character-detail__badge" data-track-character-badge data-i18n="track_char_archosaur_badge">Carnívoro</span>
-              <h3 data-track-character-detail-title data-i18n="track_char_archosaur_name">Arcosaurio de Cambil</h3>
+              <span class="track-character-detail__badge" data-track-character-badge data-i18n="track_char_archosaur_badge">Depredador terrestre</span>
+              <h3 data-track-character-detail-title data-i18n="track_char_archosaur_name">Acrocaurio de Bedmar</h3>
+              <p class="track-character-detail__description" data-track-character-description data-i18n="track_char_archosaur_description">Representa a los grandes carnívoros terrestres: sus dientes, cráneo y huellas permiten reconocer una escena de caza.</p>
               <ul class="track-character-detail__traits">
-                <li data-i18n="track_char_archosaur_trait_1">Dientes puntiagudos</li>
-                <li data-i18n="track_char_archosaur_trait_2">Huella tridáctila con garras</li>
-                <li data-i18n="track_char_archosaur_trait_3">Restos fósiles de depredador</li>
+                <li data-i18n="track_char_archosaur_trait_1">Dientes afilados: pista de dieta carnívora.</li>
+                <li data-i18n="track_char_archosaur_trait_2">Huella tridáctila con garras: indica avance de un depredador.</li>
+                <li data-i18n="track_char_archosaur_trait_3">Restos de cráneo y mordida: ayudan a interpretar escenas de alimentación.</li>
               </ul>
               <div class="track-character-bubble" data-track-character-bubble>
                 <span class="track-character-bubble__icon track-character-bubble__icon--meat" aria-hidden="true"></span>
-                <p data-i18n="track_char_archosaur_bubble">Los dientes afilados y las huellas estrechas indican dieta carnívora.</p>
+                <p data-i18n="track_char_archosaur_bubble">Idea clave: cuando coinciden dientes cortantes, huellas con garras y señales de mordida, podemos proponer un comportamiento depredador.</p>
               </div>
             </aside>
           </div>
@@ -227,7 +228,7 @@
             class="pm-inline-icon" />
           <span data-i18n="track_trace_path_title">De rastro a fósil</span>
         </h2>
-        <p class="section-lead" data-i18n="track_trace_path_lead">Un animal deja una acción. Si esa acción se conserva en la roca, se convierte en una pista fósil o icnita.</p>
+        <p class="section-lead" data-i18n="track_trace_path_lead">Un fósil no es solo un objeto: a veces conserva una acción. Esta secuencia muestra cómo una conducta del pasado puede quedar registrada en la roca y convertirse en una pista científica.</p>
         <div class="track-trace-path-grid">
           <article class="track-trace-step">
             <div class="track-trace-step__stage">
@@ -239,7 +240,11 @@
               </div>
             </div>
             <h3 data-i18n="track_trace_step_1_title">Huella de paso</h3>
-            <p data-i18n="track_trace_step_1_text">Caminar sobre barro deja una pisada que puede fosilizarse como icnita.</p>
+            <p class="track-trace-step__text" data-i18n="track_trace_step_1_text">Cuando un animal camina sobre barro blando, su peso hunde el sedimento. Si esa marca se seca, se cubre y se endurece, puede conservarse como icnita.</p>
+            <div class="track-trace-step__insight">
+              <strong data-i18n="track_trace_insight_label">Qué nos cuenta</strong>
+              <span data-i18n="track_trace_step_1_insight">La forma, profundidad y separación de las pisadas ayudan a deducir tamaño, dirección y velocidad.</span>
+            </div>
           </article>
           <article class="track-trace-step">
             <div class="track-trace-step__stage">
@@ -251,7 +256,11 @@
               </div>
             </div>
             <h3 data-i18n="track_trace_step_2_title">Coprolito</h3>
-            <p data-i18n="track_trace_step_2_text">Un excremento fosilizado conserva una acción de alimentación y digestión.</p>
+            <p class="track-trace-step__text" data-i18n="track_trace_step_2_text">Un coprolito es un excremento fosilizado. Puede conservar restos microscópicos de comida, fragmentos de hueso, plantas o sedimentos ingeridos.</p>
+            <div class="track-trace-step__insight">
+              <strong data-i18n="track_trace_insight_label">Qué nos cuenta</strong>
+              <span data-i18n="track_trace_step_2_insight">Permite investigar dieta, digestión y relaciones entre animales y plantas del ecosistema.</span>
+            </div>
           </article>
           <article class="track-trace-step">
             <div class="track-trace-step__stage track-trace-step__stage--tunnel">
@@ -266,7 +275,11 @@
               </div>
             </div>
             <h3 data-i18n="track_trace_step_3_title">Galería excavada</h3>
-            <p data-i18n="track_trace_step_3_text">Un animal excava un túnel; el paso se conserva como icnita en la roca.</p>
+            <p class="track-trace-step__text" data-i18n="track_trace_step_3_text">Algunos animales excavan galerías para refugiarse, desplazarse o buscar alimento. Si el túnel se rellena con otro sedimento, la forma puede quedar preservada.</p>
+            <div class="track-trace-step__insight">
+              <strong data-i18n="track_trace_insight_label">Qué nos cuenta</strong>
+              <span data-i18n="track_trace_step_3_insight">Estas estructuras revelan comportamiento, tipo de fondo y condiciones del ambiente donde vivían.</span>
+            </div>
           </article>
         </div>
       </div>
@@ -276,21 +289,20 @@
       <div class="container">
         <div class="pm-read-panel track-training-panel">
           <div class="track-section-heading">
-            <h2 id="track-training-title" data-i18n="track_training_title">Clasifica las evidencias</h2>
+            <h2 id="track-training-title" data-i18n="track_training_title">Juegos educativos</h2>
             <p class="section-lead" data-i18n="track_training_lead">Observa cada imagen, compara sus rasgos y decide
               qué interpretación científica encaja mejor.</p>
-            <div class="track-training-controls">
-              <span class="track-score-counter"><strong data-i18n="track_score_label">Aciertos</strong> <b data-track-score>0/14</b></span>
-              <span class="track-mistakes-counter"><strong data-i18n="track_mistakes_label">Fallos</strong> <b data-track-mistakes>0</b></span>
-              <button class="btn btn-outline-primary btn-sm track-hint-button" type="button" data-track-hint-button>
-                <span aria-hidden="true"></span>
-                <b data-i18n="track_hint_button">Necesito una pista</b>
-              </button>
-              <button class="btn btn-primary btn-sm" type="button" data-track-reset
-                data-i18n="track_new_round">Nueva ronda</button>
-            </div>
           </div>
 
+          <div class="track-game-switch" role="group" data-i18n-aria-label="track_game_switch_aria"
+            aria-label="Cambiar juego">
+            <button class="track-game-switch__button is-active" type="button" data-track-mode-button="classifier"
+              aria-pressed="true" data-i18n="track_mode_classifier">Clasificar evidencias</button>
+            <button class="track-game-switch__button" type="button" data-track-mode-button="memory"
+              aria-pressed="false" data-i18n="track_mode_memory">Memory de parejas</button>
+          </div>
+
+          <div class="track-game-mode is-active" data-track-mode-panel="classifier">
           <div class="track-game-shell" data-track-game>
             <div class="track-game-hud">
               <span class="track-game-hud__badge" data-i18n="track_board_label">Mesa de investigación</span>
@@ -300,6 +312,16 @@
               </div>
               <p class="track-game-feedback" data-track-feedback role="status" aria-live="polite"
                 data-i18n="track_status_start">Selecciona una evidencia para empezar la investigación.</p>
+              <div class="track-training-controls track-training-controls--inside">
+                <span class="track-score-counter"><strong data-i18n="track_score_label">Aciertos</strong> <b data-track-score>0/14</b></span>
+                <span class="track-mistakes-counter"><strong data-i18n="track_mistakes_label">Fallos</strong> <b data-track-mistakes>0</b></span>
+                <button class="btn btn-outline-primary btn-sm track-hint-button" type="button" data-track-hint-button>
+                  <span aria-hidden="true"></span>
+                  <b data-i18n="track_hint_button">Necesito una pista</b>
+                </button>
+                <button class="btn btn-primary btn-sm" type="button" data-track-reset
+                  data-i18n="track_new_round">Nueva ronda</button>
+              </div>
               <ol class="track-game-rules">
                 <li><span>1</span><b data-i18n="track_rule_1">Elige una carta de evidencia.</b></li>
                 <li><span>2</span><b data-i18n="track_rule_2">Comprueba la imagen seleccionada.</b></li>
@@ -494,6 +516,97 @@
               </section>
             </div>
           </div>
+          </div>
+
+          <div class="track-game-mode" data-track-mode-panel="memory" hidden>
+            <div class="track-game-shell track-memory-shell" data-track-memory-game>
+              <div class="track-game-hud">
+                <span class="track-game-hud__badge" data-i18n="track_memory_kicker">Memory científico</span>
+                <span class="track-game-hud__hint" data-track-memory-intro data-i18n="track_memory_intro">El personaje que elijas define qué parejas aparecen en el tablero.</span>
+                <div class="track-progress" aria-hidden="true">
+                  <span data-track-memory-progress-bar></span>
+                </div>
+                <p class="track-game-feedback" data-track-memory-feedback role="status" aria-live="polite"
+                  data-i18n="track_memory_status_start">Elige dos cartas para buscar una pareja.</p>
+                <div class="track-memory-stats">
+                  <span><strong data-i18n="track_pairs_label">Parejas</strong> <b data-track-memory-score>0/0</b></span>
+                  <span><strong data-i18n="track_attempts_label">Intentos</strong> <b data-track-memory-attempts>0</b></span>
+                  <button class="btn btn-primary btn-sm" type="button" data-track-memory-reset
+                    data-i18n="track_restart">Reiniciar</button>
+                </div>
+                <ol class="track-game-rules">
+                  <li><span>1</span><b data-i18n="track_memory_rule_1">Elige personaje (cambia el tablero de parejas).</b></li>
+                  <li><span>2</span><b data-i18n="track_memory_rule_2">Levanta dos cartas.</b></li>
+                  <li><span>3</span><b data-i18n="track_memory_rule_3">Encuentra todas las parejas.</b></li>
+                </ol>
+              </div>
+
+              <div class="track-memory-layout">
+                <aside class="track-memory-characters" aria-labelledby="track-memory-character-title">
+                  <h3 id="track-memory-character-title" data-i18n="track_choose_title">Elige personaje</h3>
+                  <p class="track-memory-choose-lead" data-i18n="track_choose_lead">Cada opción carga un tablero distinto: las parejas de cartas cambian según el fósil o animal que investigues. Puedes cambiar de personaje cuando quieras; el juego se reinicia con el nuevo conjunto.</p>
+                  <button class="track-memory-character is-active" type="button" data-track-character-choice="bedmar"
+                    aria-pressed="true">
+                    <img src="../images/IMAGENES%20JUEGO/ARCOSAURIO_DE_CAMBIL.png" alt="" loading="lazy" decoding="async" />
+                    <span>
+                      <strong data-i18n="track_profile_bedmar_name">Acrocaurio de Bedmar</strong>
+                      <small data-i18n="track_profile_bedmar_badge">Depredador terrestre</small>
+                    </span>
+                  </button>
+                  <button class="track-memory-character" type="button" data-track-character-choice="santisteban"
+                    aria-pressed="false">
+                    <img src="../images/IMAGENES%20JUEGO/TEROPODO-RAPTOR_DE_SANTISTEBAN.png" alt="" loading="lazy"
+                      decoding="async" />
+                    <span>
+                      <strong data-i18n="track_profile_santisteban_name">Dinosaurio de Santisteban del Puerto</strong>
+                      <small data-i18n="track_profile_santisteban_badge">Cazador bípedo</small>
+                    </span>
+                  </button>
+                  <button class="track-memory-character" type="button" data-track-character-choice="omanite"
+                    aria-pressed="false">
+                    <img src="../images/IMAGENES%20JUEGO/AMMONITE.png" alt="" loading="lazy" decoding="async" />
+                    <span>
+                      <strong data-i18n="track_profile_omanite_name">Omanite</strong>
+                      <small data-i18n="track_profile_omanite_badge">Fósil marino</small>
+                    </span>
+                  </button>
+                  <div class="track-memory-profile" data-track-profile>
+                    <p class="track-memory-character-hint" data-track-memory-character-hint data-i18n="track_memory_bedmar_lead">En este tablero: dientes, huellas y rastros de depredador del Acrocaurio de Bedmar.</p>
+                    <span data-track-profile-badge data-i18n="track_profile_bedmar_badge">Depredador terrestre</span>
+                    <h4 data-track-profile-title data-i18n="track_profile_bedmar_name">Acrocaurio de Bedmar</h4>
+                    <p data-track-profile-text data-i18n="track_profile_bedmar_text">Dientes afilados, huellas de tres dedos y rastros de alimentación lo convierten en un buen candidato para investigar escenas de caza.</p>
+                  </div>
+                </aside>
+
+                <section class="track-memory-board-panel" aria-labelledby="track-memory-board-title">
+                  <div class="track-memory-board-heading">
+                    <h3 id="track-memory-board-title" data-i18n="track_memory_title">Encuentra las parejas</h3>
+                    <p data-i18n="track_memory_lead">Levanta dos cartas. Si forman una pareja científica, verás una pista nueva.</p>
+                  </div>
+                  <div class="track-memory-board" data-track-memory-board aria-label="Tablero de memory"></div>
+                  <div class="track-memory-result is-hidden" data-track-memory-result>
+                    <span data-i18n="track_results_badge">Informe completado</span>
+                    <h3 data-track-memory-result-title>Resultado</h3>
+                    <p data-track-memory-result-text></p>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+          <div class="track-memory-modal" data-track-modal hidden role="dialog" aria-modal="true"
+            aria-labelledby="track-modal-title">
+            <div class="track-memory-modal__panel">
+              <button class="track-memory-modal__close" type="button" data-track-modal-close
+                data-i18n-aria-label="track_modal_close_aria" aria-label="Cerrar pista">×</button>
+              <img data-track-modal-img alt="" loading="lazy" decoding="async" />
+              <span data-i18n="track_modal_kicker">Pareja encontrada</span>
+              <h3 id="track-modal-title" data-track-modal-title>Información</h3>
+              <p data-track-modal-text></p>
+              <button class="btn btn-primary btn-sm" type="button" data-track-modal-continue
+                data-i18n="track_continue">Continuar</button>
+            </div>
+          </div>
 
           <div class="track-science-help">
             <h3 data-i18n="track_science_title">Lectura científica</h3>
@@ -628,10 +741,10 @@
   </footer>
 
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script defer src="../data.js?v=64"></script>
+  <script defer src="../data.js?v=69"></script>
   <script defer src="../script.js?v=61"></script>
-  <script defer src="../track-game.js?v=6"></script>
-  <script defer src="../track-guide.js?v=1"></script>
+  <script defer src="../track-game.js?v=10"></script>
+  <script defer src="../track-guide.js?v=2"></script>
 </body>
 
 </html>

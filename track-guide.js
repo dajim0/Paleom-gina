@@ -5,6 +5,7 @@
     archosaur: {
       badge: "track_char_archosaur_badge",
       title: "track_char_archosaur_name",
+      description: "track_char_archosaur_description",
       traits: [
         "track_char_archosaur_trait_1",
         "track_char_archosaur_trait_2",
@@ -16,6 +17,7 @@
     raptor: {
       badge: "track_char_raptor_badge",
       title: "track_char_raptor_name",
+      description: "track_char_raptor_description",
       traits: [
         "track_char_raptor_trait_1",
         "track_char_raptor_trait_2",
@@ -27,13 +29,14 @@
     herbivore: {
       badge: "track_char_herbivore_badge",
       title: "track_char_herbivore_name",
+      description: "track_char_herbivore_description",
       traits: [
         "track_char_herbivore_trait_1",
         "track_char_herbivore_trait_2",
         "track_char_herbivore_trait_3",
       ],
       bubble: "track_char_herbivore_bubble",
-      bubbleIcon: "plant",
+      bubbleIcon: "shell",
     },
   };
 
@@ -63,6 +66,7 @@
 
     setI18nText(detail.querySelector("[data-track-character-badge]"), config.badge);
     setI18nText(detail.querySelector("[data-track-character-detail-title]"), config.title);
+    setI18nText(detail.querySelector("[data-track-character-description]"), config.description);
 
     const traitNodes = detail.querySelectorAll(".track-character-detail__traits li");
     traitNodes.forEach((node, index) => {
